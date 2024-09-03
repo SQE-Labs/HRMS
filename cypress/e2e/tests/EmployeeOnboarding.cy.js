@@ -1,10 +1,11 @@
-import SideBar from "../components/SideBar";
+import sideBar from "../components/SideBar";
+import dashboard from "../pages/Dashboard";
 
 describe("Employee Onboard Tests",()=> {
-    
     it("Basic Login with valid user and invalid user", ()=>{
         cy.login();
-        SideBar.navigateTo("Employee Onboard", "Invitations");
+        sideBar.navigateTo("Employee Onboard", "Invitations");
+        dashboard.logoutButton.click();
     })
     
 })
