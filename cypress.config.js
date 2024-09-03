@@ -1,6 +1,7 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
+  reporter: 'cypress-mochawesome-reporter',
   e2e: {
     defaultCommandTimeout: 10000, 
     video: false,
@@ -9,9 +10,17 @@ module.exports = defineConfig({
     watchForFileChanges: false,
     viewportWidth: 1920, // Width of the viewport
     viewportHeight: 1080, // Height of the viewport
+
+    reporterOptions: {
+      charts: true,
+      reportPageTitle: 'HRMS Running report',
+      embeddedScreenshots: true,
+      inlineAssets: true,
+      videoOnFailOnly : true
+    },
     
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      require('cypress-mochawesome-reporter/plugin')(on);
     },
   },
 });

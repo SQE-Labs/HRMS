@@ -3,6 +3,7 @@
     "cypress": "^13.14.0"
   },
   "devDependencies": {
+    "cypress-mochawesome-reporter": "3.8.2",
     "cypress-xpath": "^2.0.1"
   }
 }
