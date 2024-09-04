@@ -1,3 +1,4 @@
+import { describe } from "mocha";
 import sideBar from "../components/SideBar";
 import dashboard from "../pages/Dashboard";
 
@@ -10,3 +11,6 @@ describe("Employee Onboard Tests",()=> {
     
 })
 
+it("Verify that the success message should appear",()=> {
+    
+})
