@@ -29,7 +29,8 @@
 
 
 import Dashboard from "../e2e/pages/Dashboard.js";
-import LoginPage from "../e2e/pages/LoginPage.js"
+import LoginPage from "../e2e/pages/LoginPage.js";
+
 
 Cypress.Commands.add('login', (username = 'superUser') => {
     cy.fixture('users.json').then((users) => {
@@ -41,3 +42,4 @@ Cypress.Commands.add('login', (username = 'superUser') => {
 Cypress.Commands.add('logout', () => {
     Dashboard.clickLogout();
 });
+
