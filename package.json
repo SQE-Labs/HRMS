@@ -1,8 +1,7 @@
 {
-  "dependencies": {
-    "cypress": "^13.14.0"
-  },
   "devDependencies": {
+    "cypress": "^13.14.0",
+    "cypress-file-upload": "^5.0.8",
     "cypress-mochawesome-reporter": "3.8.2",
     "cypress-xpath": "^2.0.1",
     "easy-yopmail" : "5.1.0"
