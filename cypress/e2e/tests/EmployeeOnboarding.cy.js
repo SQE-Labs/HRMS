@@ -7,7 +7,7 @@ import verifyPersonalEmailPopup from "../pages/popups/VerifyPersonalEmailPopup";
 describe("Employee Onboard Tests", () => {
 
     let globalemail = null;
-    before(() => {
+    beforeEach(() => {
         globalemail = invitations.randomEmailGenerator('@yopmail.com');
 
     });
@@ -19,22 +19,27 @@ describe("Employee Onboard Tests", () => {
         cy.wait(2000);
         invitations.enterEmailID(globalemail);
         invitations.enterEmployeeName("Mattews");
-        invitations.selectFile('dummy.pdf');
+        invitations.selectSamplePdf('cypress/fixtures/resources/dummy.pdf');
         invitations.clickSubmitButton();
         invitations.validateOnboardingEmailSentMsg('Onboarding welcome mail sent');
     });
 
     it("HRMIS_2: Verify that new hire is able to submit the onboarding form", () => {
+        // Login with Default User
         cy.login();
         cy.wait(2000);
-        cy.visit("https://topuptalent.com/create-employee?token=-k25zae93f1ws--1neuojwpwwesc",  
+
+        // Redirect to the Invitation URL
+        cy.visit("https://topuptalent.com/create-employee?token=-16t4gdv0jr0v--1f0nmsz3fq22v",  
           { failOnStatusCode: false });
         cy.wait(2000);
-        verifyPersonalEmailPopup.enterPersonalEmailID("otwj@yopmail.com"); 
+
+        // Providing Employee Details  
+        verifyPersonalEmailPopup.enterPersonalEmailID("snm@yopmail.com"); 
         verifyPersonalEmailPopup.clickSubmitButton();
         EmployeeDetailPage.enterFirstName('Matt');
         EmployeeDetailPage.enterLastName('Haden');
-        EmployeeDetailPage.checkGender('2');
+        EmployeeDetailPage.checkGender('Female');
         EmployeeDetailPage.selectBloodGroup('A+ve');
         EmployeeDetailPage.selectDateOfBirth();
         EmployeeDetailPage.enterAdhaarNumber('232324324342');
@@ -43,8 +48,7 @@ describe("Employee Onboard Tests", () => {
         EmployeeDetailPage.selectMaritalStatus('Single');
         EmployeeDetailPage.clickNextButton();
     
-        //   Contact Details   //
-
+        // Providing Contact Details   //
         EmployeeDetailPage.enterPhoneNumber('6448744833');
         EmployeeDetailPage.enterAlternateNumber('3673636733');
         EmployeeDetailPage.selectRelationship('Mother');
@@ -53,11 +57,11 @@ describe("Employee Onboard Tests", () => {
         EmployeeDetailPage.enterPermanentAddress('Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016');
         EmployeeDetailPage.clickNextButton();
 
-        //Submit 
-
-
+        // Submitting the Details 
         EmployeeDetailPage.clickSubmitButton();
         cy.wait(5000);
+
+        // Validating the Thank You Success message
         EmployeeDetailPage.validateThankYouSuccessMessage('Thank you!');
 
 

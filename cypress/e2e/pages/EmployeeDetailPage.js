@@ -1,16 +1,15 @@
 import BasePage from "./BasePage";
 import { generateRandomString } from '../../support/utils';
 
-
-
 class EmployeeDetailPage extends BasePage {
 
-//Locaters
-
+// Locaters
 get firstName() { return cy.get("input[placeholder='Ted']")}
 get lastName() { return cy.get("input[placeholder='Mosby']")}
 get personalEmailInEmpDetails() { return cy.get("input[placeholder='ted@gmail.com']")}
-get gender() { return cy.get('div.custom-checkbox.small>div>label')}
+get gender() { return cy.get('div.custom-checkbox.small > div')}
+
+//get gender() { return cy.get('div.custom-checkbox.small>div>label')}
 get bloodGroup() { return cy.get('#bloodGroup')}
 get dateOfBirth() { return cy.get("input[name='dob']")}
 get aadharNumber() { return cy.get("input[name='aadharNumber']")}
@@ -20,7 +19,6 @@ get maritalStatus() { return cy.get('#maritalStatus')}
 get nextButton() { return cy.get("button[class='theme-button']")}
 
 // Contact Details Locators
-
 get phoneNumber() { return cy.get("input[placeholder='9876543210'][name='phoneNumber']")}
 get alternateNumber() { return cy.get("input[placeholder='9876543210'][name='alternateNumber']")}
 get relationshipWithAlternateNo() { return cy.get('#relationWithAlternateNo')}
@@ -30,13 +28,10 @@ get permanentAddress() { return cy.get("textarea[name='permanentAddress']")}
 get nextButtonOnContactDetails() { return cy.get("button[class='theme-button']")}
 
 // Submit Locators
-
 get submitButton() { return cy.get("button[class='theme-button']")}
 get thankYouSuccessMsg() { return cy.get('.fw-300')}
 
-//Methods
-
-
+// Methods
 enterFirstName(firstNameTxt) {
 
     const randomString = generateRandomString(3); 
@@ -61,10 +56,8 @@ enterPersonalEmailInEmpDetails(emailTxt) {
 
 }
 
-checkGender(indexNumber){
-    this.gender.eq(indexNumber).click();
-    cy.log("Gender is selected");
-
+checkGender(genderType) {
+    this.gender.contains('label', genderType).click();
 }
 
 selectBloodGroup(){
@@ -72,7 +65,6 @@ selectBloodGroup(){
     cy.log("Blood Group is selected");
 
   }
-
 
 selectDateOfBirth(){
     this.dateOfBirth.type('2000-09-24').should('have.value','2000-09-24')
@@ -117,7 +109,6 @@ clickNextButton() {
    }
 
 //Contact Details Methods 
-
 selectRelationship(){
     this.relationshipWithAlternateNo.select(1).should('contain', 'Mother');
     cy.log("Relationship With Alternate Number is selected");
@@ -162,7 +153,6 @@ clickNextButton() {
 
 
 // Submit Methods
-
 clickSubmitButton() {
     this.submitButton.click();    
     cy.log("Clicked on Submit button");

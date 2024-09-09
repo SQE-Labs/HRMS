@@ -9,7 +9,7 @@ class Invitations extends BasePage {
     get employeeName() { return cy.get('input.border[name=employeeName]'); }
     get chooseFile() { return cy.get('#file-input'); }
     get submitBtn() { return cy.get("div[class='justify-content-center modal-footer'] button[type='submit']"); }
-    get onBoardingSuccessMsg() { return cy.get("div.Toastify__toast-body"); }
+    get onBoardingSuccessMsg() { return cy.get("div.Toastify__toast-body",{ timeout:10000}); }
     
     // Methods
 
@@ -28,7 +28,7 @@ class Invitations extends BasePage {
     //     cy.log("Email ID Entered");                                        
     // }
     randomEmailGenerator(email) {
-        const randomString = generateRandomString(4); 
+        const randomString = generateRandomString(3); 
         const newEmail = `${randomString}${email}`;   
         cy.log("Random Email is generated: " + newEmail);      
         return newEmail;                              
@@ -41,8 +41,8 @@ class Invitations extends BasePage {
 
     }
 
-    selectFile(fileName) {
-        this.chooseFile.attachFile(fileName);
+    selectSamplePdf(filePath) {
+        this.chooseFile.selectFile(filePath);
         cy.log("PDF file is Selected");
 
     }
