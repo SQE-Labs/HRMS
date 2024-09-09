@@ -10,6 +10,8 @@ class Dashboard extends BasePage{
         cy.log("clicking logout")
         this.logoutButton.click();
     }
+
+    
 }
 
 export default new Dashboard();
