@@ -1,5 +1,6 @@
 import BasePage from "./BasePage";
 import { generateRandomString } from '../../support/utils'; 
+import Loaders from "../components/Loaders";
 
 class Invitations extends BasePage {
 
@@ -28,7 +29,7 @@ class Invitations extends BasePage {
     //     cy.log("Email ID Entered");                                        
     // }
     randomEmailGenerator(email) {
-        const randomString = generateRandomString(4); 
+        const randomString = generateRandomString(3); 
         const newEmail = `${randomString}${email}`;   
         cy.log("Random Email is generated: " + newEmail);      
         return newEmail;                              
@@ -41,14 +42,15 @@ class Invitations extends BasePage {
 
     }
 
-    selectFile(fileName) {
-        this.chooseFile.attachFile(fileName);
+    selectSamplePdf(filePath) {
+        this.chooseFile.selectFile(filePath);
         cy.log("PDF file is Selected");
 
     }
 
     clickSubmitButton() {
-        this.submitBtn.click();    
+        this.submitBtn.click();
+        Loaders.threeDotLoading.should('not.exist');    
         cy.log("Clicked on submit button");
 
     }
