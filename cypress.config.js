@@ -1,6 +1,5 @@
 const { defineConfig } = require("cypress");
 const easyYopmail = require("./cypress/support/yopmail.js");
-//const easyYopmail = require(".HRMS/cypress/support/yopmail.js");
 
 module.exports = defineConfig({
   chromeWebSecurity: false,

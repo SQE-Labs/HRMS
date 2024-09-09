@@ -1,5 +1,6 @@
 import BasePage from "./BasePage";
 import { generateRandomString } from '../../support/utils'; 
+import Loaders from "../components/Loaders";
 
 class Invitations extends BasePage {
 
@@ -9,7 +10,7 @@ class Invitations extends BasePage {
     get employeeName() { return cy.get('input.border[name=employeeName]'); }
     get chooseFile() { return cy.get('#file-input'); }
     get submitBtn() { return cy.get("div[class='justify-content-center modal-footer'] button[type='submit']"); }
-    get onBoardingSuccessMsg() { return cy.get("div.Toastify__toast-body",{ timeout:10000}); }
+    get onBoardingSuccessMsg() { return cy.get("div.Toastify__toast-body"); }
     
     // Methods
 
@@ -48,7 +49,8 @@ class Invitations extends BasePage {
     }
 
     clickSubmitButton() {
-        this.submitBtn.click();    
+        this.submitBtn.click();
+        Loaders.threeDotLoading.should('not.exist');    
         cy.log("Clicked on submit button");
 
     }
