@@ -1,7 +1,6 @@
 import BasePage from "../BasePage";
 import { generateRandomString } from '../../../support/utils';
 import Loaders from "../../components/Loaders";
-import Loaders from "../../components/Loaders";
 
 class VerifyPersonalEmailPopup extends BasePage {
 
