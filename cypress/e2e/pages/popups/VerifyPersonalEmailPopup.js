@@ -1,20 +1,17 @@
 import BasePage from "../BasePage";
 import { generateRandomString } from '../../../support/utils';
 import Loaders from "../../components/Loaders";
-
-
+import Loaders from "../../components/Loaders";
 
 class VerifyPersonalEmailPopup extends BasePage {
 
 //Locaters
-
 get personalEmail() { return  cy.get ("input[class='border']")} 
 get submitBtn() { return cy.get("button[class='theme-button ']")}
 
 
 
 //Methods
-
 randomEmailGenerator(email) {
   const randomString = generateRandomString(3); 
   const newEmail = `${randomString}${email}`;   
