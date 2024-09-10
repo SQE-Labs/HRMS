@@ -24,10 +24,7 @@ class Invitations extends BasePage {
         this.emailID.type(randomEmail).should('have.value',randomEmail)
         cy.log("Email ID Entered");  
     }
-    // enterPersonalID(registeredUserEmail) {
-    //     this.personalEmail.type(registeredUserEmail).should('have.value',registeredUserEmail)
-    //     cy.log("Email ID Entered");                                        
-    // }
+  
     randomEmailGenerator(email) {
         const randomString = generateRandomString(3); 
         const newEmail = `${randomString}${email}`;   

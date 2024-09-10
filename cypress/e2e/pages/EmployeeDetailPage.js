@@ -8,8 +8,6 @@ get firstName() { return cy.get("input[placeholder='Ted']")}
 get lastName() { return cy.get("input[placeholder='Mosby']")}
 get personalEmailInEmpDetails() { return cy.get("input[placeholder='ted@gmail.com']")}
 get gender() { return cy.get('div.custom-checkbox.small > div')}
-
-//get gender() { return cy.get('div.custom-checkbox.small>div>label')}
 get bloodGroup() { return cy.get('#bloodGroup')}
 get dateOfBirth() { return cy.get("input[name='dob']")}
 get aadharNumber() { return cy.get("input[name='aadharNumber']")}

@@ -1,8 +1,8 @@
 import sideBar from "../components/SideBar";
 import EmployeeDetailPage from "../pages/EmployeeDetailPage";
 import invitations from "../pages/Invitations";
+import L1ApprovalAction from "../pages/L1ApprovalAction";
 import verifyPersonalEmailPopup from "../pages/popups/VerifyPersonalEmailPopup";
-
 
 describe("Employee Onboard Tests", () => {
 
@@ -65,7 +65,82 @@ describe("Employee Onboard Tests", () => {
         EmployeeDetailPage.validateThankYouSuccessMessage('Thank you!');
 
 
+    })
 
+    it.only("Verify that record of new hire appears on 'L1 Approval' page", () => {
+
+    // New Joinee Record    
+        const JoineeData = {
+        PersonalEmail: 'Mattew@yopmail.com',
+        Firstname: 'Mattew',
+        LastName: 'Haden',
+        Gender: 'male',
+        BloodGroup: 'A+ve',
+        DateOfBirth: '2001-12-31',
+        AadharNumber: '426225626522',
+        PanNumber: 'DFDHD3435G',
+        DateOfJoining: '2024-09-12',
+        MaritalStatus: 'Single',
+        PhoneNumber: '7362726232',
+        AlternateNumber: '3434333434',
+        Relationship: 'mother',
+        AlternateName: 'Matt',
+        PresentAddress: 'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016\n',
+        PermanentAddress: 'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016\n',
+        SuggestedPassword: 'MATT20011231',
+        CaeliusEmail: 'shubh@caeliusconsulting.com'
+        }
+
+        // Login with Default User
+        cy.login();    
+
+        // Navigate to L1 Approval Action Page
+        sideBar.navigateTo("Employee Onboard", "L1 Approval");
+
+        // Viewing Newly Onboard Invitation
+        L1ApprovalAction.clickOnViewButton();
+
+        // Validating Personal Details
+        L1ApprovalAction.firstName.should('be.visible').and('have.value', JoineeData.Firstname);
+        L1ApprovalAction.lastName.should('have.value', JoineeData.LastName);
+        L1ApprovalAction.personalEmail.should('have.value', JoineeData.PersonalEmail);
+        L1ApprovalAction.gender.should('be.checked', JoineeData.Gender);
+        L1ApprovalAction.bloodGroup.should('have.value', JoineeData.BloodGroup);
+        L1ApprovalAction.dateOfBirth.should('have.value', JoineeData.DateOfBirth);
+        L1ApprovalAction.aadharNumber.should('have.value', JoineeData.AadharNumber);
+        L1ApprovalAction.panNumber.should('have.value', JoineeData.PanNumber);
+        L1ApprovalAction.dateOfJoining.should('have.value', JoineeData.DateOfJoining);
+        L1ApprovalAction.maritalStatus.should('have.value', JoineeData.MaritalStatus);
+
+        // Validating Contact Details
+        L1ApprovalAction.switchToContactDetailTab();
+        L1ApprovalAction.phoneNumber.should('be.visible').and('have.value', JoineeData.PhoneNumber);
+        L1ApprovalAction.alternateNumber.should('have.value', JoineeData.AlternateNumber);
+        L1ApprovalAction.relationshipWithAlternateNo.should('have.value', JoineeData.Relationship);
+        L1ApprovalAction.alternateName.should('have.value', JoineeData.AlternateName);
+        L1ApprovalAction.presentAddress.should('have.value', JoineeData.PresentAddress);
+        L1ApprovalAction.permanentAddress.should('have.value', JoineeData.PermanentAddress);
+
+        // Validating Approve Tab
+        L1ApprovalAction.switchToApproveTab();
+        L1ApprovalAction.firstNameOnApproveTab.should('be.visible').and('have.text', JoineeData.Firstname);
+        L1ApprovalAction.lastNameOnApproveTab.should('have.text', JoineeData.LastName);
+        L1ApprovalAction.suggestedPassword.should('have.text', JoineeData.SuggestedPassword);
+        L1ApprovalAction.enterCaeliusEmail(JoineeData.CaeliusEmail);
+        // L1ApprovalAction.clickOnSubmitButton();
+
+
+
+
+
+
+
+
+
+
+
+       
+       
     })
     
 });
