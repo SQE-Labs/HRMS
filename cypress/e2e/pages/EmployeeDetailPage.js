@@ -1,5 +1,6 @@
 import BasePage from "./BasePage";
 import { generateRandomString } from '../../support/utils';
+import Loaders from "../components/Loaders";
 
 class EmployeeDetailPage extends BasePage {
 
@@ -156,14 +157,15 @@ clickNextButton() {
 clickSubmitButton() {
     this.submitButton.click();    
     cy.log("Clicked on Submit button");
+    Loaders.threeDotLoading.should('not.exist');
    }
 
-validateThankYouSuccessMessage(thankYouMsg) {
-    this.thankYouSuccessMsg.should('contain.text', thankYouMsg);
-    cy.log("Assertion Pass");
-
-}  
-
+   validateSuccessMessage() {
+    cy.contains('Thank you!').should('be.visible')
+    cy.contains('Your submission has been sent successfully.').should('be.visible')
+    cy.contains('HR will get back to you shortly.').should('be.visible')
+    cy.log("Success message is displayed");
+    }  
 
 }
 export default new EmployeeDetailPage();

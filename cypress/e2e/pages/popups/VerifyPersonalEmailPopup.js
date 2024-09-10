@@ -1,5 +1,6 @@
 import BasePage from "../BasePage";
 import { generateRandomString } from '../../../support/utils';
+import Loaders from "../../components/Loaders";
 
 
 
@@ -22,14 +23,14 @@ randomEmailGenerator(email) {
 }
 
 enterPersonalEmailID(registeredUserEmail) {
-  this.personalEmail.type(registeredUserEmail).should('have.value',registeredUserEmail)
+  this.personalEmail.wait(2000).type(registeredUserEmail).should('have.value', registeredUserEmail)
   cy.log("Email ID Entered");                                        
 }
 
 clickSubmitButton() {
     this.submitBtn.click();    
     cy.log("Clicked on submit button");
-
+    Loaders.threeDotLoading.should('not.exist');
    }
 }
 
