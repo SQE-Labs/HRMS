@@ -23,7 +23,7 @@ randomEmailGenerator(email) {
 }
 
 enterPersonalEmailID(registeredUserEmail) {
-  this.personalEmail.wait(2000).type(registeredUserEmail).should('have.value', registeredUserEmail)
+  this.personalEmail.type(registeredUserEmail).should('have.value', registeredUserEmail)
   cy.log("Email ID Entered");                                        
 }
 
