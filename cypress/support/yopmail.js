@@ -49,17 +49,44 @@ class yopmail{
                 }
             })
             .then(message => {
-                console.log("Message returned"); // This will log once the message is successfully retrieved
-                return message.content[0]; // Return the message
+                if (message && message.content) {
+                    // Use `find()` to stop as soon as we find a matching URL
+                    const confirmationURL = message.content.find(element => 
+                        String(element).startsWith('https://topuptalent.com')
+                    );
+                    
+                    if (confirmationURL) {
+                        return confirmationURL; // Return the found URL
+                    } else {
+                        console.log('No confirmation URL found in the message.');
+                        return null;
+                    }
+                } else {
+                    console.log('No message content found.');
+                    return null;
+                }
             })
             .catch(error => {
                 console.error('Error:', error);
                 return null; // Return null in case of an error
             });
     }
+    
+
+    // thislogic(){
+    //     this.getConfirmationURL('nqzkrdxfyz@yopmail.com').then(content => {
+    //         console.log(content);
+    //         content.forEach(element => {
+    //             if(String(element).startsWith('https://topuptalent.com')){
+    //                 console.log(element);
+    //             }
+    //         });
+    //     })
+    // }
 
 }
 
-// new yopmail().getConfirmationURL('cazeuheifebre-8507@yopmail.com');
+
+// new yopmail().thislogic();
 
 module.exports = new yopmail();

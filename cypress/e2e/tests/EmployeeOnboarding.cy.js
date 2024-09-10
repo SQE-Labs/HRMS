@@ -2,41 +2,54 @@ import sideBar from "../components/SideBar";
 import EmployeeDetailPage from "../pages/EmployeeDetailPage";
 import invitations from "../pages/Invitations";
 import verifyPersonalEmailPopup from "../pages/popups/VerifyPersonalEmailPopup";
+import { generateRandomYopmail } from '../../support/utils'; 
+import { namename } from '../../support/utils'; 
 
 
 describe("Employee Onboard Tests", () => {
-
-    let globalemail = null;
-    beforeEach(() => {
-        globalemail = invitations.randomEmailGenerator('@yopmail.com');
-
-    });
 
     it("HRMIS_1: Verify onboarding email is sent to new hire", () => {
         cy.login();
         sideBar.navigateTo("Employee Onboard", "Invitations");
         invitations.clickInviteEmployeeButton();
-        cy.wait(2000);
-        invitations.enterEmailID(globalemail);
+        let randomMail = generateRandomYopmail(10);
+        invitations.enterEmailID(randomMail); 
         invitations.enterEmployeeName("Mattews");
         invitations.selectSamplePdf('cypress/fixtures/resources/dummy.pdf');
         invitations.clickSubmitButton();
         invitations.validateOnboardingEmailSentMsg('Onboarding welcome mail sent');
     });
 
-    it("HRMIS_2: Verify that new hire is able to submit the onboarding form", () => {
-        // Login with Default User
+    it.only("HRMIS_2: Verify that new hire is able to submit the onboarding form", () => {
+
+        const joineeData = {
+            
+        }
+    
+        // Login and Navigation to Invitation
         cy.login();
-        cy.wait(2000);
+        sideBar.navigateTo("Employee Onboard", "Invitations");
 
-        // Redirect to the Invitation URL
-        cy.visit("https://topuptalent.com/create-employee?token=-16t4gdv0jr0v--1f0nmsz3fq22v",  
-          { failOnStatusCode: false });
-        cy.wait(2000);
+        // Create invite
+        invitations.clickInviteEmployeeButton();
+        let joineeEmail = generateRandomYopmail(10);
+        invitations.enterEmailID(joineeEmail); 
+        invitations.enterEmployeeName("Mattews");
+        invitations.selectSamplePdf('cypress/fixtures/resources/dummy.pdf');
+        invitations.clickSubmitButton();
+        invitations.validateOnboardingEmailSentMsg('Onboarding welcome mail sent');
 
-        // Providing Employee Details  
-        verifyPersonalEmailPopup.enterPersonalEmailID("snm@yopmail.com"); 
+        // Wait for mail and navigate to the url received in the mail
+        cy.wait(5000);
+        cy.task('getConfirmaUrl', joineeEmail).then(confirmationUrl =>{
+            cy.visit(String(confirmationUrl), {failOnStatusCode: false });
+        });
+        
+        // Provide joinee's valid email to continue
+        verifyPersonalEmailPopup.enterPersonalEmailID(joineeEmail); 
         verifyPersonalEmailPopup.clickSubmitButton();
+
+        // Providing Personal Details  
         EmployeeDetailPage.enterFirstName('Matt');
         EmployeeDetailPage.enterLastName('Haden');
         EmployeeDetailPage.checkGender('Female');
@@ -48,7 +61,7 @@ describe("Employee Onboard Tests", () => {
         EmployeeDetailPage.selectMaritalStatus('Single');
         EmployeeDetailPage.clickNextButton();
     
-        // Providing Contact Details   //
+        // Providing Contact Details
         EmployeeDetailPage.enterPhoneNumber('6448744833');
         EmployeeDetailPage.enterAlternateNumber('3673636733');
         EmployeeDetailPage.selectRelationship('Mother');
@@ -57,15 +70,11 @@ describe("Employee Onboard Tests", () => {
         EmployeeDetailPage.enterPermanentAddress('Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016');
         EmployeeDetailPage.clickNextButton();
 
-        // Submitting the Details 
+        // Submit the Details 
         EmployeeDetailPage.clickSubmitButton();
-        cy.wait(5000);
 
         // Validating the Thank You Success message
-        EmployeeDetailPage.validateThankYouSuccessMessage('Thank you!');
-
-
-
+        EmployeeDetailPage.validateSuccessMessage();
     })
     
 });
