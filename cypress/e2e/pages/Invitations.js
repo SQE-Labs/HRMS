@@ -21,17 +21,17 @@ class Invitations extends BasePage {
     }
 
     enterEmailID(randomEmail) { 
-        this.emailID.type(randomEmail).should('have.value',randomEmail)
+        this.emailID.wait(2000).type(randomEmail)
+            .should('have.value',randomEmail);
         cy.log("Email ID Entered");  
     }
-  
+    
     randomEmailGenerator(email) {
         const randomString = generateRandomString(3); 
         const newEmail = `${randomString}${email}`;   
         cy.log("Random Email is generated: " + newEmail);      
         return newEmail;                              
     }
-
 
     enterEmployeeName(employeeName) {
         this.employeeName.type(employeeName).should('have.value', 'Mattews');
@@ -54,8 +54,7 @@ class Invitations extends BasePage {
 
     validateOnboardingEmailSentMsg(successMsg) {
         this.onBoardingSuccessMsg.should('contain.text', successMsg);
-        cy.log("Assertion Pass");
-
+        cy.log("Onboarding mail is sent");
     }
 }
 

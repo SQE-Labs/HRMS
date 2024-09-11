@@ -1,19 +1,16 @@
 import BasePage from "../BasePage";
 import { generateRandomString } from '../../../support/utils';
-
-
+import Loaders from "../../components/Loaders";
 
 class VerifyPersonalEmailPopup extends BasePage {
 
 //Locaters
-
 get personalEmail() { return  cy.get ("input[class='border']")} 
 get submitBtn() { return cy.get("button[class='theme-button ']")}
 
 
 
 //Methods
-
 randomEmailGenerator(email) {
   const randomString = generateRandomString(3); 
   const newEmail = `${randomString}${email}`;   
@@ -22,14 +19,14 @@ randomEmailGenerator(email) {
 }
 
 enterPersonalEmailID(registeredUserEmail) {
-  this.personalEmail.type(registeredUserEmail).should('have.value',registeredUserEmail)
+  this.personalEmail.wait(2000).type(registeredUserEmail).should('have.value', registeredUserEmail)
   cy.log("Email ID Entered");                                        
 }
 
 clickSubmitButton() {
     this.submitBtn.click();    
     cy.log("Clicked on submit button");
-
+    Loaders.threeDotLoading.should('not.exist');
    }
 }
 
