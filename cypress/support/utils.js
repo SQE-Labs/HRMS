@@ -14,6 +14,6 @@ export function generateRandomYopmail(length){
     return randomString+'@yopmail.com';
 }
 
-export function namename(){
+export function getRandomMailFromYopmail(){
     return easyYopmail.getMail();
 }
