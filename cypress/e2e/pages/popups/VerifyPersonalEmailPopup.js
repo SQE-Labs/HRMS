@@ -5,7 +5,7 @@ import Loaders from "../../components/Loaders";
 class VerifyPersonalEmailPopup extends BasePage {
 
 //Locaters
-get personalEmail() { return  cy.get ("input[class='border']")} 
+get personalEmail() { return  cy.get("input[class='border']")} 
 get submitBtn() { return cy.get("button[class='theme-button ']")}
 
 

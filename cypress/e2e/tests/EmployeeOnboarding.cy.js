@@ -3,7 +3,9 @@ import EmployeeDetailPage from "../pages/EmployeeDetailPage";
 import invitations from "../pages/Invitations";
 import L1ApprovalAction from "../pages/L1ApprovalAction";
 import verifyPersonalEmailPopup from "../pages/popups/VerifyPersonalEmailPopup";
-import { generateRandomYopmail, generateRandomString } from '../../support/utils';
+import HomePage from "../pages/HomePage";
+import { generateRandomYopmail, generateRandomString, generateRandomCaeliusEmail } from '../../support/utils';
+import HRApproval from "../pages/HRApproval";
 
 
 describe("Employee Onboard Tests", () => {
@@ -34,10 +36,18 @@ describe("Employee Onboard Tests", () => {
             MaritalStatus: 'Single',
             PhoneNumber: '6448744833',
             AlternatePhone: '3673636733',
-            RelationShip: 'Mother',
+            RelationShip: 'Mother', 
+            RelationshipWithAlterNumber: 'mother',
             AlterName: 'Mattews',
             PresentAddress: 'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016',
             PermanentAddress: 'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016',
+            CaeliusEmail: generateRandomCaeliusEmail(6),
+            Department: 'Marketing',
+            Designation:'Customer Success Manager',
+            AssignManager: 'DDinesh D Kumar',
+            EmployeeType: 'REGULAR'
+
+
         }
 
         // Login and Navigation to Invitation
@@ -46,7 +56,7 @@ describe("Employee Onboard Tests", () => {
 
         // Create invite
         invitations.clickInviteEmployeeButton();
-        // let joineeEmail = generateRandomYopmail(10);
+        //let joineeEmail = generateRandomYopmail(10);
         invitations.enterEmailID(JoineeData.JoineeEmail);
         invitations.enterEmployeeName("Mattews");
         invitations.selectSamplePdf('cypress/fixtures/resources/dummy.pdf');
@@ -94,10 +104,73 @@ describe("Employee Onboard Tests", () => {
         // Validating the Thank You Success message
         EmployeeDetailPage.validateSuccessMessage();
 
+        // Navigate to Homepage > Employee Onboard > L1 Approval Action
+        cy.wait(3000)
+        HomePage.navigateToHomePage();
+        sideBar.navigateTo("Employee Onboard", "L1 Approval");
+
+        // Viewing Newly Onboard Invitation
+        L1ApprovalAction.selectItemsPerPage();
+        L1ApprovalAction.clickOnPagenationNextButton();
+        L1ApprovalAction.SearchNewJoineeByName(JoineeData.Firstname);
+        L1ApprovalAction.validateEmailForNewJoinee();
+        L1ApprovalAction.viewButtonOnSearchedJoinee;
+
+        // Validating Personal Details for New Joinee
+        L1ApprovalAction.firstName.should('be.visible').and('have.value', JoineeData.Firstname);
+        L1ApprovalAction.lastName.should('have.value', JoineeData.LastName);
+        L1ApprovalAction.personalEmail.should('have.value', JoineeData.JoineeEmail);
+        L1ApprovalAction.gender.should('be.checked', JoineeData.Gender);
+        L1ApprovalAction.bloodGroup.should('have.value', JoineeData.BloodGroup);
+        L1ApprovalAction.dateOfBirth.should('have.value', JoineeData.DateOfBirth);
+        L1ApprovalAction.aadharNumber.should('have.value', JoineeData.AadharNumber);
+        L1ApprovalAction.panNumber.should('have.value', JoineeData.PanNumber);
+        L1ApprovalAction.dateOfJoining.should('have.value', JoineeData.DateOfJoining);
+        L1ApprovalAction.maritalStatus.should('have.value', JoineeData.MaritalStatus);
+
+        // Validating Contact Details
+        L1ApprovalAction.switchToContactDetailTab();
+        L1ApprovalAction.phoneNumber.should('be.visible').and('have.value', JoineeData.PhoneNumber);
+        L1ApprovalAction.alternateNumber.should('have.value', JoineeData.AlternatePhone);
+        L1ApprovalAction.relationshipWithAlternateNo.should('have.value', JoineeData.RelationshipWithAlterNumber);
+        L1ApprovalAction.alternateName.should('have.value', JoineeData.AlterName);
+        L1ApprovalAction.presentAddress.should('have.value', JoineeData.PresentAddress);
+        L1ApprovalAction.permanentAddress.should('have.value', JoineeData.PermanentAddress);
+
+        // Validating Approve Tab
+        L1ApprovalAction.switchToApproveTab();
+        L1ApprovalAction.firstNameOnApproveTab.should('be.visible').and('have.text', JoineeData.Firstname);
+        L1ApprovalAction.lastNameOnApproveTab.should('have.text', JoineeData.LastName);
+        L1ApprovalAction.enterCaeliusEmail(JoineeData.CaeliusEmail);
+        L1ApprovalAction.clickOnSubmitButton();
+
+        // Validating the Thank You Success message
+        L1ApprovalAction.validateSuccessMessage();
+
+        // Navigate to Homepage > HR Approval Page
+        cy.wait(3000)
+        HomePage.navigateToHomePage();
+        sideBar.navigateTo("Employee Onboard", "HR Approval");
+
+        // Viewing Newly Onboard Invitation to HR Approval Page
+        L1ApprovalAction.selectItemsPerPage();
+        L1ApprovalAction.SearchNewJoineeByName(JoineeData.Firstname);
+        L1ApprovalAction.validateEmailForNewJoinee();
+        L1ApprovalAction.viewButtonOnSearchedJoinee;
+        L1ApprovalAction.switchToContactDetailTab();
+        L1ApprovalAction.switchToApproveTab();
+
+        // Providing HR Approval Action Details
+        // L1ApprovalAction.firstNameOnApproveTab.should('be.visible').and('have.text', JoineeData.Firstname);
+        // HRApproval.caeliusEmail.should('have,text',JoineeData.CaeliusEmail);
+        // HRApproval.selectDepartment(JoineeData.Department);
+        // HRApproval.selectDesignation(JoineeData.Designation);
+        // HRApproval.selectAssignManager(JoineeData.AssignManager);
+        // HRApproval.selectEmployeeType(JoineeData.EmployeeType);
 
     })
 
-    it.only("Verify that record of new hire appears on 'L1 Approval' page", () => {
+    it("HRMIS_3: Verify that record of new hire appears on 'L1 Approval' page", () => {
 
     // New Joinee Record    
         const JoineeData = {
@@ -128,7 +201,11 @@ describe("Employee Onboard Tests", () => {
         sideBar.navigateTo("Employee Onboard", "L1 Approval");
 
         // Viewing Newly Onboard Invitation
-        L1ApprovalAction.clickOnViewButton();
+        L1ApprovalAction.selectItemsPerPage();
+        L1ApprovalAction.clickOnViewButtonNewJoinee();
+        //L1ApprovalAction.viewbuttobNew;
+
+
 
         // Validating Personal Details
         L1ApprovalAction.firstName.should('be.visible').and('have.value', JoineeData.Firstname);
@@ -157,20 +234,8 @@ describe("Employee Onboard Tests", () => {
         L1ApprovalAction.lastNameOnApproveTab.should('have.text', JoineeData.LastName);
         L1ApprovalAction.suggestedPassword.should('have.text', JoineeData.SuggestedPassword);
         L1ApprovalAction.enterCaeliusEmail(JoineeData.CaeliusEmail);
-        // L1ApprovalAction.clickOnSubmitButton();
+        L1ApprovalAction.clickOnSubmitButton();
 
-
-
-
-
-
-
-
-
-
-
-       
-       
     })
 
 });
