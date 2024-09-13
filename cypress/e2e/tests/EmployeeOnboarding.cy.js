@@ -43,7 +43,7 @@ describe("Employee Onboard Tests", () => {
             PermanentAddress: 'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016',
             CaeliusEmail: generateRandomCaeliusEmail(6),
             Department: 'Marketing',
-            Designation:'Customer Success Manager',
+            Designation:'Demooo',
             AssignManager: 'DDinesh D Kumar',
             EmployeeType: 'REGULAR'
 
@@ -154,19 +154,44 @@ describe("Employee Onboard Tests", () => {
 
         // Viewing Newly Onboard Invitation to HR Approval Page
         L1ApprovalAction.selectItemsPerPage();
+        L1ApprovalAction.clickOnPagenationNextButton();
         L1ApprovalAction.SearchNewJoineeByName(JoineeData.Firstname);
         L1ApprovalAction.validateEmailForNewJoinee();
         L1ApprovalAction.viewButtonOnSearchedJoinee;
-        L1ApprovalAction.switchToContactDetailTab();
-        L1ApprovalAction.switchToApproveTab();
 
-        // Providing HR Approval Action Details
-        // L1ApprovalAction.firstNameOnApproveTab.should('be.visible').and('have.text', JoineeData.Firstname);
-        // HRApproval.caeliusEmail.should('have,text',JoineeData.CaeliusEmail);
-        // HRApproval.selectDepartment(JoineeData.Department);
-        // HRApproval.selectDesignation(JoineeData.Designation);
-        // HRApproval.selectAssignManager(JoineeData.AssignManager);
-        // HRApproval.selectEmployeeType(JoineeData.EmployeeType);
+        
+        // Validating Personal Details for New Joinee
+        L1ApprovalAction.firstName.should('be.visible').and('have.value', JoineeData.Firstname);
+        L1ApprovalAction.lastName.should('have.value', JoineeData.LastName);
+        L1ApprovalAction.personalEmail.should('have.value', JoineeData.JoineeEmail);
+        L1ApprovalAction.gender.should('be.checked', JoineeData.Gender);
+        L1ApprovalAction.bloodGroup.should('have.value', JoineeData.BloodGroup);
+        L1ApprovalAction.dateOfBirth.should('have.value', JoineeData.DateOfBirth);
+        L1ApprovalAction.aadharNumber.should('have.value', JoineeData.AadharNumber);
+        L1ApprovalAction.panNumber.should('have.value', JoineeData.PanNumber);
+        L1ApprovalAction.dateOfJoining.should('have.value', JoineeData.DateOfJoining);
+        L1ApprovalAction.maritalStatus.should('have.value', JoineeData.MaritalStatus);
+
+        // Validating Contact Details
+        L1ApprovalAction.switchToContactDetailTab();
+        L1ApprovalAction.phoneNumber.should('be.visible').and('have.value', JoineeData.PhoneNumber);
+        L1ApprovalAction.alternateNumber.should('have.value', JoineeData.AlternatePhone);
+        L1ApprovalAction.relationshipWithAlternateNo.should('have.value', JoineeData.RelationshipWithAlterNumber);
+        L1ApprovalAction.alternateName.should('have.value', JoineeData.AlterName);
+        L1ApprovalAction.presentAddress.should('have.value', JoineeData.PresentAddress);
+        L1ApprovalAction.permanentAddress.should('have.value', JoineeData.PermanentAddress);
+
+        // Validating and Providing Approve Details
+        L1ApprovalAction.switchToApproveTab();
+        //HRApproval.caeliusEmail.should('have,text',JoineeData.CaeliusEmail);
+        HRApproval.selectDepartment(JoineeData.Department);
+        HRApproval.selectDesignation(JoineeData.Designation);
+        HRApproval.selectAssignManager(JoineeData.AssignManager);
+        HRApproval.selectEmployeeType(JoineeData.EmployeeType);
+        HRApproval.clickApproveButton();
+
+        // Validating the Thank You Success message
+        HRApproval.validateSuccessMessage();
 
     })
 
