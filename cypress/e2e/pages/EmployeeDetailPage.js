@@ -81,7 +81,7 @@ class EmployeeDetailPage extends BasePage {
 
     selectMaritalStatus(status) {
         this.maritalStatus.select(status).should('contain', status);
-        cy.log("Marital Status is selected is selected");
+        cy.log("Marital Status is selected");
     }
 
     clickNextButton() {

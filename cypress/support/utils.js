@@ -14,6 +14,11 @@ export function generateRandomYopmail(length){
     return randomString+'@yopmail.com';
 }
 
+export function generateRandomCaeliusEmail(length){
+    let randomString = generateRandomString(length);
+    return randomString+'@caeliusconsulting.com';
+}
+
 export function getRandomMailFromYopmail(){
     return easyYopmail.getMail();
 }
