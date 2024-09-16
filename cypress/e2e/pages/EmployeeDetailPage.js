@@ -134,20 +134,8 @@ class EmployeeDetailPage extends BasePage {
     }
 
     getFieldValue(label) {
-        
-
-        return cy.get('.row').then($row => {
-          // Find the label index based on the text
-          const labelIndex = $row.find(`p:contains(${label})`).parent().index();
-          console.log('index is ',labelIndex);
-          // Find the corresponding value in the next column (same row, next column)
-          const value = $row.find('.col-md-2:nth-child(2) .truncate-text').eq(labelIndex).text();
-    
-          // Return the value
-          return value;
-        });
-      }
-
+        return cy.get('.row').contains('p', label).parents('.col-md-2').next().find('p');
+    }
       
 }
 
