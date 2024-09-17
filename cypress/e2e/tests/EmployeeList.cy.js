@@ -23,5 +23,25 @@ describe("Employee Onboard Tests", () => {
         
         // Verify that 'Basic Info' accordion gets expanded, when user clicks 'Basic Info' accordion.
         UserDashboard.clickOnBasicInfo();
+        UserDashboard.verifyAllFields();
+        
+        // Verify that data do not get saved on clicking 'Close' button.
+        UserDashboard.clickOnEditButtonBasicInfo();
+        UserDashboard.updateNameFields('Autom','Mation1','User1')
+        UserDashboard.clickOnCloseButton();
+        UserDashboard.verifyDataForAllFields('Auto','Mation','User','CCIT/09_24/501','AutomationUser@caeliusconsulting.com');
+
+        // Verify that data gets saved on clicking 'close' button.
+        UserDashboard.clickOnEditButtonBasicInfo();
+        UserDashboard.updateNameFields('Auto','User','Mation')
+        UserDashboard.clickOnUpdateButton();
+        UserDashboard.validateSuccessMessage();
+        UserDashboard.verifyDataForAllFields('Auto','Mation','User','CCIT/09_24/501','AutomationUser@caeliusconsulting.com');
+
+        // Verify that 'Basic Info' accordion gets collapsed.
+        UserDashboard.clickOnBasicInfo();
+        UserDashboard.validateAccordionCollapsed();
+
     });
+
 })
