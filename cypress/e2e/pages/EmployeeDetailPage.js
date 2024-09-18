@@ -5,18 +5,19 @@ import Loaders from "../components/Loaders";
 class EmployeeDetailPage extends BasePage {
 
     // Locaters
-    get firstName() { return cy.get("input[placeholder='Ted']") }
-    get lastName() { return cy.get("input[placeholder='Mosby']") }
-    get personalEmailInEmpDetails() { return cy.get("input[placeholder='ted@gmail.com']") }
+    get firstName() { return cy.get("input[name='firstName']") }
+    get middleName() { return cy.get("input[name='middleName']") }
+    get lastName() { return cy.get("input[name='lastName']") }
+    get personalEmailInEmpDetails() { return cy.get("input[name='personalEmail']") }
     get gender() { return cy.get('div.custom-checkbox.small > div') }
 
-    //get gender() { return cy.get('div.custom-checkbox.small>div>label')}
     get bloodGroup() { return cy.get('#bloodGroup') }
     get dateOfBirth() { return cy.get("input[name='dob']") }
     get aadharNumber() { return cy.get("input[name='aadharNumber']") }
     get panNumber() { return cy.get("input[placeholder='XXX-XXX-XXXX']") }
     get dateOfJoining() { return cy.get("input[name='joiningDate']") }
     get maritalStatus() { return cy.get('#maritalStatus') }
+    get passportNo() { return cy.get("input[name='passportNumber']") }
     get nextButton() { return cy.get("button[class='theme-button']") }
 
     // Contact Details Locators
@@ -36,6 +37,11 @@ class EmployeeDetailPage extends BasePage {
     enterFirstName(firstName) {
         this.firstName.type(firstName).should('have.value', firstName);
         cy.log("Entered First Name : ", firstName);
+    }
+
+    enterMiddleName(middleName) {
+        this.middleName.type(middleName).should('have.value', middleName);
+        cy.log("Entered Middle Name : ", middleName);
     }
 
     enterLastName(lastName) {
@@ -71,7 +77,6 @@ class EmployeeDetailPage extends BasePage {
     enterPanNumber(panNumberTxt) {
         this.panNumber.type(panNumberTxt).should('have.value', panNumberTxt);
         cy.log("Pan Number is Entered");
-
     }
 
     selectDateOfJoining(doj) {
@@ -82,6 +87,11 @@ class EmployeeDetailPage extends BasePage {
     selectMaritalStatus(status) {
         this.maritalStatus.select(status).should('contain', status);
         cy.log("Marital Status is selected");
+    }
+
+    enterPassportNumber(passportNo) {
+        this.passportNo.type(passportNo).should('have.value', passportNo);
+        cy.log("Passport Number is Entered");
     }
 
     clickNextButton() {
@@ -134,7 +144,19 @@ class EmployeeDetailPage extends BasePage {
     }
 
     getFieldValue(label) {
-        return cy.get('.row').contains('p', label).parents('.col-md-2').next().find('p');
+        return cy.get('.row').find(`p:contains(${label})`).then($element => {
+            // Get the parent container of the label
+            const parent = $element.parent();
+            
+            // Find the index of the label in the parent container
+            const index = parent.find('p').toArray().findIndex(p => Cypress.$(p).text().includes(label));
+            
+            // Return the value from the next row based on the calculated index
+            return cy.get('.row').find(`p:contains(${label})`).parent().parent().next().find('p').eq(index)
+                .invoke('text').then(text => {
+                    return text.replace(/\u00A0/g, ' ').trim(); // Replace &nbsp; with space and trim
+                });
+        });
     }
       
 }
