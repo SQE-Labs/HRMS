@@ -35,23 +35,30 @@ validateNoRecordsAppear(){
     cy.log("No Records Appear")
 }
 
-verifyAllFields() {
+verifyFirstNameContainsText(){
   this.firstName.should('be.visible');
   cy.log("First Name Contains Text")
+}
 
-  this.lastName.should('be.visible')
-  cy.log(":Last Name Contains Text")
-
-  this.employeeID.should('be.visible');
-  cy.log("Emplooyee ID Present")
-
+verifyMiddleNameContainsText(){
   this.middleName.should('be.visible');
   cy.log("Middle Name Conatins Text")
+}
 
+verifyLastNameContainsText(){
+  this.lastName.should('be.visible')
+  cy.log(":Last Name Contains Text")
+}
+
+verifyEmployeeIDContainsText(){
+  this.employeeID.should('be.visible');
+  cy.log("Emplooyee ID Present")
+}
+
+verifyEmailIDContainsText(){
   this.email.should('be.visible');
   cy.log("Email ID Present")
-
-  }
+}
 
 validateAccordionCollapsed(){
   this.firstName.should('not.be.visible');
@@ -63,15 +70,19 @@ clickOnEditButtonBasicInfo(){
   cy.log("Clicked on the Edit button Under Basic Info Accordion");
 }  
 
-updateNameFields(firstNameText, lastNameText, middleNameText){
+updateFirstName(firstNameText){
   this.editFirstName.clear().type(firstNameText).should('have.value',firstNameText)
   cy.log("Updated First Name Text");
+}
 
-  this.editLastName.clear().type(lastNameText).should('have.value',lastNameText)
-  cy.log("Updated Last Name Text");
-
+updateMiddleName(middleNameText){
   this.editMiddleName.clear().type(middleNameText).should('have.value',middleNameText)
   cy.log("Updated Middle Name Text");
+}
+
+updateLastName(lastNameText){
+  this.editLastName.clear().type(lastNameText).should('have.value',lastNameText)
+  cy.log("Updated Last Name Text");
 }
 
 clickOnCloseButton(){
@@ -85,28 +96,35 @@ clickOnUpdateButton(){
   Loaders.threeDotLoading.should('not.exist');
 }   
 
-verifyDataForAllFields(firstNameTxt, middleNameTxt, lastNameTxt, employeeId, emailID){
+verifyFirstName(firstNameTxt){
   this.firstName.should('have.text',firstNameTxt);
-  cy.log("First Name is not Updated")
+  cy.log("First Name is Verified")
+}
 
+verifyMiddleName(middleNameTxt){
   this.middleName.should('have.text',middleNameTxt);
-  cy.log("Middle Name is not Updated")
+  cy.log("Middle Name is Verified")
+}
 
+verifyLastName(lastNameTxt){
   this.lastName.should('have.text',lastNameTxt);
-  cy.log("Last Name is not Updated")
+  cy.log("Last Name is Verified")
+}
 
+verifyEmployeeID(employeeId){
   this.employeeID.should('have.text',employeeId);
-  cy.log("Emplooyee ID is not updated")
+  cy.log("Emplooyee ID is Verfied")
+}
 
+verifyEmailID(emailID){
   this.email.should('have.text',emailID);
-  cy.log("Email is not updated")
-
- }
+  cy.log("Email is Verfied")
+}
 
 validateSuccessMessage() {
   cy.contains("success").should('be.visible')
   cy.log("Success message is displayed");
-}
+ }
 }
 
 export default new UserDashboard();

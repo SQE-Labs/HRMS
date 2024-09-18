@@ -36,7 +36,6 @@ class Invitations extends BasePage {
     enterEmployeeName(employeeName) {
         this.employeeName.type(employeeName).should('have.value', 'Mattews');
         cy.log("Entered Employee Name");
-
     }
 
     selectSamplePdf(filePath) {

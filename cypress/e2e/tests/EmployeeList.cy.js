@@ -14,7 +14,7 @@ describe("Employee Onboard Tests", () => {
 
         // Verify that information message, when user enters valid data in 'Search By Name' field
         EmployeeListPage.enterValidNameToSearch('Aut');
-        EmployeeListPage.countTotalEmployees();
+        EmployeeListPage.countTotalEmployees(1);
 
         // Verify that the information message appears for the selected department with no records.
         EmployeeListPage.selectSearchedUser();
@@ -23,20 +23,36 @@ describe("Employee Onboard Tests", () => {
         
         // Verify that 'Basic Info' accordion gets expanded, when user clicks 'Basic Info' accordion.
         UserDashboard.clickOnBasicInfo();
-        UserDashboard.verifyAllFields();
+        UserDashboard.verifyFirstNameContainsText();
+        UserDashboard.verifyMiddleNameContainsText();
+        UserDashboard.verifyLastNameContainsText();
+        UserDashboard.verifyEmployeeIDContainsText();
+        UserDashboard.verifyEmailIDContainsText();
         
         // Verify that data do not get saved on clicking 'Close' button.
         UserDashboard.clickOnEditButtonBasicInfo();
-        UserDashboard.updateNameFields('Autom','Mation1','User1')
+        UserDashboard.updateFirstName('Autom');
+        UserDashboard.updateMiddleName('Mation1');
+        UserDashboard.updateLastName('User1');
         UserDashboard.clickOnCloseButton();
-        UserDashboard.verifyDataForAllFields('Auto','Mation','User','CCIT/09_24/501','AutomationUser@caeliusconsulting.com');
+        UserDashboard.verifyFirstName('Auto');
+        UserDashboard.verifyMiddleName('Mation');
+        UserDashboard.verifyLastName('User');
+        UserDashboard.verifyEmployeeID('CCIT/09_24/501');
+        UserDashboard.verifyEmailID('AutomationUser@caeliusconsulting.com');
 
         // Verify that data gets saved on clicking 'close' button.
         UserDashboard.clickOnEditButtonBasicInfo();
-        UserDashboard.updateNameFields('Auto','User','Mation')
+        UserDashboard.updateFirstName('Auto');
+        UserDashboard.updateMiddleName('Mation');
+        UserDashboard.updateLastName('User');
         UserDashboard.clickOnUpdateButton();
         UserDashboard.validateSuccessMessage();
-        UserDashboard.verifyDataForAllFields('Auto','Mation','User','CCIT/09_24/501','AutomationUser@caeliusconsulting.com');
+        UserDashboard.verifyFirstName('Auto');
+        UserDashboard.verifyMiddleName('Mation');
+        UserDashboard.verifyLastName('User');
+        UserDashboard.verifyEmployeeID('CCIT/09_24/501');
+        UserDashboard.verifyEmailID('AutomationUser@caeliusconsulting.com');
 
         // Verify that 'Basic Info' accordion gets collapsed.
         UserDashboard.clickOnBasicInfo();
