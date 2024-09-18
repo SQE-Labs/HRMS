@@ -1,3 +1,6 @@
 {
-    "url" : "https://topuptalent.com/"
+    "url" : "https://topuptalent.com/",
+    "employeeName" : "DDinesh D Kumar",
+    "EmployeeManagementTab" : "Employee Management",
+    "EmployeesListSubTab" : "Employees List"
 }
