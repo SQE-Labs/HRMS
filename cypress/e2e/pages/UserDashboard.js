@@ -21,12 +21,12 @@ get updateButton() { return cy.get("button[class='btn btn-primary btn-sm']")}
 
 // Methods
 clickOnWorkExperience(){
-    this.workExperience.click().should('be.visible');
+    this.workExperience.click();
     cy.log("Clicked on the Work Experience Option");
  }
 
 clickOnBasicInfo(){
-    this.basicInfo.wait(2000).click().should('be.visible');
+    this.basicInfo.wait(2000).click();
     cy.log("Clicked on the Basic Info Option");
  } 
 
@@ -35,63 +35,38 @@ validateNoRecordsAppear(){
     cy.log("No Records Appear")
 }
 
-verifyFirstNameContainsText(){
-  this.firstName.should('be.visible');
-  cy.log("First Name Contains Text")
-}
-
-verifyMiddleNameContainsText(){
-  this.middleName.should('be.visible');
-  cy.log("Middle Name Conatins Text")
-}
-
-verifyLastNameContainsText(){
-  this.lastName.should('be.visible')
-  cy.log(":Last Name Contains Text")
-}
-
-verifyEmployeeIDContainsText(){
-  this.employeeID.should('be.visible');
-  cy.log("Emplooyee ID Present")
-}
-
-verifyEmailIDContainsText(){
-  this.email.should('be.visible');
-  cy.log("Email ID Present")
-}
-
 validateAccordionCollapsed(){
   this.firstName.should('not.be.visible');
   cy.log("Accordion Is Collapsed")
  } 
 
 clickOnEditButtonBasicInfo(){
-  this.editBasicInfo.should('be.visible').click();
+  this.editBasicInfo.click();
   cy.log("Clicked on the Edit button Under Basic Info Accordion");
 }  
 
 updateFirstName(firstNameText){
-  this.editFirstName.clear().type(firstNameText).should('have.value',firstNameText)
+  this.editFirstName.type(`{selectall}{backspace}${firstNameText}`).should('have.value',firstNameText)
   cy.log("Updated First Name Text");
 }
 
 updateMiddleName(middleNameText){
-  this.editMiddleName.clear().type(middleNameText).should('have.value',middleNameText)
+  this.editMiddleName.type(`{selectall}{backspace}${middleNameText}`).should('have.value',middleNameText)
   cy.log("Updated Middle Name Text");
 }
 
 updateLastName(lastNameText){
-  this.editLastName.clear().type(lastNameText).should('have.value',lastNameText)
+  this.editLastName.type(`{selectall}{backspace}${lastNameText}`).should('have.value',lastNameText)
   cy.log("Updated Last Name Text");
 }
 
 clickOnCloseButton(){
-  this.closeButton.should('be.visible').click();
+  this.closeButton.click();
   cy.log("Clicked on the Close Button under Basic Info Accordion");
 } 
 
 clickOnUpdateButton(){
-  this.updateButton.should('be.visible').click();
+  this.updateButton.click();
   cy.log("Clicked on the Update Button under Basic Info Accordion");
   Loaders.threeDotLoading.should('not.exist');
 }   

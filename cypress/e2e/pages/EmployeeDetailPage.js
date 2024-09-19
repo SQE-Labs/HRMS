@@ -134,19 +134,20 @@ class EmployeeDetailPage extends BasePage {
     }
 
     getFieldValue(label) {
-        
-
-        return cy.get('.row').then($row => {
-          // Find the label index based on the text
-          const labelIndex = $row.find(`p:contains(${label})`).parent().index();
-          console.log('index is ',labelIndex);
-          // Find the corresponding value in the next column (same row, next column)
-          const value = $row.find('.col-md-2:nth-child(2) .truncate-text').eq(labelIndex).text();
-    
-          // Return the value
-          return value;
+        return cy.get('.row').find(`p:contains(${label})`).then($element => {
+            // Get the parent container of the label
+            const parent = $element.parent();
+            
+            // Find the index of the label in the parent container
+            const index = parent.find('p').toArray().findIndex(p => Cypress.$(p).text().includes(label));
+            
+            // Return the value from the next row based on the calculated index
+            return cy.get('.row').find(`p:contains(${label})`).parent().parent().next().find('p').eq(index)
+                .invoke('text').then(text => {
+                    return text.replace(/\u00A0/g, ' ').trim(); // Replace   with space and trim
+                });
         });
-      }
+    }
 
       
 }

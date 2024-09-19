@@ -5,21 +5,16 @@ class EmployeeListPage extends BasePage {
 
 //Locators
 get searchByName() { return cy.get("input[placeholder='Search By Name.']")}
-get selectUser() { return cy.get(".card-title.text-primary")}
+get user() { return cy.get(".card-title.text-primary")}
 get employeeCount() { return cy.get('.total')}
 get noRecordAvailable() { return cy.get('.fs-4.text-secondary.text-center')}
 get department() { return cy.get("#department")}
 get totalCount() { return cy.get("div[class='total'] span")}
 
 //Methods
-enterValidNameToSearch(nametxt) {
-  this.searchByName.clear().type(nametxt).should('have.value', nametxt);
-  cy.log("Entered Valid Name to Search")
-  }
-
-enterInvalidNameToSearch(nametxt) {
-  this.searchByName.type(nametxt).should('have.value', nametxt);
-  cy.log("Entered Invalid Name to Search")
+enterNameToSearch(nametxt) {
+  this.searchByName.type(`{selectall}{backspace}${nametxt}`).should('have.value', nametxt);
+  cy.log("Entered Name to Search")
   }  
 
 validateNoRecordsAppear(){
@@ -36,7 +31,7 @@ countTotalEmployees(countEmployees){
         });
       }
 
-selectSearchedUser(){
+selectUser(){
   this.selectUser.click();
   Loaders.threeDotLoading.should('not.exist');    
   cy.log("Clicked on Searched User");
