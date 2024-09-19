@@ -34,7 +34,7 @@ class Invitations extends BasePage {
     }
 
     enterEmployeeName(employeeName) {
-        this.employeeName.type(employeeName).should('have.value', 'Mattews');
+        this.employeeName.type(employeeName).should('have.value', employeeName);
         cy.log("Entered Employee Name");
     }
 
