@@ -21,17 +21,17 @@ selectDepartment(departmentName) {
 }
 
 selectDesignation(designation) {
-    this.designation.wait(1000).type(designation+ '{enter}').should('contain', designation);
+    this.designation.wait(500).type(designation+ '{enter}').should('contain', designation);
     cy.log("Designation is selected");
 }
 
 selectAssignManager(assignManagerName) {
-    this.assignManager.wait(1000).type(assignManagerName+ '{enter}');
+    this.assignManager.wait(500).type(assignManagerName+ '{enter}');
     cy.log("Assign Manager is selected");
 }
 
 selectEmployeeType(employeeType) {
-    this.employeeType.wait(1000).type(employeeType+ '{enter}');
+    this.employeeType.wait(500).type(employeeType+ '{enter}');
     cy.log("Employee Type is selected");
    }
 

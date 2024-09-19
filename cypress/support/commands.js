@@ -43,10 +43,29 @@ Cypress.Commands.add('logout', () => {
     Dashboard.clickLogout();
 });
 
+
+
+// custom command to press Enter key 
 Cypress.Commands.add('pressEnter', { prevSubject: 'element' }, (subject) => {
     // Trigger the 'enter' key press event
     cy.wrap(subject).trigger('keydown', { keyCode: 13, which: 13 });
 });
+
+// cutome command to validate all success or error messages [Array of messages] or single message
+Cypress.Commands.add('validateSuccessMessages', (messages) => {
+    // Check if it's an array, otherwise treat it as a single message
+    if (Array.isArray(messages)) {
+        messages.forEach((message) => {
+            cy.contains(message).should('be.visible');
+        });
+    } else {
+        // Handle single message case
+        cy.contains(messages).should('be.visible');
+    }
+    cy.log("All messages are successfully validated");
+});
+
+
   
 
 

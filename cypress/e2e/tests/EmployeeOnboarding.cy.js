@@ -29,7 +29,8 @@ describe("Employee Onboard Tests", () => {
         invitations.clickSubmitButton();
 
         // Verify mail sent notification is displayed
-        invitations.validateOnboardingEmailSentMsg('Onboarding welcome mail sent');
+        invitations.onBoardingSuccessMsg.should('contain.text', 'Onboarding welcome mail sent');
+        //invitations.validateOnboardingEmailSentMsg('Onboarding welcome mail sent');
         
         // New Employee Details test Data
         const JoineeData = {
@@ -55,11 +56,16 @@ describe("Employee Onboard Tests", () => {
             Department: 'Marketing',
             Designation:'Demooo',
             AssignManager: 'DDinesh D Kumar',
-            EmployeeType: 'REGULAR'
+            EmployeeType: 'REGULAR',
+            messagesToValidate : [
+                'Thank you!',
+                'Your submission has been sent successfully.',
+                'HR will get back to you shortly.'
+            ]
         }
 
         // Wait for mail and navigate to the url received in the mail
-        cy.wait(5000);
+        cy.wait(3000);
         cy.task('getConfirmaUrl', JoineeData.JoineeEmail).then(confirmationUrl => {
             cy.visit(String(confirmationUrl), { failOnStatusCode: false });
         });
@@ -67,6 +73,7 @@ describe("Employee Onboard Tests", () => {
         // Provide joinee's valid email to continue
         verifyPersonalEmailPopup.enterPersonalEmailID(JoineeData.JoineeEmail);
 
+       // cy.pause();
         verifyPersonalEmailPopup.clickSubmitButton();
 
         // Providing Personal Details  
@@ -116,7 +123,10 @@ describe("Employee Onboard Tests", () => {
         EmployeeDetailPage.clickSubmitButton();
 
         // Validating the Thank You Success message
-        EmployeeDetailPage.validateSuccessMessage();
+        //EmployeeDetailPage.validateSuccessMessage();
+
+        
+        cy.validateSuccessMessages(JoineeData.messagesToValidate);
 
         // Navigate to Homepage > Employee Onboard > L1 Approval Action 
         HomePage.navigateToHomePage();
@@ -161,7 +171,12 @@ describe("Employee Onboard Tests", () => {
         L1ApprovalAction.clickOnSubmitButton();
 
         // Validating the Thank You Success message
-        L1ApprovalAction.validateSuccessMessage();
+
+        // we can user EmployeeDetailPage.validateSuccessMessages(message) this metthod here 
+        
+        //L1ApprovalAction.validateSuccessMessage();
+
+        cy.validateSuccessMessages('User Email has been successfully updated.');
 
         // Navigate to Homepage > HR Approval Page
         cy.wait(3000)
@@ -211,7 +226,7 @@ describe("Employee Onboard Tests", () => {
         HRApproval.clickApproveButton();
 
         // Validating the Thank You Success message
-        HRApproval.validateSuccessMessage();
+        cy.validateSuccessMessages("Employee's HRMIS account created ");
     })
 
 });
