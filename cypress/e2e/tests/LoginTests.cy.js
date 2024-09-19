@@ -1,9 +1,13 @@
+import { it } from "mocha";
 
 
 describe("Login Tests",()=> {
     
-    it('should handle errors gracefully', () => {
-        let tokenUrl = null;
+    it('Login_1 : Verify that user is able to login with valid credentials', () => {
+        cy.login();
+        }); 
+        
+    it.skip('Methods to create and retreive mails from yopmail', ()=>{
         cy.task('emailFetcher').then((emailId) => {
             cy.log('Email ID:', emailId);
         });
@@ -16,7 +20,6 @@ describe("Login Tests",()=> {
             cy.log('url :', url );
             cy.visit(String(url), {failOnStatusCode:false});
         })
-
-        }); 
+    })
 });
 
