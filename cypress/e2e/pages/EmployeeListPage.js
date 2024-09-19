@@ -32,7 +32,7 @@ countTotalEmployees(countEmployees){
       }
 
 selectUser(){
-  this.selectUser.click();
+  this.user.click();
   Loaders.threeDotLoading.should('not.exist');    
   cy.log("Clicked on Searched User");
   } 

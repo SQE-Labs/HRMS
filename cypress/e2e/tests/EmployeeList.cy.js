@@ -1,16 +1,26 @@
 import sideBar from "../components/SideBar";
 import EmployeeListPage from "../pages/EmployeeListPage";
 import UserDashboard from "../pages/UserDashboard";
-import EmployeeDetailPage from "../pages/EmployeeDetailPage";
 
 describe("Employee Onboard Tests", () => {
 
     it("HRMIS_1: Verify that 'Employee List' page opens up, when user clicks on 'Employee Management'.", () => {
+
+        // Employee List Details Test Data
+
+        const EmployeeData = {
+            FirstName: 'Auto',
+            LastName: 'User',
+            MiddleName: 'Mation',
+            EmployeeID: 'CCIT/09_24/501',
+            EmailID: 'AutomationUser@caeliusconsulting.com',
+            
+        }
         cy.login();
         sideBar.navigateTo("Employee Management", "Employees List");
 
         // Verify that information message, when user enters invalid data in 'Search By Name' field
-        EmployeeListPage.enterNameToSearch('Tests');
+        EmployeeListPage.enterNameToSearch('invalidName');
         EmployeeListPage.validateNoRecordsAppear();
 
         // Verify that information message, when user enters valid data in 'Search By Name' field
@@ -24,12 +34,11 @@ describe("Employee Onboard Tests", () => {
         
         // Verify that 'Basic Info' accordion gets expanded, when user clicks 'Basic Info' accordion.
         UserDashboard.clickOnBasicInfo();
-       // EmployeeDetailPage.getFieldValue('First Name').should('be.visible');
-        EmployeeDetailPage.getFieldValue("First Name").should('be.visible');
-        UserDashboard.middleName.should('be.visible');
-        UserDashboard.lastName.should('be.visible');
-        UserDashboard.employeeID.should('be.visible');
-        UserDashboard.email.should('be.visible');
+        UserDashboard.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
+        UserDashboard.getFieldValue("Middle Name").should('equal', EmployeeData.MiddleName);
+        UserDashboard.getFieldValue("Last Name").should('equal', EmployeeData.LastName);
+        UserDashboard.getFieldValue("Employee Id").should('equal', EmployeeData.EmployeeID);
+        UserDashboard.getFieldValue("Email").should('equal', EmployeeData.EmailID);
         
         // Verify that data do not get saved on clicking 'Close' button.
         UserDashboard.clickOnEditButtonBasicInfo();
@@ -37,11 +46,11 @@ describe("Employee Onboard Tests", () => {
         UserDashboard.updateMiddleName('Mation1');
         UserDashboard.updateLastName('User1');
         UserDashboard.clickOnCloseButton();
-        UserDashboard.verifyFirstName('Auto');
-        UserDashboard.verifyMiddleName('Mation');
-        UserDashboard.verifyLastName('User');
-        UserDashboard.verifyEmployeeID('CCIT/09_24/501');
-        UserDashboard.verifyEmailID('AutomationUser@caeliusconsulting.com');
+        UserDashboard.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
+        UserDashboard.getFieldValue("Middle Name").should('equal', EmployeeData.MiddleName);
+        UserDashboard.getFieldValue("Last Name").should('equal', EmployeeData.LastName);
+        UserDashboard.getFieldValue("Employee Id").should('equal', EmployeeData.EmployeeID);
+        UserDashboard.getFieldValue("Email").should('equal', EmployeeData.EmailID);
 
         // Verify that data gets saved on clicking 'close' button.
         UserDashboard.clickOnEditButtonBasicInfo();
@@ -50,11 +59,11 @@ describe("Employee Onboard Tests", () => {
         UserDashboard.updateLastName('User');
         UserDashboard.clickOnUpdateButton();
         UserDashboard.validateSuccessMessage();
-        UserDashboard.verifyFirstName('Auto');
-        UserDashboard.verifyMiddleName('Mation');
-        UserDashboard.verifyLastName('User');
-        UserDashboard.verifyEmployeeID('CCIT/09_24/501');
-        UserDashboard.verifyEmailID('AutomationUser@caeliusconsulting.com');
+        UserDashboard.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
+        UserDashboard.getFieldValue("Middle Name").should('equal', EmployeeData.MiddleName);
+        UserDashboard.getFieldValue("Last Name").should('equal', EmployeeData.LastName);
+        UserDashboard.getFieldValue("Employee Id").should('equal', EmployeeData.EmployeeID);
+        UserDashboard.getFieldValue("Email").should('equal', EmployeeData.EmailID);
 
         // Verify that 'Basic Info' accordion gets collapsed.
         UserDashboard.clickOnBasicInfo();
