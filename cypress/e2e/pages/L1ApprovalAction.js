@@ -8,14 +8,6 @@ class L1ApprovalAction extends BasePage {
 get itemsPerPage() { return cy.get('#itemsPerPage')}
 get pagenation() { return cy.get("li[class='page-item '] a[class='page-link']")}
 get searchBox() { return cy.get("input[placeholder='Search By Name.']")}
-get email() { return cy.get("td[data-title='Email']").invoke('text').then((email) => {
-            cy.log("Email: " + email);  
-            console.log("Email: " + email);  
-        });
-    }   
-get viewButtonOnSearchedJoinee() { return cy.get("table[class='resume custom']")
-    .contains('View') 
-    .click({ force: true }); }    
 
 //  Locators for Personal Detail Tab
 get viewButton() { return cy.get('tbody tr:nth-child(3) td:nth-child(6)')}
@@ -39,6 +31,7 @@ get relationshipWithAlternateNo() { return cy.get('#relationWithAlternateNo')}
 get alternateName() { return cy.get("input[placeholder='Enter Alternate Name']")}
 get presentAddress() { return cy.get("textarea[name='presentAddress']")}
 get permanentAddress() { return cy.get("textarea[name='permanentAddress']")}
+
 
 //  Locators for Approve Tab
 get approveTab() { return cy.get('#tab3-tab')}
@@ -69,17 +62,12 @@ get submitButton() { return cy.get("button[type='submit']")}
     cy.log("Searched New Joinee");
     }
 
-    validateEmailForNewJoinee(){
-    const randomEmail = generateRandomYopmail();
-    this.email; 
-    }
-
     validateSuccessMessage() {
         cy.contains('User Email has been successfully updated.').should('be.visible')
         cy.log("Success message is displayed");
     }
 
-//  Methods for Personal Detail Tab
+    // Methods for Personal Detail Tab
     clickOnViewButton() {
     this.viewButton.click();
     cy.log("Clicked On View Button");
@@ -111,7 +99,21 @@ get submitButton() { return cy.get("button[type='submit']")}
     this.submitButton.click();
     Loaders.threeDotLoading.should('not.exist'); 
     cy.log("Clicked on Submit Button");
-    }  
+    }
+    
+    EmployeesTable = class{
+        static get EmployeesTable(){ return cy.get("table.resume.custom")}
+    
+        static get getRowsCount() {
+            return this.EmployeesTable.find('tbody > tr').its('length')
+        }
+    
+        static viewApprvalByMailAddress(emailOFEmployee) {
+            this.EmployeesTable.find("td[data-title='Email']").contains(emailOFEmployee)
+                .parent().find('a[data-bs-toggle="modal"]').click()
+        }
+    
+    }
             
 }
 
