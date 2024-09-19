@@ -50,7 +50,7 @@ get submitButton() { return cy.get("button[type='submit']")}
 
 //  Methods 
     selectItemsPerPage() {
-    this.itemsPerPage.wait(2000).select('40');
+    this.itemsPerPage.wait(500).select('40');
     cy.log("Items Index is Changed");
     }
 
@@ -65,7 +65,7 @@ get submitButton() { return cy.get("button[type='submit']")}
     } 
 
     SearchNewJoineeByName(joineeName){
-    this.searchBox.wait(2000).type(joineeName).should('have.value',joineeName)
+    this.searchBox.wait(500).type(joineeName).should('have.value',joineeName)
     cy.log("Searched New Joinee");
     }
 

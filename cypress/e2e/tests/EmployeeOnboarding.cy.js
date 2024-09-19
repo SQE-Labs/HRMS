@@ -17,8 +17,14 @@ describe("Employee Onboard Tests", () => {
         let randomMail = generateRandomYopmail(10);
         invitations.enterEmailID(randomMail);
         invitations.enterEmployeeName("Mattews");
+
+        // Why should we need to pass the full path of the file ,
+        // we can create a comman path for fixture and append only different files
         invitations.selectSamplePdf('cypress/fixtures/resources/dummy.pdf');
+
         invitations.clickSubmitButton();
+
+        // Assertion should be here instead of creating a method 
         invitations.validateOnboardingEmailSentMsg('Onboarding welcome mail sent');
     });
 
@@ -57,10 +63,19 @@ describe("Employee Onboard Tests", () => {
         // Create invite
         invitations.clickInviteEmployeeButton();
         //let joineeEmail = generateRandomYopmail(10);
+
         invitations.enterEmailID(JoineeData.JoineeEmail);
+
+
         invitations.enterEmployeeName("Mattews");
+
+
         invitations.selectSamplePdf('cypress/fixtures/resources/dummy.pdf');
+
         invitations.clickSubmitButton();
+
+
+        // validation should be here instead of method
         invitations.validateOnboardingEmailSentMsg('Onboarding welcome mail sent');
 
         // Wait for mail and navigate to the url received in the mail
@@ -71,6 +86,7 @@ describe("Employee Onboard Tests", () => {
 
         // Provide joinee's valid email to continue
         verifyPersonalEmailPopup.enterPersonalEmailID(JoineeData.JoineeEmail);
+
         verifyPersonalEmailPopup.clickSubmitButton();
 
         // Providing Personal Details  
@@ -105,7 +121,7 @@ describe("Employee Onboard Tests", () => {
         EmployeeDetailPage.validateSuccessMessage();
 
         // Navigate to Homepage > Employee Onboard > L1 Approval Action
-        cy.wait(3000)
+        cy.wait(1000)
         HomePage.navigateToHomePage();
         sideBar.navigateTo("Employee Onboard", "L1 Approval");
 

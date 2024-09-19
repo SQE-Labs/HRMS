@@ -3,7 +3,7 @@ import EmployeelistPage from "../pages/EmployeelistPage";
 import EmployeeProfilePage from "../pages/EmployeeProfilePage";
 
 
-describe("Employee Managment Tests", () => {
+describe("Employee Asset Managment Tests", () => {
 
     it("HRMIS_1: Verify Assets tab", () => {
 
@@ -20,7 +20,7 @@ describe("Employee Managment Tests", () => {
         EmployeelistPage.enterEmployeeName("DDinesh D Kumar");
     
         // click on Employee Profile card
-        EmployeelistPage.clickOnEmployeeCard();
+        EmployeelistPage.clickOnEmployeeCard("DDinesh D Kumar");
 
         // Click on Asset Tab 
         EmployeeProfilePage.clickOnAssetTab();

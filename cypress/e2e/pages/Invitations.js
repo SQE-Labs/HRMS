@@ -21,7 +21,7 @@ class Invitations extends BasePage {
     }
 
     enterEmailID(randomEmail) { 
-        this.emailID.wait(2000).type(randomEmail)
+        this.emailID.wait(500).type(randomEmail)
             .should('have.value',randomEmail);
         cy.log("Email ID Entered");  
     }
@@ -34,7 +34,7 @@ class Invitations extends BasePage {
     }
 
     enterEmployeeName(employeeName) {
-        this.employeeName.type(employeeName).should('have.value', 'Mattews');
+        this.employeeName.type(employeeName).should('have.value', employeeName);
         cy.log("Entered Employee Name");
 
     }

@@ -12,14 +12,14 @@ class EmployeeProfilePage extends BasePage {
     get refershbutton(){return cy.get("#tab4 div button")}
   
     // Methods 
-   clickOnAssetTab(){
-    this.assetTab.should('be.visible').click();
+    clickOnAssetTab(){
+    this.assetTab.click();
     Loaders.threeDotLoading.should('not.exist');
    }
 
    validateNoRecordInfo(){
     this.refershbutton.should('be.visible');
-    this.noRecordInfo.should('be.visible');
+    this.noRecordInfo.should('have.text','No records available');
    }
     
 }

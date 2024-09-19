@@ -43,4 +43,10 @@ Cypress.Commands.add('logout', () => {
     Dashboard.clickLogout();
 });
 
+Cypress.Commands.add('pressEnter', { prevSubject: 'element' }, (subject) => {
+    // Trigger the 'enter' key press event
+    cy.wrap(subject).trigger('keydown', { keyCode: 13, which: 13 });
+});
+  
+
 
