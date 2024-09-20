@@ -1,6 +1,6 @@
 import sideBar from "../components/SideBar";
 import EmployeeListPage from "../pages/EmployeeListPage";
-import UserDashboard from "../pages/UserDashboard";
+import UserDashboardPage from "../pages/UserDashboardPage";
 
 describe("Employee Onboard Tests", () => {
 
@@ -29,45 +29,47 @@ describe("Employee Onboard Tests", () => {
 
         // Verify that the information message appears for the selected department with no records.
         EmployeeListPage.selectUser();
-        UserDashboard.clickOnWorkExperience();
-        UserDashboard.validateNoRecordsAppear();
-        
+        UserDashboardPage.clickOnWorkExperience();
+        UserDashboardPage.noRecordAvailable.should('have.text', "No records available");
+        cy.log("No Records Appear")
+       
         // Verify that 'Basic Info' accordion gets expanded, when user clicks 'Basic Info' accordion.
-        UserDashboard.clickOnBasicInfo();
-        UserDashboard.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
-        UserDashboard.getFieldValue("Middle Name").should('equal', EmployeeData.MiddleName);
-        UserDashboard.getFieldValue("Last Name").should('equal', EmployeeData.LastName);
-        UserDashboard.getFieldValue("Employee Id").should('equal', EmployeeData.EmployeeID);
-        UserDashboard.getFieldValue("Email").should('equal', EmployeeData.EmailID);
+        UserDashboardPage.clickOnBasicInfo();
+        UserDashboardPage.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
+        UserDashboardPage.getFieldValue("Middle Name").should('equal', EmployeeData.MiddleName);
+        UserDashboardPage.getFieldValue("Last Name").should('equal', EmployeeData.LastName);
+        UserDashboardPage.getFieldValue("Employee Id").should('equal', EmployeeData.EmployeeID);
+        UserDashboardPage.getFieldValue("Email").should('equal', EmployeeData.EmailID);
         
         // Verify that data do not get saved on clicking 'Close' button.
-        UserDashboard.clickOnEditButtonBasicInfo();
-        UserDashboard.updateFirstName('Autom');
-        UserDashboard.updateMiddleName('Mation1');
-        UserDashboard.updateLastName('User1');
-        UserDashboard.clickOnCloseButton();
-        UserDashboard.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
-        UserDashboard.getFieldValue("Middle Name").should('equal', EmployeeData.MiddleName);
-        UserDashboard.getFieldValue("Last Name").should('equal', EmployeeData.LastName);
-        UserDashboard.getFieldValue("Employee Id").should('equal', EmployeeData.EmployeeID);
-        UserDashboard.getFieldValue("Email").should('equal', EmployeeData.EmailID);
+        UserDashboardPage.clickOnEditButtonBasicInfo();
+        UserDashboardPage.enterFirstName('Autom');
+        UserDashboardPage.enterMiddleName('Mation1');
+        UserDashboardPage.enterLastName('User1');
+        UserDashboardPage.clickOnCloseButton();
+        UserDashboardPage.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
+        UserDashboardPage.getFieldValue("Middle Name").should('equal', EmployeeData.MiddleName);
+        UserDashboardPage.getFieldValue("Last Name").should('equal', EmployeeData.LastName);
+        UserDashboardPage.getFieldValue("Employee Id").should('equal', EmployeeData.EmployeeID);
+        UserDashboardPage.getFieldValue("Email").should('equal', EmployeeData.EmailID);
 
-        // Verify that data gets saved on clicking 'close' button.
-        UserDashboard.clickOnEditButtonBasicInfo();
-        UserDashboard.updateFirstName('Auto');
-        UserDashboard.updateMiddleName('Mation');
-        UserDashboard.updateLastName('User');
-        UserDashboard.clickOnUpdateButton();
-        UserDashboard.validateSuccessMessage();
-        UserDashboard.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
-        UserDashboard.getFieldValue("Middle Name").should('equal', EmployeeData.MiddleName);
-        UserDashboard.getFieldValue("Last Name").should('equal', EmployeeData.LastName);
-        UserDashboard.getFieldValue("Employee Id").should('equal', EmployeeData.EmployeeID);
-        UserDashboard.getFieldValue("Email").should('equal', EmployeeData.EmailID);
+        // Verify that data gets saved on clicking 'update' button.
+        UserDashboardPage.clickOnEditButtonBasicInfo();
+        UserDashboardPage.enterFirstName('Auto');
+        UserDashboardPage.enterMiddleName('Mation');
+        UserDashboardPage.enterLastName('User');
+        UserDashboardPage.clickOnUpdateButton();
+        cy.validateSuccessMessages("success");
+        UserDashboardPage.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
+        UserDashboardPage.getFieldValue("Middle Name").should('equal', EmployeeData.MiddleName);
+        UserDashboardPage.getFieldValue("Last Name").should('equal', EmployeeData.LastName);
+        UserDashboardPage.getFieldValue("Employee Id").should('equal', EmployeeData.EmployeeID);
+        UserDashboardPage.getFieldValue("Email").should('equal', EmployeeData.EmailID);
 
         // Verify that 'Basic Info' accordion gets collapsed.
-        UserDashboard.clickOnBasicInfo();
-        UserDashboard.validateAccordionCollapsed();
+        UserDashboardPage.clickOnBasicInfo();
+        UserDashboardPage.editBasicInfo.should('not.be.visible');
+        cy.log("Accordion Is Collapsed");
 
     });
 

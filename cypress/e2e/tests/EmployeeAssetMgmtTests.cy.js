@@ -1,5 +1,5 @@
 import sideBar from "../components/SideBar";
-import EmployeelistPage from "../pages/EmployeelistPage";
+import EmployeelistPage from "../pages/EmployeeListPage"
 import EmployeeProfilePage from "../pages/EmployeeProfilePage";
 
 

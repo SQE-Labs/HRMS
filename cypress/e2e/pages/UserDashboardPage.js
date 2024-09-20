@@ -9,9 +9,9 @@ class UserDashboardPage extends BasePage {
   get basicInfo() { return cy.get("h2[id='heading1'] button[type='button']") }
   get editBasicInfo() { return cy.get("#collapse1 a i") }
   get closeButton() { return cy.get("button[class='btn btn-secondary btn-sm ms-2']") }
-  get editFirstName() { return cy.get("input[value='Auto']") }
-  get editLastName() { return cy.get("input[value='User']") }
-  get editMiddleName() { return cy.get("input[value='Mation']") }
+  get editFirstName() { return cy.get("input[name='firstName']:not(:disabled)") }
+  get editLastName() { return cy.get("input[name='lastName']:not(:disabled)") }
+  get editMiddleName() { return cy.get("input[name='middleName']:not(:disabled)") }
   get updateButton() { return cy.get("button[class='btn btn-primary btn-sm']") }
 
   // Methods
@@ -21,18 +21,8 @@ class UserDashboardPage extends BasePage {
   }
 
   clickOnBasicInfo() {
-    this.basicInfo.wait(2000).click();
+    this.basicInfo.wait(1000).click();
     cy.log("Clicked on the Basic Info Option");
-  }
-
-  validateNoRecordsAppear() {
-    this.noRecordAvailable.should('have.text', "No records available");
-    cy.log("No Records Appear")
-  }
-
-  validateAccordionCollapsed() {
-    this.editBasicInfo.should('not.be.visible');
-    cy.log("Accordion Is Collapsed")
   }
 
   clickOnEditButtonBasicInfo() {
@@ -40,17 +30,17 @@ class UserDashboardPage extends BasePage {
     cy.log("Clicked on the Edit button Under Basic Info Accordion");
   }
 
-  updateFirstName(firstNameText) {
+  enterFirstName(firstNameText) {
     this.editFirstName.clear().type(firstNameText).should('have.value', firstNameText)
     cy.log("Updated First Name Text");
   }
 
-  updateMiddleName(middleNameText) {
+  enterMiddleName(middleNameText) {
     this.editMiddleName.clear().type(middleNameText).should('have.value', middleNameText)
     cy.log("Updated Middle Name Text");
   }
 
-  updateLastName(lastNameText) {
+  enterLastName(lastNameText) {
     this.editLastName.clear().type(lastNameText).should('have.value', lastNameText)
     cy.log("Updated Last Name Text");
   }
@@ -65,12 +55,7 @@ class UserDashboardPage extends BasePage {
     cy.log("Clicked on the Update Button under Basic Info Accordion");
     Loaders.threeDotLoading.should('not.exist');
   }
-
-  validateSuccessMessage() {
-    cy.contains("success").should('be.visible')
-    cy.log("Success message is displayed");
-  }
-
+  
   getFieldValue(label) {
     return cy.get('.row').find(`p:contains(${label})`).then($element => {
       // Get the parent container of the label

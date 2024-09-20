@@ -28,7 +28,7 @@
 ///  <reference types="cypress-xpath"/>
 
 
-import Dashboard from "../e2e/pages/Dashboard.js";
+import DashboardPage from "../e2e/pages/DashboardPage.js";
 import LoginPage from "../e2e/pages/LoginPage.js"
 import 'cypress-file-upload';
 
