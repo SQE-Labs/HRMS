@@ -17,10 +17,6 @@ class EmployeeProfilePage extends BasePage {
     Loaders.threeDotLoading.should('not.exist');
    }
 
-   validateNoRecordInfo(){
-    this.refershbutton.should('be.visible');
-    this.noRecordInfo.should('have.text','No records available');
-   }
     
 }
 
