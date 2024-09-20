@@ -2,7 +2,7 @@ import BasePage from "./BasePage";
 import Loaders from "../components/Loaders";
 
 
-class HRApproval extends BasePage{
+class HRApprovalPage extends BasePage{
 
 //  Locators
 get caeliusEmail() { return cy.get("div[class='row mt-3'] h6[class='truncate-text']")}
@@ -49,4 +49,4 @@ validateSuccessMessage() {
 }
 
 }
-export default new HRApproval();
+export default new HRApprovalPage();

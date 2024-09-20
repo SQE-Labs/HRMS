@@ -1,12 +1,12 @@
 import sideBar from "../components/SideBar";
 import EmployeeDetailPage from "../pages/EmployeeDetailPage";
-import invitations from "../pages/Invitations";
-import L1ApprovalAction from "../pages/L1ApprovalAction";
+import invitations from "../pages/InvitationsPage";
+import L1ApprovalActionPage from "../pages/L1ApprovalActionPage";
 import verifyPersonalEmailPopup from "../pages/popups/VerifyPersonalEmailPopup";
 import HomePage from "../pages/HomePage";
 import { generateRandomYopmail, generateRandomString, 
     generateRandomCaeliusEmail, generateRandomNumber } from '../../support/utils';
-import HRApproval from "../pages/HRApproval";
+import HRApprovalPage from "../pages/HRApprovalPage";
 
 
 describe("Employee Onboard Tests", () => {
@@ -131,43 +131,43 @@ describe("Employee Onboard Tests", () => {
         sideBar.navigateTo("Employee Onboard", "L1 Approval");
         
         // Viewing Newly Onboard Invitation
-        L1ApprovalAction.selectItemsPerPage();
-        L1ApprovalAction.clickOnPagenationNextButton();
-        L1ApprovalAction.clickOnPagenationNextButton();
-        L1ApprovalAction.SearchNewJoineeByName(JoineeData.Firstname);
+        L1ApprovalActionPage.selectItemsPerPage();
+        L1ApprovalActionPage.clickOnPagenationNextButton();
+        L1ApprovalActionPage.clickOnPagenationNextButton();
+        L1ApprovalActionPage.SearchNewJoineeByName(JoineeData.Firstname);
 
         // L1ApprovalAction.validateEmailForNewJoinee();
-        L1ApprovalAction.EmployeesTable.getRowsCount.should('equal', 1);
-        L1ApprovalAction.EmployeesTable.viewApprvalByMailAddress(JoineeData.JoineeEmail);
+        L1ApprovalActionPage.EmployeesTable.getRowsCount.should('equal', 1);
+        L1ApprovalActionPage.EmployeesTable.viewApprvalByMailAddress(JoineeData.JoineeEmail);
 
         // Validating Personal Details for New Joinee
-        L1ApprovalAction.firstName.should('be.visible').and('have.value', JoineeData.Firstname);
-        L1ApprovalAction.lastName.should('have.value', JoineeData.LastName);
-        L1ApprovalAction.personalEmail.should('have.value', JoineeData.JoineeEmail);
-        L1ApprovalAction.gender.should('be.checked', JoineeData.Gender);
-        L1ApprovalAction.bloodGroup.should('have.value', JoineeData.BloodGroup);
-        L1ApprovalAction.dateOfBirth.should('have.value', JoineeData.DateOfBirth);
-        L1ApprovalAction.aadharNumber.should('have.value', JoineeData.AadharNumber);
-        L1ApprovalAction.panNumber.should('have.value', JoineeData.PanNumber);
-        L1ApprovalAction.dateOfJoining.should('have.value', JoineeData.DateOfJoining);
-        L1ApprovalAction.maritalStatus.should('have.value', JoineeData.MaritalStatus);
+        L1ApprovalActionPage.firstName.should('be.visible').and('have.value', JoineeData.Firstname);
+        L1ApprovalActionPage.lastName.should('have.value', JoineeData.LastName);
+        L1ApprovalActionPage.personalEmail.should('have.value', JoineeData.JoineeEmail);
+        L1ApprovalActionPage.gender.should('be.checked', JoineeData.Gender);
+        L1ApprovalActionPage.bloodGroup.should('have.value', JoineeData.BloodGroup);
+        L1ApprovalActionPage.dateOfBirth.should('have.value', JoineeData.DateOfBirth);
+        L1ApprovalActionPage.aadharNumber.should('have.value', JoineeData.AadharNumber);
+        L1ApprovalActionPage.panNumber.should('have.value', JoineeData.PanNumber);
+        L1ApprovalActionPage.dateOfJoining.should('have.value', JoineeData.DateOfJoining);
+        L1ApprovalActionPage.maritalStatus.should('have.value', JoineeData.MaritalStatus);
 
         // Validating Contact Details
-        L1ApprovalAction.switchToContactDetailTab();
-        L1ApprovalAction.phoneNumber.should('be.visible').and('have.value', JoineeData.PhoneNumber);
-        L1ApprovalAction.alternateNumber.should('have.value', JoineeData.AlternatePhone);
-        L1ApprovalAction.relationshipWithAlternateNo.should('have.value', JoineeData.RelationshipWithAlterNumber.toLowerCase());
-        L1ApprovalAction.alternateName.should('have.value', JoineeData.AlterName);
-        L1ApprovalAction.presentAddress.should('have.value', JoineeData.PresentAddress);
-        L1ApprovalAction.permanentAddress.should('have.value', JoineeData.PermanentAddress);
+        L1ApprovalActionPage.switchToContactDetailTab();
+        L1ApprovalActionPage.phoneNumber.should('be.visible').and('have.value', JoineeData.PhoneNumber);
+        L1ApprovalActionPage.alternateNumber.should('have.value', JoineeData.AlternatePhone);
+        L1ApprovalActionPage.relationshipWithAlternateNo.should('have.value', JoineeData.RelationshipWithAlterNumber.toLowerCase());
+        L1ApprovalActionPage.alternateName.should('have.value', JoineeData.AlterName);
+        L1ApprovalActionPage.presentAddress.should('have.value', JoineeData.PresentAddress);
+        L1ApprovalActionPage.permanentAddress.should('have.value', JoineeData.PermanentAddress);
 
         // Validating Approve Tab
-        L1ApprovalAction.switchToApproveTab();
-        L1ApprovalAction.firstNameOnApproveTab.should('be.visible').and('have.text', JoineeData.Firstname);
-        L1ApprovalAction.lastNameOnApproveTab.should('have.text', JoineeData.LastName);
+        L1ApprovalActionPage.switchToApproveTab();
+        L1ApprovalActionPage.firstNameOnApproveTab.should('be.visible').and('have.text', JoineeData.Firstname);
+        L1ApprovalActionPage.lastNameOnApproveTab.should('have.text', JoineeData.LastName);
         
-        L1ApprovalAction.enterCaeliusEmail(JoineeData.CaeliusEmail);
-        L1ApprovalAction.clickOnSubmitButton();
+        L1ApprovalActionPage.enterCaeliusEmail(JoineeData.CaeliusEmail);
+        L1ApprovalActionPage.clickOnSubmitButton();
 
         // Validating the Thank You Success message
         cy.validateSuccessMessages('User Email has been successfully updated.');
@@ -178,46 +178,46 @@ describe("Employee Onboard Tests", () => {
         sideBar.navigateTo("Employee Onboard", "HR Approval");
 
         // Viewing Newly Onboard Invitation to HR Approval Page
-        L1ApprovalAction.selectItemsPerPage();
-        L1ApprovalAction.clickOnPagenationNextButton();
-        L1ApprovalAction.SearchNewJoineeByName(JoineeData.Firstname);
+        L1ApprovalActionPage.selectItemsPerPage();
+        L1ApprovalActionPage.clickOnPagenationNextButton();
+        L1ApprovalActionPage.SearchNewJoineeByName(JoineeData.Firstname);
 
         // Verify that only single result appears
-        L1ApprovalAction.EmployeesTable.getRowsCount.should('equal', 1);
+        L1ApprovalActionPage.EmployeesTable.getRowsCount.should('equal', 1);
 
         // L1ApprovalAction.viewButtonOnSearchedJoinee;
-        L1ApprovalAction.EmployeesTable.viewApprvalByMailAddress(JoineeData.JoineeEmail);
+        L1ApprovalActionPage.EmployeesTable.viewApprvalByMailAddress(JoineeData.JoineeEmail);
         
         // Validating Personal Details for New Joinee
-        L1ApprovalAction.firstName.should('be.visible').and('have.value', JoineeData.Firstname);
-        L1ApprovalAction.lastName.should('have.value', JoineeData.LastName);
-        L1ApprovalAction.personalEmail.should('have.value', JoineeData.JoineeEmail);
-        L1ApprovalAction.gender.should('be.checked', JoineeData.Gender);
-        L1ApprovalAction.bloodGroup.should('have.value', JoineeData.BloodGroup);
-        L1ApprovalAction.dateOfBirth.should('have.value', JoineeData.DateOfBirth);
-        L1ApprovalAction.aadharNumber.should('have.value', JoineeData.AadharNumber);
-        L1ApprovalAction.panNumber.should('have.value', JoineeData.PanNumber);
-        L1ApprovalAction.dateOfJoining.should('have.value', JoineeData.DateOfJoining);
-        L1ApprovalAction.maritalStatus.should('have.value', JoineeData.MaritalStatus);
+        L1ApprovalActionPage.firstName.should('be.visible').and('have.value', JoineeData.Firstname);
+        L1ApprovalActionPage.lastName.should('have.value', JoineeData.LastName);
+        L1ApprovalActionPage.personalEmail.should('have.value', JoineeData.JoineeEmail);
+        L1ApprovalActionPage.gender.should('be.checked', JoineeData.Gender);
+        L1ApprovalActionPage.bloodGroup.should('have.value', JoineeData.BloodGroup);
+        L1ApprovalActionPage.dateOfBirth.should('have.value', JoineeData.DateOfBirth);
+        L1ApprovalActionPage.aadharNumber.should('have.value', JoineeData.AadharNumber);
+        L1ApprovalActionPage.panNumber.should('have.value', JoineeData.PanNumber);
+        L1ApprovalActionPage.dateOfJoining.should('have.value', JoineeData.DateOfJoining);
+        L1ApprovalActionPage.maritalStatus.should('have.value', JoineeData.MaritalStatus);
 
         // Validating Contact Details
-        L1ApprovalAction.switchToContactDetailTab();
-        L1ApprovalAction.phoneNumber.should('be.visible').and('have.value', JoineeData.PhoneNumber);
-        L1ApprovalAction.alternateNumber.should('have.value', JoineeData.AlternatePhone);
-        L1ApprovalAction.relationshipWithAlternateNo.should('have.value', JoineeData.RelationshipWithAlterNumber.toLowerCase());
-        L1ApprovalAction.alternateName.should('have.value', JoineeData.AlterName);
-        L1ApprovalAction.presentAddress.should('have.value', JoineeData.PresentAddress);
-        L1ApprovalAction.permanentAddress.should('have.value', JoineeData.PermanentAddress);
+        L1ApprovalActionPage.switchToContactDetailTab();
+        L1ApprovalActionPage.phoneNumber.should('be.visible').and('have.value', JoineeData.PhoneNumber);
+        L1ApprovalActionPage.alternateNumber.should('have.value', JoineeData.AlternatePhone);
+        L1ApprovalActionPage.relationshipWithAlternateNo.should('have.value', JoineeData.RelationshipWithAlterNumber.toLowerCase());
+        L1ApprovalActionPage.alternateName.should('have.value', JoineeData.AlterName);
+        L1ApprovalActionPage.presentAddress.should('have.value', JoineeData.PresentAddress);
+        L1ApprovalActionPage.permanentAddress.should('have.value', JoineeData.PermanentAddress);
 
         // Validating and Providing Approve Details
-        L1ApprovalAction.switchToApproveTab();
+        L1ApprovalActionPage.switchToApproveTab();
 
         //HRApproval.caeliusEmail.should('have,text',JoineeData.CaeliusEmail);
-        HRApproval.selectDepartment(JoineeData.Department);
-        HRApproval.selectDesignation(JoineeData.Designation);
-        HRApproval.selectAssignManager(JoineeData.AssignManager);
-        HRApproval.selectEmployeeType(JoineeData.EmployeeType);
-        HRApproval.clickApproveButton();
+        HRApprovalPage.selectDepartment(JoineeData.Department);
+        HRApprovalPage.selectDesignation(JoineeData.Designation);
+        HRApprovalPage.selectAssignManager(JoineeData.AssignManager);
+        HRApprovalPage.selectEmployeeType(JoineeData.EmployeeType);
+        HRApprovalPage.clickApproveButton();
 
         // Validating the Thank You Success message
         cy.validateSuccessMessages("Employee's HRMIS account created ");

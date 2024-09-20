@@ -1,7 +1,7 @@
 import BasePage from "./BasePage";
 import Loaders from "../components/Loaders";
 
-class UserDashboard extends BasePage {
+class UserDashboardPage extends BasePage {
 
   // Locators    
   get workExperience() { return cy.get("h2[id='heading4'] button[type='button']") }
@@ -88,4 +88,4 @@ class UserDashboard extends BasePage {
   }
 }
 
-export default new UserDashboard();
+export default new UserDashboardPage();

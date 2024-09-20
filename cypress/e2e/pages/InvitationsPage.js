@@ -2,7 +2,7 @@ import BasePage from "./BasePage";
 import { generateRandomString } from '../../support/utils'; 
 import Loaders from "../components/Loaders";
 
-class Invitations extends BasePage {
+class InvitationsPage extends BasePage {
 
     // Locators
 
@@ -58,4 +58,4 @@ class Invitations extends BasePage {
     }
 }
 
-export default new Invitations();
+export default new InvitationsPage();

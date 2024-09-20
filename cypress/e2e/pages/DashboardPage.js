@@ -1,6 +1,6 @@
 import BasePage from "./BasePage";
 
-class Dashboard extends BasePage{
+class DashboardPage extends BasePage{
     
     // Locators
     get logoutButton() { return cy.get('.log-out > .text-center')}
@@ -12,4 +12,4 @@ class Dashboard extends BasePage{
     }
 }
 
-export default new Dashboard();
+export default new DashboardPage();

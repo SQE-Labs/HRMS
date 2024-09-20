@@ -2,7 +2,7 @@ import BasePage from "./BasePage";
 import { generateRandomYopmail } from '../../support/utils';
 import Loaders from "../components/Loaders";
 
-class L1ApprovalAction extends BasePage {
+class L1ApprovalActionPage extends BasePage {
 
 //  Locators
 get itemsPerPage() { return cy.get('#itemsPerPage')}
@@ -116,4 +116,4 @@ get submitButton() { return cy.get("button[type='submit']")}
             
 }
 
-export default new L1ApprovalAction();
+export default new L1ApprovalActionPage();
