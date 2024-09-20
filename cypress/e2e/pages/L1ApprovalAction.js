@@ -7,31 +7,30 @@ class L1ApprovalAction extends BasePage {
 //  Locators
 get itemsPerPage() { return cy.get('#itemsPerPage')}
 get pagenation() { return cy.get("li[class='page-item '] a[class='page-link']")}
-get searchBox() { return cy.get("input[placeholder='Search By Name.']")}
+get searchBox() { return cy.get("input[name='search'][type='text']")}
 
 //  Locators for Personal Detail Tab
 get viewButton() { return cy.get('tbody tr:nth-child(3) td:nth-child(6)')}
 get personalDetailTab() { return cy.get('#tab1-tab')}
-get firstName() { return cy.get("input[placeholder='Enter First Name']")}
-get lastName() { return cy.get("input[placeholder='Enter Last Name']")}
-get personalEmail() { return cy.get("input[placeholder='Enter Personal Email']")}
+get firstName() { return cy.get("input[name='firstName'][type='text']")}
+get lastName() { return cy.get("input[name='lastName'][type='text']")}
+get personalEmail() { return cy.get("input[name='personalEmail'][type='email']")}
 get gender() { return cy.get('#female')}
 get bloodGroup() { return cy.get('#bloodGroup')}
 get dateOfBirth() { return cy.get("input[name='dob']")}
 get aadharNumber() { return cy.get("input[name='aadharNumber']")}
-get panNumber() { return cy.get("input[placeholder='XXX-XXX-XXXX']")}
+get panNumber() { return cy.get("input[name='panCardNumber']")}
 get dateOfJoining() { return cy.get("input[name='joiningDate']")}
 get maritalStatus() { return cy.get('#maritalStatus')}
 
 //  Locators for Contact Details Tab
 get contactDetailTab() { return cy.get('#tab2-tab')}
-get phoneNumber() { return cy.get("input[placeholder='Enter Phone Number']")}
-get alternateNumber() { return cy.get("input[placeholder='Enter Alternate Number']")}
+get phoneNumber() { return cy.get("input[name='phoneNumber'][type='tel']")}
+get alternateNumber() { return cy.get("input[name='alternateNumber'][type='tel']")}
 get relationshipWithAlternateNo() { return cy.get('#relationWithAlternateNo')}
-get alternateName() { return cy.get("input[placeholder='Enter Alternate Name']")}
+get alternateName() { return cy.get("input[name='alternateName'][type='text']")}
 get presentAddress() { return cy.get("textarea[name='presentAddress']")}
 get permanentAddress() { return cy.get("textarea[name='permanentAddress']")}
-
 
 //  Locators for Approve Tab
 get approveTab() { return cy.get('#tab3-tab')}
@@ -43,7 +42,7 @@ get submitButton() { return cy.get("button[type='submit']")}
 
 //  Methods 
     selectItemsPerPage() {
-    this.itemsPerPage.wait(500).select('40');
+    this.itemsPerPage.wait(1000).select('40');
     cy.log("Items Index is Changed");
     }
 
@@ -58,7 +57,7 @@ get submitButton() { return cy.get("button[type='submit']")}
     } 
 
     SearchNewJoineeByName(joineeName){
-    this.searchBox.wait(500).type(joineeName).should('have.value',joineeName)
+    this.searchBox.wait(1000).type(joineeName).should('have.value',joineeName)
     cy.log("Searched New Joinee");
     }
 

@@ -5,9 +5,10 @@ import Loaders from "../components/Loaders";
 class Invitations extends BasePage {
 
     // Locators
-    get inviteEmplooyeeBtn() { return cy.get('.export.theme-button');}
-    get emailID() { return cy.get('input.border[name=email]'); }
-    get employeeName() { return cy.get('input.border[name=employeeName]'); }
+
+    get inviteEmplooyeeBtn() { return cy.get('div a.export');}
+    get emailID() { return cy.get('input[name=email]'); }
+    get employeeName() { return cy.get('input[name=employeeName]'); }
     get chooseFile() { return cy.get('#file-input'); }
     get submitBtn() { return cy.get("div[class='justify-content-center modal-footer'] button[type='submit']"); }
     get onBoardingSuccessMsg() { return cy.get("div.Toastify__toast-body"); }

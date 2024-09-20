@@ -123,18 +123,16 @@ describe("Employee Onboard Tests", () => {
         EmployeeDetailPage.clickSubmitButton();
 
         // Validating the Thank You Success message
-        //EmployeeDetailPage.validateSuccessMessage();
-
-        
         cy.validateSuccessMessages(JoineeData.messagesToValidate);
 
         // Navigate to Homepage > Employee Onboard > L1 Approval Action 
         HomePage.navigateToHomePage();
 
         sideBar.navigateTo("Employee Onboard", "L1 Approval");
-
+        
         // Viewing Newly Onboard Invitation
         L1ApprovalAction.selectItemsPerPage();
+        L1ApprovalAction.clickOnPagenationNextButton();
         L1ApprovalAction.clickOnPagenationNextButton();
         L1ApprovalAction.SearchNewJoineeByName(JoineeData.Firstname);
 
@@ -167,15 +165,11 @@ describe("Employee Onboard Tests", () => {
         L1ApprovalAction.switchToApproveTab();
         L1ApprovalAction.firstNameOnApproveTab.should('be.visible').and('have.text', JoineeData.Firstname);
         L1ApprovalAction.lastNameOnApproveTab.should('have.text', JoineeData.LastName);
+        
         L1ApprovalAction.enterCaeliusEmail(JoineeData.CaeliusEmail);
         L1ApprovalAction.clickOnSubmitButton();
 
         // Validating the Thank You Success message
-
-        // we can user EmployeeDetailPage.validateSuccessMessages(message) this metthod here 
-        
-        //L1ApprovalAction.validateSuccessMessage();
-
         cy.validateSuccessMessages('User Email has been successfully updated.');
 
         // Navigate to Homepage > HR Approval Page
