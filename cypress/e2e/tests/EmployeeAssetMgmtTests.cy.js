@@ -11,15 +11,11 @@ describe("Employee Asset Managment Tests", () => {
         cy.login();
 
         sideBar.navigateTo("Employee Management", "Employees List");
-        EmployeelistPage.employeelistHeader.should('be.visible').and('have.text', "Employees List");
-        EmployeelistPage.enterEmployeeName("DDinesh D Kumar");
-        EmployeelistPage.clickOnEmployeeCard("DDinesh D Kumar");
+        EmployeelistPage.enterNameToSearch("Auto Mation User");
+        EmployeelistPage.clickOnUserCard("Auto Mation User");
         EmployeeProfilePage.clickOnAssetTab();
         EmployeeProfilePage.refershbutton.should('be.visible');
         EmployeeProfilePage.noRecordInfo.should('have.text','No records available'); 
-       
-
-        
        
     });
 

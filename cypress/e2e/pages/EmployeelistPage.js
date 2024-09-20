@@ -16,12 +16,7 @@ enterNameToSearch(nametxt) {
   this.searchByName.clear().type(nametxt).should('have.value', nametxt);
   cy.log("Entered Name to Search")
   }  
-
-validateNoRecordsAppear(){
-  this.noRecordAvailable.should('have.text', "No Records Available");
-  cy.log("No Records Appear")
-  }    
-
+   
 countTotalEmployees(countEmployees){
   this.employeeCount.invoke('text')
   .then((text) => {
@@ -31,7 +26,7 @@ countTotalEmployees(countEmployees){
         });
       }
 
-selectUser(){
+clickOnUserCard(){
   this.user.click();
   Loaders.threeDotLoading.should('not.exist');    
   cy.log("Clicked on Searched User");

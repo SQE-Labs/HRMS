@@ -15,7 +15,6 @@ get approveButton() { return cy.get("div[role='tabpanel'] form div button[type='
 
 // Methods
 selectDepartment(departmentName) {
-    //this.department.type(departmentName + '{enter}').should('contain', departmentName);
     this.department.type(departmentName).pressEnter().should('contain', departmentName);
     cy.log("Department is selected");
 }

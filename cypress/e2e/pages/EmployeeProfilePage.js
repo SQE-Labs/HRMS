@@ -16,8 +16,7 @@ class EmployeeProfilePage extends BasePage {
     this.assetTab.click();
     Loaders.threeDotLoading.should('not.exist');
    }
-
-    
+  
 }
 
 
