@@ -22,16 +22,14 @@ describe("Employee Onboard Tests", () => {
         invitations.enterEmailID(joineePersonalMail);
         invitations.enterEmployeeName("Mattews");
 
-        // Why should we need to pass the full path of the file ,
-        // we can create a comman path for fixture and append only different files
+       
         invitations.selectSamplePdf('cypress/fixtures/resources/dummy.pdf');
 
         invitations.clickSubmitButton();
 
         // Verify mail sent notification is displayed
         invitations.onBoardingSuccessMsg.should('contain.text', 'Onboarding welcome mail sent');
-        //invitations.validateOnboardingEmailSentMsg('Onboarding welcome mail sent');
-        
+      
         // New Employee Details test Data
         const JoineeData = {
             JoineeEmail: joineePersonalMail,
