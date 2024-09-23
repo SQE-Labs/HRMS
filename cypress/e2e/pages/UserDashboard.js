@@ -13,6 +13,10 @@ class UserDashboard extends BasePage {
   get editLastName() { return cy.get("input[value='User']") }
   get editMiddleName() { return cy.get("input[value='Mation']") }
   get updateButton() { return cy.get("button[class='btn btn-primary btn-sm']") }
+  get work() { return cy.get("h2[id='heading2'] button[type='button']") }
+  get editWorkInfo() { return cy.get('#collapse2 a i') }
+  get editDateOfJoining() { return cy.get("div[class='input-group'] [class='border']") }
+  get personalDetails() { return cy.get("h2[id='heading3'] button[type='button']")}
 
   // Methods
   clickOnWorkExperience() {
@@ -23,6 +27,26 @@ class UserDashboard extends BasePage {
   clickOnBasicInfo() {
     this.basicInfo.wait(2000).click();
     cy.log("Clicked on the Basic Info Option");
+  }
+
+  clickOnWork() {
+    this.work.click();
+    cy.log("Clicked on the Work Option");
+  }
+
+  clickOnPersonalDeatils() {
+    this.personalDetails.click();
+    cy.log("Clicked on the Personal Details Option");
+  }
+
+  updateDOJ(doj) {
+    this.editDateOfJoining.type(doj).should('have.value', doj);
+    cy.log("Updated Date of Joining");
+  }
+
+  reverseDOJ(doj) {
+    this.editDateOfJoining.type(doj).should('have.value', doj);
+    cy.log("Reverse Date of Joining");
   }
 
   validateNoRecordsAppear() {
@@ -37,7 +61,12 @@ class UserDashboard extends BasePage {
 
   clickOnEditButtonBasicInfo() {
     this.editBasicInfo.click();
-    cy.log("Clicked on the Edit button Under Basic Info Accordion");
+    cy.log("Clicked on the Edit button");
+  }
+
+  clickOnEditButtonUnderWorkInfo() {
+    this.editWorkInfo.click();
+    cy.log("Clicked on the Edit button");
   }
 
   updateFirstName(firstNameText) {
@@ -57,12 +86,12 @@ class UserDashboard extends BasePage {
 
   clickOnCloseButton() {
     this.closeButton.click();
-    cy.log("Clicked on the Close Button under Basic Info Accordion");
+    cy.log("Clicked on the Close Button");
   }
 
   clickOnUpdateButton() {
     this.updateButton.click();
-    cy.log("Clicked on the Update Button under Basic Info Accordion");
+    cy.log("Clicked on the Update Button");
     Loaders.threeDotLoading.should('not.exist');
   }
 
