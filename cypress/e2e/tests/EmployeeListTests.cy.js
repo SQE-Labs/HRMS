@@ -25,7 +25,10 @@ describe("Employee Onboard Tests", () => {
     
         // Verify that information message, when user enters valid data in 'Search By Name' field
         EmployeeListPage.enterNameToSearch('Automation');
-        EmployeeListPage.countTotalEmployees(1);
+        EmployeeListPage.countTotalEmployees().then((employcount) => {
+        expect(employcount).to.equal(1);
+        });
+      
 
         // Verify that the information message appears for the selected department with no records.
         EmployeeListPage.clickOnUserCard();

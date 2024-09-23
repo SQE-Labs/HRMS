@@ -17,14 +17,14 @@ enterNameToSearch(nametxt) {
   cy.log("Entered Name to Search")
   }  
    
-countTotalEmployees(countEmployees){
-  this.employeeCount.invoke('text')
-  .then((text) => {
-  const employeeCount = parseInt(text.replace('Total Employees : ', '').trim());
-  expect(employeeCount).to.equal(countEmployees);  
-  cy.log(`Total number of employees: ${employeeCount}`);
-        });
-      }
+
+countTotalEmployees() {
+  return this.employeeCount.invoke('text')
+    .then((text) => {
+      return parseInt(text.replace('Total Employees : ', '').trim());
+    });
+}
+
 
 clickOnUserCard(){
   this.user.click();
