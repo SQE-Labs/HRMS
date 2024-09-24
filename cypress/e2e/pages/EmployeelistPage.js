@@ -26,8 +26,8 @@ getTotalEmployeescount() {
 }
 
 
-clickOnUserCard(){
-  this.user.click();
+clickOnUserCard(user){
+  this.user.contains(user).click();
   Loaders.threeDotLoading.should('not.exist');    
   cy.log("Clicked on Searched User");
   } 

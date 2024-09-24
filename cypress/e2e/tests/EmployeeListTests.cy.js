@@ -24,14 +24,14 @@ describe("Employee Onboard Tests", () => {
         EmployeeListPage.noRecordAvailable.should('have.text', "No Records Available");
     
         // Verify that information message, when user enters valid data in 'Search By Name' field
-        EmployeeListPage.enterNameToSearch('Automation');
+        EmployeeListPage.enterNameToSearch('Auto Mation User');
         EmployeeListPage.getTotalEmployeescount().then((employcount) => {
         expect(employcount).to.equal(1);
         });
       
 
         // Verify that the information message appears for the selected department with no records.
-        EmployeeListPage.clickOnUserCard();
+        EmployeeListPage.clickOnUserCard('Auto Mation User');
         UserDashboardPage.clickOnWorkExperience();
         UserDashboardPage.noRecordAvailable.should('have.text', "No records available");
         cy.log("No Records Appear")
