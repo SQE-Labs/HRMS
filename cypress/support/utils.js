@@ -31,3 +31,7 @@ export function generateRandomCaeliusEmail(length){
 export function getRandomMailFromYopmail(){
     return easyYopmail.getMail();
 }
+
+export function selectDrpValueByText(locator ,text){
+    locator.select(text).should('contain', text);
+}

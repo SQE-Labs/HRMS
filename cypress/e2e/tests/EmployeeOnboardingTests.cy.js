@@ -5,7 +5,7 @@ import L1ApprovalActionPage from "../pages/L1ApprovalActionPage";
 import verifyPersonalEmailPopup from "../pages/popups/VerifyPersonalEmailPopup";
 import HomePage from "../pages/HomePage";
 import { generateRandomYopmail, generateRandomString, 
-    generateRandomCaeliusEmail, generateRandomNumber } from '../../support/utils';
+    generateRandomCaeliusEmail, generateRandomNumber,selectDrpValueByText } from '../../support/utils';
 import HRApprovalPage from "../pages/HRApprovalPage";
 
 
@@ -79,14 +79,15 @@ describe("Employee Onboard Tests", () => {
         EmployeeDetailPage.enterMiddleName(JoineeData.MiddleName);
         EmployeeDetailPage.enterLastName(JoineeData.LastName);
         EmployeeDetailPage.checkGender(JoineeData.Gender);
-        EmployeeDetailPage.selectBloodGroup(JoineeData.BloodGroup);
+        selectDrpValueByText(EmployeeDetailPage.bloodGroup,JoineeData.BloodGroup)
         EmployeeDetailPage.selectDateOfBirth(JoineeData.DateOfBirth);
         EmployeeDetailPage.enterAdhaarNumber(JoineeData.AadharNumber);
         EmployeeDetailPage.enterPanNumber(JoineeData.PanNumber);
         EmployeeDetailPage.selectDateOfJoining(JoineeData.DateOfJoining);
-        EmployeeDetailPage.selectMaritalStatus(JoineeData.MaritalStatus);
+        selectDrpValueByText(EmployeeDetailPage.maritalStatus,JoineeData.MaritalStatus);
         EmployeeDetailPage.enterPassportNumber(JoineeData.PassportNo);
         EmployeeDetailPage.clickNextButton();
+
 
         // Providing Contact Details
         EmployeeDetailPage.enterPhoneNumber(JoineeData.PhoneNumber);
