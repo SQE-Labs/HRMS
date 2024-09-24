@@ -4,15 +4,15 @@ import invitations from "../pages/Invitations";
 import L1ApprovalAction from "../pages/L1ApprovalAction";
 import verifyPersonalEmailPopup from "../pages/popups/VerifyPersonalEmailPopup";
 import HomePage from "../pages/HomePage";
-import { generateRandomYopmail, generateRandomString, 
-    generateRandomCaeliusEmail, generateRandomNumber } from '../../support/utils';
+import {
+    generateRandomYopmail, generateRandomString,
+    generateRandomCaeliusEmail, generateRandomNumber
+} from '../../support/utils';
 import HRApproval from "../pages/HRApproval";
-
 
 describe("Employee Onboard Tests", () => {
 
-    it.only("ONBRD_1: Verify that new hire is able to submit the onboarding form", () => {
-        // Login
+    it("ONBRD_1: Verify that new hire is able to submit the onboarding form", () => {
         cy.login();
 
         // Invite new Employee
@@ -26,7 +26,7 @@ describe("Employee Onboard Tests", () => {
 
         // Verify mail sent notification is displayed
         invitations.validateOnboardingEmailSentMsg('Onboarding welcome mail sent');
-        
+
         // New Employee Details test Data
         const JoineeData = {
             JoineeEmail: joineePersonalMail,
@@ -40,7 +40,7 @@ describe("Employee Onboard Tests", () => {
             PanNumber: 'BSSSS1233D',
             DateOfJoining: '2024-09-23',
             MaritalStatus: 'Single',
-            PassportNo: generateRandomString(1)+generateRandomNumber(11),
+            PassportNo: generateRandomString(1) + generateRandomNumber(11),
             PhoneNumber: '6448744833',
             AlternatePhone: '3673636733',
             RelationshipWithAlterNumber: 'Mother',
@@ -49,7 +49,7 @@ describe("Employee Onboard Tests", () => {
             PermanentAddress: 'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016',
             CaeliusEmail: generateRandomCaeliusEmail(6),
             Department: 'Marketing',
-            Designation:'Demooo',
+            Designation: 'Demooo',
             AssignManager: 'DDinesh D Kumar',
             EmployeeType: 'REGULAR'
         }
@@ -173,7 +173,7 @@ describe("Employee Onboard Tests", () => {
 
         // L1ApprovalAction.viewButtonOnSearchedJoinee;
         L1ApprovalAction.EmployeesTable.viewApprvalByMailAddress(JoineeData.JoineeEmail);
-        
+
         // Validating Personal Details for New Joinee
         L1ApprovalAction.firstName.should('be.visible').and('have.value', JoineeData.Firstname);
         L1ApprovalAction.lastName.should('have.value', JoineeData.LastName);
