@@ -18,7 +18,7 @@ enterNameToSearch(nametxt) {
   }  
    
 
-countTotalEmployees() {
+getTotalEmployeescount() {
   return this.employeeCount.invoke('text')
     .then((text) => {
       return parseInt(text.replace('Total Employees : ', '').trim());

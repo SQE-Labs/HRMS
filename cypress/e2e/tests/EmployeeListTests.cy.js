@@ -25,7 +25,7 @@ describe("Employee Onboard Tests", () => {
     
         // Verify that information message, when user enters valid data in 'Search By Name' field
         EmployeeListPage.enterNameToSearch('Automation');
-        EmployeeListPage.countTotalEmployees().then((employcount) => {
+        EmployeeListPage.getTotalEmployeescount().then((employcount) => {
         expect(employcount).to.equal(1);
         });
       
