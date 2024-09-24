@@ -11,7 +11,7 @@ import HRApproval from "../pages/HRApproval";
 
 describe("Employee Onboard Tests", () => {
 
-    it.only("ONBRD_1: Verify that new hire is able to submit the onboarding form", () => {
+    it("ONBRD_1: Verify that new hire is able to submit the onboarding form", () => {
         // Login
         cy.login();
 
@@ -203,10 +203,37 @@ describe("Employee Onboard Tests", () => {
         HRApproval.selectDesignation(JoineeData.Designation);
         HRApproval.selectAssignManager(JoineeData.AssignManager);
         HRApproval.selectEmployeeType(JoineeData.EmployeeType);
+        
+
+
         HRApproval.clickApproveButton();
 
         // Validating the Thank You Success message
         HRApproval.validateSuccessMessage();
+    })
+
+    it("intercept", ()=> {
+        cy.intercept('POST', '/v1/track').as('somethingas');
+
+        cy.visit('https://qasource.com');
+
+        cy.wait('@somethingas').then(data => {
+            cy.log(data.response.headers.date);
+        })
+    })
+
+    it.only("asdasdasdasdasd", ()=>{
+        cy.visit("https://www.google.com");
+        
+
+        cy.wait(5000);
+
+        cy.window().then((win) => {
+            const newWindow = win.open('https://www.flipkart.com');
+            cy.wait(5000);
+            cy.visit("https://www.google.com");
+            cy.wait(5000);
+          });
     })
 
 });
