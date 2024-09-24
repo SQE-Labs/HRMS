@@ -4,8 +4,10 @@ import invitations from "../pages/Invitations";
 import L1ApprovalAction from "../pages/L1ApprovalAction";
 import verifyPersonalEmailPopup from "../pages/popups/VerifyPersonalEmailPopup";
 import HomePage from "../pages/HomePage";
-import { generateRandomYopmail, generateRandomString, 
-    generateRandomCaeliusEmail, generateRandomNumber } from '../../support/utils';
+import {
+    generateRandomYopmail, generateRandomString,
+    generateRandomCaeliusEmail, generateRandomNumber
+} from '../../support/utils';
 import HRApproval from "../pages/HRApproval";
 
 
@@ -26,7 +28,7 @@ describe("Employee Onboard Tests", () => {
 
         // Verify mail sent notification is displayed
         invitations.validateOnboardingEmailSentMsg('Onboarding welcome mail sent');
-        
+
         // New Employee Details test Data
         const JoineeData = {
             JoineeEmail: joineePersonalMail,
@@ -40,7 +42,7 @@ describe("Employee Onboard Tests", () => {
             PanNumber: 'BSSSS1233D',
             DateOfJoining: '2024-09-23',
             MaritalStatus: 'Single',
-            PassportNo: generateRandomString(1)+generateRandomNumber(11),
+            PassportNo: generateRandomString(1) + generateRandomNumber(11),
             PhoneNumber: '6448744833',
             AlternatePhone: '3673636733',
             RelationshipWithAlterNumber: 'Mother',
@@ -49,7 +51,7 @@ describe("Employee Onboard Tests", () => {
             PermanentAddress: 'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016',
             CaeliusEmail: generateRandomCaeliusEmail(6),
             Department: 'Marketing',
-            Designation:'Demooo',
+            Designation: 'Demooo',
             AssignManager: 'DDinesh D Kumar',
             EmployeeType: 'REGULAR'
         }
@@ -173,7 +175,7 @@ describe("Employee Onboard Tests", () => {
 
         // L1ApprovalAction.viewButtonOnSearchedJoinee;
         L1ApprovalAction.EmployeesTable.viewApprvalByMailAddress(JoineeData.JoineeEmail);
-        
+
         // Validating Personal Details for New Joinee
         L1ApprovalAction.firstName.should('be.visible').and('have.value', JoineeData.Firstname);
         L1ApprovalAction.lastName.should('have.value', JoineeData.LastName);
@@ -203,37 +205,10 @@ describe("Employee Onboard Tests", () => {
         HRApproval.selectDesignation(JoineeData.Designation);
         HRApproval.selectAssignManager(JoineeData.AssignManager);
         HRApproval.selectEmployeeType(JoineeData.EmployeeType);
-        
-
-
         HRApproval.clickApproveButton();
 
         // Validating the Thank You Success message
         HRApproval.validateSuccessMessage();
-    })
-
-    it("intercept", ()=> {
-        cy.intercept('POST', '/v1/track').as('somethingas');
-
-        cy.visit('https://qasource.com');
-
-        cy.wait('@somethingas').then(data => {
-            cy.log(data.response.headers.date);
-        })
-    })
-
-    it.only("asdasdasdasdasd", ()=>{
-        cy.visit("https://www.google.com");
-        
-
-        cy.wait(5000);
-
-        cy.window().then((win) => {
-            const newWindow = win.open('https://www.flipkart.com');
-            cy.wait(5000);
-            cy.visit("https://www.google.com");
-            cy.wait(5000);
-          });
     })
 
 });
