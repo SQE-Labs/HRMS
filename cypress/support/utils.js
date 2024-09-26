@@ -34,10 +34,6 @@ export function getRandomMailFromYopmail(){
     return easyYopmail.getMail();
 }
 
-// export function selectDrpValueByText(locator ,text){
-//     locator.select(text).should('contain', text);
-// }
-
 
 export function selectDrpValueByText(locator, text, isSearchable = false, searchInputLocator = '') {
     if (isSearchable) {
