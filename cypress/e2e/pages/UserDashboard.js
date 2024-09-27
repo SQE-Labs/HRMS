@@ -4,93 +4,103 @@ import Loaders from "../components/Loaders";
 class UserDashboard extends BasePage {
 
   // Locators    
-  get workExperience() { return cy.get("h2[id='heading4'] button[type='button']") }
-  get noRecordAvailable() { return cy.get("#collapse4 div.table-responsive div") }
-  get basicInfo() { return cy.get("h2[id='heading1'] button[type='button']") }
-  get editBasicInfo() { return cy.get("#collapse1 a i") }
-  get closeButton() { return cy.get("button[class='btn btn-secondary btn-sm ms-2']") }
-  get editFirstName() { return cy.get("input[value='Auto']") }
-  get editLastName() { return cy.get("input[value='User']") }
-  get editMiddleName() { return cy.get("input[value='Mation']") }
-  get updateButton() { return cy.get("button[class='btn btn-primary btn-sm']") }
-  get work() { return cy.get("h2[id='heading2'] button[type='button']") }
-  get editWorkInfo() { return cy.get('#collapse2 a i') }
-  get editDateOfJoining() { return cy.get("div[class='input-group'] [class='border']") }
-  get personalDetails() { return cy.get("h2[id='heading3'] button[type='button']")}
+  get workExperienceAccord() { return cy.get("h2[id='heading4'] button") }
+  get noRecordAvailableInfo() { return cy.get("#collapse4 div.table-responsive div") }
+  get basicInfoAccord() { return cy.get("h2[id='heading1'] button") }
+  get editBasicInfoBtn() { return cy.get("#collapse1 a i") }
+  get closeBtn() { return cy.get("button[class='btn btn-secondary btn-sm ms-2']") }
+  get editFirstNameTxt() { return cy.get("input[name='firstName']:not(:disabled)") }
+  get editLastNameTxt() { return cy.get("input[name='lastName']:not(:disabled)") }
+  get editMiddleNameTxt() { return cy.get("input[name='middleName']:not(:disabled)") }
+  get updateBtn() { return cy.get("button[class='btn btn-primary btn-sm']") }
+  get workAccord() { return cy.get("h2[id='heading2'] button") }
+  get editWorkInfoBtn() { return cy.get('#collapse2 a i') }
+  get editDateOfJoiningPicker() { return cy.get("div[class='input-group'] [class='border']") }
+  get personalDetailsAccord() { return cy.get("h2[id='heading3'] button") }
+  get editDateOfBirthPicker() { return cy.get("#collapse3 input[type='date']") }
+  get editPassportNumberTxt() { return cy.get("input[name='passportNumber']:not(:disabled)") }
+  get editPanNumberTxt() { return cy.get("input[name='panCardNumber']:not(:disabled)") }
+  get editAdhaarNumberTxt() { return cy.get("input[name='aadharNumber']:not(:disabled)") }
+  get editPresentAddressTxt() { return cy.get("textarea[name='presentAddress']:not(:disabled)") }
+  get editPermanentAddressTxt() { return cy.get("textarea[name='permanentAddress']:not(:disabled)") }
+  get editAlternateNumberTxt() { return cy.get("input[name='alternateNumber']:not(:disabled)") }
+  get editBloodGroupDrp() { return cy.get("div [id='bloodGroup']:not(:disabled)") }
+  get editMaritalStatusDrp() { return cy.get("select[id='maritalStatus']:not(:disabled)") }
+  get editGenderBtn() { return cy.get("#female:not(:disabled)") }
 
   // Methods
-  clickOnWorkExperience() {
-    this.workExperience.click();
+  clickOnWorkExperienceAccord() {
+    this.workExperienceAccord.click();
     cy.log("Clicked on the Work Experience Option");
   }
 
-  clickOnBasicInfo() {
-    this.basicInfo.wait(1000).click();
+  clickOnPersonalDetailsAccord() {
+    this.personalDetailsAccord.click();
+    cy.log("Clicked on the Work Experience Option");
+  }
+
+  clickOnBasicInfoAccord() {
+    this.basicInfoAccord.wait(2000).click();
     cy.log("Clicked on the Basic Info Option");
   }
 
-  clickOnWork() {
-    this.work.click();
+  clickOnWorkAccord() {
+    this.workAccord.click();
     cy.log("Clicked on the Work Option");
   }
 
-  clickOnPersonalDeatils() {
-    this.personalDetails.click();
+  clickOnPersonalDetailsAccord() {
+    this.personalDetailsAccord.click();
     cy.log("Clicked on the Personal Details Option");
   }
 
-  updateDOJ(doj) {
-    this.editDateOfJoining.type(doj).should('have.value', doj);
+  updateDOJPicker(doj) {
+    this.editDateOfJoiningPicker.type(doj).should('have.value', doj);
     cy.log("Updated Date of Joining");
   }
 
-  reverseDOJ(doj) {
-    this.editDateOfJoining.type(doj).should('have.value', doj);
-    cy.log("Reverse Date of Joining");
-  }
-
   validateNoRecordsAppear() {
-    this.noRecordAvailable.should('have.text', "No records available");
+    this.noRecordAvailableInfo.should('have.text', "No records available");
     cy.log("No Records Appear")
   }
 
   validateAccordionCollapsed() {
-    this.editBasicInfo.should('not.be.visible');
+    this.editBasicInfoBtn.should('not.be.visible');
     cy.log("Accordion Is Collapsed")
   }
 
   clickOnEditButtonBasicInfo() {
-    this.editBasicInfo.click();
+    this.editBasicInfoBtn.click();
     cy.log("Clicked on the Edit button");
   }
 
-  clickOnEditButtonUnderWorkInfo() {
-    this.editWorkInfo.click();
+  clickOnEditButtonWorkInfo() {
+    this.editWorkInfoBtn.click();
     cy.log("Clicked on the Edit button");
   }
 
-  updateFirstName(firstNameText) {
-    this.editFirstName.clear().type(firstNameText).should('have.value', firstNameText)
+  updateFirstNameField(firstNameText) {
+    this.editFirstNameTxt.clear().type(firstNameText).should('have.value', firstNameText)
     cy.log("Updated First Name Text");
   }
 
-  updateMiddleName(middleNameText) {
-    this.editMiddleName.clear().type(middleNameText).should('have.value', middleNameText)
+  updateMiddleNameField(middleNameText) {
+    this.editMiddleNameTxt.clear().type(middleNameText).should('have.value', middleNameText)
     cy.log("Updated Middle Name Text");
   }
 
-  updateLastName(lastNameText) {
-    this.editLastName.clear().type(lastNameText).should('have.value', lastNameText)
+  updateLastNameField(lastNameText) {
+    this.editLastNameTxt.clear().type(lastNameText).should('have.value', lastNameText)
     cy.log("Updated Last Name Text");
   }
 
   clickOnCloseButton() {
-    this.closeButton.click();
+    this.closeBtn.click();
     cy.log("Clicked on the Close Button");
   }
 
   clickOnUpdateButton() {
-    this.updateButton.click();
+    this.updateBtn.click();
     cy.log("Clicked on the Update Button");
     Loaders.threeDotLoading.should('not.exist');
   }
@@ -98,6 +108,53 @@ class UserDashboard extends BasePage {
   validateSuccessMessage() {
     cy.contains("success").should('be.visible')
     cy.log("Success message is displayed");
+  }
+
+  updateDateOfBirth(dob) {
+    this.editDateOfBirthPicker.type(dob).should('have.value', dob);
+    cy.log("Date of Birth is selected");
+  }
+
+  updatePermanentAddress(permanentAddressTxt) {
+    this.editPermanentAddressTxt.type(permanentAddressTxt).should('have.value', permanentAddressTxt);
+    cy.log("Entered Permanent Address");
+  }
+  updatePresentAddress(presentAddressTxt) {
+    this.editPresentAddressTxt.type(presentAddressTxt).should('have.value', presentAddressTxt);
+    cy.log("Entered Present Address");
+  }
+  updateAdhaarNumber(adhaarNumberTxt) {
+    this.editAdhaarNumberTxt.type(adhaarNumberTxt).should('have.value', adhaarNumberTxt);
+    cy.log("Adhaar Number is Entered");
+  }
+
+  updatePanNumber(panNumberTxt) {
+    this.editPanNumberTxt.type(panNumberTxt).should('have.value', panNumberTxt);
+    cy.log("Pan Number is Entered");
+  }
+  updatePassportNumber(passportNo) {
+    this.editPassportNumberTxt.type(passportNo).should('have.value', passportNo);
+    cy.log("Passport Number is Entered");
+  }
+
+  updateBloodGroup(bloodGroup) {
+    this.editBloodGroupDrp.select(bloodGroup).should('contain', bloodGroup);
+    cy.log("Blood Group is selected");
+  }
+
+  // checkGender(genderType) {
+  //   this.gender.contains('label', genderType).click();
+  // }
+
+
+  updateMaritalStatus(status) {
+    this.editMaritalStatusDrp.select(status).should('contain', status);
+    cy.log("Marital Status is selected");
+  }
+
+  updateAlternateNumber(alternateNumber) {
+    this.editAlternateNumberTxt.type(alternateNumber).should('have.value', alternateNumber);
+    cy.log("Entered Alternate Number");
   }
 
   getFieldValue(label) {
