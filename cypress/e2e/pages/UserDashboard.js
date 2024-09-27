@@ -25,7 +25,7 @@ class UserDashboard extends BasePage {
   }
 
   clickOnBasicInfo() {
-    this.basicInfo.wait(2000).click();
+    this.basicInfo.wait(1000).click();
     cy.log("Clicked on the Basic Info Option");
   }
 

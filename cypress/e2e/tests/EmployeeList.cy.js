@@ -16,7 +16,7 @@ describe("Employee Onboard Tests", () => {
             EmailID: 'AutomationUser@caeliusconsulting.com',
             Department: 'Automation Testing',
             Designation: 'Automate Tests',
-            ReportingTo: 'DDinesh Kumar',
+            ReportingTo: 'chandler  shan',
             DOJ: '29-09-2024',
             EmployeeStatus: 'VERIFIED',
             EmployeeType: 'Full Time',
