@@ -1,6 +1,5 @@
 import sideBar from "../components/SideBar";
 import PromoteEmployeePage from "../pages/PromoteEmployeePage";
-import { selectDrpValueByText } from '../../support/utils';
 
 
 beforeEach(() => {
@@ -23,7 +22,7 @@ describe("Employee Managment Promote Employee Tests", () => {
             expect(text.trim()).to.eq('Promote Employee');
         });
         cy.wait(1000);
-        selectDrpValueByText(PromoteEmployeePage.selectEmployeeDrp, "Auto Mation User", true, PromoteEmployeePage.selectEmployeeDrp);
+        PromoteEmployeePage.selectEmployee("Auto Mation User");
         PromoteEmployeePage.tableHeadersLbl.each((headerText, index) => {
             cy.wrap(headerText).should('contain.text', expectedTexts[index])
         });
@@ -33,7 +32,7 @@ describe("Employee Managment Promote Employee Tests", () => {
     it("HRMIS_2: Verify Promot pop up open and close when user click on Promot and Cancel button", () => {
 
         cy.wait(1000);
-        selectDrpValueByText(PromoteEmployeePage.selectEmployeeDrp, "Auto Mation User", true, PromoteEmployeePage.selectEmployeeDrp);
+        PromoteEmployeePage.selectEmployee("Auto Mation User");
         PromoteEmployeePage.clickOnPromote();
         PromoteEmployeePage.promotePopHeaderLbl.should('have.text','Promote Employee');
         PromoteEmployeePage.clickOnCancel();
@@ -51,7 +50,7 @@ describe("Employee Managment Promote Employee Tests", () => {
     it("HRMIS_3: Verify Validation message appears after clicking on submit button when no department or designation is selected", () => {
         
         cy.wait(1000);
-        selectDrpValueByText(PromoteEmployeePage.selectEmployeeDrp, "Auto Mation User", true, PromoteEmployeePage.selectEmployeeDrp);
+        PromoteEmployeePage.selectEmployee("Auto Mation User");
         PromoteEmployeePage.clickOnPromote();
         PromoteEmployeePage.promotePopHeaderLbl.should('have.text','Promote Employee');
 
@@ -62,9 +61,7 @@ describe("Employee Managment Promote Employee Tests", () => {
         .should('equal', 'Please select an item in the list.');
 
         // select department
-
-        selectDrpValueByText(PromoteEmployeePage.selectDepartmentDrp, "GENRIC", false);
-
+        PromoteEmployeePage.selectDepartment("GENRIC");
         // when no designation is selected.
         PromoteEmployeePage.clickOnSubmitBtn();
         cy.wait(1000);
@@ -76,17 +73,16 @@ describe("Employee Managment Promote Employee Tests", () => {
     });
 
 
-    it.only("HRMIS_4: Verify Validation message appears after clicking on submit button when no department or designation is selected", () => {
+    it("HRMIS_4: Verify Validation message appears after clicking on submit button when no department or designation is selected", () => {
         
 
         const designations = ['Select Designation','CEO & Chief Architect','Co Founder & COO','VP Sucess Manager & Sales','Chief People Officer','Piyush Dogra'];
 
         cy.wait(1000);
-        selectDrpValueByText(PromoteEmployeePage.selectEmployeeDrp, "Auto Mation User", true, PromoteEmployeePage.selectEmployeeDrp);
+        PromoteEmployeePage.selectEmployee("Auto Mation User");
         PromoteEmployeePage.clickOnPromote();
         PromoteEmployeePage.promotePopHeaderLbl.should('have.text','Promote Employee');
-        selectDrpValueByText(PromoteEmployeePage.selectDepartmentDrp, "GENRIC", false);
-
+        PromoteEmployeePage.selectDepartment("GENRIC")
         PromoteEmployeePage.getdesgnationOptions().then((options) => {
             const optionTexts = [...options].map(option => option.innerText.trim()); // Extract all option texts
             optionTexts.forEach((text,index) => {

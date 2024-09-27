@@ -66,6 +66,29 @@ Cypress.Commands.add('validateSuccessMessages', (messages) => {
 });
 
 
+
+
+Cypress.Commands.add('selectDrpValueByText', (locator, text, isSearchable = false, searchInputLocator = '') => {
+    if (isSearchable) {
+        // Click the dropdown to open
+        locator.click();
+
+        if (searchInputLocator) {
+            // Wait and type the text in the search input field
+            searchInputLocator.wait(1000).type(text);
+            
+            // Click the correct option in the dropdown
+            cy.get("#react-select-2-listbox span, #react-select-3-listbox span").contains(text).click();
+        } 
+    } else {
+        // Standard dropdown (non-searchable)
+        locator.select(text).should('contain', text);
+    }
+      
+});
+
+
+
   
 
 

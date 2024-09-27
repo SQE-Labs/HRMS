@@ -19,7 +19,10 @@ describe("Employee Assign Manager Managment Tests", () => {
 
         const expectedTexts = ['Id', 'Name', 'Assigned Manager', 'Action'];
 
-        AssignManagerPage.assignManagerLbl.should('have.text', "Assign Manager");
+
+         AssignManagerPage.assignManagerLbl.invoke('text').then((text)=>{
+             expect(text.trim()).to.eq('Assign Manager');
+         });
         cy.wait(1000);
         selectDrpValueByText(AssignManagerPage.selectEmployeeDrp, "Auto Mation User", true, AssignManagerPage.selectEmployeeDrp);
 
