@@ -2,7 +2,7 @@ import BasePage from "./BasePage";
 import Loaders from "../components/Loaders";
 
 
-class HRApproval extends BasePage{
+class HRApprovalPage extends BasePage{
 
 //  Locators
 get caeliusEmail() { return cy.get("div[class='row mt-3'] h6[class='truncate-text']")}
@@ -15,22 +15,22 @@ get approveButton() { return cy.get("div[role='tabpanel'] form div button[type='
 
 // Methods
 selectDepartment(departmentName) {
-    this.department.type(departmentName + '{enter}').should('contain', departmentName);
+    this.department.type(departmentName).pressEnter().should('contain', departmentName);
     cy.log("Department is selected");
 }
 
 selectDesignation(designation) {
-    this.designation.wait(1000).type(designation+ '{enter}').should('contain', designation);
+    this.designation.wait(500).type(designation).pressEnter().should('contain', designation);
     cy.log("Designation is selected");
 }
 
 selectAssignManager(assignManagerName) {
-    this.assignManager.wait(1000).type(assignManagerName+ '{enter}');
+    this.assignManager.wait(500).type(assignManagerName).pressEnter();
     cy.log("Assign Manager is selected");
 }
 
 selectEmployeeType(employeeType) {
-    this.employeeType.wait(1000).type(employeeType+ '{enter}');
+    this.employeeType.wait(500).type(employeeType).pressEnter();
     cy.log("Employee Type is selected");
    }
 
@@ -48,4 +48,4 @@ validateSuccessMessage() {
 }
 
 }
-export default new HRApproval();
+export default new HRApprovalPage();

@@ -14,15 +14,16 @@ class EmployeeDetailPage extends BasePage {
     get bloodGroup() { return cy.get('#bloodGroup') }
     get dateOfBirth() { return cy.get("input[name='dob']") }
     get aadharNumber() { return cy.get("input[name='aadharNumber']") }
-    get panNumber() { return cy.get("input[placeholder='XXX-XXX-XXXX']") }
+    get panNumber() { return cy.get("input[name='panCardNumber']") }
     get dateOfJoining() { return cy.get("input[name='joiningDate']") }
     get maritalStatus() { return cy.get('#maritalStatus') }
     get passportNo() { return cy.get("input[name='passportNumber']") }
     get nextButton() { return cy.get("button[class='theme-button']") }
 
     // Contact Details Locators
-    get phoneNumber() { return cy.get("input[placeholder='9876543210'][name='phoneNumber']") }
-    get alternateNumber() { return cy.get("input[placeholder='9876543210'][name='alternateNumber']") }
+    get phoneNumber() { return cy.get("input[name='phoneNumber']") }
+    get alternateNumber() { return cy.get("input[name='alternateNumber']") }
+
     get relationshipWithAlternateNo() { return cy.get('#relationWithAlternateNo') }
     get alternateName() { return cy.get("input[name='alternateName']") }
     get presentAddress() { return cy.get("textarea[name='presentAddress']") }

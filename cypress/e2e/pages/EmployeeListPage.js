@@ -5,7 +5,7 @@ import sideBar from "../components/SideBar";
 class EmployeeListPage extends BasePage {
 
 //Locators
-get searchByName() { return cy.get("input[placeholder='Search By Name.']")}
+get searchByName() { return cy.get("input[name='search']")}
 get user() { return cy.get(".card-title.text-primary")}
 get employeeCount() { return cy.get('.total')}
 get noRecordAvailable() { return cy.get('.fs-4.text-secondary.text-center')}
@@ -17,36 +17,24 @@ enterNameIntoSearchField(nametxt) {
   this.searchByName.clear().type(nametxt).should('have.value', nametxt);
   cy.log("Entered Name to Search")
   }  
+   
 
-navigateToUserDashboardPage(nametxt){
-  sideBar.navigateTo("Employee Management", "Employees List");
-  this.searchByName.clear().type(nametxt).should('have.value', nametxt);
-  this.user.click();
-
-  }  
-
-validateNoRecordsAppear(informationMsg){
-  this.noRecordAvailable.should('have.text',informationMsg);
-  cy.log("No Records Appear")
-  }    
-
-countTotalEmployees(countEmployees){
-  this.employeeCount.invoke('text')
-  .then((text) => {
-  const employeeCount = parseInt(text.replace('Total Employees : ', '').trim());
-  expect(employeeCount).to.equal(countEmployees);  
-  cy.log(`Total number of employees: ${employeeCount}`);
+getTotalEmployeescount() {
+  return this.employeeCount.invoke('text')
+    .then((text) => {
+      return parseInt(text.replace('Total Employees : ', '').trim());
     });
-  }
+}
 
-selectUser(){
-  this.user.should('be.visible').click();
+
+clickOnUserCard(user){
+  this.user.contains(user).click();
   Loaders.threeDotLoading.should('not.exist');    
   cy.log("Clicked on Searched User");
   } 
 
 selectDepartment(departmentName) {
-    this.department.wait(2000).select(departmentName).should('contain', departmentName);
+    this.department.wait(1000).select(departmentName).should('contain', departmentName);
     Loaders.threeDotLoading.should('not.exist');
     cy.log("Department is selected");
   }  
