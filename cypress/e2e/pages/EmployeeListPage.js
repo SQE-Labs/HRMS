@@ -25,8 +25,8 @@ navigateToUserDashboardPage(nametxt){
 
   }  
 
-validateNoRecordsAppear(){
-  this.noRecordAvailable.should('have.text', "No Records Available");
+validateNoRecordsAppear(informationMsg){
+  this.noRecordAvailable.should('have.text',informationMsg);
   cy.log("No Records Appear")
   }    
 

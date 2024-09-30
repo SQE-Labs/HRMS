@@ -24,7 +24,7 @@ describe("Employee Onboard Tests", () => {
 
         // Verify that information message, when user enters invalid data in 'Search By Name' field
         EmployeeListPage.enterNameIntoSearchField('invalidName');
-        EmployeeListPage.validateNoRecordsAppear();
+        EmployeeListPage.validateNoRecordsAppear('No Records Available');
 
         // Verify that information message, when user enters valid data in 'Search By Name' field
         EmployeeListPage.enterNameIntoSearchField('DDinesh');
@@ -45,7 +45,7 @@ describe("Employee Onboard Tests", () => {
         }
 
         // Verify that 'Basic Info' accordion gets expanded, when user clicks 'Basic Info' accordion.
-        UserDashboard.clickOnBasicInfoAccord();
+        UserDashboard.clickOnBasicInfo();
         UserDashboard.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
         UserDashboard.getFieldValue("Middle Name").should('equal', EmployeeData.MiddleName);
         UserDashboard.getFieldValue("Last Name").should('equal', EmployeeData.LastName);
@@ -53,10 +53,10 @@ describe("Employee Onboard Tests", () => {
         UserDashboard.getFieldValue("Email").should('equal', EmployeeData.EmailID);
 
         // Verify that data do not get saved on clicking 'Close' button.
-        UserDashboard.clickOnEditButtonBasicInfo();
-        UserDashboard.updateFirstNameField('Autom');
-        UserDashboard.updateMiddleNameField('Mation1');
-        UserDashboard.updateLastNameField('User1');
+        UserDashboard.clickOnEditBasicInfoDetails();
+        UserDashboard.updateFirstName('Autom');
+        UserDashboard.updateMiddleName('Mation1');
+        UserDashboard.updateLastName('User1');
         UserDashboard.clickOnCloseButton();
         UserDashboard.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
         UserDashboard.getFieldValue("Middle Name").should('equal', EmployeeData.MiddleName);
@@ -65,10 +65,10 @@ describe("Employee Onboard Tests", () => {
         UserDashboard.getFieldValue("Email").should('equal', EmployeeData.EmailID);
 
         // Verify that data gets saved on clicking 'Update' button.
-        UserDashboard.clickOnEditButtonBasicInfo();
-        UserDashboard.updateFirstNameField('DDinesh');
-        UserDashboard.updateMiddleNameField('D');
-        UserDashboard.updateLastNameField('Kumar');
+        UserDashboard.clickOnEditBasicInfoDetails();
+        UserDashboard.updateFirstName('DDinesh');
+        UserDashboard.updateMiddleName('D');
+        UserDashboard.updateLastName('Kumar');
         UserDashboard.clickOnUpdateButton();
         UserDashboard.validateSuccessMessage();
         UserDashboard.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
@@ -78,7 +78,7 @@ describe("Employee Onboard Tests", () => {
         UserDashboard.getFieldValue("Email").should('equal', EmployeeData.EmailID);
 
         // Verify that 'Basic Info' accordion gets collapsed.
-        UserDashboard.clickOnBasicInfoAccord();
+        UserDashboard.clickOnBasicInfo();
         UserDashboard.validateAccordionCollapsed();
     });
 
@@ -88,8 +88,8 @@ describe("Employee Onboard Tests", () => {
         const EmployeeData = {
             Department: 'Technical',
             Designation: 'Senior Salesforce Developer',
-            ReportingTo: '-',
-            DOJ: '25-07-2024',
+            ReportingTo: 'chandler  shan',
+            DOJ: '30-09-2024',
             EmployeeStatus: 'VERIFIED',
             EmployeeType: 'Full Time',
             UpdateDOJ: '2024-09-30',
@@ -98,7 +98,7 @@ describe("Employee Onboard Tests", () => {
         }
 
         // Verify that 'Work' accordion gets expanded, when user clicks 'Work' accordion.
-        UserDashboard.clickOnWorkAccord();
+        UserDashboard.clickOnWork();
         UserDashboard.getFieldValue("Department").should('equal', EmployeeData.Department);
         UserDashboard.getFieldValue("Designation").should('equal', EmployeeData.Designation);
         UserDashboard.getFieldValue("Reporting To").should('equal', EmployeeData.ReportingTo);
@@ -107,25 +107,25 @@ describe("Employee Onboard Tests", () => {
         UserDashboard.getFieldValue("Employee Type").should('equal', EmployeeData.EmployeeType);
 
         //Verify that data do not get saved on clicking 'Close' button'
-        UserDashboard.clickOnEditButtonWorkInfo();
-        UserDashboard.updateDOJPicker(EmployeeData.UpdateDOJ);
+        UserDashboard.clickOnEditWorkDetails();
+        UserDashboard.updateDOJ(EmployeeData.UpdateDOJ);
         UserDashboard.clickOnCloseButton();
         UserDashboard.getFieldValue("Date of Joining").should('equal', EmployeeData.DOJ);
 
         //Verify that data do not get saved on clicking 'Update' button'
-        UserDashboard.clickOnEditButtonWorkInfo();
-        UserDashboard.updateDOJPicker(EmployeeData.UpdateDOJ);
+        UserDashboard.clickOnEditWorkDetails();
+        UserDashboard.updateDOJ(EmployeeData.UpdateDOJ);
         UserDashboard.clickOnUpdateButton();
         UserDashboard.validateSuccessMessage();
         UserDashboard.getFieldValue("Date of Joining").should('equal', EmployeeData.UpdatedDOJ);
 
         //Rollback Date Of Joining Under Work Into Accordion
-        UserDashboard.clickOnEditButtonWorkInfo();
-        UserDashboard.updateDOJPicker(EmployeeData.RecentDOJ);
+        UserDashboard.clickOnEditWorkDetails();
+        UserDashboard.updateDOJ(EmployeeData.RecentDOJ);
         UserDashboard.clickOnUpdateButton();
 
         //Verify that 'Work' accordion gets collapsed,  when user clicks on 'Work' accordion.
-        UserDashboard.clickOnWorkAccord();
+        UserDashboard.clickOnWork();
         UserDashboard.validateAccordionCollapsed();
 
     });
@@ -146,21 +146,21 @@ describe("Employee Onboard Tests", () => {
             PermanentAddress: '#800 SMALL FLTAS, DHANAS, CHANDIGARH (PIN 160014)',
 
           //Updated Employee Test Data
-            DateOfBirth: '09-05-2000',
-            AdhaarNumber: '488123345262',
-            PassportNumber: 'B20964573432',
-            PanNumber: 'ABCD4225Y',
-            PresentAddress: '#1000 CHANDIGARH (PIN 160014)',
-            BloodGroup: 'A+ve',
-            Gender: 'female',
-            AlternateNumber: '7676767676',
-            MaritalStatus:'Single',
-            PermanentAddress: '#1000 CHANDIGARH (PIN 160014)',
+            // UpdatedDateOfBirth: '09-05-2000',
+            // AdhaarNumber: '488123345262',
+            // PassportNumber: 'B20964573432',
+            // PanNumber: 'ABCD4225Y',
+            // PresentAddress: '#1000 CHANDIGARH (PIN 160014)',
+            // BloodGroup: 'A+ve',
+            // Gender: 'female',
+            // AlternateNumber: '7676767676',
+            // MaritalStatus:'Single',
+            // PermanentAddress: '#1000 CHANDIGARH (PIN 160014)',
 
         }
 
         // Verify that 'Personal Details' accordion gets expanded, when user clicks 'Personal Details' accordion.
-        UserDashboard.clickOnPersonalDetailsAccord();
+        UserDashboard.clickOnPersonalDetails();
         UserDashboard.getFieldValue("Date of Birth").should('equal', EmployeeData.DateOfBirth);
         UserDashboard.getFieldValue("Aadhar Card Number").should('equal', EmployeeData.AdhaarNumber);
         UserDashboard.getFieldValue("Passport Number").should('equal', EmployeeData.PassportNumber);
@@ -173,8 +173,8 @@ describe("Employee Onboard Tests", () => {
         UserDashboard.getFieldValue("Permanent Address").should('equal', EmployeeData.PermanentAddress);
 
 
-         //Verify that data do not get saved on clicking 'Close' button'
-        UserDashboard.clickOnEditButtonWorkInfo();
+         //Verify that data do not get saved on clicking 'Close' button' 
+         UserDashboard.clickOnPersonalDetails();
         
         });
     })

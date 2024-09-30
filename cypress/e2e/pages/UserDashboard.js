@@ -17,6 +17,7 @@ class UserDashboard extends BasePage {
   get editWorkInfoBtn() { return cy.get('#collapse2 a i') }
   get editDateOfJoiningPicker() { return cy.get("div[class='input-group'] [class='border']") }
   get personalDetailsAccord() { return cy.get("h2[id='heading3'] button") }
+  get editPersonalDetailsBtn() { return cy.get('#collapse3 a i') }
   get editDateOfBirthPicker() { return cy.get("#collapse3 input[type='date']") }
   get editPassportNumberTxt() { return cy.get("input[name='passportNumber']:not(:disabled)") }
   get editPanNumberTxt() { return cy.get("input[name='panCardNumber']:not(:disabled)") }
@@ -29,32 +30,32 @@ class UserDashboard extends BasePage {
   get editGenderBtn() { return cy.get("#female:not(:disabled)") }
 
   // Methods
-  clickOnWorkExperienceAccord() {
+  clickOnWorkExperience() {
     this.workExperienceAccord.click();
     cy.log("Clicked on the Work Experience Option");
   }
 
-  clickOnPersonalDetailsAccord() {
+  clickOnPersonalDetails() {
     this.personalDetailsAccord.click();
     cy.log("Clicked on the Work Experience Option");
   }
 
-  clickOnBasicInfoAccord() {
+  clickOnBasicInfo() {
     this.basicInfoAccord.wait(2000).click();
     cy.log("Clicked on the Basic Info Option");
   }
 
-  clickOnWorkAccord() {
+  clickOnWork() {
     this.workAccord.click();
     cy.log("Clicked on the Work Option");
   }
 
-  clickOnPersonalDetailsAccord() {
+  clickOnPersonalDetails() {
     this.personalDetailsAccord.click();
     cy.log("Clicked on the Personal Details Option");
   }
 
-  updateDOJPicker(doj) {
+  updateDOJ(doj) {
     this.editDateOfJoiningPicker.type(doj).should('have.value', doj);
     cy.log("Updated Date of Joining");
   }
@@ -69,27 +70,37 @@ class UserDashboard extends BasePage {
     cy.log("Accordion Is Collapsed")
   }
 
-  clickOnEditButtonBasicInfo() {
+  clickOnEditBasicInfoDetails() {
     this.editBasicInfoBtn.click();
     cy.log("Clicked on the Edit button");
   }
 
-  clickOnEditButtonWorkInfo() {
+  clickOnEditWorkDetails() {
     this.editWorkInfoBtn.click();
     cy.log("Clicked on the Edit button");
   }
 
-  updateFirstNameField(firstNameText) {
+  clickOnEditPersonalDetails() {
+    this.editPersonalDetailsBtn.click();
+    cy.log("Clicked on the Edit button");
+  }
+
+  clickOnCloseButton() {
+    this.closeBtn.click();
+    cy.log("Clicked on the Edit button");
+  }
+
+  updateFirstName(firstNameText) {
     this.editFirstNameTxt.clear().type(firstNameText).should('have.value', firstNameText)
     cy.log("Updated First Name Text");
   }
 
-  updateMiddleNameField(middleNameText) {
+  updateMiddleName(middleNameText) {
     this.editMiddleNameTxt.clear().type(middleNameText).should('have.value', middleNameText)
     cy.log("Updated Middle Name Text");
   }
 
-  updateLastNameField(lastNameText) {
+  updateLastName(lastNameText) {
     this.editLastNameTxt.clear().type(lastNameText).should('have.value', lastNameText)
     cy.log("Updated Last Name Text");
   }
