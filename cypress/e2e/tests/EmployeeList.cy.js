@@ -7,19 +7,12 @@ let currentTestName = '';
 describe("Employee Onboard Tests", () => {
 
     beforeEach(function () {
-
-        currentTestName = this.currentTest.title;
-
-        if (currentTestName !== "HRMIS_1: Verify that the 'Employee List' page and the User Dashboard load successfully.") {
             cy.login();
-            EmployeeListPage.navigateToUserDashboardPage("DDinesh");
-        }
     });
 
     it("HRMIS_1: Verify that the 'Employee List' page and the User Dashboard load successfully.", () => {
 
         //Login and Navigate to Employees List Page
-        cy.login();
         sideBar.navigateTo("Employee Management", "Employees List");
 
         // Verify that information message, when user enters invalid data in 'Search By Name' field
@@ -45,6 +38,7 @@ describe("Employee Onboard Tests", () => {
         }
 
         // Verify that 'Basic Info' accordion gets expanded, when user clicks 'Basic Info' accordion.
+        EmployeeListPage.navigateToUserDashboardPage("DDinesh");
         UserDashboard.clickOnBasicInfo();
         UserDashboard.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
         UserDashboard.getFieldValue("Middle Name").should('equal', EmployeeData.MiddleName);
@@ -98,6 +92,7 @@ describe("Employee Onboard Tests", () => {
         }
 
         // Verify that 'Work' accordion gets expanded, when user clicks 'Work' accordion.
+        EmployeeListPage.navigateToUserDashboardPage("DDinesh");
         UserDashboard.clickOnWork();
         UserDashboard.getFieldValue("Department").should('equal', EmployeeData.Department);
         UserDashboard.getFieldValue("Designation").should('equal', EmployeeData.Designation);
@@ -160,6 +155,7 @@ describe("Employee Onboard Tests", () => {
         }
 
         // Verify that 'Personal Details' accordion gets expanded, when user clicks 'Personal Details' accordion.
+        EmployeeListPage.navigateToUserDashboardPage("DDinesh");
         UserDashboard.clickOnPersonalDetails();
         UserDashboard.getFieldValue("Date of Birth").should('equal', EmployeeData.DateOfBirth);
         UserDashboard.getFieldValue("Aadhar Card Number").should('equal', EmployeeData.AdhaarNumber);

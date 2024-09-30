@@ -41,7 +41,7 @@ class UserDashboard extends BasePage {
   }
 
   clickOnBasicInfo() {
-    this.basicInfoAccord.wait(2000).click();
+    this.basicInfoAccord.wait(500).click();
     cy.log("Clicked on the Basic Info Option");
   }
 
@@ -152,11 +152,6 @@ class UserDashboard extends BasePage {
     this.editBloodGroupDrp.select(bloodGroup).should('contain', bloodGroup);
     cy.log("Blood Group is selected");
   }
-
-  // checkGender(genderType) {
-  //   this.gender.contains('label', genderType).click();
-  // }
-
 
   updateMaritalStatus(status) {
     this.editMaritalStatusDrp.select(status).should('contain', status);
