@@ -1,5 +1,6 @@
 import BasePage from "./BasePage";
 import Loaders from "../components/Loaders";
+import sideBar from "../components/SideBar";
 
 class EmployeeListPage extends BasePage {
 
@@ -12,13 +13,20 @@ get department() { return cy.get("#department")}
 get totalCount() { return cy.get("div[class='total'] span")}
 
 //Methods
-enterNameToSearch(nametxt) {
-  this.searchByName.type(`{selectall}{backspace}${nametxt}`).should('have.value', nametxt);
+enterNameIntoSearchField(nametxt) {
+  this.searchByName.clear().type(nametxt).should('have.value', nametxt);
   cy.log("Entered Name to Search")
   }  
 
-validateNoRecordsAppear(){
-  this.noRecordAvailable.should('have.text', "No Records Available");
+navigateToUserDashboardPage(nametxt){
+  sideBar.navigateTo("Employee Management", "Employees List");
+  this.searchByName.clear().type(nametxt).should('have.value', nametxt);
+  this.user.click();
+
+  }  
+
+validateNoRecordsAppear(informationMsg){
+  this.noRecordAvailable.should('have.text',informationMsg);
   cy.log("No Records Appear")
   }    
 
@@ -28,11 +36,11 @@ countTotalEmployees(countEmployees){
   const employeeCount = parseInt(text.replace('Total Employees : ', '').trim());
   expect(employeeCount).to.equal(countEmployees);  
   cy.log(`Total number of employees: ${employeeCount}`);
-        });
-      }
+    });
+  }
 
 selectUser(){
-  this.user.click();
+  this.user.should('be.visible').click();
   Loaders.threeDotLoading.should('not.exist');    
   cy.log("Clicked on Searched User");
   } 

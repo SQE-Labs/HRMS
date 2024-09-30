@@ -2,46 +2,52 @@ import sideBar from "../components/SideBar";
 import EmployeeListPage from "../pages/EmployeeListPage";
 import UserDashboard from "../pages/UserDashboard";
 
+let currentTestName = '';
+
 describe("Employee Onboard Tests", () => {
 
-    it("HRMIS_1: Verify that 'Employee List' page opens up, when user clicks on 'Employee Management'.", () => {
+    beforeEach(function () {
+            cy.login();
+    });
 
-        // Employee List Details Test Data
+    it("HRMIS_1: Verify that the 'Employee List' page and the User Dashboard load successfully.", () => {
 
-        const EmployeeData = {
-            FirstName: 'Auto',
-            LastName: 'User',
-            MiddleName: 'Mation',
-            EmployeeID: 'CCIT/09_24/501',
-            EmailID: 'AutomationUser@caeliusconsulting.com',
-            
-        }
-        cy.login();
+        //Login and Navigate to Employees List Page
         sideBar.navigateTo("Employee Management", "Employees List");
 
         // Verify that information message, when user enters invalid data in 'Search By Name' field
-        EmployeeListPage.enterNameToSearch('invalidName');
-        EmployeeListPage.validateNoRecordsAppear();
+        EmployeeListPage.enterNameIntoSearchField('invalidName');
+        EmployeeListPage.validateNoRecordsAppear('No Records Available');
 
         // Verify that information message, when user enters valid data in 'Search By Name' field
-        EmployeeListPage.enterNameToSearch('Automation');
+        EmployeeListPage.enterNameIntoSearchField('DDinesh');
         EmployeeListPage.countTotalEmployees(1);
 
-        // Verify that the information message appears for the selected department with no records.
-        EmployeeListPage.selectUser();
-        UserDashboard.clickOnWorkExperience();
-        UserDashboard.validateNoRecordsAppear();
-        
+    });
+
+    it("HRMIS_2: Verify that the 'Basic Info' accordion expands, and validate the update and close functionalities.", () => {
+
+        //Employee Details Test Data
+        const EmployeeData = {
+            FirstName: 'DDinesh',
+            LastName: 'Kumar',
+            MiddleName: 'D',
+            EmployeeID: 'CCIT/08_22/409',
+            EmailID: 'dinesh87@yopmail.com',
+
+        }
+
         // Verify that 'Basic Info' accordion gets expanded, when user clicks 'Basic Info' accordion.
+        EmployeeListPage.navigateToUserDashboardPage("DDinesh");
         UserDashboard.clickOnBasicInfo();
         UserDashboard.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
         UserDashboard.getFieldValue("Middle Name").should('equal', EmployeeData.MiddleName);
         UserDashboard.getFieldValue("Last Name").should('equal', EmployeeData.LastName);
         UserDashboard.getFieldValue("Employee Id").should('equal', EmployeeData.EmployeeID);
         UserDashboard.getFieldValue("Email").should('equal', EmployeeData.EmailID);
-        
+
         // Verify that data do not get saved on clicking 'Close' button.
-        UserDashboard.clickOnEditButtonBasicInfo();
+        UserDashboard.clickOnEditBasicInfoDetails();
         UserDashboard.updateFirstName('Autom');
         UserDashboard.updateMiddleName('Mation1');
         UserDashboard.updateLastName('User1');
@@ -52,11 +58,11 @@ describe("Employee Onboard Tests", () => {
         UserDashboard.getFieldValue("Employee Id").should('equal', EmployeeData.EmployeeID);
         UserDashboard.getFieldValue("Email").should('equal', EmployeeData.EmailID);
 
-        // Verify that data gets saved on clicking 'close' button.
-        UserDashboard.clickOnEditButtonBasicInfo();
-        UserDashboard.updateFirstName('Auto');
-        UserDashboard.updateMiddleName('Mation');
-        UserDashboard.updateLastName('User');
+        // Verify that data gets saved on clicking 'Update' button.
+        UserDashboard.clickOnEditBasicInfoDetails();
+        UserDashboard.updateFirstName('DDinesh');
+        UserDashboard.updateMiddleName('D');
+        UserDashboard.updateLastName('Kumar');
         UserDashboard.clickOnUpdateButton();
         UserDashboard.validateSuccessMessage();
         UserDashboard.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
@@ -68,7 +74,103 @@ describe("Employee Onboard Tests", () => {
         // Verify that 'Basic Info' accordion gets collapsed.
         UserDashboard.clickOnBasicInfo();
         UserDashboard.validateAccordionCollapsed();
+    });
+
+    it("HRMIS_3: Verify that the 'Work' accordion expands, and validate the update and close functionalities.", () => {
+
+        //Employee Details Test Data
+        const EmployeeData = {
+            Department: 'Technical',
+            Designation: 'Senior Salesforce Developer',
+            ReportingTo: 'chandler  shan',
+            DOJ: '30-09-2024',
+            EmployeeStatus: 'VERIFIED',
+            EmployeeType: 'Full Time',
+            UpdateDOJ: '2024-09-30',
+            UpdatedDOJ: '30-09-2024',
+            RecentDOJ: '2024-07-25',
+        }
+
+        // Verify that 'Work' accordion gets expanded, when user clicks 'Work' accordion.
+        EmployeeListPage.navigateToUserDashboardPage("DDinesh");
+        UserDashboard.clickOnWork();
+        UserDashboard.getFieldValue("Department").should('equal', EmployeeData.Department);
+        UserDashboard.getFieldValue("Designation").should('equal', EmployeeData.Designation);
+        UserDashboard.getFieldValue("Reporting To").should('equal', EmployeeData.ReportingTo);
+        UserDashboard.getFieldValue("Date of Joining").should('equal', EmployeeData.DOJ);
+        UserDashboard.getFieldValue("Employee Status").should('equal', EmployeeData.EmployeeStatus);
+        UserDashboard.getFieldValue("Employee Type").should('equal', EmployeeData.EmployeeType);
+
+        //Verify that data do not get saved on clicking 'Close' button'
+        UserDashboard.clickOnEditWorkDetails();
+        UserDashboard.updateDOJ(EmployeeData.UpdateDOJ);
+        UserDashboard.clickOnCloseButton();
+        UserDashboard.getFieldValue("Date of Joining").should('equal', EmployeeData.DOJ);
+
+        //Verify that data do not get saved on clicking 'Update' button'
+        UserDashboard.clickOnEditWorkDetails();
+        UserDashboard.updateDOJ(EmployeeData.UpdateDOJ);
+        UserDashboard.clickOnUpdateButton();
+        UserDashboard.validateSuccessMessage();
+        UserDashboard.getFieldValue("Date of Joining").should('equal', EmployeeData.UpdatedDOJ);
+
+        //Rollback Date Of Joining Under Work Into Accordion
+        UserDashboard.clickOnEditWorkDetails();
+        UserDashboard.updateDOJ(EmployeeData.RecentDOJ);
+        UserDashboard.clickOnUpdateButton();
+
+        //Verify that 'Work' accordion gets collapsed,  when user clicks on 'Work' accordion.
+        UserDashboard.clickOnWork();
+        UserDashboard.validateAccordionCollapsed();
 
     });
 
-})
+    it("HRMIS_4: Verify that the 'Personal Details' accordion expands, and validate the update and close functionalities.", () => {
+
+         //Employee Details Test Data
+         const EmployeeData = {
+            DateOfBirth: '09-05-1994',
+            AdhaarNumber: '477233425262',
+            PassportNumber: 'A20964573432',
+            PanNumber: 'GSSVS4225Y',
+            PresentAddress: '#800 SMALL FLTAS, DHANAS, CHANDIGARH (PIN 160014)',
+            BloodGroup: 'AB+ve',
+            Gender: 'male',
+            AlternateNumber: '9877455076',
+            MaritalStatus:'Married',
+            PermanentAddress: '#800 SMALL FLTAS, DHANAS, CHANDIGARH (PIN 160014)',
+
+          //Updated Employee Test Data
+            // UpdatedDateOfBirth: '09-05-2000',
+            // AdhaarNumber: '488123345262',
+            // PassportNumber: 'B20964573432',
+            // PanNumber: 'ABCD4225Y',
+            // PresentAddress: '#1000 CHANDIGARH (PIN 160014)',
+            // BloodGroup: 'A+ve',
+            // Gender: 'female',
+            // AlternateNumber: '7676767676',
+            // MaritalStatus:'Single',
+            // PermanentAddress: '#1000 CHANDIGARH (PIN 160014)',
+
+        }
+
+        // Verify that 'Personal Details' accordion gets expanded, when user clicks 'Personal Details' accordion.
+        EmployeeListPage.navigateToUserDashboardPage("DDinesh");
+        UserDashboard.clickOnPersonalDetails();
+        UserDashboard.getFieldValue("Date of Birth").should('equal', EmployeeData.DateOfBirth);
+        UserDashboard.getFieldValue("Aadhar Card Number").should('equal', EmployeeData.AdhaarNumber);
+        UserDashboard.getFieldValue("Passport Number").should('equal', EmployeeData.PassportNumber);
+        UserDashboard.getFieldValue("PAN Number").should('equal', EmployeeData.PanNumber);
+        UserDashboard.getFieldValue("Present Address").should('equal', EmployeeData.PresentAddress);
+        UserDashboard.getFieldValue("Blood Group").should('equal', EmployeeData.BloodGroup);
+        UserDashboard.getFieldValue("Gender").should('equal', EmployeeData.Gender);
+        UserDashboard.getFieldValue("Marital Status").should('equal', EmployeeData.MaritalStatus);
+        UserDashboard.getFieldValue("Alternate Number").should('equal', EmployeeData.AlternateNumber);
+        UserDashboard.getFieldValue("Permanent Address").should('equal', EmployeeData.PermanentAddress);
+
+
+         //Verify that data do not get saved on clicking 'Close' button' 
+         UserDashboard.clickOnPersonalDetails();
+        
+        });
+    })
