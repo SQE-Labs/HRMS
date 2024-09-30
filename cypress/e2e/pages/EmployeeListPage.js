@@ -36,8 +36,8 @@ countTotalEmployees(countEmployees){
   const employeeCount = parseInt(text.replace('Total Employees : ', '').trim());
   expect(employeeCount).to.equal(countEmployees);  
   cy.log(`Total number of employees: ${employeeCount}`);
-        });
-      }
+    });
+  }
 
 selectUser(){
   this.user.should('be.visible').click();
