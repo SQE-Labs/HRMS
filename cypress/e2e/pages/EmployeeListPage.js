@@ -1,5 +1,6 @@
 import BasePage from "./BasePage";
 import Loaders from "../components/Loaders";
+import sideBar from "../components/SideBar";
 
 class EmployeeListPage extends BasePage {
 
@@ -12,7 +13,7 @@ get department() { return cy.get("#department")}
 get totalCount() { return cy.get("div[class='total'] span")}
 
 //Methods
-enterNameToSearch(nametxt) {
+enterNameIntoSearchField(nametxt) {
   this.searchByName.clear().type(nametxt).should('have.value', nametxt);
   cy.log("Entered Name to Search")
   }  
