@@ -72,7 +72,7 @@ Cypress.Commands.add('selectDrpValueByText', (locator, text, isSearchable = fals
     if (isSearchable) {
         // Click the dropdown to open
         locator.click();
-
+        cy.wait(500);
         if (searchInputLocator) {
             // Wait and type the text in the search input field
             searchInputLocator.wait(1000).type(text);

@@ -17,15 +17,10 @@ describe("Employee Managment Promote Employee Tests", () => {
     it("HRMIS_1: Verify Promote Open when user click on Promote Employee Subtab under Employee Managment", () => {
 
         const expectedTexts = ['Employee Id', 'Name', 'Department', 'Designation' ,'Action'];
-
-        PromoteEmployeePage.promoteEmployeeLbl.invoke('text').then((text)=>{
-            expect(text.trim()).to.eq('Promote Employee');
-        });
+        PromoteEmployeePage.assertTextEquals(PromoteEmployeePage.promoteEmployeeLbl, 'Promote Employee');
         cy.wait(1000);
         PromoteEmployeePage.selectEmployee("Auto Mation User");
-        PromoteEmployeePage.tableHeadersLbl.each((headerText, index) => {
-            cy.wrap(headerText).should('contain.text', expectedTexts[index])
-        });
+        PromoteEmployeePage.assertExpectedTableLbl(expectedTexts);
     });
 
 
@@ -56,44 +51,30 @@ describe("Employee Managment Promote Employee Tests", () => {
 
         // When no department is selected.
         PromoteEmployeePage.clickOnSubmitBtn();
-        PromoteEmployeePage.selectDepartmentDrp
-        .invoke('prop', 'validationMessage') 
-        .should('equal', 'Please select an item in the list.');
+        PromoteEmployeePage.assertDepartmentValidation('Please select an item in the list.');
 
         // select department
         PromoteEmployeePage.selectDepartment("GENRIC");
+
         // when no designation is selected.
         PromoteEmployeePage.clickOnSubmitBtn();
         cy.wait(1000);
-        PromoteEmployeePage.selectDesignationDrp
-        .invoke('prop', 'validationMessage') 
-        .should('equal', 'Please select an item in the list.');
-
-
+        PromoteEmployeePage.assertDesignationValidation('Please select an item in the list.');
     });
 
 
     it("HRMIS_4: Verify Validation message appears after clicking on submit button when no department or designation is selected", () => {
         
-
         const designations = ['Select Designation','CEO & Chief Architect','Co Founder & COO','VP Sucess Manager & Sales','Chief People Officer','Piyush Dogra'];
 
         cy.wait(1000);
         PromoteEmployeePage.selectEmployee("Auto Mation User");
         PromoteEmployeePage.clickOnPromote();
         PromoteEmployeePage.promotePopHeaderLbl.should('have.text','Promote Employee');
-        PromoteEmployeePage.selectDepartment("GENRIC")
-        PromoteEmployeePage.getdesgnationOptions().then((options) => {
-            const optionTexts = [...options].map(option => option.innerText.trim()); // Extract all option texts
-            optionTexts.forEach((text,index) => {
-            expect(text).to.deep.equal(designations[index]); 
-            });
-          });
-
+        PromoteEmployeePage.selectDepartment("GENRIC");
+        PromoteEmployeePage.assertOptionTexts(designations);
 
         })
        
     
-
-
 });

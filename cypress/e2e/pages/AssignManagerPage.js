@@ -30,6 +30,53 @@ clickOnCancelBtn(){
   this.cancelBtn.wait(1000).click();
 }
 
+getTrimmedText(element) {
+  return element.invoke('text').then((text) => text.trim());
+}
+
+assertTextEquals(element, expectedText) {
+  this.getTrimmedText(element).then((trimmedText) => {
+      expect(trimmedText).to.eq(expectedText);
+  });
+}
+
+
+
+getActualTableTexts(element) {
+  const actualTexts = [];
+  return element.each(($el) => {
+      const text = Cypress.$($el).text().trim();
+      actualTexts.push(text);
+  }).then(() => actualTexts); // Return the collected texts after the iteration
+}
+
+assertExpectedTableLbl(expectedTexts) {
+  this.getActualTableTexts(this.tableHeadersLbl).then((actualTexts) => {
+    expectedTexts.forEach((expectedText, index) => {
+      console.log(actualTexts[index]);
+      console.log(expectedText[index]);
+        expect(actualTexts[index]).to.eq(expectedText);
+    });
+});
+}
+
+
+
+selectEmployee(text) {
+  cy.selectDrpValueByText(this.selectEmployeeDrp, text, true, this.selectEmployeeDrp);
+}
+
+selectManager(text) {
+  cy.selectDrpValueByText(this.selectManagerDrp, text, true, this.selectManagerDrp);
+}
+
+
+
+
+
 
 }
+
+
+
 export default new AssignManagerPage();
