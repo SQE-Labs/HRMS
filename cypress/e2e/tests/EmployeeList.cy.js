@@ -1,13 +1,13 @@
 import sideBar from "../components/SideBar";
 import EmployeeListPage from "../pages/EmployeeListPage";
-import UserDashboard from "../pages/UserDashboard";
+import UserDashboardPage from "../pages/UserDashboardPage";
 
 let currentTestName = '';
 
-describe("Employee Onboard Tests", () => {
+describe("Employee Profile Tests", () => {
 
     beforeEach(function () {
-            cy.login();
+        cy.login();
     });
 
     it("HRMIS_1: Verify that the 'Employee List' page and the User Dashboard load successfully.", () => {
@@ -21,7 +21,7 @@ describe("Employee Onboard Tests", () => {
 
         // Verify that information message, when user enters valid data in 'Search By Name' field
         EmployeeListPage.enterNameIntoSearchField('DDinesh');
-        EmployeeListPage.countTotalEmployees(1);
+        EmployeeListPage.getTotalEmployeescount(1);
 
     });
 
@@ -39,41 +39,41 @@ describe("Employee Onboard Tests", () => {
 
         // Verify that 'Basic Info' accordion gets expanded, when user clicks 'Basic Info' accordion.
         EmployeeListPage.navigateToUserDashboardPage("DDinesh");
-        UserDashboard.clickOnBasicInfo();
-        UserDashboard.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
-        UserDashboard.getFieldValue("Middle Name").should('equal', EmployeeData.MiddleName);
-        UserDashboard.getFieldValue("Last Name").should('equal', EmployeeData.LastName);
-        UserDashboard.getFieldValue("Employee Id").should('equal', EmployeeData.EmployeeID);
-        UserDashboard.getFieldValue("Email").should('equal', EmployeeData.EmailID);
+        UserDashboardPage.clickOnBasicInfo();
+        UserDashboardPage.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
+        UserDashboardPage.getFieldValue("Middle Name").should('equal', EmployeeData.MiddleName);
+        UserDashboardPage.getFieldValue("Last Name").should('equal', EmployeeData.LastName);
+        UserDashboardPage.getFieldValue("Employee Id").should('equal', EmployeeData.EmployeeID);
+        UserDashboardPage.getFieldValue("Email").should('equal', EmployeeData.EmailID);
 
         // Verify that data do not get saved on clicking 'Close' button.
-        UserDashboard.clickOnEditBasicInfoDetails();
-        UserDashboard.updateFirstName('Autom');
-        UserDashboard.updateMiddleName('Mation1');
-        UserDashboard.updateLastName('User1');
-        UserDashboard.clickOnCloseButton();
-        UserDashboard.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
-        UserDashboard.getFieldValue("Middle Name").should('equal', EmployeeData.MiddleName);
-        UserDashboard.getFieldValue("Last Name").should('equal', EmployeeData.LastName);
-        UserDashboard.getFieldValue("Employee Id").should('equal', EmployeeData.EmployeeID);
-        UserDashboard.getFieldValue("Email").should('equal', EmployeeData.EmailID);
+        UserDashboardPage.clickOnEditBasicInfoDetails();
+        UserDashboardPage.updateFirstName('Autom');
+        UserDashboardPage.updateMiddleName('Mation1');
+        UserDashboardPage.updateLastName('User1');
+        UserDashboardPage.clickOnCloseButton();
+        UserDashboardPage.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
+        UserDashboardPage.getFieldValue("Middle Name").should('equal', EmployeeData.MiddleName);
+        UserDashboardPage.getFieldValue("Last Name").should('equal', EmployeeData.LastName);
+        UserDashboardPage.getFieldValue("Employee Id").should('equal', EmployeeData.EmployeeID);
+        UserDashboardPage.getFieldValue("Email").should('equal', EmployeeData.EmailID);
 
         // Verify that data gets saved on clicking 'Update' button.
-        UserDashboard.clickOnEditBasicInfoDetails();
-        UserDashboard.updateFirstName('DDinesh');
-        UserDashboard.updateMiddleName('D');
-        UserDashboard.updateLastName('Kumar');
-        UserDashboard.clickOnUpdateButton();
-        UserDashboard.validateSuccessMessage();
-        UserDashboard.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
-        UserDashboard.getFieldValue("Middle Name").should('equal', EmployeeData.MiddleName);
-        UserDashboard.getFieldValue("Last Name").should('equal', EmployeeData.LastName);
-        UserDashboard.getFieldValue("Employee Id").should('equal', EmployeeData.EmployeeID);
-        UserDashboard.getFieldValue("Email").should('equal', EmployeeData.EmailID);
+        UserDashboardPage.clickOnEditBasicInfoDetails();
+        UserDashboardPage.updateFirstName('DDinesh');
+        UserDashboardPage.updateMiddleName('D');
+        UserDashboardPage.updateLastName('Kumar');
+        UserDashboardPage.clickOnUpdateButton();
+        UserDashboardPage.validateSuccessMessage();
+        UserDashboardPage.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
+        UserDashboardPage.getFieldValue("Middle Name").should('equal', EmployeeData.MiddleName);
+        UserDashboardPage.getFieldValue("Last Name").should('equal', EmployeeData.LastName);
+        UserDashboardPage.getFieldValue("Employee Id").should('equal', EmployeeData.EmployeeID);
+        UserDashboardPage.getFieldValue("Email").should('equal', EmployeeData.EmailID);
 
         // Verify that 'Basic Info' accordion gets collapsed.
-        UserDashboard.clickOnBasicInfo();
-        UserDashboard.validateAccordionCollapsed();
+        UserDashboardPage.clickOnBasicInfo();
+        UserDashboardPage.validateAccordionCollapsed();
     });
 
     it("HRMIS_3: Verify that the 'Work' accordion expands, and validate the update and close functionalities.", () => {
@@ -93,43 +93,44 @@ describe("Employee Onboard Tests", () => {
 
         // Verify that 'Work' accordion gets expanded, when user clicks 'Work' accordion.
         EmployeeListPage.navigateToUserDashboardPage("DDinesh");
-        UserDashboard.clickOnWork();
-        UserDashboard.getFieldValue("Department").should('equal', EmployeeData.Department);
-        UserDashboard.getFieldValue("Designation").should('equal', EmployeeData.Designation);
-        UserDashboard.getFieldValue("Reporting To").should('equal', EmployeeData.ReportingTo);
-        UserDashboard.getFieldValue("Date of Joining").should('equal', EmployeeData.DOJ);
-        UserDashboard.getFieldValue("Employee Status").should('equal', EmployeeData.EmployeeStatus);
-        UserDashboard.getFieldValue("Employee Type").should('equal', EmployeeData.EmployeeType);
+        UserDashboardPage.clickOnWork();
+        UserDashboardPage.getFieldValue("Department").should('equal', EmployeeData.Department);
+        UserDashboardPage.getFieldValue("Designation").should('equal', EmployeeData.Designation);
+        UserDashboardPage.getFieldValue("Reporting To").should('equal', EmployeeData.ReportingTo);
+        UserDashboardPage.getFieldValue("Date of Joining").should('equal', EmployeeData.DOJ);
+        UserDashboardPage.getFieldValue("Employee Status").should('equal', EmployeeData.EmployeeStatus);
+        UserDashboardPage.getFieldValue("Employee Type").should('equal', EmployeeData.EmployeeType);
 
         //Verify that data do not get saved on clicking 'Close' button'
-        UserDashboard.clickOnEditWorkDetails();
-        UserDashboard.updateDOJ(EmployeeData.UpdateDOJ);
-        UserDashboard.clickOnCloseButton();
-        UserDashboard.getFieldValue("Date of Joining").should('equal', EmployeeData.DOJ);
+        UserDashboardPage.clickOnEditWorkDetails();
+        UserDashboardPage.updateDOJ(EmployeeData.UpdateDOJ);
+        UserDashboardPage.clickOnCloseButton();
+        UserDashboardPage.getFieldValue("Date of Joining").should('equal', EmployeeData.DOJ);
 
         //Verify that data do not get saved on clicking 'Update' button'
-        UserDashboard.clickOnEditWorkDetails();
-        UserDashboard.updateDOJ(EmployeeData.UpdateDOJ);
-        UserDashboard.clickOnUpdateButton();
-        UserDashboard.validateSuccessMessage();
-        UserDashboard.getFieldValue("Date of Joining").should('equal', EmployeeData.UpdatedDOJ);
+        UserDashboardPage.clickOnEditWorkDetails();
+        UserDashboardPage.updateDOJ(EmployeeData.UpdateDOJ);
+        UserDashboardPage.clickOnUpdateButton();
+        UserDashboardPage.validateSuccessMessage();
+        UserDashboardPage.getFieldValue("Date of Joining").should('equal', EmployeeData.UpdatedDOJ);
 
         //Rollback Date Of Joining Under Work Into Accordion
-        UserDashboard.clickOnEditWorkDetails();
-        UserDashboard.updateDOJ(EmployeeData.RecentDOJ);
-        UserDashboard.clickOnUpdateButton();
+        UserDashboardPage.clickOnEditWorkDetails();
+        UserDashboardPage.updateDOJ(EmployeeData.RecentDOJ);
+        UserDashboardPage.clickOnUpdateButton();
 
         //Verify that 'Work' accordion gets collapsed,  when user clicks on 'Work' accordion.
-        UserDashboard.clickOnWork();
-        UserDashboard.validateAccordionCollapsed();
+        UserDashboardPage.clickOnWork();
+        UserDashboardPage.validateAccordionCollapsed();
 
     });
 
     it("HRMIS_4: Verify that the 'Personal Details' accordion expands, and validate the update and close functionalities.", () => {
 
-         //Employee Details Test Data
-         const EmployeeData = {
+        //Employee Details Test Data
+        const EmployeeData = {
             DateOfBirth: '09-05-1994',
+            OriginalDOB: '1994-05-09',
             AdhaarNumber: '477233425262',
             PassportNumber: 'A20964573432',
             PanNumber: 'GSSVS4225Y',
@@ -137,40 +138,109 @@ describe("Employee Onboard Tests", () => {
             BloodGroup: 'AB+ve',
             Gender: 'male',
             AlternateNumber: '9877455076',
-            MaritalStatus:'Married',
+            MaritalStatus: 'Married',
             PermanentAddress: '#800 SMALL FLTAS, DHANAS, CHANDIGARH (PIN 160014)',
 
-          //Updated Employee Test Data
-            // UpdatedDateOfBirth: '09-05-2000',
-            // AdhaarNumber: '488123345262',
-            // PassportNumber: 'B20964573432',
-            // PanNumber: 'ABCD4225Y',
-            // PresentAddress: '#1000 CHANDIGARH (PIN 160014)',
-            // BloodGroup: 'A+ve',
-            // Gender: 'female',
-            // AlternateNumber: '7676767676',
-            // MaritalStatus:'Single',
-            // PermanentAddress: '#1000 CHANDIGARH (PIN 160014)',
+            //Updated Employee Test Data
+            UpdatedDateOfBirth: '2000-05-09',
+            UpdatededDateOfBirth: '09-05-2000',
+            AdhaarNumber2: '488123345262',
+            PassportNumber2: 'B20964573432',
+            PanNumber2: 'ABCD42215Y',
+            PresentAddress2: '#1000 CHANDIGARH (PIN 160014)',
+            BloodGroup2: 'A+ve',
+            Gender2: 'female',
+            AlternateNumber2: '7676767676',
+            MaritalStatus2: 'Single',
+            PermanentAddress2: '#1000 CHANDIGARH (PIN 160014)',
 
         }
 
         // Verify that 'Personal Details' accordion gets expanded, when user clicks 'Personal Details' accordion.
         EmployeeListPage.navigateToUserDashboardPage("DDinesh");
-        UserDashboard.clickOnPersonalDetails();
-        UserDashboard.getFieldValue("Date of Birth").should('equal', EmployeeData.DateOfBirth);
-        UserDashboard.getFieldValue("Aadhar Card Number").should('equal', EmployeeData.AdhaarNumber);
-        UserDashboard.getFieldValue("Passport Number").should('equal', EmployeeData.PassportNumber);
-        UserDashboard.getFieldValue("PAN Number").should('equal', EmployeeData.PanNumber);
-        UserDashboard.getFieldValue("Present Address").should('equal', EmployeeData.PresentAddress);
-        UserDashboard.getFieldValue("Blood Group").should('equal', EmployeeData.BloodGroup);
-        UserDashboard.getFieldValue("Gender").should('equal', EmployeeData.Gender);
-        UserDashboard.getFieldValue("Marital Status").should('equal', EmployeeData.MaritalStatus);
-        UserDashboard.getFieldValue("Alternate Number").should('equal', EmployeeData.AlternateNumber);
-        UserDashboard.getFieldValue("Permanent Address").should('equal', EmployeeData.PermanentAddress);
+        UserDashboardPage.clickOnPersonalDetails();
+        UserDashboardPage.getFieldValue("Date of Birth").should('equal', EmployeeData.DateOfBirth);
+        UserDashboardPage.getFieldValue("Aadhar Card Number").should('equal', EmployeeData.AdhaarNumber);
+        UserDashboardPage.getFieldValue("Passport Number").should('equal', EmployeeData.PassportNumber);
+        UserDashboardPage.getFieldValue("PAN Number").should('equal', EmployeeData.PanNumber);
+        UserDashboardPage.getFieldValue("Present Address").should('equal', EmployeeData.PresentAddress);
+        UserDashboardPage.getFieldValue("Blood Group").should('equal', EmployeeData.BloodGroup);
+        UserDashboardPage.getFieldValue("Gender").should('equal', EmployeeData.Gender);
+        UserDashboardPage.getFieldValue("Marital Status").should('equal', EmployeeData.MaritalStatus);
+        UserDashboardPage.getFieldValue("Alternate Number").should('equal', EmployeeData.AlternateNumber);
+        UserDashboardPage.getFieldValue("Permanent Address").should('equal', EmployeeData.PermanentAddress);
 
 
-         //Verify that data do not get saved on clicking 'Close' button' 
-         UserDashboard.clickOnPersonalDetails();
-        
-        });
-    })
+        //Verify that data do not get saved on clicking 'Close' button' 
+        UserDashboardPage.clickOnEditPersonalDetails();
+        UserDashboardPage.updateDateOfBirth(EmployeeData.UpdatedDateOfBirth);
+        UserDashboardPage.updateBloodGroup(EmployeeData.BloodGroup2);
+        UserDashboardPage.updateAdhaarNumber(EmployeeData.AdhaarNumber2);
+        UserDashboardPage.updateGender(EmployeeData.Gender2);
+        UserDashboardPage.updatePassportNumber(EmployeeData.PassportNumber2);
+        UserDashboardPage.updateMaritalStatus(EmployeeData.MaritalStatus2);
+        UserDashboardPage.updatePanNumber(EmployeeData.PanNumber2);
+        UserDashboardPage.updateAlternateNumber(EmployeeData.AlternateNumber2);
+        UserDashboardPage.updatePermanentAddress(EmployeeData.PermanentAddress2);
+        UserDashboardPage.updatePresentAddress(EmployeeData.PresentAddress2);
+        UserDashboardPage.clickOnCloseButton();
+
+        // Assert after clicking on close button
+        UserDashboardPage.getFieldValue("Date of Birth").should('equal', EmployeeData.DateOfBirth);
+        UserDashboardPage.getFieldValue("Aadhar Card Number").should('equal', EmployeeData.AdhaarNumber);
+        UserDashboardPage.getFieldValue("Passport Number").should('equal', EmployeeData.PassportNumber);
+        UserDashboardPage.getFieldValue("PAN Number").should('equal', EmployeeData.PanNumber);
+        UserDashboardPage.getFieldValue("Present Address").should('equal', EmployeeData.PresentAddress);
+        UserDashboardPage.getFieldValue("Blood Group").should('equal', EmployeeData.BloodGroup);
+        UserDashboardPage.getFieldValue("Gender").should('equal', EmployeeData.Gender);
+        UserDashboardPage.getFieldValue("Marital Status").should('equal', EmployeeData.MaritalStatus);
+        UserDashboardPage.getFieldValue("Alternate Number").should('equal', EmployeeData.AlternateNumber);
+        UserDashboardPage.getFieldValue("Permanent Address").should('equal', EmployeeData.PermanentAddress);
+
+         //Verify that data do not get saved on clicking 'update' button' 
+         UserDashboardPage.clickOnEditPersonalDetails();
+         UserDashboardPage.updateDateOfBirth(EmployeeData.UpdatedDateOfBirth);
+         UserDashboardPage.updateBloodGroup(EmployeeData.BloodGroup2);
+         UserDashboardPage.updateAdhaarNumber(EmployeeData.AdhaarNumber2);
+         UserDashboardPage.updateGender(EmployeeData.Gender2);
+         UserDashboardPage.updatePassportNumber(EmployeeData.PassportNumber2);
+         UserDashboardPage.updateMaritalStatus(EmployeeData.MaritalStatus2);
+         UserDashboardPage.updatePanNumber(EmployeeData.PanNumber2);
+         UserDashboardPage.updateAlternateNumber(EmployeeData.AlternateNumber2);
+         UserDashboardPage.updatePermanentAddress(EmployeeData.PermanentAddress2);
+         UserDashboardPage.updatePresentAddress(EmployeeData.PresentAddress2);
+         UserDashboardPage.clickOnUpdateButton();
+
+
+         // Assert after clicking on update button
+        UserDashboardPage.getFieldValue("Date of Birth").should('equal', EmployeeData.UpdatededDateOfBirth);
+        UserDashboardPage.getFieldValue("Aadhar Card Number").should('equal', EmployeeData.AdhaarNumber2);
+        UserDashboardPage.getFieldValue("Passport Number").should('equal', EmployeeData.PassportNumber2);
+        UserDashboardPage.getFieldValue("PAN Number").should('equal', EmployeeData.PanNumber2);
+        UserDashboardPage.getFieldValue("Present Address").should('equal', EmployeeData.PresentAddress2);
+        UserDashboardPage.getFieldValue("Blood Group").should('equal', EmployeeData.BloodGroup2);
+        UserDashboardPage.getFieldValue("Gender").should('equal', EmployeeData.Gender2);
+        UserDashboardPage.getFieldValue("Marital Status").should('equal', EmployeeData.MaritalStatus2);
+        UserDashboardPage.getFieldValue("Alternate Number").should('equal', EmployeeData.AlternateNumber2);
+        UserDashboardPage.getFieldValue("Permanent Address").should('equal', EmployeeData.PermanentAddress2);
+
+        //Clean up and revert back to previous details
+        UserDashboardPage.clickOnEditPersonalDetails();
+        UserDashboardPage.updateDateOfBirth(EmployeeData.OriginalDOB);
+        UserDashboardPage.updateBloodGroup(EmployeeData.BloodGroup);
+        UserDashboardPage.updateAdhaarNumber(EmployeeData.AdhaarNumber);
+        UserDashboardPage.updateGender(EmployeeData.Gender);
+        UserDashboardPage.updatePassportNumber(EmployeeData.PassportNumber);
+        UserDashboardPage.updateMaritalStatus(EmployeeData.MaritalStatus);
+        UserDashboardPage.updatePanNumber(EmployeeData.PanNumber);
+        UserDashboardPage.updateAlternateNumber(EmployeeData.AlternateNumber);
+        UserDashboardPage.updatePermanentAddress(EmployeeData.PermanentAddress);
+        UserDashboardPage.updatePresentAddress(EmployeeData.PresentAddress);
+        UserDashboardPage.clickOnUpdateButton();
+
+
+        UserDashboardPage.clickOnPersonalDetails();
+        UserDashboardPage.editPersonalDetailsBtn.should('not.be.visible');
+
+    });
+})

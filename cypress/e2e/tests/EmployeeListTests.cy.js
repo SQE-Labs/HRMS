@@ -2,7 +2,7 @@ import sideBar from "../components/SideBar";
 import EmployeeListPage from "../pages/EmployeeListPage";
 import UserDashboardPage from "../pages/UserDashboardPage";
 
-describe("Employee Onboard Tests", () => {
+describe("Employee List Tests", () => {
 
     it("HRMIS_1: Verify that 'Employee List' page opens up, when user clicks on 'Employee Management'.", () => {
 
@@ -20,20 +20,20 @@ describe("Employee Onboard Tests", () => {
         sideBar.navigateTo("Employee Management", "Employees List");
 
         // Verify that information message, when user enters invalid data in 'Search By Name' field
-        EmployeeListPage.enterNameToSearch('invalidName');
+        EmployeeListPage.enterNameIntoSearchField('invalidName');
         EmployeeListPage.noRecordAvailable.should('have.text', "No Records Available");
     
         // Verify that information message, when user enters valid data in 'Search By Name' field
-        EmployeeListPage.enterNameToSearch('Auto Mation User');
+        EmployeeListPage.enterNameIntoSearchField('Auto Mation User');
         EmployeeListPage.getTotalEmployeescount().then((employcount) => {
-        expect(employcount).to.equal(1);
-        });
+            expect(employcount).to.equal(1);
+            });
       
 
         // Verify that the information message appears for the selected department with no records.
         EmployeeListPage.clickOnUserCard('Auto Mation User');
         UserDashboardPage.clickOnWorkExperience();
-        UserDashboardPage.noRecordAvailable.should('have.text', "No records available");
+        UserDashboardPage.noRecordAvailableInfo.should('have.text', "No records available");
         cy.log("No Records Appear")
        
         // Verify that 'Basic Info' accordion gets expanded, when user clicks 'Basic Info' accordion.
@@ -45,10 +45,10 @@ describe("Employee Onboard Tests", () => {
         UserDashboardPage.getFieldValue("Email").should('equal', EmployeeData.EmailID);
         
         // Verify that data do not get saved on clicking 'Close' button.
-        UserDashboardPage.clickOnEditButtonBasicInfo();
-        UserDashboardPage.enterFirstName('Autom');
-        UserDashboardPage.enterMiddleName('Mation1');
-        UserDashboardPage.enterLastName('User1');
+        UserDashboardPage.clickOnEditBasicInfoDetails();
+        UserDashboardPage.updateFirstName('Autom');
+        UserDashboardPage.updateMiddleName('Mation1');
+        UserDashboardPage.updateLastName('User1');
         UserDashboardPage.clickOnCloseButton();
         UserDashboardPage.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
         UserDashboardPage.getFieldValue("Middle Name").should('equal', EmployeeData.MiddleName);
@@ -57,10 +57,10 @@ describe("Employee Onboard Tests", () => {
         UserDashboardPage.getFieldValue("Email").should('equal', EmployeeData.EmailID);
 
         // Verify that data gets saved on clicking 'update' button.
-        UserDashboardPage.clickOnEditButtonBasicInfo();
-        UserDashboardPage.enterFirstName('Auto');
-        UserDashboardPage.enterMiddleName('Mation');
-        UserDashboardPage.enterLastName('User');
+        UserDashboardPage.clickOnEditBasicInfoDetails();
+        UserDashboardPage.updateFirstName('Auto');
+        UserDashboardPage.updateMiddleName('Mation');
+        UserDashboardPage.updateLastName('User');
         UserDashboardPage.clickOnUpdateButton();
         cy.validateSuccessMessages("success");
         UserDashboardPage.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
@@ -71,7 +71,7 @@ describe("Employee Onboard Tests", () => {
 
         // Verify that 'Basic Info' accordion gets collapsed.
         UserDashboardPage.clickOnBasicInfo();
-        UserDashboardPage.editBasicInfo.should('not.be.visible');
+        UserDashboardPage.editBasicInfoBtn.should('not.be.visible');
         cy.log("Accordion Is Collapsed");
 
     });

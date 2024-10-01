@@ -28,6 +28,7 @@ class UserDashboardPage extends BasePage {
   get editBloodGroupDrp() { return cy.get("div [id='bloodGroup']:not(:disabled)") }
   get editMaritalStatusDrp() { return cy.get("select[id='maritalStatus']:not(:disabled)") }
   get editGenderBtn() { return cy.get("#female:not(:disabled)") }
+  genderRadioBtn(value){return cy.get(`input[type='radio']:not(:disabled)[value='${value}']`)}
 
   // Methods
   clickOnWorkExperience() {
@@ -70,6 +71,7 @@ class UserDashboardPage extends BasePage {
     cy.log("Accordion Is Collapsed")
   }
 
+  
   clickOnEditBasicInfoDetails() {
     this.editBasicInfoBtn.click();
     cy.log("Clicked on the Edit button");
@@ -127,24 +129,24 @@ class UserDashboardPage extends BasePage {
   }
 
   updatePermanentAddress(permanentAddressTxt) {
-    this.editPermanentAddressTxt.type(permanentAddressTxt).should('have.value', permanentAddressTxt);
+    this.editPermanentAddressTxt.clear().type(permanentAddressTxt).should('have.value', permanentAddressTxt);
     cy.log("Entered Permanent Address");
   }
   updatePresentAddress(presentAddressTxt) {
-    this.editPresentAddressTxt.type(presentAddressTxt).should('have.value', presentAddressTxt);
+    this.editPresentAddressTxt.clear().type(presentAddressTxt).should('have.value', presentAddressTxt);
     cy.log("Entered Present Address");
   }
   updateAdhaarNumber(adhaarNumberTxt) {
-    this.editAdhaarNumberTxt.type(adhaarNumberTxt).should('have.value', adhaarNumberTxt);
+    this.editAdhaarNumberTxt.clear().type(adhaarNumberTxt).should('have.value', adhaarNumberTxt);
     cy.log("Adhaar Number is Entered");
   }
 
   updatePanNumber(panNumberTxt) {
-    this.editPanNumberTxt.type(panNumberTxt).should('have.value', panNumberTxt);
+    this.editPanNumberTxt.clear().type(panNumberTxt).should('have.value', panNumberTxt);
     cy.log("Pan Number is Entered");
   }
   updatePassportNumber(passportNo) {
-    this.editPassportNumberTxt.type(passportNo).should('have.value', passportNo);
+    this.editPassportNumberTxt.clear().type(passportNo).should('have.value', passportNo);
     cy.log("Passport Number is Entered");
   }
 
@@ -154,12 +156,12 @@ class UserDashboardPage extends BasePage {
   }
 
   updateMaritalStatus(status) {
-    this.editMaritalStatusDrp.select(status).should('contain', status);
+    cy.selectDrpValueByText(this.editMaritalStatusDrp, status, false);
     cy.log("Marital Status is selected");
   }
 
   updateAlternateNumber(alternateNumber) {
-    this.editAlternateNumberTxt.type(alternateNumber).should('have.value', alternateNumber);
+    this.editAlternateNumberTxt.clear().type(alternateNumber).should('have.value', alternateNumber);
     cy.log("Entered Alternate Number");
   }
 
@@ -177,6 +179,10 @@ class UserDashboardPage extends BasePage {
           return text.replace(/\u00A0/g, ' ').trim(); // Replace &nbsp; with space and trim
         });
     });
+  }
+
+  updateGender(value){
+    this.genderRadioBtn(value).click();
   }
 }
 

@@ -4,39 +4,58 @@ import sideBar from "../components/SideBar";
 
 class EmployeeListPage extends BasePage {
 
-//Locators
-get searchByName() { return cy.get("input[name='search']")}
-get user() { return cy.get(".card-title.text-primary")}
-get employeeCount() { return cy.get('.total')}
-get noRecordAvailable() { return cy.get('.fs-4.text-secondary.text-center')}
-get department() { return cy.get("#department")}
-get totalCount() { return cy.get("div[class='total'] span")}
+  //Locators
+  get searchByName() { return cy.get("input[name='search']") }
+  get user() { return cy.get(".card-title.text-primary") }
+  get employeeCount() { return cy.get('.total') }
+  get noRecordAvailable() { return cy.get('.fs-4.text-secondary.text-center') }
+  get department() { return cy.get("#department") }
+  get totalCount() { return cy.get("div[class='total'] span") }
 
-//Methods
-enterNameIntoSearchField(nametxt) {
-  this.searchByName.clear().type(nametxt).should('have.value', nametxt);
-  cy.log("Entered Name to Search")
-  }  
-   
+  //Methods
+  enterNameIntoSearchField(nametxt) {
+    this.searchByName.clear().type(nametxt).should('have.value', nametxt);
+    cy.log("Entered Name to Search")
+  }
 
-getTotalEmployeescount() {
-  return this.employeeCount.invoke('text')
-    .then((text) => {
-      return parseInt(text.replace('Total Employees : ', '').trim());
-    });
-}
+  navigateToUserDashboardPage(nametxt) {
+    sideBar.navigateTo("Employee Management", "Employees List");
+    this.searchByName.clear().type(nametxt).should('have.value', nametxt);
+    this.user.click();
+
+  }
+
+  validateNoRecordsAppear(informationMsg) {
+    this.noRecordAvailable.should('have.text', informationMsg);
+    cy.log("No Records Appear")
+  }
 
 
-clickOnUserCard(user){
-  this.user.contains(user).click();
-  Loaders.threeDotLoading.should('not.exist');    
-  cy.log("Clicked on Searched User");
-  } 
+  getTotalEmployeescount() {
+    return this.employeeCount.invoke('text')
+      .then((text) => {
+        return parseInt(text.replace('Total Employees : ', '').trim());
+      });
+  }
 
-selectDepartment(departmentName) {
-    this.department.wait(1000).select(departmentName).should('contain', departmentName);
+
+  selectUser(username) {
+    this.user.contains(username).should('be.visible').click();
+    Loaders.threeDotLoading.should('not.exist');
+    cy.log("Clicked on Searched User");
+  }
+
+  clickOnUserCard(user) {
+    this.user.contains(user).should('be.visible').click();
+    Loaders.threeDotLoading.should('not.exist');
+    cy.log("Clicked on Searched User");
+  }
+
+
+  selectDepartment(departmentName) {
+    this.department.wait(2000).select(departmentName).should('contain', departmentName);
     Loaders.threeDotLoading.should('not.exist');
     cy.log("Department is selected");
-  }  
+  }
 }
 export default new EmployeeListPage();

@@ -12,7 +12,7 @@ describe("Employee Asset Managment Tests", () => {
         cy.login();
 
         sideBar.navigateTo("Employee Management", "Employees List");
-        EmployeelistPage.enterNameToSearch("Auto Mation User");
+        EmployeelistPage.enterNameIntoSearchField("Auto Mation User");
         EmployeelistPage.clickOnUserCard("Auto Mation User");
         EmployeeProfilePage.clickOnAssetTab();
         EmployeeProfilePage.refershbutton.should('be.visible');
