@@ -1,14 +1,14 @@
 import sideBar from "../components/SideBar";
 import EmployeeDetailPage from "../pages/EmployeeDetailPage";
-import invitations from "../pages/InvitationsPage";
+import InvitationsPage from "../pages/InvitationsPage";
 import L1ApprovalActionPage from "../pages/L1ApprovalActionPage";
 import verifyPersonalEmailPopup from "../pages/popups/VerifyPersonalEmailPopup";
 import HomePage from "../pages/HomePage";
 import {
     generateRandomYopmail, generateRandomString,
-    generateRandomCaeliusEmail, generateRandomNumber
+    generateRandomCaeliusEmail, generateRandomNumber,selectDrpValueByText
 } from '../../support/utils';
-import HRApproval from "../pages/HRApproval";
+import HRApprovalPage from "../pages/HRApprovalPage";
 
 describe("Employee Onboard Tests", () => {
 
@@ -17,18 +17,18 @@ describe("Employee Onboard Tests", () => {
 
         // Invite new Employee
         sideBar.navigateTo("Employee Onboard", "Invitations");
-        invitations.clickInviteEmployeeButton();
+        InvitationsPage.clickInviteEmployeeButton();
         const joineePersonalMail = generateRandomYopmail(10);
-        invitations.enterEmailID(joineePersonalMail);
-        invitations.enterEmployeeName("Mattews");
+        InvitationsPage.enterEmailID(joineePersonalMail);
+        InvitationsPage.enterEmployeeName("Mattews");
 
        
-        invitations.selectSamplePdf('cypress/fixtures/resources/dummy.pdf');
+        InvitationsPage.selectSamplePdf('cypress/fixtures/resources/dummy.pdf');
 
-        invitations.clickSubmitButton();
+        InvitationsPage.clickSubmitButton();
 
         // Verify mail sent notification is displayed
-        invitations.validateOnboardingEmailSentMsg('Onboarding welcome mail sent');
+        InvitationsPage.validateOnboardingEmailSentMsg('Onboarding welcome mail sent');
 
         // New Employee Details test Data
         const JoineeData = {
@@ -185,7 +185,7 @@ describe("Employee Onboard Tests", () => {
         L1ApprovalActionPage.EmployeesTable.getRowsCount.should('equal', 1);
 
         // L1ApprovalAction.viewButtonOnSearchedJoinee;
-        L1ApprovalAction.EmployeesTable.viewApprvalByMailAddress(JoineeData.JoineeEmail);
+        L1ApprovalActionPage.EmployeesTable.viewApprvalByMailAddress(JoineeData.JoineeEmail);
 
         // Validating Personal Details for New Joinee
         L1ApprovalActionPage.firstName.should('be.visible').and('have.value', JoineeData.Firstname);

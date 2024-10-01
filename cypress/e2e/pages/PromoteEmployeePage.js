@@ -44,75 +44,75 @@ class PromoteEmployeePage extends BasePage {
     }
 
     selectDepartment(text) {
-        cy.selectDrpValueByText(this.selectDepartmentDrp,text, false)
+        cy.selectDrpValueByText(this.selectDepartmentDrp, text, false)
     }
 
     selectDesignation(text) {
-        cy.selectDrpValueByText(this.selectDesignationDrp,text, false)
+        cy.selectDrpValueByText(this.selectDesignationDrp, text, false)
     }
 
     getTrimmedText(element) {
         return element.invoke('text').then((text) => text.trim());
-      }
+    }
 
     assertTextEquals(element, expectedText) {
         this.getTrimmedText(element).then((trimmedText) => {
             expect(trimmedText).to.eq(expectedText);
         });
-      }
-
-      
-getActualTableTexts(element) {
-    const actualTexts = [];
-    return element.each(($el) => {
-        const text = Cypress.$($el).text().trim();
-        actualTexts.push(text);
-    }).then(() => actualTexts); // Return the collected texts after the iteration
-  }
-  
-  assertExpectedTableLbl(expectedTexts) {
-    this.getActualTableTexts(this.tableHeadersLbl).then((actualTexts) => {
-      expectedTexts.forEach((expectedText, index) => {
-        console.log(actualTexts[index]);
-        console.log(expectedText[index]);
-          expect(actualTexts[index]).to.eq(expectedText);
-      });
-  });
-  }
+    }
 
 
-getValidationMessage(element) {
-    return element.invoke('prop', 'validationMessage');
-}
+    getActualTableTexts(element) {
+        const actualTexts = [];
+        return element.each(($el) => {
+            const text = Cypress.$($el).text().trim();
+            actualTexts.push(text);
+        }).then(() => actualTexts); // Return the collected texts after the iteration
+    }
 
-assertDesignationValidation(expectedMessage) {
-    this.getValidationMessage(this.selectDesignationDrp).then((message) => {
-        expect(message).to.equal(expectedMessage);
-    });
-}
-
-
-assertDepartmentValidation(expectedMessage) {
-    this.getValidationMessage(this.selectDepartmentDrp).then((message) => {
-        expect(message).to.equal(expectedMessage);
-    });
-}
-
-
-getDesginationOptions(element) {
-    return element.then((options) => {
-        return [...options].map(option => option.innerText.trim()); // Extract and trim all option texts
-    });
-}
-
-
-assertOptionTexts(expectedOptions) {
-    this.getDesginationOptions(this.getdesgnationOptions()).then((actualOptions) => {
-        expectedOptions.forEach((expectedOption, index) => {
-            expect(actualOptions[index]).to.deep.equal(expectedOption); // Assert each option with the expected value
+    assertExpectedTableLbl(expectedTexts) {
+        this.getActualTableTexts(this.tableHeadersLbl).then((actualTexts) => {
+            expectedTexts.forEach((expectedText, index) => {
+                console.log(actualTexts[index]);
+                console.log(expectedText[index]);
+                expect(actualTexts[index]).to.eq(expectedText);
+            });
         });
-    });
-}
+    }
+
+
+    getValidationMessage(element) {
+        return element.invoke('prop', 'validationMessage');
+    }
+
+    assertDesignationValidation(expectedMessage) {
+        this.getValidationMessage(this.selectDesignationDrp).then((message) => {
+            expect(message).to.equal(expectedMessage);
+        });
+    }
+
+
+    assertDepartmentValidation(expectedMessage) {
+        this.getValidationMessage(this.selectDepartmentDrp).then((message) => {
+            expect(message).to.equal(expectedMessage);
+        });
+    }
+
+
+    getDesginationOptions(element) {
+        return element.then((options) => {
+            return [...options].map(option => option.innerText.trim()); // Extract and trim all option texts
+        });
+    }
+
+
+    assertOptionTexts(expectedOptions) {
+        this.getDesginationOptions(this.getdesgnationOptions()).then((actualOptions) => {
+            expectedOptions.forEach((expectedOption, index) => {
+                expect(actualOptions[index]).to.deep.equal(expectedOption); // Assert each option with the expected value
+            });
+        });
+    }
 
 
 
