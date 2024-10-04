@@ -12,8 +12,8 @@ describe("Employee List Tests", () => {
             FirstName: 'Auto',
             LastName: 'User',
             MiddleName: 'Mation',
-            EmployeeID: 'CCIT/09_24/501',
-            EmailID: 'AutomationUser@caeliusconsulting.com',
+            EmployeeID: 'CCIT/10_24/559',
+            EmailID: 'autouser@caeliusconsulting.com',
             
         }
         cy.login();
