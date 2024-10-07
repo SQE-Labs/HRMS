@@ -8,7 +8,8 @@ class SideBar {
     // Methods
     navigateTo(...navigationChain){
         navigationChain.forEach(ch => {
-            cy.get('a').contains(ch).click();
+            cy.wait(2000);
+            cy.get('a').contains(ch).should('be.visible').click();
         });
         Loaders.threeDotLoading.should("not.exist");
     }

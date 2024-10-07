@@ -1,5 +1,8 @@
 const { defineConfig } = require("cypress");
 const easyYopmail = require("./cypress/support/yopmail.js");
+const webpackPreprocessor = require('@cypress/webpack-preprocessor');
+const webpack = require('webpack');
+
 
 module.exports = defineConfig({
   chromeWebSecurity: false,
@@ -16,16 +19,48 @@ module.exports = defineConfig({
     watchForFileChanges: false,
     viewportWidth: 1920, // Width of the viewport
     viewportHeight: 1080, // Height of the viewport
-
+    screenshotsFolder: "cypress/reports/html/screenshots",
+    reporter: 'cypress-multi-reporters',
     reporterOptions: {
-      charts: true,
-      reportPageTitle: 'HRMS Running report',
-      embeddedScreenshots: true,
-      inlineAssets: true,
-      videoOnFailOnly : true
+        reporterEnabled: 'mochawesome',
+        mochawesomeReporterOptions: {
+            reportDir: 'cypress/reports/html',
+            overwrite: false,
+            html: false,
+            json: true,
+            charts: true,
+            reportPageTitle: 'HRMS Running report',
+            screenshots: true,
+        },
     },
+   
     
     setupNodeEvents(on, config) {
+      const options = {
+        webpackOptions: {
+          resolve: {
+            fallback: {
+              stream: require.resolve('stream-browserify'),
+              querystring: require.resolve('querystring-es3'),
+              fs: require.resolve('browserify-fs'),      // Add fs polyfill
+              zlib: require.resolve('browserify-zlib'),
+              "assert": require.resolve("assert/") ,
+              "https": false ,"path": false,
+              buffer: require.resolve('buffer'),
+
+            },
+          },
+          plugins: [
+            new webpack.ProvidePlugin({
+              process: 'process/browser',
+              Buffer: ['buffer', 'Buffer'],
+            }),
+          ],
+        },
+      };
+
+      on('file:preprocessor', webpackPreprocessor(options));
+
       on('task', {
         emailFetcher() {
           return easyYopmail.getNewEmailId();
@@ -36,9 +71,13 @@ module.exports = defineConfig({
         getConfirmaUrl(email){
           return easyYopmail.getConfirmationURL(email);
         },
-      })
+      }),
 
+     
       require('cypress-mochawesome-reporter/plugin')(on);
+
+      return config;
+      
       
     },
   },
