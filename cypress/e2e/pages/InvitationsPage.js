@@ -2,12 +2,13 @@ import BasePage from "./BasePage";
 import { generateRandomString } from '../../support/utils'; 
 import Loaders from "../components/Loaders";
 
-class Invitations extends BasePage {
+class InvitationsPage extends BasePage {
 
     // Locators
-    get inviteEmplooyeeBtn() { return cy.get('.export.theme-button');}
-    get emailID() { return cy.get('input.border[name=email]'); }
-    get employeeName() { return cy.get('input.border[name=employeeName]'); }
+
+    get inviteEmplooyeeBtn() { return cy.get('div a.export');}
+    get emailID() { return cy.get('input[name=email]'); }
+    get employeeName() { return cy.get('input[name=employeeName]'); }
     get chooseFile() { return cy.get('#file-input'); }
     get submitBtn() { return cy.get("div[class='justify-content-center modal-footer'] button[type='submit']"); }
     get onBoardingSuccessMsg() { return cy.get("div.Toastify__toast-body"); }
@@ -21,7 +22,7 @@ class Invitations extends BasePage {
     }
 
     enterEmailID(randomEmail) { 
-        this.emailID.wait(2000).type(randomEmail)
+        this.emailID.wait(500).type(randomEmail)
             .should('have.value',randomEmail);
         cy.log("Email ID Entered");  
     }
@@ -57,4 +58,4 @@ class Invitations extends BasePage {
     }
 }
 
-export default new Invitations();
+export default new InvitationsPage();
