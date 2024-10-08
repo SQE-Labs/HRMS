@@ -23,7 +23,7 @@
          },
      },
 
-      ## Package.josn
+      #Package.josn
     6. "scripts": {
     "clean:reports": "mkdir -p cypress/reports && rm -R -f cypress/reports/* && mkdir cypress/reports/mochareports",
     "pretest": "npm run clean:reports",
