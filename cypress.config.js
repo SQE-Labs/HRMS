@@ -2,6 +2,7 @@ const { defineConfig } = require("cypress");
 const easyYopmail = require("./cypress/support/yopmail.js");
 const webpackPreprocessor = require('@cypress/webpack-preprocessor');
 const webpack = require('webpack');
+const { json } = require("mocha/lib/reporters/index.js");
 
 
 module.exports = defineConfig({
@@ -19,22 +20,18 @@ module.exports = defineConfig({
     watchForFileChanges: false,
     viewportWidth: 1920, // Width of the viewport
     viewportHeight: 1080, // Height of the viewport
-    screenshotsFolder: "cypress/reports/html/screenshots",
-    reporter: 'cypress-multi-reporters',
+    reporter: 'cypress-mochawesome-reporter',
     reporterOptions: {
-        reporterEnabled: 'mochawesome',
-        mochawesomeReporterOptions: {
-            reportDir: 'cypress/reports/html',
-            overwrite: false,
-            html: false,
-            json: true,
-            charts: true,
-            reportPageTitle: 'HRMS Running report',
-            screenshots: true,
-        },
-    },
-   
-    
+      reportDir: 'cypress/reports',
+      charts: true,
+      reportPageTitle: 'HRMS Running report',
+      embeddedScreenshots: true,
+      inlineAssets: true,
+      videoOnFailOnly : true,
+      html: true,
+      json:true,
+      overwrite: false
+    },    
     setupNodeEvents(on, config) {
       const options = {
         webpackOptions: {
