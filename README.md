@@ -7,7 +7,7 @@
 2. **npx cypress run**    // To run all the tests
 3. **npx cypress run --spec "cypress/integration/your_test_file.cy.js" --browser chrome --headed --config video=false, screenshotOnRunFailure=false**  // Command with additional parameters
 
-   # multireport generation and merging
+   ## multireport generation and merging
    #cypress.config.json
 5.  reporter: 'cypress-multi-reporters',
      reporterOptions: {
@@ -23,7 +23,7 @@
          },
      },
 
-      # Package.josn
+      ## Package.josn
     6. "scripts": {
     "clean:reports": "mkdir -p cypress/reports && rm -R -f cypress/reports/* && mkdir cypress/reports/mochareports",
     "pretest": "npm run clean:reports",
