@@ -44,7 +44,6 @@ module.exports = defineConfig({
               "assert": require.resolve("assert/") ,
               "https": false ,"path": false,
               buffer: require.resolve('buffer'),
-
             },
           },
           plugins: [
