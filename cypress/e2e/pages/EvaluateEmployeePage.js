@@ -1,3 +1,4 @@
+import { debug } from "util";
 import BasePage from "./BasePage";
 
 class EvaluateEmployeePage extends BasePage {
@@ -7,17 +8,17 @@ class EvaluateEmployeePage extends BasePage {
   get employeeDrp() { return cy.get(".css-19bb58m") }
   get evaluateFormTxt() { return cy.get("form[id='assign-asset'] div[class='card'] h3") }
   get formInputsTxt() { return cy.get("div.input-group input") }
-  get resetBtn() { return cy.get("div.action button.btn") }
+  get resetBtn() { return cy.xpath("//button[text()='Reset']") }
   get remarkTxt() {return cy.get("textarea[name='remarks']")}
-  get formMockTxt() {return cy.get("div.input-group input[name='mock']")}
-  get formCRSTxt() {return cy.get("div.input-group input[name='classroom']")}
-  get formcoffeeNLearnTxt() {return cy.get("div.input-group input[name='coffeeNLearn']")}
-  get formMuleQuizTxt() {return cy.get("div.input-group input[name='muleSoftQuizRank']")}
-  get formMuleMeetUpTxt() {return cy.get("div.input-group input[name='muleSoftMeetups']")}
-  get formmentorsTxt() {return cy.get("div.input-group input[name='mentors']")}
-  get formprojectTxt() {return cy.get("div.input-group input[name='project']")}
-  get formselfEvaluationTxt() {return cy.get("div.input-group input[name='selfEvaluation']")}
-  get formfutureGoalTxt() {return cy.get("div.input-group input[name='futureGoal']")}
+  get formMockTxt() {return cy.get("div.input-group input[name='mock'][type='tel']")}
+  get formCRSTxt() {return cy.get("div.input-group input[name='classroom'][type='tel']")}
+  get formcoffeeNLearnTxt() {return cy.get("div.input-group input[name='coffeeNLearn'][type='tel']")}
+  get formMuleQuizTxt() {return cy.get("div.input-group input[name='muleSoftQuizRank'][type='tel']")}
+  get formMuleMeetUpTxt() {return cy.get("div.input-group input[name='muleSoftMeetups'][type='tel']")}
+  get formmentorsTxt() {return cy.get("div.input-group input[name='mentors'][type='tel']")}
+  get formprojectTxt() {return cy.get("div.input-group input[name='project'][type='tel']")}
+  get formselfEvaluationTxt() {return cy.get("div.input-group input[name='selfEvaluation'][type='tel']")}
+  get formfutureGoalTxt() {return cy.get("div.input-group input[name='futureGoal'][type='tel']")}
   get submitBtn() { return cy.get("div.action button[type='Submit']") }
 
   //Methods
@@ -26,7 +27,7 @@ class EvaluateEmployeePage extends BasePage {
   }
 
   clickOnReset() {
-    this.resetBtn.contains('Reset').click();
+    this.resetBtn.focus().should('have.length', 1).click();
   }
 
   assertFieldsEmpty() {
@@ -36,34 +37,62 @@ class EvaluateEmployeePage extends BasePage {
   }
 
   sendTextToMock(marks) {
-    this.formMockTxt.click().wait(2000).type(marks);
+    this.formMockTxt.focus();
+    this.formMockTxt.click();
+    // this.formCRSTxt.should('be.focused');
+    this.formMockTxt.type(marks);
   }
+
   sendTextToClassRoom(marks) {
-    this.formCRSTxt.click().wait(1000).type(marks);
+    this.formCRSTxt.focus();
+    this.formCRSTxt.click();
+    this.formCRSTxt.should('be.focused');
+    this.formCRSTxt.type(marks);
   }
   sendTextToCoffeLearn(marks) {
-    this.formcoffeeNLearnTxt.click().wait(1000).type(marks);
+    this.formcoffeeNLearnTxt.focus();
+    this.formcoffeeNLearnTxt.click();
+    this.formcoffeeNLearnTxt.should('be.focused');
+    this.formcoffeeNLearnTxt.type(marks);
+    
   }
   sendTextToMQuiz(marks) {
-    this.formMuleQuizTxt.click().wait(1000).type(marks);
+    this.formMuleQuizTxt.focus();
+    this.formMuleQuizTxt.click();
+    this.formMuleQuizTxt.type(marks);
   }
   sendTextToMeetUp(marks) {
-    this.formMuleMeetUpTxt.click().wait(1000).type(marks);
+    this.formMuleMeetUpTxt.focus();
+    this.formMuleMeetUpTxt.click();
+    this.formMuleMeetUpTxt.type(marks);
+  
   }
   sendTextToMentors(marks) {
-    this.formmentorsTxt.click().wait(1000).type(marks);
+    this.formmentorsTxt.focus();
+    this.formmentorsTxt.click();
+    this.formmentorsTxt.type(marks);
+   
   }
   sendTextToProjec(marks) {
-    this.formprojectTxt.click().wait(1000).type(marks);
+    this.formprojectTxt.focus();
+    this.formprojectTxt.click();
+    this.formprojectTxt.type(marks);
   }
   sendTextToSEvaluation(marks) {
-    this.formselfEvaluationTxt.click().wait(1000).type(marks);
+    this.formselfEvaluationTxt.focus();
+    this.formselfEvaluationTxt.click();
+    this.formselfEvaluationTxt.type(marks);
   }
   sendTextToFGoal(marks) {
-    this.formfutureGoalTxt.click().wait(1000).type(marks);
+    this.formfutureGoalTxt.focus();
+    this.formfutureGoalTxt.click();
+    this.formfutureGoalTxt.type(marks);
   }
   sendTextToRemark(marks) {
-    this.remarkTxt.click().wait(1000).type(marks);
+    this.remarkTxt.focus();
+    this.remarkTxt.click();
+    this.remarkTxt.type(marks);
+    
   }
 
   clickOnSubmit(){
