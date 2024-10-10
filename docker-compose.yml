@@ -1,0 +1,9 @@
+version: '3'
+services:
+  cypress:
+    image: cypress/included:12.11.0
+    volumes:
+      - .:/e2e
+    working_dir: /e2e
+    command: ["npx", "cypress", "run"]
+

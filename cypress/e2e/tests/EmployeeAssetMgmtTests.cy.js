@@ -9,7 +9,7 @@ describe("Employee Asset Managment Tests", () => {
 
         // login to Application
         cy.login();
-
+        
         sideBar.navigateTo("Employee Management", "Employees List");
         EmployeelistPage.enterNameIntoSearchField("Auto Mation User");
         EmployeelistPage.clickOnUserCard("Auto Mation User");
