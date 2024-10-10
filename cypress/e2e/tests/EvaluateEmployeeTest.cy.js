@@ -4,14 +4,18 @@ import EvaluateEmployeePage from "../pages/EvaluateEmployeePage";
 
 describe("Evaluate Employee Tests", () => {
 
-    it("HRMIS_1: Verify that 'Evaluate employee' page opens up.", () => {
+    it("HRMIS_1: Verify 'Evaluate Employee'page.", () => {
         cy.login();
 
       //Navigate to Evaluate Employee Page
       sideBar.navigateTo("Employee Management", "Evaluate Employee");
 
-      //Validate Page Title
+      //Validate Evaluate Employee Page Title
       EvaluateEmployeePage.evaluateEmployeeTxt.should('be.visible');
+
+      //Verify that Evaluate Employee form opens up on selecting any option from 'Select Employee' dropdown.
+      EvaluateEmployeePage.selectEmployee("DDinesh D Kumar")
+      EvaluateEmployeePage.evaluateFormTxt.should('be.visible')
 
     })
 });
