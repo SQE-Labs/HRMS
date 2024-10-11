@@ -14,7 +14,7 @@ describe("Evaluate Employee Tests", () => {
     //Verify that Evaluate Employee form opens up on selecting any option from 'Select Employee' dropdown.
     EvaluateEmployeePage.selectEmployee("DDinesh D Kumar");
     EvaluateEmployeePage.evaluateFormTxt.should('be.visible');
-  
+
     //verify form fields are clear after clicking on reset button
     cy.intercept('POST', '/HRMBackendTest/performance/hr', (req) => {
       req.reply(403, { message: 'Request was blocked' });
@@ -40,10 +40,41 @@ describe("Evaluate Employee Tests", () => {
     cy.intercept('POST', '/HRMBackendTest/performance/hr', (req) => {
       req.reply(200, { message: 'Successfully evaluated.' });
     }).as('postPerformanceHR');
-    
+
     cy.wait(2000);
     EvaluateEmployeePage.clickOnSubmit();
     cy.validateSuccessMessages("Successfully evaluated.");
+
+  })
+
+
+  it.only("HRMIS_2: Verify use able to export employee Evaluate details on 'Evaluate Employee' page ", () => {
+
+    
+    EvaluateEmployeePage.deleteExistingFile('cypress/downloads/performance_evaluation.xlsx');
+
+    cy.login();
+
+    //Navigate to Evaluate Employee Page
+    sideBar.navigateTo("Employee Management", "Evaluate Employee");
+    EvaluateEmployeePage.evaluateEmployeeTxt.should('be.visible');
+    EvaluateEmployeePage.viewBtn.should('be.visible');
+    EvaluateEmployeePage.clickOnViewBtn();
+
+    // export CSV and verify
+    EvaluateEmployeePage.evalutationLbl.should('be.visible');
+    EvaluateEmployeePage.exportBtn.should('be.visible');
+    EvaluateEmployeePage.clickOnExportBtn();
+    EvaluateEmployeePage.checkFile('cypress/downloads/performance_evaluation.xlsx')
+    
+    // back icon
+    EvaluateEmployeePage.clickOnBackIcon();
+    EvaluateEmployeePage.evaluateEmployeeTxt.should('be.visible');
+
+
+
+
+
 
   })
 });

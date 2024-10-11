@@ -1,5 +1,6 @@
 import { debug } from "util";
 import BasePage from "./BasePage";
+import Loaders from "../components/Loaders";
 
 class EvaluateEmployeePage extends BasePage {
 
@@ -20,6 +21,10 @@ class EvaluateEmployeePage extends BasePage {
   get formselfEvaluationTxt() {return cy.get("div.input-group input[name='selfEvaluation'][type='tel']")}
   get formfutureGoalTxt() {return cy.get("div.input-group input[name='futureGoal'][type='tel']")}
   get submitBtn() { return cy.get("div.action button[type='Submit']") }
+  get viewBtn(){return cy.get("div.actions a.export")}
+  get evalutationLbl(){return cy.get("#showMenuBtn ~ h1")}
+  get exportBtn() {return cy.get("div.actions a")}
+  get backArrow(){return cy.get("#showMenuBtn ~a")}
 
   //Methods
   selectEmployee(text) {
@@ -98,6 +103,36 @@ class EvaluateEmployeePage extends BasePage {
   clickOnSubmit(){
     this.submitBtn.wait(1000).click();
   }
+
+  clickOnViewBtn(){
+    this.viewBtn.click();
+    Loaders.threeDotLoading.should('not.exist');
+  }
+
+  clickOnExportBtn(){
+    this.exportBtn.click();
+  }
+
+  checkFile(path){
+    cy.readFile(path)
+   .should('exist')
+  }
+
+  deleteExistingFile(filePath){
+    cy.task('deleteFile', filePath).then((result) => {
+      if (result.success) {
+        cy.log('File deleted successfully');
+      } else {
+        cy.log(result.message);
+      }
+    });
+  }
+
+clickOnBackIcon(){
+  this.backArrow.click();
+  Loaders.threeDotLoading.should('not.exist');
+  Loaders.overlay.should('not.exist');
+}
 
 
 }

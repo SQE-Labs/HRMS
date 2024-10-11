@@ -33,6 +33,8 @@ module.exports = defineConfig({
       overwrite: false
     },    
     setupNodeEvents(on, config) {
+      const fs = require('fs');
+      const path = require('path');
       const options = {
         webpackOptions: {
           resolve: {
@@ -68,6 +70,21 @@ module.exports = defineConfig({
           return easyYopmail.getConfirmationURL(email);
         },
       }),
+
+
+      on('task', {
+        deleteFile(filePath) {
+          const fullPath = path.resolve(__dirname, filePath);
+    
+          if (fs.existsSync(fullPath)) {
+            fs.unlinkSync(fullPath);
+            return { success: true };
+          }
+    
+          return { success: false, message: 'File not found' };
+        }
+      });
+    
 
      
       require('cypress-mochawesome-reporter/plugin')(on);
