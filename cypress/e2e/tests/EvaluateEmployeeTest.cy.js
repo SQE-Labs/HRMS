@@ -48,7 +48,7 @@ describe("Evaluate Employee Tests", () => {
   })
 
 
-  it.only("HRMIS_2: Verify use able to export employee Evaluate details on 'Evaluate Employee' page ", () => {
+  it("HRMIS_2: Verify use able to export employee Evaluate details on 'Evaluate Employee' page ", () => {
 
     
     EvaluateEmployeePage.deleteExistingFile('cypress/downloads/performance_evaluation.xlsx');
