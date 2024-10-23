@@ -1,15 +1,12 @@
-# Use Cypress included image
-FROM cypress/included:12.5.1
-
-# Set working directory to /e2e in the container
+FROM cypress/included:12.11.0
+RUN npm install -g n \
+    && n 20.11.0 \
+    && node -v
+    
 WORKDIR /e2e
-
-# Copy all files from the current directory into /e2e in the container
+COPY package.json /e2e
 COPY . .
 
-# Install npm dependencies
 RUN npm install
 
-# Run Cypress 
-CMD ["npx", "cypress", "run"]
-
+CMD ["npm", "run"] 
