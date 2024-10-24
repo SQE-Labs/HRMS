@@ -5,6 +5,7 @@ const webpack = require('webpack');
 const { json } = require("mocha/lib/reporters/index.js");
 
 
+
 module.exports = defineConfig({
   chromeWebSecurity: false,
   experimentalModifyObstructiveThirdPartyCode : true,
@@ -45,12 +46,13 @@ module.exports = defineConfig({
               zlib: require.resolve('browserify-zlib'),
               "assert": require.resolve("assert/") ,
               "https": false ,"path": false,
-              buffer: require.resolve('buffer'),
+              "buffer": require.resolve('buffer/'),
+              "process": require.resolve("process/browser.js")
             },
           },
           plugins: [
             new webpack.ProvidePlugin({
-              process: 'process/browser',
+              process: 'process/browser.js',
               Buffer: ['buffer', 'Buffer'],
             }),
           ],

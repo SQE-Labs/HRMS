@@ -4,6 +4,11 @@ services:
     image: cypress/included:12.11.0
     volumes:
       - .:/e2e
+      - reports:/e2e/cypress/reports  # Use a named volume for reports
     working_dir: /e2e
     command: ["npx", "cypress", "run"]
+
+
+volumes:
+  reports:  # Define a named volume for storing reports
 
