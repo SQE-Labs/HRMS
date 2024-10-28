@@ -1,6 +1,6 @@
 import BasePage from "./BasePage";
 
-class PolicyMgmtPage extends BasePage {
+class ViewPolicyMgmtPage extends BasePage {
 
     // Locators
     get modifyPolicyLbl() { return cy.get("#showMenuBtn + h1") }
@@ -14,9 +14,9 @@ class PolicyMgmtPage extends BasePage {
     get cancelBtn() { return cy.get("button[type='button'].theme-button") }
     get itemPerPageDrp() { return cy.get("#itemsPerPage") }
     get gridRows() { return cy.get("tbody tr") }
-    get policyTitle() { return cy.get("tbody tr[kwy='0'] td:nth-child(2)") }
+    get policyTitle() { return cy.get("tbody tr:nth-child(1) td:nth-child(2)") }
     get noRecordeLbl() { return cy.get("div.fs-4") }
-    get viewBtn() { return cy.get("tr[kwy='0'] a") }
+    get viewBtn() { return cy.get("tr a") }
     get editBtn() { return cy.get("tbody tr:nth-child(1) button.export") }
     get deletePolicy(){return cy.get("a.text-danger i")}
     get uploadeFile(){return cy.get("#file-input")}
@@ -27,7 +27,6 @@ class PolicyMgmtPage extends BasePage {
     get lastPolicyTitle(){return cy.get('tbody tr:last-of-type td:nth-child(2)')}
     get lastPolicyDesc(){return cy.get('tbody tr:last-of-type td:nth-child(4)')}
     get lastValidDate(){return cy.get('tbody tr:last-of-type td:nth-child(3)')}
-    // get policyTitleView() {return cy.get('tbody tr:nth-child(1) td:nth-child(2)')}
 
 
 
@@ -76,7 +75,7 @@ class PolicyMgmtPage extends BasePage {
     }
 
     enterPolicytitle(title){
-        this.policyTitleTxt.clear().wait(500).type(title,{force: true});
+        this.policyTitleTxt.clear().wait(500).type(title);
     }
 
     enterDescription(desc){
@@ -155,4 +154,4 @@ class PolicyMgmtPage extends BasePage {
 
 }
 
-export default new PolicyMgmtPage();
+export default new ViewPolicyMgmtPage();
