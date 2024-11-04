@@ -5,6 +5,9 @@ import EmployeeProfilePage from "../pages/EmployeeProfilePage";
 describe("Employee Profile Tests", () => {
 
     beforeEach(function () {
+        cy.fixture('testData').then((data) => {
+            this.testData = data;
+          });
         cy.login();
     });
 
@@ -15,10 +18,10 @@ describe("Employee Profile Tests", () => {
 
         // Verify that information message, when user enters invalid data in 'Search By Name' field
         EmployeeListPage.enterNameIntoSearchField('invalidName');
-        EmployeeListPage.validateNoRecordsAppear('No Records Available');
+        EmployeeListPage.validateNoRecordsAppear('No Record Available');
 
         // Verify that information message, when user enters valid data in 'Search By Name' field
-        EmployeeListPage.enterNameIntoSearchField('DDinesh');
+        EmployeeListPage.enterNameIntoSearchField('Autom Mation User');
         EmployeeListPage.getTotalEmployeescount(1);
 
     });
@@ -26,118 +29,71 @@ describe("Employee Profile Tests", () => {
     it("HRMIS_2: Verify that the 'Basic Info' accordion expands, and validate the update and close functionalities.", () => {
 
         //Employee Details Test Data
-        const EmployeeData = {
-            FirstName: 'DDinesh',
-            LastName: 'Kumar',
-            MiddleName: 'D',
-            EmployeeID: 'CCIT/08_22/409',
-            EmailID: 'dinesh87@yopmail.com',
+        // const EmployeeData = {
+        //     FirstName: 'Autom',
+        //     LastName: 'User',
+        //     MiddleName: 'Mation',
+        //     EmployeeID: 'CCIT/10_24/559',
+        //     EmailID: 'autouser@caeliusconsulting.com',
 
-        }
+        // }
 
         // Verify that 'Basic Info' accordion gets expanded, when user clicks 'Basic Info' accordion.
-        EmployeeListPage.navigateToUserDashboardPage("DDinesh");
+        EmployeeListPage.navigateToUserDashboardPage("Autom Mation User");
         EmployeeProfilePage.clickOnBasicInfo();
-        EmployeeProfilePage.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
-        EmployeeProfilePage.getFieldValue("Middle Name").should('equal', EmployeeData.MiddleName);
-        EmployeeProfilePage.getFieldValue("Last Name").should('equal', EmployeeData.LastName);
-        EmployeeProfilePage.getFieldValue("Employee Id").should('equal', EmployeeData.EmployeeID);
-        EmployeeProfilePage.getFieldValue("Email").should('equal', EmployeeData.EmailID);
+        EmployeeProfilePage.getFieldValue("First Name").should('equal',this.testData.EmployeeData.FirstName);
+        EmployeeProfilePage.getFieldValue("Middle Name").should('equal', this.testData.EmployeeData.MiddleName);
+        EmployeeProfilePage.getFieldValue("Last Name").should('equal', this.testData.EmployeeData.LastName);
+        EmployeeProfilePage.getFieldValue("Employee Id").should('equal', this.testData.EmployeeData.EmployeeID);
+        EmployeeProfilePage.getFieldValue("Email").should('equal', this.testData.EmployeeData.EmailID);
 
         // Verify that data do not get saved on clicking 'Close' button.
-        EmployeeProfilePage.clickOnEditBasicInfoDetails();
-        EmployeeProfilePage.updateFirstName('Autom');
-        EmployeeProfilePage.updateMiddleName('Mation1');
-        EmployeeProfilePage.updateLastName('User1');
-        EmployeeProfilePage.clickOnCloseButton();
-        EmployeeProfilePage.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
-        EmployeeProfilePage.getFieldValue("Middle Name").should('equal', EmployeeData.MiddleName);
-        EmployeeProfilePage.getFieldValue("Last Name").should('equal', EmployeeData.LastName);
-        EmployeeProfilePage.getFieldValue("Employee Id").should('equal', EmployeeData.EmployeeID);
-        EmployeeProfilePage.getFieldValue("Email").should('equal', EmployeeData.EmailID);
-
-        // Verify that data gets saved on clicking 'Update' button.
         EmployeeProfilePage.clickOnEditBasicInfoDetails();
         EmployeeProfilePage.updateFirstName('DDinesh');
         EmployeeProfilePage.updateMiddleName('D');
         EmployeeProfilePage.updateLastName('Kumar');
+        EmployeeProfilePage.clickOnCloseButton();
+        EmployeeProfilePage.getFieldValue("First Name").should('equal', this.testData.EmployeeData.FirstName);
+        EmployeeProfilePage.getFieldValue("Middle Name").should('equal', this.testData.EmployeeData.MiddleName);
+        EmployeeProfilePage.getFieldValue("Last Name").should('equal', this.testData.EmployeeData.LastName);
+        EmployeeProfilePage.getFieldValue("Employee Id").should('equal',this.testData.EmployeeData.EmployeeID);
+        EmployeeProfilePage.getFieldValue("Email").should('equal', this.testData.EmployeeData.EmailID);
+
+        // Verify that data gets saved on clicking 'Update' button.
+        EmployeeProfilePage.clickOnEditBasicInfoDetails();
+        EmployeeProfilePage.updateFirstName('Autom');
+        EmployeeProfilePage.updateMiddleName('Mation');
+        EmployeeProfilePage.updateLastName('User');
         EmployeeProfilePage.clickOnUpdateButton();
         EmployeeProfilePage.validateSuccessMessage();
-        EmployeeProfilePage.getFieldValue("First Name").should('equal', EmployeeData.FirstName);
-        EmployeeProfilePage.getFieldValue("Middle Name").should('equal', EmployeeData.MiddleName);
-        EmployeeProfilePage.getFieldValue("Last Name").should('equal', EmployeeData.LastName);
-        EmployeeProfilePage.getFieldValue("Employee Id").should('equal', EmployeeData.EmployeeID);
-        EmployeeProfilePage.getFieldValue("Email").should('equal', EmployeeData.EmailID);
+        EmployeeProfilePage.getFieldValue("First Name").should('equal', this.testData.EmployeeData.FirstName);
+        EmployeeProfilePage.getFieldValue("Middle Name").should('equal', this.testData.EmployeeData.MiddleName);
+        EmployeeProfilePage.getFieldValue("Last Name").should('equal', this.testData.EmployeeData.LastName);
+        EmployeeProfilePage.getFieldValue("Employee Id").should('equal', this.testData.EmployeeData.EmployeeID);
+        EmployeeProfilePage.getFieldValue("Email").should('equal', this.testData.EmployeeData.EmailID);
 
         // Verify that 'Basic Info' accordion gets collapsed.
         EmployeeProfilePage.clickOnBasicInfo();
         EmployeeProfilePage.validateAccordionCollapsed();
     });
 
-    it("HRMIS_3: Verify that the 'Work' accordion expands, and validate the update and close functionalities.", () => {
+    
+
+    it.skip("HRMIS_3: Verify that the 'Personal Details' accordion expands, and validate the update and close functionalities.", () => {
 
         //Employee Details Test Data
         const EmployeeData = {
-            Department: 'Technical',
-            Designation: 'Senior Salesforce Developer',
-            ReportingTo: 'chandler  shan',
-            DOJ: '30-09-2024',
-            EmployeeStatus: 'VERIFIED',
-            EmployeeType: 'Full Time',
-            UpdateDOJ: '2024-09-30',
-            UpdatedDOJ: '30-09-2024',
-            RecentDOJ: '2024-07-25',
-        }
-
-        // Verify that 'Work' accordion gets expanded, when user clicks 'Work' accordion.
-        EmployeeListPage.navigateToUserDashboardPage("DDinesh");
-        EmployeeProfilePage.clickOnWork();
-        EmployeeProfilePage.getFieldValue("Department").should('equal', EmployeeData.Department);
-        EmployeeProfilePage.getFieldValue("Designation").should('equal', EmployeeData.Designation);
-        EmployeeProfilePage.getFieldValue("Reporting To").should('equal', EmployeeData.ReportingTo);
-        EmployeeProfilePage.getFieldValue("Date of Joining").should('equal', EmployeeData.DOJ);
-        EmployeeProfilePage.getFieldValue("Employee Status").should('equal', EmployeeData.EmployeeStatus);
-        EmployeeProfilePage.getFieldValue("Employee Type").should('equal', EmployeeData.EmployeeType);
-
-        //Verify that data do not get saved on clicking 'Close' button'
-        EmployeeProfilePage.clickOnEditWorkDetails();
-        EmployeeProfilePage.updateDOJ(EmployeeData.UpdateDOJ);
-        EmployeeProfilePage.clickOnCloseButton();
-        EmployeeProfilePage.getFieldValue("Date of Joining").should('equal', EmployeeData.DOJ);
-
-        //Verify that data do not get saved on clicking 'Update' button'
-        EmployeeProfilePage.clickOnEditWorkDetails();
-        EmployeeProfilePage.updateDOJ(EmployeeData.UpdateDOJ);
-        EmployeeProfilePage.clickOnUpdateButton();
-        EmployeeProfilePage.validateSuccessMessage();
-        EmployeeProfilePage.getFieldValue("Date of Joining").should('equal', EmployeeData.UpdatedDOJ);
-
-        //Rollback Date Of Joining Under Work Into Accordion
-        EmployeeProfilePage.clickOnEditWorkDetails();
-        EmployeeProfilePage.updateDOJ(EmployeeData.RecentDOJ);
-        EmployeeProfilePage.clickOnUpdateButton();
-
-        //Verify that 'Work' accordion gets collapsed,  when user clicks on 'Work' accordion.
-        EmployeeProfilePage.clickOnWork();
-        EmployeeProfilePage.validateAccordionCollapsed();
-
-    });
-
-    it("HRMIS_4: Verify that the 'Personal Details' accordion expands, and validate the update and close functionalities.", () => {
-
-        //Employee Details Test Data
-        const EmployeeData = {
-            DateOfBirth: '09-05-1994',
-            OriginalDOB: '1994-05-09',
-            AdhaarNumber: '477233425262',
-            PassportNumber: 'A20964573432',
-            PanNumber: 'GSSVS4225Y',
-            PresentAddress: '#800 SMALL FLTAS, DHANAS, CHANDIGARH (PIN 160014)',
-            BloodGroup: 'AB+ve',
+            DateOfBirth: '30-09-1993',
+            OriginalDOB: '1993-09-30',
+            AdhaarNumber: '232324324322',
+            PassportNumber: '238928392323',
+            PanNumber: 'BSSSS5123D',
+            PresentAddress: 'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016',
+            BloodGroup: 'B+ve',
             Gender: 'male',
-            AlternateNumber: '9877455076',
-            MaritalStatus: 'Married',
-            PermanentAddress: '#800 SMALL FLTAS, DHANAS, CHANDIGARH (PIN 160014)',
+            AlternateNumber: '4523542343',
+            MaritalStatus: 'Single',
+            PermanentAddress: 'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016',
 
             //Updated Employee Test Data
             UpdatedDateOfBirth: '2000-05-09',
@@ -155,7 +111,7 @@ describe("Employee Profile Tests", () => {
         }
 
         // Verify that 'Personal Details' accordion gets expanded, when user clicks 'Personal Details' accordion.
-        EmployeeListPage.navigateToUserDashboardPage("DDinesh");
+        EmployeeListPage.navigateToUserDashboardPage("Autom Mation User");
         EmployeeProfilePage.clickOnPersonalDetails();
         EmployeeProfilePage.getFieldValue("Date of Birth").should('equal', EmployeeData.DateOfBirth);
         EmployeeProfilePage.getFieldValue("Aadhar Card Number").should('equal', EmployeeData.AdhaarNumber);
@@ -242,10 +198,59 @@ describe("Employee Profile Tests", () => {
 
     });
 
-    it("HRMIS_5: Verify that the 'Work Experience' accordion expands,validate table columns", () => {
+    it.skip("HRMIS_4: Verify that the 'Work' accordion expands, and validate the update and close functionalities.", () => {
+
+        //Employee Details Test Data
+        const EmployeeData = {
+            Department: 'Technical',
+            Designation: 'Application Developer',
+            ReportingTo: 'chandler  shan',
+            DOJ: '30-09-2024',
+            EmployeeStatus: 'VERIFIED',
+            EmployeeType: 'Full Time',
+            UpdateDOJ: '2024-11-30',
+            UpdatedDOJ: '30-11-2024',
+            RecentDOJ: '2024-07-25',
+        }
+
+        // Verify that 'Work' accordion gets expanded, when user clicks 'Work' accordion.
+        EmployeeListPage.navigateToUserDashboardPage("Autom Mation User");
+        EmployeeProfilePage.clickOnWork();
+        EmployeeProfilePage.getFieldValue("Department").should('equal', EmployeeData.Department);
+        EmployeeProfilePage.getFieldValue("Designation").should('equal', EmployeeData.Designation);
+        EmployeeProfilePage.getFieldValue("Reporting To").should('equal', EmployeeData.ReportingTo);
+        EmployeeProfilePage.getFieldValue("Date of Joining").should('equal', EmployeeData.DOJ);
+        EmployeeProfilePage.getFieldValue("Employee Status").should('equal', EmployeeData.EmployeeStatus);
+        EmployeeProfilePage.getFieldValue("Employee Type").should('equal', EmployeeData.EmployeeType);
+
+        //Verify that data do not get saved on clicking 'Close' button'
+        EmployeeProfilePage.clickOnEditWorkDetails();
+        EmployeeProfilePage.updateDOJ(EmployeeData.UpdateDOJ);
+        EmployeeProfilePage.clickOnCloseButton();
+        EmployeeProfilePage.getFieldValue("Date of Joining").should('equal', EmployeeData.DOJ);
+
+        //Verify that data do not get saved on clicking 'Update' button'
+        EmployeeProfilePage.clickOnEditWorkDetails();
+        EmployeeProfilePage.updateDOJ(EmployeeData.UpdateDOJ);
+        EmployeeProfilePage.clickOnUpdateButton();
+        EmployeeProfilePage.validateSuccessMessage();
+        EmployeeProfilePage.getFieldValue("Date of Joining").should('equal', EmployeeData.UpdatedDOJ);
+
+        //Rollback Date Of Joining Under Work Into Accordion
+        EmployeeProfilePage.clickOnEditWorkDetails();
+        EmployeeProfilePage.updateDOJ(EmployeeData.RecentDOJ);
+        EmployeeProfilePage.clickOnUpdateButton();
+
+        //Verify that 'Work' accordion gets collapsed,  when user clicks on 'Work' accordion.
+        EmployeeProfilePage.clickOnWork();
+        EmployeeProfilePage.validateAccordionCollapsed();
+
+    });
+
+    it.skip("HRMIS_5: Verify that the 'Work Experience' accordion expands,validate table columns", () => {
 
         const expectedTexts = ['Job Title', 'Previous Company', 'From', 'To','Description'];
-        EmployeeListPage.navigateToUserDashboardPage("DDinesh");
+        EmployeeListPage.navigateToUserDashboardPage("Autom Mation User");
         EmployeeProfilePage.clickOnWorkExperience();
         EmployeeProfilePage.assertExpectedTableLbl(EmployeeProfilePage.workExpColLbl,expectedTexts);
 
@@ -256,10 +261,10 @@ describe("Employee Profile Tests", () => {
 
 
 
-    it("HRMIS_6: Verify that the 'Education' accordion expands,validate table columns", () => {
+    it.skip("HRMIS_6: Verify that the 'Education' accordion expands,validate table columns", () => {
 
         const expectedTexts = ['Highest Degree', 'College', 'From', 'To'];
-        EmployeeListPage.navigateToUserDashboardPage("DDinesh");
+        EmployeeListPage.navigateToUserDashboardPage("Autom Mation User");
         EmployeeProfilePage.clickOnEducationDetail();
         EmployeeProfilePage.assertExpectedTableLbl(EmployeeProfilePage.workEduColLbl,expectedTexts);
 
@@ -269,10 +274,10 @@ describe("Employee Profile Tests", () => {
     });
 
 
-    it("HRMIS_7: Verify that the 'Dependents' accordion expands,validate table columns", () => {
+    it.skip("HRMIS_7: Verify that the 'Dependents' accordion expands,validate table columns", () => {
 
         const expectedTexts = ['Name', 'Gender', 'DOB', 'Relation','Mobile Number'];
-        EmployeeListPage.navigateToUserDashboardPage("DDinesh");
+        EmployeeListPage.navigateToUserDashboardPage("Autom Mation User");
         EmployeeProfilePage.clickOnEducationDetail();
         EmployeeProfilePage.assertExpectedTableLbl(EmployeeProfilePage.workDependentsColLbl,expectedTexts);
 

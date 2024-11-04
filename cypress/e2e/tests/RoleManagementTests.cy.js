@@ -33,7 +33,7 @@ describe("Role Management Tests", () => {
   })
 
 
-  it.only("HRMIS_2: Verify 'Add Role' Pop up.", () => {
+  it("HRMIS_2: Verify 'Add Role' Pop up.", () => {
     cy.login();
 
     //Navigate to Modify Policy Page

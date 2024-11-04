@@ -41,7 +41,7 @@ describe("Employee Onboard Tests", () => {
             DateOfBirth: '2000-09-24',
             AadharNumber: '232324324342',
             PanNumber: 'BSSSS1233D',
-            DateOfJoining: '2024-09-23',
+            DateOfJoining: '2024-11-23',
             MaritalStatus: 'Single',
             PassportNo: generateRandomString(1) + generateRandomNumber(11),
             PhoneNumber: '6448744833',
@@ -51,7 +51,7 @@ describe("Employee Onboard Tests", () => {
             PresentAddress: 'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016',
             PermanentAddress: 'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016',
             CaeliusEmail: generateRandomCaeliusEmail(6),
-            Department: 'Marketing',
+            Department: 'Marketing45xxx',
             Designation: 'Demooo',
             AssignManager: 'DDinesh D Kumar',
             EmployeeType: 'REGULAR',
@@ -131,8 +131,8 @@ describe("Employee Onboard Tests", () => {
         
         // Viewing Newly Onboard Invitation
         L1ApprovalActionPage.selectItemsPerPage();
-        L1ApprovalActionPage.clickOnPagenationNextButton();
-        L1ApprovalActionPage.clickOnPagenationNextButton();
+        // L1ApprovalActionPage.clickOnPagenationNextButton();
+        L1ApprovalActionPage.clickNextUntilDisabled();
         L1ApprovalActionPage.SearchNewJoineeByName(JoineeData.Firstname);
 
         // L1ApprovalAction.validateEmailForNewJoinee();
@@ -178,7 +178,8 @@ describe("Employee Onboard Tests", () => {
 
         // Viewing Newly Onboard Invitation to HR Approval Page
         L1ApprovalActionPage.selectItemsPerPage();
-        L1ApprovalActionPage.clickOnPagenationNextButton();
+        L1ApprovalActionPage.clickNextUntilDisabled();
+       //L1ApprovalActionPage.clickOnPagenationNextButton();
         L1ApprovalActionPage.SearchNewJoineeByName(JoineeData.Firstname);
 
         // Verify that only single result appears
@@ -213,6 +214,7 @@ describe("Employee Onboard Tests", () => {
 
         //HRApproval.caeliusEmail.should('have,text',JoineeData.CaeliusEmail);
         HRApprovalPage.selectDepartment(JoineeData.Department);
+        cy.wait(1000);
         HRApprovalPage.selectDesignation(JoineeData.Designation);
         HRApprovalPage.selectAssignManager(JoineeData.AssignManager);
         HRApprovalPage.selectEmployeeType(JoineeData.EmployeeType);

@@ -78,7 +78,7 @@ Cypress.Commands.add('selectDrpValueByText', (locator, text, isSearchable = fals
             searchInputLocator.wait(1000).type(text);
             
             // Click the correct option in the dropdown
-            cy.get("#react-select-2-listbox span, #react-select-3-listbox span").contains(text).click();
+            cy.get("#react-select-2-listbox span, #react-select-3-listbox span,#react-select-2-listbox div div").contains(text).click();
         } 
     } else {
         // Standard dropdown (non-searchable)

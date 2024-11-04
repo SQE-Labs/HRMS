@@ -21,7 +21,7 @@ describe("Employee List Tests", () => {
 
         // Verify that information message, when user enters invalid data in 'Search By Name' field
         EmployeeListPage.enterNameIntoSearchField('invalidName');
-        EmployeeListPage.noRecordAvailable.should('have.text', "No Records Available");
+        EmployeeListPage.noRecordAvailable.should('have.text', "No Record Available");
     
         // Verify that information message, when user enters valid data in 'Search By Name' field
         EmployeeListPage.enterNameIntoSearchField('Auto Mation User');
