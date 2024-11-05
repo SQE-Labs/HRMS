@@ -12,7 +12,7 @@ describe("Evaluate Employee Tests", () => {
     EvaluateEmployeePage.evaluateEmployeeTxt.should('be.visible');
 
     //Verify that Evaluate Employee form opens up on selecting any option from 'Select Employee' dropdown.
-    EvaluateEmployeePage.selectEmployee("DDinesh D Kumar");
+    EvaluateEmployeePage.selectEmployee("Autom Mation User");
     EvaluateEmployeePage.evaluateFormTxt.should('be.visible');
 
     //verify form fields are clear after clicking on reset button

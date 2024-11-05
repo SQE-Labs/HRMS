@@ -33,7 +33,7 @@ describe("Policy Management Tests", () => {
     PolicyMgmtPage.searchPolicy();
     cy.wait(1000);
     PolicyMgmtPage.clickOnView();
-    PolicyMgmtPage.checkDownloadFile('cypress/downloads/ECardsCCIT112126022926502 (1) (6).pdf');
+    PolicyMgmtPage.checkDownloadFile('cypress/downloads/ECardsCCIT112126022926502 (2) (6).pdf');
 
 
   })
@@ -67,7 +67,9 @@ describe("Policy Management Tests", () => {
     cy.wait(1000);
     cy.validateSuccessMessages("Success");
     PolicyMgmtPage.selectItemPerPage('40');
+    cy.wait(500);
     PolicyMgmtPage.clickNextUntilDisabled();
+    cy.wait(500);
     PolicyMgmtPage.lastPolicyTitle.should('have.text', 'Demoo989');
     PolicyMgmtPage.lastPolicyDesc.should('have.text', 'demooPolicy');
     PolicyMgmtPage.lastValidDate.should('have.text', '24-10-2023');
@@ -138,7 +140,7 @@ describe("Policy Management Tests", () => {
      ViewPolicyMgmt.searchPolicy();
      cy.wait(1000);
      ViewPolicyMgmt.clickOnView();
-     ViewPolicyMgmt.checkDownloadFile('cypress/downloads/ECardsCCIT112126022926502 (1) (6).pdf');
+     ViewPolicyMgmt.checkDownloadFile('cypress/downloads/ECardsCCIT112126022926502 (2) (6).pdf');
 
   })
 

@@ -51,10 +51,12 @@ describe("Employee Onboard Tests", () => {
             PresentAddress: 'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016',
             PermanentAddress: 'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016',
             CaeliusEmail: generateRandomCaeliusEmail(6),
-            Department: 'Marketing45xxx',
-            Designation: 'Demooo',
-            AssignManager: 'DDinesh D Kumar',
+            Department: 'GENRIC',
+            Designation: 'Chief People Officer',
+            AssignManager: 'Jitendra Kumar',
             EmployeeType: 'REGULAR',
+            LeaveManager:'Manjeet Saini',
+            EmpSubType:'Fulltime',
             messagesToValidate : [
                 'Thank you!',
                 'Your submission has been sent successfully.',
@@ -177,7 +179,10 @@ describe("Employee Onboard Tests", () => {
         sideBar.navigateTo("Employee Onboard", "HR Approval");
 
         // Viewing Newly Onboard Invitation to HR Approval Page
+        cy.debug();
+        cy.wait(1000);
         L1ApprovalActionPage.selectItemsPerPage();
+        cy.wait(1000);
         L1ApprovalActionPage.clickNextUntilDisabled();
        //L1ApprovalActionPage.clickOnPagenationNextButton();
         L1ApprovalActionPage.SearchNewJoineeByName(JoineeData.Firstname);
@@ -218,6 +223,8 @@ describe("Employee Onboard Tests", () => {
         HRApprovalPage.selectDesignation(JoineeData.Designation);
         HRApprovalPage.selectAssignManager(JoineeData.AssignManager);
         HRApprovalPage.selectEmployeeType(JoineeData.EmployeeType);
+        HRApprovalPage.selectLeaveManager(JoineeData.LeaveManager)
+        HRApprovalPage.selectEmplSubtype(JoineeData.EmpSubType)
         HRApprovalPage.clickApproveButton();
 
         // Validating the Thank You Success message

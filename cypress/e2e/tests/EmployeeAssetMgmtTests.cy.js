@@ -11,8 +11,8 @@ describe("Employee Asset Managment Tests", () => {
         cy.login();
         
         sideBar.navigateTo("Employee Management", "Employees List");
-        EmployeelistPage.enterNameIntoSearchField("Auto Mation User");
-        EmployeelistPage.clickOnUserCard("Auto Mation User");
+        EmployeelistPage.enterNameIntoSearchField("Autom Mation User");
+        EmployeelistPage.clickOnUserCard("Autom Mation User");
         EmployeeProfilePage.clickOnAssetTab();
         EmployeeProfilePage.refershbutton.should('be.visible');
         EmployeeProfilePage.noRecordInfo.should('have.text','No records available'); 

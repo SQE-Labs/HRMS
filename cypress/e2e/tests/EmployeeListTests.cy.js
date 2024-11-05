@@ -9,7 +9,7 @@ describe("Employee List Tests", () => {
         // Employee List Details Test Data
 
         const EmployeeData = {
-            FirstName: 'Auto',
+            FirstName: 'Autom',
             LastName: 'User',
             MiddleName: 'Mation',
             EmployeeID: 'CCIT/10_24/559',
@@ -24,14 +24,14 @@ describe("Employee List Tests", () => {
         EmployeeListPage.noRecordAvailable.should('have.text', "No Record Available");
     
         // Verify that information message, when user enters valid data in 'Search By Name' field
-        EmployeeListPage.enterNameIntoSearchField('Auto Mation User');
+        EmployeeListPage.enterNameIntoSearchField('Autom Mation User');
         EmployeeListPage.getTotalEmployeescount().then((employcount) => {
             expect(employcount).to.equal(1);
             });
       
 
         // Verify that the information message appears for the selected department with no records.
-        EmployeeListPage.clickOnUserCard('Auto Mation User');
+        EmployeeListPage.clickOnUserCard('Autom Mation User');
         EmployeeProfilePage.clickOnWorkExperience();
         EmployeeProfilePage.noRecordAvailableInfo.should('have.text', "No records available");
         cy.log("No Records Appear")
@@ -58,7 +58,7 @@ describe("Employee List Tests", () => {
 
         // Verify that data gets saved on clicking 'update' button.
         EmployeeProfilePage.clickOnEditBasicInfoDetails();
-        EmployeeProfilePage.updateFirstName('Auto');
+        EmployeeProfilePage.updateFirstName('Autom');
         EmployeeProfilePage.updateMiddleName('Mation');
         EmployeeProfilePage.updateLastName('User');
         EmployeeProfilePage.clickOnUpdateButton();

@@ -15,6 +15,8 @@ get designationSearch(){return cy.get("#react-select-3-input")}
 get depatmentSearch(){return cy.get("#react-select-2-input")}
 get assignManagerSearch(){return cy.get("#react-select-4-input")}
 get employeeTypeSearch(){return cy.get("#react-select-6-input")}
+get LeaveManager(){return cy.get("#react-select-5-input")}
+get employeSubtype(){return cy.get("#react-select-7-input")}
 
 
 // Methods
@@ -40,6 +42,18 @@ selectEmployeeType(employeeType) {
     cy.selectDrpValueByText(this.employeeTypeSearch, employeeType, true,this.employeeTypeSearch);
     //this.employeeType.wait(1000).type(employeeType).pressEnter();
     cy.log("Employee Type is selected");
+   }
+
+   selectLeaveManager(manager) {
+    cy.selectDrpValueByText(this.LeaveManager, manager, true,this.LeaveManager);
+    //this.employeeType.wait(1000).type(employeeType).pressEnter();
+    cy.log("Leave Manager is selected");
+   }
+
+   selectEmplSubtype(subType){
+    cy.selectDrpValueByText(this.employeSubtype, subType, true,this.employeSubtype);
+    //this.employeeType.wait(1000).type(employeeType).pressEnter();
+    cy.log("Employee Subtype is selected");
    }
 
 clickApproveButton() {
