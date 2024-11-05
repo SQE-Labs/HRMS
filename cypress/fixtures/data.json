@@ -1,5 +1,6 @@
 {
     "url" : "https://topuptalent.com/",
+    "EmployeeName":"Autom Mation User",
     "EmployeeData" :{
         "FirstName": "Autom",
         "LastName": "User",
@@ -42,5 +43,9 @@
         "UpdateDOJ": "2024-11-30",
         "UpdatedDOJ": "30-11-2024",
         "RecentDOJ": "2024-07-25"
+    },
+    "Manager": {
+    "VidyutKundu" : "Vidyut Kundu",
+    "AnmolJuneja":"Anmol Juneja"
     }
 }

@@ -24,7 +24,7 @@ describe("Employee Profile Tests", () => {
         EmployeeListPage.validateNoRecordsAppear('No Record Available');
 
         // Verify that information message, when user enters valid data in 'Search By Name' field
-        EmployeeListPage.enterNameIntoSearchField('Autom Mation User');
+        EmployeeListPage.enterNameIntoSearchField(testData.EmployeeName);
         EmployeeListPage.getTotalEmployeescount(1);
 
     });
@@ -32,7 +32,7 @@ describe("Employee Profile Tests", () => {
     it("HRMIS_2: Verify that the 'Basic Info' accordion expands, and validate the update and close functionalities.", () => {
 
         // Verify that 'Basic Info' accordion gets expanded, when user clicks 'Basic Info' accordion.
-        EmployeeListPage.navigateToUserDashboardPage("Autom Mation User");
+        EmployeeListPage.navigateToUserDashboardPage(testData.EmployeeName);
         EmployeeProfilePage.clickOnBasicInfo();
         EmployeeProfilePage.getFieldValue("First Name").should('equal',testData.EmployeeData.FirstName);
         EmployeeProfilePage.getFieldValue("Middle Name").should('equal', testData.EmployeeData.MiddleName);
@@ -72,39 +72,10 @@ describe("Employee Profile Tests", () => {
 
     
 
-    it.skip("HRMIS_3: Verify that the 'Personal Details' accordion expands, and validate the update and close functionalities.", () => {
-
-        //Employee Details Test Data
-        // const EmployeeData = {
-        //     DateOfBirth: '30-09-1993',
-        //     OriginalDOB: '1993-09-30',
-        //     AdhaarNumber: '232324324322',
-        //     PassportNumber: '238928392323',
-        //     PanNumber: 'BSSSS5123D',
-        //     PresentAddress: 'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016',
-        //     BloodGroup: 'B+ve',
-        //     Gender: 'male',
-        //     AlternateNumber: '4523542343',
-        //     MaritalStatus: 'Single',
-        //     PermanentAddress: 'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016',
-
-        //     //Updated Employee Test Data
-        //     UpdatedDateOfBirth: '2000-05-09',
-        //     UpdatededDateOfBirth: '09-05-2000',
-        //     AdhaarNumber2: '488123345262',
-        //     PassportNumber2: 'B20964573432',
-        //     PanNumber2: 'ABCD42215Y',
-        //     PresentAddress2: '#1000 CHANDIGARH (PIN 160014)',
-        //     BloodGroup2: 'A+ve',
-        //     Gender2: 'female',
-        //     AlternateNumber2: '7676767676',
-        //     MaritalStatus2: 'Single',
-        //     PermanentAddress2: '#1000 CHANDIGARH (PIN 160014)',
-
-        // }
+    it("HRMIS_3: Verify that the 'Personal Details' accordion expands, and validate the update and close functionalities.", () => {
 
         // Verify that 'Personal Details' accordion gets expanded, when user clicks 'Personal Details' accordion.
-        EmployeeListPage.navigateToUserDashboardPage("Autom Mation User");
+        EmployeeListPage.navigateToUserDashboardPage(testData.EmployeeName);
         EmployeeProfilePage.clickOnPersonalDetails();
         EmployeeProfilePage.getFieldValue("Date of Birth").should('equal', testData.EmployeePersonalData.DateOfBirth);
         EmployeeProfilePage.getFieldValue("Aadhar Card Number").should('equal', testData.EmployeePersonalData.AdhaarNumber);
@@ -191,23 +162,10 @@ describe("Employee Profile Tests", () => {
 
     });
 
-    it.skip("HRMIS_4: Verify that the 'Work' accordion expands, and validate the update and close functionalities.", () => {
-
-        //Employee Details Test Data
-        // const EmployeeData = {
-        //     Department: 'Technical',
-        //     Designation: 'Application Developer',
-        //     ReportingTo: 'chandler  shan',
-        //     DOJ: '30-09-2024',
-        //     EmployeeStatus: 'VERIFIED',
-        //     EmployeeType: 'Full Time',
-        //     UpdateDOJ: '2024-11-30',
-        //     UpdatedDOJ: '30-11-2024',
-        //     RecentDOJ: '2024-07-25',
-        // }
+    it("HRMIS_4: Verify that the 'Work' accordion expands, and validate the update and close functionalities.", () => {
 
         // Verify that 'Work' accordion gets expanded, when user clicks 'Work' accordion.
-        EmployeeListPage.navigateToUserDashboardPage("Autom Mation User");
+        EmployeeListPage.navigateToUserDashboardPage(testData.EmployeeName);
         EmployeeProfilePage.clickOnWork();
         EmployeeProfilePage.getFieldValue("Department").should('equal', testData.EmployeeWorkData.Department);
         EmployeeProfilePage.getFieldValue("Designation").should('equal', testData.EmployeeWorkData.Designation);
@@ -240,10 +198,10 @@ describe("Employee Profile Tests", () => {
 
     });
 
-    it.skip("HRMIS_5: Verify that the 'Work Experience' accordion expands,validate table columns", () => {
+    it("HRMIS_5: Verify that the 'Work Experience' accordion expands,validate table columns", () => {
 
         const expectedTexts = ['Job Title', 'Previous Company', 'From', 'To','Description'];
-        EmployeeListPage.navigateToUserDashboardPage("Autom Mation User");
+        EmployeeListPage.navigateToUserDashboardPage(testData.EmployeeName);
         EmployeeProfilePage.clickOnWorkExperience();
         EmployeeProfilePage.assertExpectedTableLbl(EmployeeProfilePage.workExpColLbl,expectedTexts);
 
@@ -254,10 +212,10 @@ describe("Employee Profile Tests", () => {
 
 
 
-    it.skip("HRMIS_6: Verify that the 'Education' accordion expands,validate table columns", () => {
+    it("HRMIS_6: Verify that the 'Education' accordion expands,validate table columns", () => {
 
         const expectedTexts = ['Highest Degree', 'College', 'From', 'To'];
-        EmployeeListPage.navigateToUserDashboardPage("Autom Mation User");
+        EmployeeListPage.navigateToUserDashboardPage(testData.EmployeeName);
         EmployeeProfilePage.clickOnEducationDetail();
         EmployeeProfilePage.assertExpectedTableLbl(EmployeeProfilePage.workEduColLbl,expectedTexts);
 
@@ -267,10 +225,10 @@ describe("Employee Profile Tests", () => {
     });
 
 
-    it.skip("HRMIS_7: Verify that the 'Dependents' accordion expands,validate table columns", () => {
+    it("HRMIS_7: Verify that the 'Dependents' accordion expands,validate table columns", () => {
 
         const expectedTexts = ['Name', 'Gender', 'DOB', 'Relation','Mobile Number'];
-        EmployeeListPage.navigateToUserDashboardPage("Autom Mation User");
+        EmployeeListPage.navigateToUserDashboardPage(testData.EmployeeName);
         EmployeeProfilePage.clickOnEducationDetail();
         EmployeeProfilePage.assertExpectedTableLbl(EmployeeProfilePage.workDependentsColLbl,expectedTexts);
 

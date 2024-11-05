@@ -2,6 +2,13 @@ import sideBar from "../components/SideBar";
 import PromoteEmployeePage from "../pages/PromoteEmployeePage";
 
 
+let testData;
+before(function(){
+    cy.fixture('data').then((data) => {
+        testData = data;
+      });
+})
+
 beforeEach(() => {
 
     // login to Application
@@ -19,7 +26,7 @@ describe("Employee Managment Promote Employee Tests", () => {
         const expectedTexts = ['Employee Id', 'Name', 'Department', 'Designation' ,'Action'];
         PromoteEmployeePage.assertTextEquals(PromoteEmployeePage.promoteEmployeeLbl, 'Promote Employee');
         cy.wait(1000);
-        PromoteEmployeePage.selectEmployee("Autom Mation User");
+        PromoteEmployeePage.selectEmployee(testData.EmployeeName);
         PromoteEmployeePage.assertExpectedTableLbl(expectedTexts);
     });
 
@@ -27,7 +34,7 @@ describe("Employee Managment Promote Employee Tests", () => {
     it("HRMIS_2: Verify Promot pop up open and close when user click on Promot and Cancel button", () => {
 
         cy.wait(1000);
-        PromoteEmployeePage.selectEmployee("Autom Mation User");
+        PromoteEmployeePage.selectEmployee(testData.EmployeeName);
         PromoteEmployeePage.clickOnPromote();
         PromoteEmployeePage.promotePopHeaderLbl.should('have.text','Promote Employee');
         PromoteEmployeePage.clickOnCancel();
@@ -45,7 +52,7 @@ describe("Employee Managment Promote Employee Tests", () => {
     it("HRMIS_3: Verify Validation message appears after clicking on submit button when no department or designation is selected", () => {
         
         cy.wait(1000);
-        PromoteEmployeePage.selectEmployee("Autom Mation User");
+        PromoteEmployeePage.selectEmployee(testData.EmployeeName);
         PromoteEmployeePage.clickOnPromote();
         PromoteEmployeePage.promotePopHeaderLbl.should('have.text','Promote Employee');
 
@@ -68,7 +75,7 @@ describe("Employee Managment Promote Employee Tests", () => {
         const designations = ['Select Designation','CEO & Chief Architect','Co Founder & COO','VP Sucess Manager & Sales','Chief People Officer','Piyush Dogra'];
 
         cy.wait(1000);
-        PromoteEmployeePage.selectEmployee("Autom Mation User");
+        PromoteEmployeePage.selectEmployee(testData.EmployeeName);
         PromoteEmployeePage.clickOnPromote();
         PromoteEmployeePage.promotePopHeaderLbl.should('have.text','Promote Employee');
         PromoteEmployeePage.selectDepartment("GENRIC");
