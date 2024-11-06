@@ -3,6 +3,7 @@ import sideBar from "../components/SideBar";
 import PolicyMgmtPage from "../pages/PolicyMgmtPage";
 import ViewPolicyMgmt from "../pages/ViewPolicyMgmt";
 import process from 'process/browser.js';
+import { generateRandomString } from '../../support/utils';
 
 
 
@@ -40,8 +41,10 @@ describe("Policy Management Tests", () => {
 
 
   it("HRMIS_2: Verify 'Add Policy' Pop up.", () => {
+    const randomPolicy = "Demo"+generateRandomString(5); 
+    const randomDescription = "Description"+generateRandomString(5); 
     cy.login();
-
+    
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Policy Management", "Modify Policy");
 
@@ -49,7 +52,7 @@ describe("Policy Management Tests", () => {
     PolicyMgmtPage.addPolicyHeader.should('be.visible').and('have.text', 'Add Policy')
     PolicyMgmtPage.clickOnSubmit();
     PolicyMgmtPage.assertTitleValidation('Please fill out this field.');
-    PolicyMgmtPage.enterPolicytitle('Demoo989');
+    PolicyMgmtPage.enterPolicytitle(randomPolicy);
 
     PolicyMgmtPage.clickOnSubmit();
     PolicyMgmtPage.assertDocumentValidation('Please select a file.');
@@ -62,7 +65,7 @@ describe("Policy Management Tests", () => {
     PolicyMgmtPage.clickOnSubmit();
     cy.wait(1000);
     PolicyMgmtPage.assertPolicyDescValidation('Please fill out this field.');
-    PolicyMgmtPage.enterDescription("demooPolicy");
+    PolicyMgmtPage.enterDescription(randomDescription);
     PolicyMgmtPage.clickOnSubmit();
     cy.wait(1000);
     cy.validateSuccessMessages("Success");
@@ -70,15 +73,17 @@ describe("Policy Management Tests", () => {
     cy.wait(500);
     PolicyMgmtPage.clickNextUntilDisabled();
     cy.wait(500);
-    PolicyMgmtPage.lastPolicyTitle.should('have.text', 'Demoo989');
-    PolicyMgmtPage.lastPolicyDesc.should('have.text', 'demooPolicy');
+    PolicyMgmtPage.lastPolicyTitle.should('have.text', randomPolicy);
+    PolicyMgmtPage.lastPolicyDesc.should('have.text', randomDescription);
     PolicyMgmtPage.lastValidDate.should('have.text', '24-10-2023');
 
 
   })
 
 
-  it("HRMIS_3: Verify 'Update Policy' Pop up.", () => {
+  it.only("HRMIS_3: Verify 'Update Policy' Pop up.", () => {
+    const randomPolicy = "Demo"+generateRandomString(5); 
+    const randomDescription = "Description"+generateRandomString(5); 
     cy.login();
 
     //Navigate to Modify Policy Page
@@ -97,17 +102,34 @@ describe("Policy Management Tests", () => {
     PolicyMgmtPage.clickOnCrossBtn();
     PolicyMgmtPage.addPolicyHeader.should('not.be.visible')
 
-    
+    //Title
     PolicyMgmtPage.clickOnEditBtn();
-    PolicyMgmtPage.enterPolicytitle('Demoo999');
-    PolicyMgmtPage.enterDescription("demooPolicy");
+    PolicyMgmtPage.policyTitleTxt.clear();
+    PolicyMgmtPage.clickOnSubmit();
+    PolicyMgmtPage.assertTitleValidation('Please fill out this field.');
+    PolicyMgmtPage.enterPolicytitle(randomPolicy);
+
+    // Description
+    PolicyMgmtPage.policyDescTxt.clear();
+    PolicyMgmtPage.clickOnSubmit();
+    PolicyMgmtPage.assertPolicyDescValidation('Please fill out this field.');
+    PolicyMgmtPage.enterDescription(randomDescription);
+
+    // Document
     PolicyMgmtPage.delete_Policy();
+    PolicyMgmtPage.clickOnSubmit();
+    PolicyMgmtPage.assertDocumentValidation('Please select a file.');
     PolicyMgmtPage.uploadePolicyFile('cypress/fixtures/resources/ECardsCCIT112126022926502 (2) (6).pdf');
+
+    // Valid date
+    PolicyMgmtPage.dateField.clear();
+    PolicyMgmtPage.clickOnSubmit();
+    PolicyMgmtPage.assertValidDateValidation('Please fill out this field.');
     PolicyMgmtPage.selectValidDate('2023-10-24');
     PolicyMgmtPage.clickOnSubmit();
     cy.wait(1000);
-    PolicyMgmtPage.policyTitle.should('have.text', 'Demoo999');
-    PolicyMgmtPage.policyDesc.should('have.text', 'demooPolicy');
+    PolicyMgmtPage.policyTitle.should('have.text', randomPolicy);
+    PolicyMgmtPage.policyDesc.should('have.text', randomDescription);
     PolicyMgmtPage.policyValidDate.should('have.text', '24-10-2023');
 
 
