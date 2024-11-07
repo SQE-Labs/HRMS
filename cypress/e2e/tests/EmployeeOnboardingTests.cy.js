@@ -56,7 +56,7 @@ describe("Employee Onboard Tests", () => {
             AssignManager: 'Jitendra Kumar',
             EmployeeType: 'REGULAR',
             LeaveManager:'Manjeet Saini',
-            EmpSubType:'Fulltime',
+            EmpSubType:'Intern',
             messagesToValidate : [
                 'Thank you!',
                 'Your submission has been sent successfully.',

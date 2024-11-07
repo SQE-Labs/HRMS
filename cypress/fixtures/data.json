@@ -47,5 +47,9 @@
     "Manager": {
     "VidyutKundu" : "Vidyut Kundu",
     "AnmolJuneja":"Anmol Juneja"
+    },
+
+    "AssetsNames":{
+    "Keyboard":"Keyboard"
     }
 }
