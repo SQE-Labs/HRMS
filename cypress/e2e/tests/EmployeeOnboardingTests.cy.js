@@ -33,7 +33,7 @@ describe("Employee Onboard Tests", () => {
         // New Employee Details test Data
         const JoineeData = {
             JoineeEmail: joineePersonalMail,
-            Firstname: generateRandomString(7),
+            Firstname: "Auto "+generateRandomString(7),
             MiddleName: generateRandomString(4),
             LastName: generateRandomString(5),
             Gender: 'Female',

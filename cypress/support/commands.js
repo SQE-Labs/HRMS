@@ -91,6 +91,16 @@ Cypress.Commands.add('selectDrpValueByText', (locator, text, isSearchable = fals
 });
 
 
+// get texts from the column 
+Cypress.Commands.add('getColumnTexts', (selector) => {
+    return cy.get(selector).then(($cells) => {
+        return Cypress._.map($cells, 'textContent').map(text => text.trim());
+    });
+});
+
+
+
+
 
 
 

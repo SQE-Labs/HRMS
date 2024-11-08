@@ -54,6 +54,7 @@ describe("Employee Asset Managment Request Tests", () => {
         AssetMgmtPage.enterReqReason(reason);
         AssetMgmtPage.clickOnSubmit();
         cy.validateSuccessMessages("Successfully Submitted");
+        AssetMgmtPage.clickNextUntilDisabled();
         AssetMgmtPage.lastRequestReason.should('have.text',reason);
 
     });

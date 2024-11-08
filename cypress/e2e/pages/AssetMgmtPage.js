@@ -42,6 +42,16 @@ clickOnSubmit(){
   this.submitBtn.click();
 }
 
+clickNextUntilDisabled() {
+  cy.get('ul.pagination li').contains('Next').should('be.visible').then(($nextButton) => {
+    if (!$nextButton.parent().hasClass('disabled')) {
+      cy.wrap($nextButton).click({ force: true });
+      cy.wait(1000);
+      this.clickNextUntilDisabled();
+    }
+  });
+}
+
 
 
 }

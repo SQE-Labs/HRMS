@@ -18,20 +18,26 @@ class PolicyMgmtPage extends BasePage {
     get noRecordeLbl() { return cy.get("div.fs-4") }
     get viewBtn() { return cy.get("tr[kwy='0'] a") }
     get editBtn() { return cy.get("tbody tr:nth-child(1) button.export") }
-    get deletePolicy(){return cy.get("a.text-danger i")}
-    get uploadeFile(){return cy.get("#file-input")}
+    get deletePolicy() { return cy.get("a.text-danger i") }
+    get uploadeFile() { return cy.get("#file-input") }
     get policyDesc() { return cy.get("tbody tr[kwy='0'] td:nth-child(4)") }
     get policyValidDate() { return cy.get("tbody tr[kwy='0'] td:nth-child(3)") }
-    get crossBtn(){return cy.get("button.btn-close")}
-    get dateField(){return  cy.get('input[type="date"]')}
-    get lastPolicyTitle(){return cy.get('tbody tr:last-of-type td:nth-child(2)')}
-    get lastPolicyDesc(){return cy.get('tbody tr:last-of-type td:nth-child(4)')}
-    get lastValidDate(){return cy.get('tbody tr:last-of-type td:nth-child(3)')}
+    get crossBtn() { return cy.get("button.btn-close") }
+    get dateField() { return cy.get('input[type="date"]') }
+    get lastPolicyTitle() { return cy.get('tbody tr:last-of-type td:nth-child(2)') }
+    get lastPolicyDesc() { return cy.get('tbody tr:last-of-type td:nth-child(4)') }
+    get lastValidDate() { return cy.get('tbody tr:last-of-type td:nth-child(3)') }
+    get policyIds(){return cy.get("tbody tr td:nth-child(1)")}
+    get policyIdsSortImg(){return cy.get("tr th:nth-child(1) img")}
     // get policyTitleView() {return cy.get('tbody tr:nth-child(1) td:nth-child(2)')}
 
 
 
     // Methods
+
+    clickOnPolicyIds(){
+        this.policyIdsSortImg.click();
+    }
 
     selectItemPerPage(count) {
         cy.selectDrpValueByText(this.itemPerPageDrp, count, false)
@@ -75,40 +81,40 @@ class PolicyMgmtPage extends BasePage {
         this.editBtn.click();
     }
 
-    enterPolicytitle(title){
-        this.policyTitleTxt.clear().wait(500).type(title,{force: true});
+    enterPolicytitle(title) {
+        this.policyTitleTxt.clear().wait(500).type(title, { force: true });
     }
 
-    enterDescription(desc){
+    enterDescription(desc) {
         this.policyDescTxt.clear().type(desc);
     }
 
-    delete_Policy(){
+    delete_Policy() {
         this.deletePolicy.click();
     }
 
-    uploadePolicyFile(filePath){
+    uploadePolicyFile(filePath) {
         this.uploadeFile.selectFile(filePath);
     }
 
-    selectValidDate(date){
+    selectValidDate(date) {
         this.dateField.type(date).should('have.value', date);
 
     }
 
-    clickOnSubmit(){
+    clickOnSubmit() {
         this.submitBtn.click();
     }
 
-    clickOnCancel(){
+    clickOnCancel() {
         this.cancelBtn.wait(500).click();
     }
 
-    clickOnCrossBtn(){
+    clickOnCrossBtn() {
         this.crossBtn.wait(500).click();
     }
 
-    clickOnAddPolicy(){
+    clickOnAddPolicy() {
         this.addPolicyBtn.click();
     }
 
@@ -141,17 +147,44 @@ class PolicyMgmtPage extends BasePage {
         });
     }
 
+    clickNext() {
+        cy.get('ul.pagination li').contains('Next').should('be.visible').then(($nextButton) => {
+            if (!$nextButton.parent().hasClass('disabled')) {
+                cy.wrap($nextButton).click({ force: true });
+                cy.wait(1000);
+            }
+        });
+    }
+
+    clickPrevious() {
+        cy.get('ul.pagination li').contains('Previous').should('be.visible').then(($nextButton) => {
+            if (!$nextButton.parent().hasClass('disabled')) {
+                cy.wrap($nextButton).click({ force: true });
+                cy.wait(1000);
+            }
+        });
+    }
 
     clickNextUntilDisabled() {
         cy.get('ul.pagination li').contains('Next').should('be.visible').then(($nextButton) => {
-          if (!$nextButton.parent().hasClass('disabled')) {
-            cy.wrap($nextButton).click({ force: true });
-            cy.wait(1000);
-            this.clickNextUntilDisabled();
-          }
+            if (!$nextButton.parent().hasClass('disabled')) {
+                cy.wrap($nextButton).click({ force: true });
+                cy.wait(1000);
+                this.clickNextUntilDisabled();
+            }
         });
-      }
-      
+    }
+
+    clickPreviousUntilDisabled() {
+        cy.get('ul.pagination li').contains('Previous').should('be.visible').then(($nextButton) => {
+            if (!$nextButton.parent().hasClass('disabled')) {
+                cy.wrap($nextButton).click({ force: true });
+                cy.wait(1000);
+                this.clickNextUntilDisabled();
+            }
+        });
+    }
+
 
 }
 

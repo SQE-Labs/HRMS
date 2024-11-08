@@ -41,10 +41,10 @@ describe("Policy Management Tests", () => {
 
 
   it("HRMIS_2: Verify 'Add Policy' Pop up.", () => {
-    const randomPolicy = "Demo"+generateRandomString(5); 
-    const randomDescription = "Description"+generateRandomString(5); 
+    const randomPolicy = "Demo" + generateRandomString(5);
+    const randomDescription = "Description" + generateRandomString(5);
     cy.login();
-    
+
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Policy Management", "Modify Policy");
 
@@ -81,9 +81,9 @@ describe("Policy Management Tests", () => {
   })
 
 
-  it.only("HRMIS_3: Verify 'Update Policy' Pop up.", () => {
-    const randomPolicy = "Demo"+generateRandomString(5); 
-    const randomDescription = "Description"+generateRandomString(5); 
+  it("HRMIS_3: Verify 'Update Policy' Pop up.", () => {
+    const randomPolicy = "Demo" + generateRandomString(5);
+    const randomDescription = "Description" + generateRandomString(5);
     cy.login();
 
     //Navigate to Modify Policy Page
@@ -135,9 +135,74 @@ describe("Policy Management Tests", () => {
 
   })
 
- 
 
-  it("HRMIS_4: Verify 'view Policy' Page", () => {
+  it("HRMIS_4: Verify 'Next' and 'Previous' Pagination button Modify Policy Page", () => {
+    cy.login();
+    //Navigate to Modify Policy Page
+    sideBar.navigateTo("Policy Management", "Modify Policy");
+    PolicyMgmtPage.modifyPolicyLbl.should('be.visible');
+
+    // expected policy 
+    let expectedPolicytitle;
+    PolicyMgmtPage.lastPolicyTitle.invoke('text').then((text) => {
+      expectedPolicytitle = text.trim();
+    });
+
+    PolicyMgmtPage.clickNext();
+    let actualPolicytitle1;
+    PolicyMgmtPage.lastPolicyTitle.invoke('text').then((text) => {
+      actualPolicytitle1 = text.trim();
+    });
+    PolicyMgmtPage.clickPrevious();
+
+    let actualPolicytitle;
+    PolicyMgmtPage.lastPolicyTitle.invoke('text').then((text) => {
+      actualPolicytitle = text.trim();
+    });
+
+    PolicyMgmtPage.clickNext();
+    let actualPolicytitle2;
+    PolicyMgmtPage.lastPolicyTitle.invoke('text').then((text) => {
+      actualPolicytitle2 = text.trim();
+    });
+
+    expect(actualPolicytitle1).to.equal(actualPolicytitle2);
+    expect(actualPolicytitle).to.equal(expectedPolicytitle);
+
+  })
+
+  it("HRMIS_5: Verify Asscending and Descending sorting of Policy Ids Modify Policy Page", () => {
+    cy.login();
+    //Navigate to Modify Policy Page
+    sideBar.navigateTo("Policy Management", "Modify Policy");
+    PolicyMgmtPage.modifyPolicyLbl.should('be.visible');
+
+    let textsList1 = [];
+    let textsList2 = [];
+
+    cy.getColumnTexts('tbody tr td:nth-child(1)').then((texts) => {
+      textsList1 = [...texts].sort().reverse(); 
+      cy.log("textsList1 (descending):", textsList1); 
+    });
+
+    // Click the sorting icon twice to change the order
+    PolicyMgmtPage.clickOnPolicyIds();
+    //PolicyMgmtPage.clickOnPolicyIds();
+   
+    // Get the new sorted list
+    cy.getColumnTexts('tbody tr td:nth-child(1)').then((texts) => {
+      textsList2 = [...texts]; 
+      cy.log("textsList2 (after clicks):", textsList2); 
+      const sortedTextsList2 = [...textsList2].sort().reverse();
+      expect(sortedTextsList2).to.deep.equal(textsList1);
+    });
+
+
+  })
+
+
+
+  it("HRMIS_6: Verify 'view Policy' Page", () => {
     cy.login();
 
     //Navigate to View Policy Page
@@ -157,13 +222,80 @@ describe("Policy Management Tests", () => {
     ViewPolicyMgmt.searchPolicy("Inavlid");
     ViewPolicyMgmt.noRecordeLbl.should('be.visible').and('have.text', 'No Record Available');
 
-     // verify Policy should downloded
-     ViewPolicyMgmt.searchTxt.clear();
-     ViewPolicyMgmt.searchPolicy();
-     cy.wait(1000);
-     ViewPolicyMgmt.clickOnView();
-     ViewPolicyMgmt.checkDownloadFile('cypress/downloads/ECardsCCIT112126022926502 (2) (6).pdf');
+    // verify Policy should downloded
+    ViewPolicyMgmt.searchTxt.clear();
+    ViewPolicyMgmt.searchPolicy();
+    cy.wait(1000);
+    ViewPolicyMgmt.clickOnView();
+    ViewPolicyMgmt.checkDownloadFile('cypress/downloads/ECardsCCIT112126022926502 (2) (6).pdf');
 
   })
+
+
+  it("HRMIS_7: Verify 'Next' and 'Previous' Pagination button View Policy Page", () => {
+    cy.login();
+    //Navigate to Modify Policy Page
+    sideBar.navigateTo("Policy Management", "View Policy");
+    PolicyMgmtPage.modifyPolicyLbl.should('be.visible');
+
+    // expected policy 
+    let expectedPolicytitle;
+    PolicyMgmtPage.lastPolicyTitle.invoke('text').then((text) => {
+      expectedPolicytitle = text.trim();
+    });
+
+    PolicyMgmtPage.clickNext();
+    let actualPolicytitle1;
+    PolicyMgmtPage.lastPolicyTitle.invoke('text').then((text) => {
+      actualPolicytitle1 = text.trim();
+    });
+    PolicyMgmtPage.clickPrevious();
+
+    let actualPolicytitle;
+    PolicyMgmtPage.lastPolicyTitle.invoke('text').then((text) => {
+      actualPolicytitle = text.trim();
+    });
+
+    PolicyMgmtPage.clickNext();
+    let actualPolicytitle2;
+    PolicyMgmtPage.lastPolicyTitle.invoke('text').then((text) => {
+      actualPolicytitle2 = text.trim();
+    });
+
+    expect(actualPolicytitle1).to.equal(actualPolicytitle2);
+    expect(actualPolicytitle).to.equal(expectedPolicytitle);
+
+  })
+
+  it("HRMIS_8: Verify Asscending and Descending sorting of Policy Ids View Policy Page", () => {
+    cy.login();
+    //Navigate to Modify Policy Page
+    sideBar.navigateTo("Policy Management", "View Policy");
+    PolicyMgmtPage.modifyPolicyLbl.should('be.visible');
+
+    let textsList1 = [];
+    let textsList2 = [];
+
+    cy.getColumnTexts('tbody tr td:nth-child(1)').then((texts) => {
+      textsList1 = [...texts].sort().reverse(); 
+      cy.log("textsList1 (descending):", textsList1); 
+    });
+
+    // Click the sorting icon twice to change the order
+    PolicyMgmtPage.clickOnPolicyIds();
+    //PolicyMgmtPage.clickOnPolicyIds();
+   
+    // Get the new sorted list
+    cy.getColumnTexts('tbody tr td:nth-child(1)').then((texts) => {
+      textsList2 = [...texts]; 
+      cy.log("textsList2 (after clicks):", textsList2); 
+      const sortedTextsList2 = [...textsList2].sort().reverse();
+      expect(sortedTextsList2).to.deep.equal(textsList1);
+    });
+
+
+  })
+
+
 
 });

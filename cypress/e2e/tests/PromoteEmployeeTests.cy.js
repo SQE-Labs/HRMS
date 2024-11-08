@@ -56,6 +56,10 @@ describe("Employee Managment Promote Employee Tests", () => {
         PromoteEmployeePage.clickOnPromote();
         PromoteEmployeePage.promotePopHeaderLbl.should('have.text','Promote Employee');
 
+        // Clear the pre-selected value 
+        PromoteEmployeePage.selectDepartment("Select Department");
+        PromoteEmployeePage.selectDesignation("Select Designation");
+
         // When no department is selected.
         PromoteEmployeePage.clickOnSubmitBtn();
         PromoteEmployeePage.assertDepartmentValidation('Please select an item in the list.');
