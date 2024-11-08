@@ -76,19 +76,32 @@ Cypress.Commands.add('selectDrpValueByText', (locator, text, isSearchable = fals
         if (searchInputLocator) {
             // Wait and type the text in the search input field
             searchInputLocator.wait(1000).type(text);
-            
+            const selectorNumbers = [2, 3, 4, 5, 6, 7];
+            const selectors = selectorNumbers.map(
+                (num) => `#react-select-${num}-listbox span,#react-select-${num}-listbox, #react-select-${num}-listbox div div`
+            ).join(', ');
             // Click the correct option in the dropdown
-            cy.get("#react-select-2-listbox span, #react-select-3-listbox span").contains(text).click();
-        } 
+            cy.get(selectors).contains(text).click();
+        }
     } else {
         // Standard dropdown (non-searchable)
         locator.select(text).should('contain', text);
     }
-      
+
+});
+
+
+// get texts from the column 
+Cypress.Commands.add('getColumnTexts', (selector) => {
+    return cy.get(selector).then(($cells) => {
+        return Cypress._.map($cells, 'textContent').map(text => text.trim());
+    });
 });
 
 
 
-  
+
+
+
 
 

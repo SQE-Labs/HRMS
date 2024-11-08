@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "cypress:open": "cypress open",
-    "cypress:run:chrome": "cypress run --browser chrome",
+    "cypress:run:chrome": "cypress run --browser chrome  --spec 'cypress/e2e/tests/*.cy.js'",
     "cypress:run:chrome:headed": "cypress run --browser chrome --headed",
     "test": "npm run cypress:run:chrome",
     "test:headed": "npm run cypress:run:chrome:headed"

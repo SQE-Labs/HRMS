@@ -1,6 +1,12 @@
 import sideBar from "../components/SideBar";
 import EvaluateEmployeePage from "../pages/EvaluateEmployeePage";
 
+let testData;
+before(function(){
+    cy.fixture('data').then((data) => {
+        testData = data;
+      });
+})
 
 describe("Evaluate Employee Tests", () => {
 
@@ -12,7 +18,7 @@ describe("Evaluate Employee Tests", () => {
     EvaluateEmployeePage.evaluateEmployeeTxt.should('be.visible');
 
     //Verify that Evaluate Employee form opens up on selecting any option from 'Select Employee' dropdown.
-    EvaluateEmployeePage.selectEmployee("DDinesh D Kumar");
+    EvaluateEmployeePage.selectEmployee(testData.EmployeeName);
     EvaluateEmployeePage.evaluateFormTxt.should('be.visible');
 
     //verify form fields are clear after clicking on reset button

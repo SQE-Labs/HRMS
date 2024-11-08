@@ -33,7 +33,7 @@ describe("Employee Onboard Tests", () => {
         // New Employee Details test Data
         const JoineeData = {
             JoineeEmail: joineePersonalMail,
-            Firstname: generateRandomString(7),
+            Firstname: "Auto "+generateRandomString(7),
             MiddleName: generateRandomString(4),
             LastName: generateRandomString(5),
             Gender: 'Female',
@@ -41,7 +41,7 @@ describe("Employee Onboard Tests", () => {
             DateOfBirth: '2000-09-24',
             AadharNumber: '232324324342',
             PanNumber: 'BSSSS1233D',
-            DateOfJoining: '2024-09-23',
+            DateOfJoining: '2024-11-23',
             MaritalStatus: 'Single',
             PassportNo: generateRandomString(1) + generateRandomNumber(11),
             PhoneNumber: '6448744833',
@@ -51,10 +51,12 @@ describe("Employee Onboard Tests", () => {
             PresentAddress: 'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016',
             PermanentAddress: 'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016',
             CaeliusEmail: generateRandomCaeliusEmail(6),
-            Department: 'Marketing',
-            Designation: 'Demooo',
-            AssignManager: 'DDinesh D Kumar',
+            Department: 'GENRIC',
+            Designation: 'Chief People Officer',
+            AssignManager: 'Jitendra Kumar',
             EmployeeType: 'REGULAR',
+            LeaveManager:'Manjeet Saini',
+            EmpSubType:'Intern',
             messagesToValidate : [
                 'Thank you!',
                 'Your submission has been sent successfully.',
@@ -131,8 +133,8 @@ describe("Employee Onboard Tests", () => {
         
         // Viewing Newly Onboard Invitation
         L1ApprovalActionPage.selectItemsPerPage();
-        L1ApprovalActionPage.clickOnPagenationNextButton();
-        L1ApprovalActionPage.clickOnPagenationNextButton();
+        // L1ApprovalActionPage.clickOnPagenationNextButton();
+        L1ApprovalActionPage.clickNextUntilDisabled();
         L1ApprovalActionPage.SearchNewJoineeByName(JoineeData.Firstname);
 
         // L1ApprovalAction.validateEmailForNewJoinee();
@@ -177,8 +179,12 @@ describe("Employee Onboard Tests", () => {
         sideBar.navigateTo("Employee Onboard", "HR Approval");
 
         // Viewing Newly Onboard Invitation to HR Approval Page
+        cy.debug();
+        cy.wait(1000);
         L1ApprovalActionPage.selectItemsPerPage();
-        L1ApprovalActionPage.clickOnPagenationNextButton();
+        cy.wait(1000);
+        L1ApprovalActionPage.clickNextUntilDisabled();
+       //L1ApprovalActionPage.clickOnPagenationNextButton();
         L1ApprovalActionPage.SearchNewJoineeByName(JoineeData.Firstname);
 
         // Verify that only single result appears
@@ -213,9 +219,12 @@ describe("Employee Onboard Tests", () => {
 
         //HRApproval.caeliusEmail.should('have,text',JoineeData.CaeliusEmail);
         HRApprovalPage.selectDepartment(JoineeData.Department);
+        cy.wait(1000);
         HRApprovalPage.selectDesignation(JoineeData.Designation);
         HRApprovalPage.selectAssignManager(JoineeData.AssignManager);
         HRApprovalPage.selectEmployeeType(JoineeData.EmployeeType);
+        HRApprovalPage.selectLeaveManager(JoineeData.LeaveManager)
+        HRApprovalPage.selectEmplSubtype(JoineeData.EmpSubType)
         HRApprovalPage.clickApproveButton();
 
         // Validating the Thank You Success message
