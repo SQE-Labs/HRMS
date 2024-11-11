@@ -16,6 +16,7 @@ get submitBtn(){return cy.get("button[type='Submit']")}
 get crossIconBtn(){return cy.get("#staticBackdropLabel + button")}
 get DepartmentNameTxt() {return cy.get("input[name='name']")}
 get departmentCount(){return cy.get("#showMenuBtn ~ div span")}
+get editLastDepartment(){return cy.get("tbody tr:last-of-type td a")}
 
 // Method
 
@@ -81,6 +82,10 @@ assertDepartmentCount(expectedCount){
       expect(actualCount).to.equal(expectedCountNum+1); 
   })
  
+}
+
+clickOnEditBtn(){
+  this.editLastDepartment.click();
 }
 
 }

@@ -40,17 +40,17 @@ describe("Setting Department Tests", () => {
 
         sideBar.navigateTo("Settings", "Departments");
         DepartmentsPage.clickOnAddDepartment();
-        DepartmentsPage.addUpdateDepartmentHeader.should('be.visible').and('have.text','Add  Department')
-       
+        DepartmentsPage.addUpdateDepartmentHeader.should('be.visible').and('have.text', 'Add  Department')
+
         // cancel button functionality 
         DepartmentsPage.clickOnCancelBtn();
         DepartmentsPage.addUpdateDepartmentHeader.should('not.be.visible')
 
         DepartmentsPage.clickOnAddDepartment();
-        // cancel button functionality 
+        // cross button functionality 
         DepartmentsPage.clickOnCrossIcon();
         DepartmentsPage.addUpdateDepartmentHeader.should('not.be.visible')
-       
+
     });
 
 
@@ -61,33 +61,76 @@ describe("Setting Department Tests", () => {
 
         sideBar.navigateTo("Settings", "Departments");
         DepartmentsPage.clickOnAddDepartment();
-        
+
         DepartmentsPage.clickOnSubmit();
-        DepartmentsPage.assertValidation(DepartmentsPage.DepartmentNameTxt,'Please fill out this field.')  
+        DepartmentsPage.assertValidation(DepartmentsPage.DepartmentNameTxt, 'Please fill out this field.')
     });
 
-    it.only("HRMIS_4: Verify new department added on clicking submit button", () => {
+    it("HRMIS_4: Verify new department added on clicking submit button", () => {
 
         // login to Application
         cy.login();
-        const departmentName = "Department Auto " +generateRandomString(5);
+        const departmentName = "Department Auto " + generateRandomString(5);
         expect(departmentName.length).to.be.at.least(21);
         sideBar.navigateTo("Settings", "Departments");
         let deptCountBefore;
         DepartmentsPage.departmentCount.invoke('text').then((text) => {
             deptCountBefore = text.trim();
-          });
+        });
         DepartmentsPage.clickOnAddDepartment();
         DepartmentsPage.enterDepartmentName(departmentName);
         DepartmentsPage.clickOnSubmit();
         cy.validateSuccessMessages("Department created successfully!");
         DepartmentsPage.searchDepartment(departmentName);
         DepartmentsPage.assertSearchDepartment();
-        cy.then(()=>{
+        cy.then(() => {
             DepartmentsPage.assertDepartmentCount(deptCountBefore);
-          })
+        })
 
-        
+
+    });
+
+
+    it("HRMIS_5: Verify edit department , Cancel and cross button", () => {
+
+        // login to Application
+        cy.login();
+        const departmentName = "Department Auto " + generateRandomString(5);
+        expect(departmentName.length).to.be.at.least(21);
+        sideBar.navigateTo("Settings", "Departments");
+        DepartmentsPage.searchDepartment("Department Auto ");
+        DepartmentsPage.clickOnEditBtn();
+        DepartmentsPage.departmentHeader.should('be.visible').and('have.text', 'Departments');
+        // cancel button functionality 
+        DepartmentsPage.clickOnCancelBtn();
+        DepartmentsPage.addUpdateDepartmentHeader.should('not.be.visible')
+
+        DepartmentsPage.clickOnEditBtn();
+        // cross button functionality 
+        DepartmentsPage.clickOnCrossIcon();
+        DepartmentsPage.addUpdateDepartmentHeader.should('not.be.visible');
+
+    });
+
+
+    it.only("HRMIS_6: Verify edit department , Cancel and cross button", () => {
+
+        // login to Application
+        cy.login();
+        const departmentName = "Department Updated " + generateRandomString(5);
+        expect(departmentName.length).to.be.at.least(21);
+        sideBar.navigateTo("Settings", "Departments");
+        DepartmentsPage.searchDepartment("Department Auto ");
+        DepartmentsPage.clickOnEditBtn();
+       
+        // validation messages verification 
+        DepartmentsPage.DepartmentNameTxt.clear();
+        DepartmentsPage.clickOnSubmit();
+        DepartmentsPage.assertValidation(DepartmentsPage.DepartmentNameTxt,'Please fill out this field.');
+        DepartmentsPage.enterDepartmentName(departmentName);
+        DepartmentsPage.clickOnSubmit();
+        DepartmentsPage.searchDepartment(departmentName);
+        DepartmentsPage.assertSearchDepartment("Department successfully updated!");
     });
 
 
