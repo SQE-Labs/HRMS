@@ -53,7 +53,7 @@ describe("Employee Onboard Tests", () => {
             CaeliusEmail: generateRandomCaeliusEmail(6),
             Department: 'GENRIC',
             Designation: 'Chief People Officer',
-            AssignManager: 'Jitendra Kumar',
+            AssignManager: 'Manjeet Saini',
             EmployeeType: 'REGULAR',
             LeaveManager:'Manjeet Saini',
             EmpSubType:'Intern',
