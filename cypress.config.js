@@ -6,6 +6,7 @@ const path = require('path');
 const fs = require('fs');
 
 module.exports = defineConfig({
+  specPattern: 'cypress/e2e/**/*.cy.js',
   chromeWebSecurity: false,
   experimentalModifyObstructiveThirdPartyCode: true,
   reporter: 'cypress-mochawesome-reporter',
