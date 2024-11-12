@@ -113,7 +113,7 @@ describe("Setting Department Tests", () => {
     });
 
 
-    it.only("HRMIS_6: Verify edit department , Cancel and cross button", () => {
+    it.only("HRMIS_6: Verify Update Department.", () => {
 
         // login to Application
         cy.login();
