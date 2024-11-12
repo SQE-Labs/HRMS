@@ -51,5 +51,18 @@
 
     "AssetsNames":{
     "Keyboard":"Keyboard"
-    }
+    },
+    "Departments":{
+        "Genric":"GENRIC",
+        "AutomationTesting":"Automation Testing"
+    },
+   "Designations":{
+    "Genric":[
+        "CEO & Chief Architect",
+        "Co Founder & COO",
+        "VP Sucess Manager & Sales",
+        "Chief People Officer",
+        "Piyush Dogra"
+      ]
+   }
 }
