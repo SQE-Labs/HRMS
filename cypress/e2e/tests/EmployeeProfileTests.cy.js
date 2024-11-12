@@ -162,7 +162,7 @@ describe("Employee Profile Tests", () => {
 
     });
 
-    it.only("HRMIS_4: Verify that the 'Work' accordion expands, and validate the update and close functionalities.", () => {
+    it("HRMIS_4: Verify that the 'Work' accordion expands, and validate the update and close functionalities.", () => {
 
         // Verify that 'Work' accordion gets expanded, when user clicks 'Work' accordion.
         EmployeeListPage.navigateToUserDashboardPage(testData.EmployeeName);
