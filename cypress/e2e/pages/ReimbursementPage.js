@@ -130,15 +130,6 @@ assert_SubMenus(submenus) {
 }
 
 
-// assertDepartmentCount(expectedCount){
-//   this.departmentCount.invoke('text').then((Count) => {
-//         const actualCount = parseInt(Count, 10); 
-//         const expectedCountNum = parseInt(expectedCount, 10);
-//       expect(actualCount).to.equal(expectedCountNum+1); 
-//   })
- 
-// }
-
 }
 
 
