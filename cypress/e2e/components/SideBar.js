@@ -14,6 +14,13 @@ class SideBar {
         });
         Loaders.threeDotLoading.should("not.exist");
     }
+
+    clickOnSideBar(siderBar){
+        cy.wait(1000);
+        cy.get('li a').contains(siderBar).scrollIntoView().wait(1000).click({force:true});
+        cy.wait(1000);
+        Loaders.threeDotLoading.should("not.exist");
+    }
 }
 
 export default new SideBar();
