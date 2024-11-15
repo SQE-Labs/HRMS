@@ -89,7 +89,8 @@
     "Withdraw":"Withdraw"
    },
    "ReimbursementStatus":{
-    "PendingAdmin" : "Pending-Admin"
+    "PendingAdmin" : "Pending-Admin",
+    "Withdraw":"Withdrawn"
    },
 
     "UnsportedFileWarningMessage" : "Unsupported file type. Please upload a valid document, PDF, JPG, PNG and JPEG."

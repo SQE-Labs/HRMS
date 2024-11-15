@@ -1,6 +1,6 @@
 import sideBar from "../components/SideBar";
 import ReimbursementPage from "../pages/ReimbursementPage";
-import { generateRandomString,generateRandomNumber } from '../../support/utils';
+import { generateRandomString, generateRandomNumber } from '../../support/utils';
 
 
 let testData;
@@ -21,6 +21,14 @@ describe("Reimbursement Tests", () => {
         ReimbursementPage.assert_SubMenus(testData.ExpenseManagment.SubMenus);
 
         ReimbursementPage.reimbursementHeader.should('be.visible').and('have.text', 'Reimbursement');
+
+        // select Item Per Page 20
+        ReimbursementPage.selectItemPerPage('5');
+        ReimbursementPage.itemPerPageDrp.should('have.value', '5');
+        ReimbursementPage.gridRows.should('have.length', 5);
+
+        ReimbursementPage.selectItemPerPage('10');
+
         // get and search valid data from the grid
         ReimbursementPage.search_Reimbursement_Type();
         ReimbursementPage.assert_Search_Reimbursement_Type();
@@ -48,7 +56,51 @@ describe("Reimbursement Tests", () => {
 
 
 
-    it("HRMIS_3: Verify Reimbursement Request ", () => {
+    it("HRMIS_3: Verify 'Next' and 'Previous' Pagination button Reimbursement Page", () => {
+        cy.login();
+        sideBar.navigateTo("Expense Management", "Reimbursement");
+        
+        // Declare variables to store the values
+        let expectedRequest, actualRequestName, actualRequestName1, actualRequestName2;
+        
+        // Step 1: Capture the initial reimbursement name
+        ReimbursementPage.lastReimbursmentName
+          .invoke('text')
+          .then((text) => {
+            expectedRequest = text.trim();
+        
+            // Step 2: Click Next and capture the next reimbursement name
+            ReimbursementPage.clickNext();
+            return ReimbursementPage.lastReimbursmentName.invoke('text');
+          })
+          .then((text) => {
+            actualRequestName1 = text.trim();
+        
+            // Step 3: Click Previous and capture the previous reimbursement name
+            ReimbursementPage.clickPrevious();
+            return ReimbursementPage.lastReimbursmentName.invoke('text');
+          })
+          .then((text) => {
+            actualRequestName = text.trim();
+        
+            // Step 4: Click Next again and capture the reimbursement name
+            ReimbursementPage.clickNext();
+            return ReimbursementPage.lastReimbursmentName.invoke('text');
+          })
+          .then((text) => {
+            actualRequestName2 = text.trim();
+        
+            // Assertions
+            expect(actualRequestName1).to.equal(actualRequestName2);
+            expect(actualRequestName).to.equal(expectedRequest);
+          });
+        
+    
+      })
+
+
+
+    it("HRMIS_4: Verify Reimbursement Request ", () => {
 
         // login to Application
         cy.login();
@@ -101,13 +153,58 @@ describe("Reimbursement Tests", () => {
         ReimbursementPage.clickOnSubmit();
         cy.validateSuccessMessages("Successfully Sent!");
         cy.wait(1000);
-        ReimbursementPage.lastReimbursmentName.should('have.text',testData.ReimbursementTypes.InternetClaim)
-        ReimbursementPage.lastInvoiceNo.should('have.text',invoiceNumber);
-        ReimbursementPage.lastRowActionLbl.should('have.text',testData.ReimbursementAction.Withdraw);
-        ReimbursementPage.lastRequestStatus.should('have.text',testData.ReimbursementStatus.PendingAdmin);
+        ReimbursementPage.clickNextUntilDisabled();
+        ReimbursementPage.lastReimbursmentName.should('have.text', testData.ReimbursementTypes.InternetClaim)
+        ReimbursementPage.lastInvoiceNo.should('have.text', invoiceNumber);
+        ReimbursementPage.lastRowActionLbl.should('have.text', testData.ReimbursementAction.Withdraw);
+        ReimbursementPage.lastRequestStatus.should('have.text', testData.ReimbursementStatus.PendingAdmin);
+    });
+
+    it("HRMIS_5: Verify Reimbursement Withdraw Button pop up", () => {
+
+        // login to Application
+        cy.login();
+        sideBar.navigateTo("Expense Management", "Reimbursement");
+        ReimbursementPage.clickNextUntilDisabled();
+        ReimbursementPage.clickOnWithDrawAction();
+        ReimbursementPage.withDrawReimbursementLbl.should('be.visible').and('have.text', 'Withdraw Reimbursement');
+
+        // Cancel Button
+        ReimbursementPage.clickOn_cancelBtn();
+        ReimbursementPage.withDrawReimbursementLbl.should('not.be.visible');
+
+        ReimbursementPage.clickOnWithDrawAction();
+
+        // cross button
+        ReimbursementPage.clickOn_CrossIconBtn();
+        ReimbursementPage.withDrawReimbursementLbl.should('not.be.visible');
+
+
+
     });
 
 
+    it("HRMIS_6: Verify Reimbursement Withdraw, comment validation and downlode Attachment", () => {
+
+        // login to Application
+        cy.login();
+        sideBar.navigateTo("Expense Management", "Reimbursement");
+        ReimbursementPage.clickNextUntilDisabled();
+        ReimbursementPage.clickOnWithDrawAction();
+
+        ReimbursementPage.clickOn_withDrawBtn();
+        ReimbursementPage.assertValidation(ReimbursementPage.comment_Txt, 'Please fill out this field.')
+
+        ReimbursementPage.clickOnViewBtn();
+        ReimbursementPage.checkFile('cypress/downloads/dummy.pdf');
+
+        ReimbursementPage.enter_Comment("Commented");
+        ReimbursementPage.clickOn_withDrawBtn();
+        ReimbursementPage.lastRowAction_Lbl.should('have.text', '-');
+        cy.validateSuccessMessages("Successfully Status Changed to Withdrawn");
+        ReimbursementPage.lastRequestStatus.should('have.text', testData.ReimbursementStatus.Withdraw);
+
+    });
 
 
 

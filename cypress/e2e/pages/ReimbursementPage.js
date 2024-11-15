@@ -27,8 +27,47 @@ get lastReimbursmentName(){return cy.get("tbody tr:last-of-type td[data-title='n
 get lastInvoiceNo(){return cy.get("tbody tr:last-of-type td[data-title='invoiceNo']")}
 get lastRequestStatus(){return cy.get("tbody tr:last-of-type td[data-title='trackingStatus']")}
 get lastRowActionLbl(){return cy.get("tbody tr:last-of-type td a")}
+get withDrawReimbursementLbl() { return cy.get("#staticBackdropLabel") }
+get cancelBtn() { return cy.xpath("//button[@type='button'][text()='Cancel']") }
+get withDrawBtn() { return cy.get("button[type='Submit']") }
+get crossIconBtn() { return cy.get("#staticBackdropLabel + button") }
+get viewBtn(){return cy.get("#staticBackdropAssetwithdraw div > a")}
+get lastRowAction_Lbl(){return cy.get("tbody tr:last-of-type td p")}
+get itemPerPageDrp() { return cy.get("#itemsPerPage") }
+get gridRows() { return cy.get("tbody tr") }
+
 
 // Methods
+
+selectItemPerPage(count) {
+  cy.selectDrpValueByText(this.itemPerPageDrp, count, false)
+}
+
+checkFile(path){
+  cy.readFile(path)
+ .should('exist')
+}
+
+clickOnViewBtn(){
+  this.viewBtn.click();
+}
+
+clickOn_cancelBtn(){
+  this.cancelBtn.wait(500).click();
+}
+
+clickOn_withDrawBtn(){
+  this.withDrawBtn.click();
+}
+
+clickOn_CrossIconBtn(){
+  this.crossIconBtn.wait(500).click();
+}
+
+
+clickOnWithDrawAction(){
+  this.lastRowActionLbl.click();
+}
 
 getValidationMessage(element) {
   return element.invoke('prop', 'validationMessage');
@@ -127,6 +166,35 @@ assert_SubMenus(submenus) {
     .each((element, index) => {
       expect(element.text().trim()).to.equal(submenus[index]);
     });
+}
+
+clickNextUntilDisabled() {
+  cy.get('ul.pagination li').contains('Next').should('be.visible').then(($nextButton) => {
+    if (!$nextButton.parent().hasClass('disabled')) {
+      cy.wrap($nextButton).click({ force: true });
+      cy.wait(1000);
+      this.clickNextUntilDisabled();
+    }
+  });
+}
+
+
+clickNext() {
+  cy.get('ul.pagination li').contains('Next').should('be.visible').then(($nextButton) => {
+      if (!$nextButton.parent().hasClass('disabled')) {
+          cy.wrap($nextButton).click({ force: true });
+          cy.wait(1000);
+      }
+  });
+}
+
+clickPrevious() {
+  cy.get('ul.pagination li').contains('Previous').should('be.visible').then(($nextButton) => {
+      if (!$nextButton.parent().hasClass('disabled')) {
+          cy.wrap($nextButton).click({ force: true });
+          cy.wait(1000);
+      }
+  });
 }
 
 

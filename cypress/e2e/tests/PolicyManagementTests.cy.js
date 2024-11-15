@@ -138,36 +138,45 @@ describe("Policy Management Tests", () => {
 
   it("HRMIS_4: Verify 'Next' and 'Previous' Pagination button Modify Policy Page", () => {
     cy.login();
-    //Navigate to Modify Policy Page
+
+    // Navigate to Modify Policy Page
     sideBar.navigateTo("Policy Management", "Modify Policy");
     PolicyMgmtPage.modifyPolicyLbl.should('be.visible');
-
-    // expected policy 
-    let expectedPolicytitle;
-    PolicyMgmtPage.lastPolicyTitle.invoke('text').then((text) => {
-      expectedPolicytitle = text.trim();
-    });
-
-    PolicyMgmtPage.clickNext();
-    let actualPolicytitle1;
-    PolicyMgmtPage.lastPolicyTitle.invoke('text').then((text) => {
-      actualPolicytitle1 = text.trim();
-    });
-    PolicyMgmtPage.clickPrevious();
-
-    let actualPolicytitle;
-    PolicyMgmtPage.lastPolicyTitle.invoke('text').then((text) => {
-      actualPolicytitle = text.trim();
-    });
-
-    PolicyMgmtPage.clickNext();
-    let actualPolicytitle2;
-    PolicyMgmtPage.lastPolicyTitle.invoke('text').then((text) => {
-      actualPolicytitle2 = text.trim();
-    });
-
-    expect(actualPolicytitle1).to.equal(actualPolicytitle2);
-    expect(actualPolicytitle).to.equal(expectedPolicytitle);
+    
+    // Step 1: Capture the initial policy title
+    let expectedPolicyTitle, actualPolicyTitle1, actualPolicyTitle, actualPolicyTitle2;
+    
+    PolicyMgmtPage.lastPolicyTitle
+      .invoke('text')
+      .then((text) => {
+        expectedPolicyTitle = text.trim();
+    
+        // Step 2: Click Next and capture the next policy title
+        PolicyMgmtPage.clickNext();
+        return PolicyMgmtPage.lastPolicyTitle.invoke('text');
+      })
+      .then((text) => {
+        actualPolicyTitle1 = text.trim();
+    
+        // Step 3: Click Previous and capture the previous policy title
+        PolicyMgmtPage.clickPrevious();
+        return PolicyMgmtPage.lastPolicyTitle.invoke('text');
+      })
+      .then((text) => {
+        actualPolicyTitle = text.trim();
+    
+        // Step 4: Click Next again and capture the policy title
+        PolicyMgmtPage.clickNext();
+        return PolicyMgmtPage.lastPolicyTitle.invoke('text');
+      })
+      .then((text) => {
+        actualPolicyTitle2 = text.trim();
+    
+        // Assertions
+        expect(actualPolicyTitle1).to.equal(actualPolicyTitle2);
+        expect(actualPolicyTitle).to.equal(expectedPolicyTitle);
+      });
+    
 
   })
 
