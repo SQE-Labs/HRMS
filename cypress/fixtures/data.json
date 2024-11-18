@@ -93,6 +93,10 @@
     "Withdraw":"Withdrawn"
    },
 
-    "UnsportedFileWarningMessage" : "Unsupported file type. Please upload a valid document, PDF, JPG, PNG and JPEG."
+    "UnsportedFileWarningMessage" : "Unsupported file type. Please upload a valid document, PDF, JPG, PNG and JPEG.",
+    "VehicalType":{
+    "TwoWheeler" : "Two Wheeler",
+    "FourWheeler":"Four Wheeler"
+   }
   
 }

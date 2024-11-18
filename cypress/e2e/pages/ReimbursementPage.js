@@ -35,6 +35,10 @@ get viewBtn(){return cy.get("#staticBackdropAssetwithdraw div > a")}
 get lastRowAction_Lbl(){return cy.get("tbody tr:last-of-type td p")}
 get itemPerPageDrp() { return cy.get("#itemsPerPage") }
 get gridRows() { return cy.get("tbody tr") }
+get fromPlaceTxt() {return cy.get("input[name='fromPlace']")}
+get toPlaceTxt(){return cy.get("input[name='toPlace']")}
+get vehicalTypeDrp(){return cy.get("#vehicleType")}
+get distanceTxt(){return cy.get("input[name='distance']")}
 
 
 // Methods
@@ -115,8 +119,20 @@ enter_reimbursementAmount(text){
   this.reimbursementAmount_Txt.type(text).should('have.value',text);
 }
 
+enterPlaceName(Locator,text){
+  Locator.type(text).should('have.value',text);
+}
+
+enter_Distance(text){
+  this.distanceTxt.type(text).should('have.value',text);
+}
+
 select_reimbursementType(type){
   cy.selectDrpValueByText(this.reimbursementType_Drp, type, false)
+}
+
+select_VehicalType(type){
+  cy.selectDrpValueByText(this.vehicalTypeDrp, type, false)
 }
 
 enter_InvoiceNo(text){
