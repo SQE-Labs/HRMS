@@ -64,5 +64,39 @@
         "Chief People Officer",
         "Piyush Dogra"
       ]
+   },
+   "ExpenseManagment":{
+    "Menu":"Expense Management",
+    "SubMenus":[
+        "Reimbursement",
+        "Approve Reimbursement",
+        "Download Reimbursement",
+        "Bulk Paid"
+      ]
+   },
+   "ReimbursementTypes":{
+    "InternetClaim":"Internet Claim",
+    "TravelExpense":"Travel Expense",
+    "Miscellaneous":"Miscellaneous" 
+   },
+
+   "ReimbursementDates":{
+    "InvoiceDate":"2024-11-06",
+    "FromDate":"2024-11-11",
+    "ToDate":"2024-11-13" 
+   },
+   "ReimbursementAction":{
+    "Withdraw":"Withdraw"
+   },
+   "ReimbursementStatus":{
+    "PendingAdmin" : "Pending-Admin",
+    "Withdraw":"Withdrawn"
+   },
+
+    "UnsportedFileWarningMessage" : "Unsupported file type. Please upload a valid document, PDF, JPG, PNG and JPEG.",
+    "VehicalType":{
+    "TwoWheeler" : "Two Wheeler",
+    "FourWheeler":"Four Wheeler"
    }
+  
 }

@@ -88,7 +88,7 @@ describe("Setting Designation Tests", () => {
 
 
 
-    it("HRMIS_4: Clean up for Designation", () => {
+    it("HRMIS_5: Clean up for Designation", () => {
 
         // login to Application
         cy.login();
@@ -112,7 +112,7 @@ describe("Setting Designation Tests", () => {
 
     });
 
-    it("HRMIS_5: Verify edit department , Cancel and cross button", () => {
+    it("HRMIS_6: Verify Add designation , Cancel and cross button", () => {
 
         // login to Application
         cy.login();
@@ -135,7 +135,7 @@ describe("Setting Designation Tests", () => {
     });
 
 
-    it("HRMIS_6: Verify validation messages on Add Designation pop up", () => {
+    it("HRMIS_7: Verify validation messages on Add Designation pop up", () => {
 
         // login to Application
         cy.login();
@@ -150,7 +150,7 @@ describe("Setting Designation Tests", () => {
         DesignationPage.assertValidation(DesignationPage.designationNameTxt, 'Please fill out this field.')
     });
 
-    it("HRMIS_7: Verify new designation added on clicking submit button", () => {
+    it("HRMIS_8: Verify new designation added on clicking submit button", () => {
 
         // login to Application
         cy.login();

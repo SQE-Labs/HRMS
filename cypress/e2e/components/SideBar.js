@@ -14,6 +14,7 @@ class SideBar {
         });
         Loaders.threeDotLoading.should("not.exist");
     }
+
 }
 
 export default new SideBar();
