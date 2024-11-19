@@ -1,5 +1,6 @@
 import sideBar from "../components/SideBar";
 import AssetMgmtPage from "../pages/AssetMgmtPage"
+import AssetDashBoardPage from "../pages/AssetDashBoardPage"
 import { generateRandomString } from '../../support/utils';
 
 let testData;
@@ -57,6 +58,47 @@ describe("Employee Asset Managment Request Tests", () => {
         AssetMgmtPage.clickNextUntilDisabled();
         AssetMgmtPage.lastRequestReason.should('have.text',reason);
 
+    });
+
+
+    it("HRMIS_4: Verify Asset Management Subtabs and Asset Dashboard Page  ", () => {
+
+        // login to Application
+        cy.login(); 
+        sideBar.navigateTo("Asset Management","Asset Dashboard");
+        AssetDashBoardPage.assert_SubMenus(testData.AssetManagement.SubMenus);
+        AssetDashBoardPage.DashBoardHeader.should('be.visible').and('have.text','Asset Dashboard')
+
+    });
+
+    it("HRMIS_5: Verify Asset Type Filter on Dashboard Page  ", () => {
+
+        // login to Application
+        cy.login(); 
+        sideBar.navigateTo("Asset Management","Asset Dashboard");
+        AssetDashBoardPage.selectAssetType(testData.AssetsNames.Keyboard);
+        AssetDashBoardPage.clickOnFilterBtn();
+        AssetDashBoardPage.assertAllCardsContainKeyword(AssetDashBoardPage.assetCards,testData.AssetsNames.Keyboard);
+    });
+
+    it("HRMIS_6: Verify Asset Type Filter 'No Record Available' on Dashboard Page  ", () => {
+
+        // login to Application
+        cy.login(); 
+        sideBar.navigateTo("Asset Management","Asset Dashboard");
+        AssetDashBoardPage.selectAssetType(testData.AssetsNames.Pendrive);
+        AssetDashBoardPage.clickOnFilterBtn();
+        AssetDashBoardPage.noRecordeLbl.should('be.visible').and('have.text', 'No Record Available');
+    });
+
+    it.only("HRMIS_7: Verify Asset Owner Filter on Dashboard Page  ", () => {
+
+        // login to Application
+        cy.login(); 
+        sideBar.navigateTo("Asset Management","Asset Dashboard");
+        AssetDashBoardPage.selectAssetOwner(testData.AssetsOwner.Caelius);
+        AssetDashBoardPage.clickOnFilterBtn();
+        AssetDashBoardPage.assertAllCardsContainKeyword(AssetDashBoardPage.assetCardOwner,testData.AssetsOwner.Caelius);
     });
 
 

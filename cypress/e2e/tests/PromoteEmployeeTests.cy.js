@@ -74,16 +74,14 @@ describe("Employee Managment Promote Employee Tests", () => {
     });
 
 
-    it("HRMIS_4: Verify Validation message appears after clicking on submit button when no department or designation is selected", () => {
-        
-        const designations = ['Select Designation','CEO & Chief Architect','Co Founder & COO','VP Sucess Manager & Sales','Chief People Officer','Piyush Dogra'];
-
+    it("HRMIS_4: Verify options list of Desgination associated to Department", () => {
+         
         cy.wait(1000);
         PromoteEmployeePage.selectEmployee(testData.EmployeeName);
         PromoteEmployeePage.clickOnPromote();
         PromoteEmployeePage.promotePopHeaderLbl.should('have.text','Promote Employee');
         PromoteEmployeePage.selectDepartment("GENRIC");
-        PromoteEmployeePage.assertOptionTexts(designations);
+        PromoteEmployeePage.assertOptionTexts(testData.Designations.Options);
 
         })
        
