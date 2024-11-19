@@ -91,7 +91,7 @@ describe("Employee Asset Managment Request Tests", () => {
         AssetDashBoardPage.noRecordeLbl.should('be.visible').and('have.text', 'No Record Available');
     });
 
-    it.only("HRMIS_7: Verify Asset Owner Filter on Dashboard Page  ", () => {
+    it("HRMIS_7: Verify Asset Owner Filter on Dashboard Page  ", () => {
 
         // login to Application
         cy.login(); 
