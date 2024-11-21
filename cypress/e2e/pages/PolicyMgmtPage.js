@@ -180,7 +180,7 @@ class PolicyMgmtPage extends BasePage {
             if (!$nextButton.parent().hasClass('disabled')) {
                 cy.wrap($nextButton).click({ force: true });
                 cy.wait(1000);
-                this.clickNextUntilDisabled();
+                this.clickPreviousUntilDisabled();
             }
         });
     }
