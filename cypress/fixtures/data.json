@@ -120,5 +120,9 @@
     },
     "AssetsOwner": {
         "Caelius": "Caelius"
+    },
+    "AssetAssigneeCol":{
+        "Colunms":["Id","Manufacture","Asset Name","Serial Number","Owner","Action"]
+
     }
 }
