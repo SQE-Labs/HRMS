@@ -10,13 +10,19 @@ before(function(){
       });
 })
 
+beforeEach(() => {
+
+    // login to Application
+    cy.login();
+})
+
 
 describe("Employee Asset Managment Request Tests", () => {
 
     it("HRMIS_1: Verify Asset Request Tab", () => {
 
         // login to Application
-        cy.login(); 
+         
         sideBar.navigateTo("Asset Management", "Asset Request");
         AssetMgmtPage.assetReqHeader.should('be.visible').and('have.text','Asset Request');
         AssetMgmtPage.assetReqBtn.should('be.visible');
@@ -32,7 +38,7 @@ describe("Employee Asset Managment Request Tests", () => {
     it("HRMIS_2: Verify Reset Asset Request Details", () => {
 
         // login to Application
-        cy.login(); 
+         
         sideBar.navigateTo("Asset Management", "Asset Request");
         AssetMgmtPage.clickOnAssetReq();
         AssetMgmtPage.selectAsset_Type('Keyboard');
@@ -47,7 +53,7 @@ describe("Employee Asset Managment Request Tests", () => {
     it("HRMIS_3: Verify Submit Asset Request ", () => {
 
         // login to Application
-        cy.login(); 
+         
         const reason = "Reason For Request "+generateRandomString(5); 
         sideBar.navigateTo("Asset Management", "Asset Request");
         AssetMgmtPage.clickOnAssetReq();
@@ -64,7 +70,7 @@ describe("Employee Asset Managment Request Tests", () => {
     it("HRMIS_4: Verify Asset Management Subtabs and Asset Dashboard Page  ", () => {
 
         // login to Application
-        cy.login(); 
+         
         sideBar.navigateTo("Asset Management","Asset Dashboard");
         AssetDashBoardPage.assert_SubMenus(testData.AssetManagement.SubMenus);
         AssetDashBoardPage.DashBoardHeader.should('be.visible').and('have.text','Asset Dashboard')
@@ -74,7 +80,7 @@ describe("Employee Asset Managment Request Tests", () => {
     it("HRMIS_5: Verify Asset Type Filter on Dashboard Page  ", () => {
 
         // login to Application
-        cy.login(); 
+         
         sideBar.navigateTo("Asset Management","Asset Dashboard");
         AssetDashBoardPage.selectAssetType(testData.AssetsNames.Keyboard);
         AssetDashBoardPage.clickOnFilterBtn();
@@ -85,7 +91,7 @@ describe("Employee Asset Managment Request Tests", () => {
     it("HRMIS_6: Verify Asset Type Filter 'No Record Available' on Dashboard Page  ", () => {
 
         // login to Application
-        cy.login(); 
+         
         sideBar.navigateTo("Asset Management","Asset Dashboard");
         AssetDashBoardPage.selectAssetType(testData.AssetsNames.Pendrive);
         AssetDashBoardPage.clickOnFilterBtn();
@@ -95,7 +101,7 @@ describe("Employee Asset Managment Request Tests", () => {
     it("HRMIS_7: Verify Asset Owner Filter on Dashboard Page  ", () => {
 
         // login to Application
-        cy.login(); 
+         
         sideBar.navigateTo("Asset Management","Asset Dashboard");
         AssetDashBoardPage.selectAssetOwner(testData.AssetsOwner.Caelius);
         AssetDashBoardPage.clickOnFilterBtn();
@@ -106,7 +112,7 @@ describe("Employee Asset Managment Request Tests", () => {
     it("HRMIS_8:  Verify Asset Owner and Asset Type Filter on Dashboard Page", () => {
 
         // login to Application
-        cy.login(); 
+         
         sideBar.navigateTo("Asset Management","Asset Dashboard");
         AssetDashBoardPage.selectAssetOwner(testData.AssetsOwner.Caelius);
         AssetDashBoardPage.selectAssetType(testData.AssetsNames.Keyboard);
@@ -122,7 +128,7 @@ describe("Employee Asset Managment Request Tests", () => {
     it("HRMIS_9:Verify 'No Record Available' message appear after clicking Export when Asset Owner is blank on Dashboard Page", () => {
 
         // login to Application
-        cy.login(); 
+         
         sideBar.navigateTo("Asset Management","Asset Dashboard");
         AssetDashBoardPage.selectAssetType(testData.AssetsNames.Keyboard);
         AssetDashBoardPage.clickOnExportBtn();
@@ -134,7 +140,7 @@ describe("Employee Asset Managment Request Tests", () => {
     it("HRMIS_10:Verify 'No Record Available' message appear after clicking Export when Asset Type is blank on Dashboard Page", () => {
 
         // login to Application
-        cy.login(); 
+         
         sideBar.navigateTo("Asset Management","Asset Dashboard");
         AssetDashBoardPage.selectAssetOwner(testData.AssetsOwner.Caelius);
         AssetDashBoardPage.clickOnExportBtn();
@@ -146,7 +152,7 @@ describe("Employee Asset Managment Request Tests", () => {
     it("HRMIS_11:Verify CSV file is downloaded after clicking Export on Dashboard Page", () => {
 
         // login to Application
-        cy.login(); 
+         
         sideBar.navigateTo("Asset Management","Asset Dashboard");
         AssetDashBoardPage.selectAssetOwner(testData.AssetsOwner.Caelius);
         AssetDashBoardPage.selectAssetType(testData.AssetsNames.Keyboard);
@@ -158,7 +164,7 @@ describe("Employee Asset Managment Request Tests", () => {
     it("HRMIS_12: Verify No Record Available message when Asset type and asset Owner with no record is selected ", () => {
 
         // login to Application
-        cy.login(); 
+         
         sideBar.navigateTo("Asset Management","Asset Dashboard");
         AssetDashBoardPage.selectAssetOwner(testData.AssetsOwner.Caelius);
         AssetDashBoardPage.selectAssetType(testData.AssetsNames.Pendrive);

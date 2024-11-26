@@ -7,6 +7,12 @@ before(function () {
     cy.fixture('data').then((data) => {
         testData = data;
     });
+   
+})
+
+beforeEach(() => {
+
+    // login to Application
     cy.login();
 })
 
