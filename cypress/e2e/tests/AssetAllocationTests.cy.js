@@ -7,6 +7,7 @@ before(function () {
     cy.fixture('data').then((data) => {
         testData = data;
     });
+    cy.login();
 })
 
 
@@ -14,7 +15,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
 
     it("HRMIS_1: Verify Asset Management Collapse and Open", () => {
 
-        cy.login();
+       
         sideBar.navigateTo("Asset Management");
         cy.get("a[aria-expanded='true'] + ul li").should('be.visible');
         sideBar.navigateTo("Asset Management");
@@ -25,7 +26,6 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
 
     it("HRMIS_2: Verify Asset Allocation Page open after clicking on Asset Allocation subtab", () => {
 
-        cy.login();
         sideBar.navigateTo("Asset Management", "Asset Allocation");
         AssetAllocationPage.assetAllocationHeader.should('be.visible').and('have.text', 'Asset Allocation');
         AssetAllocationPage.assignAsset.should('be.visible');
@@ -39,7 +39,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
 
     it("HRMIS_3: Verify Searching with Asset type ,Employee Name and serial Number on Asset Allocation subtab", () => {
 
-        cy.login();
+        
         sideBar.navigateTo("Asset Management", "Asset Allocation");
 
         // Searching By Asset Type
@@ -64,7 +64,6 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
 
     it("HRMIS_4: Verify 'Next' and 'Previous' Pagination button Asset Allocation Page", () => {
         // Navigate to Modify Policy Page
-        cy.login();
         sideBar.navigateTo("Asset Management", "Asset Allocation");
         AssetAllocationPage.selectItemPerPage('5');
         AssetAllocationPage.itemPerPageDrp.should('have.value', '5');
@@ -121,7 +120,6 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
 
     it("HRMIS_5: Verify 'Next' and 'Previous' Pagination button disable when only one page preset Asset Allocation Page", () => {
         // Navigate to Modify Policy Page
-        cy.login();
         sideBar.navigateTo("Asset Management", "Asset Allocation");
         AssetAllocationPage.selectItemPerPage('40');
         AssetAllocationPage.itemPerPageDrp.should('have.value', '40');
@@ -137,7 +135,6 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
 
 
     it("HRMIS_6: Verify that 'Owner' column gets sorted in asecending order after clicking 'Owner' header with 'Sort' icon, on 'Asset Allocation' page.", () => {
-        cy.login(); // Ensure you're logged in
         sideBar.navigateTo("Asset Management", "Asset Allocation"); // Navigate to the desired page
 
         let originalData = [];
@@ -183,8 +180,6 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
 
 
     it("HRMIS_7: Verify that the Asset Type get sorted in ascending order after clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
-
-        cy.login(); // Ensure you're logged in
         sideBar.navigateTo("Asset Management", "Asset Allocation"); // Navigate to the desired page
 
         let originalData = [];
@@ -231,7 +226,6 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
 
     it("HRMIS_8: Verify that the Employee get sorted in ascending order after clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
 
-        cy.login(); // Ensure you're logged in
         sideBar.navigateTo("Asset Management", "Asset Allocation"); // Navigate to the desired page
 
         let originalData = []; // Initialize an empty array to store the text data
@@ -285,7 +279,6 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
 
     it("HRMIS_9: Verify that the serial Number get sorted in ascending order after clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
 
-        cy.login(); // Ensure you're logged in
         sideBar.navigateTo("Asset Management", "Asset Allocation"); // Navigate to the desired page
 
         let originalData = []; // Initialize an empty array to store the text data
@@ -335,7 +328,6 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
 
     it("HRMIS_10: Verify that the serial Number get sorted in descending order after double clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
 
-        cy.login(); // Ensure you're logged in
         sideBar.navigateTo("Asset Management", "Asset Allocation"); // Navigate to the desired page
 
         let originalData = []; // Initialize an empty array to store the text data
@@ -387,7 +379,6 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
 
     it("HRMIS_11: Verify that the employe get sorted in descending order after double clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
 
-        cy.login(); // Ensure you're logged in
         sideBar.navigateTo("Asset Management", "Asset Allocation"); // Navigate to the desired page
 
         let originalData = []; // Initialize an empty array to store the text data
@@ -439,7 +430,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
 
     it("HRMIS_12: Verify that the Asset Type get sorted in descending order after double clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
 
-        cy.login(); // Ensure you're logged in
+        
         sideBar.navigateTo("Asset Management", "Asset Allocation"); // Navigate to the desired page
 
         let originalData = []; // Initialize an empty array to store the text data
@@ -490,7 +481,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
 
     it("HRMIS_13: Verify that the Owner get sorted in descending order after double clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
 
-        cy.login(); // Ensure you're logged in
+       
         sideBar.navigateTo("Asset Management", "Asset Allocation"); // Navigate to the desired page
 
         let originalData = []; // Initialize an empty array to store the text data
@@ -541,7 +532,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
 
 
     it("HRMIS_14:Verify Asset Assign Asset Management Page",()=>{
-        cy.login(); 
+       
         sideBar.navigateTo("Asset Management", "Asset Allocation"); 
 
         AssetAllocationPage.clickOnAssetAssigne();
@@ -558,22 +549,19 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
 
 
     it("HRMIS_15:Verify Asset Assign Asset Management Page validations",()=>{
-        cy.login(); 
+       
         sideBar.navigateTo("Asset Management", "Asset Allocation"); 
 
         AssetAllocationPage.clickOnAssetAssigne();
         AssetAllocationPage.clickOnSubmit();
-        AssetAllocationPage.assertValidation(AssetAllocationPage.selectAssetTypeDrp,"Please fill out this field.");
-
-
-
+        AssetAllocationPage.assertValidation(cy.xpath("//input[@id='react-select-2-input']"),"Please fill out this field.");
 
     })
 
 
 
     it("HRMIS_16:Verify 'Assets are not available for selected type !' message after selecting Unavailable asset type",()=>{
-        cy.login(); 
+       
         sideBar.navigateTo("Asset Management", "Asset Allocation"); 
 
         AssetAllocationPage.clickOnAssetAssigne();
@@ -590,7 +578,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
 
 
     it("HRMIS_17:Verify Asset Assign pop up after selecting asset from asset type",()=>{
-        cy.login(); 
+       
         sideBar.navigateTo("Asset Management", "Asset Allocation"); 
 
         AssetAllocationPage.clickOnAssetAssigne();
@@ -602,7 +590,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
 
 
     it("HRMIS_18:Verify relevant recorde should appear after searching with serial number on asset assigne pop up",()=>{
-        cy.login(); 
+       
         sideBar.navigateTo("Asset Management", "Asset Allocation"); 
 
         AssetAllocationPage.clickOnAssetAssigne();
@@ -615,7 +603,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
 
     
     it("HRMIS_19:Verify 'Assets are not available for selected type !' appear after searching with invalid serial number on asset assigne pop up",()=>{
-        cy.login(); 
+        
         sideBar.navigateTo("Asset Management", "Asset Allocation"); 
 
         AssetAllocationPage.clickOnAssetAssigne();
@@ -624,6 +612,16 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
         AssetAllocationPage.unavailbleAssetLbl.should('be.visible').and('have.text','Assets are not available for selected type !');
         
       
+    })
+
+
+    it("HRMIS_20:Verify that 'Selected Asset' field appears, when user clicks any radion button on 'Assign Asset' page",()=>{
+        
+        sideBar.navigateTo("Asset Management", "Asset Allocation"); 
+        AssetAllocationPage.clickOnAssetAssigne();
+        AssetAllocationPage.selectAssetType("Keyboard");
+        AssetAllocationPage.searchBySerialno(AssetAllocationPage.serialNo2rowLbl);
+        AssetAllocationPage.assetSelectedDetails();
     })
 
 
