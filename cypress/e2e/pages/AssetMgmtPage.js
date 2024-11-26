@@ -14,6 +14,9 @@ get requestReason(){return cy.get("textarea[name='reason']")}
 get resetBtn(){return cy.get("div.action button.btn")}
 get submitBtn(){return cy.get("div.action button.theme-button")}
 get lastRequestReason(){return cy.get("div.wrapper-body > div.table-responsive tr:last-of-type td[data-title='reason']")}
+get subMenus(){return cy.get("ul.submenu.show li")}
+get DashBoardHeader(){return cy.get("#showMenuBtn + h1")}
+get filterAssetType(){return cy.get("#filterAssetType")}
 
 //Methods
 clickOnAssetReq(){
@@ -50,6 +53,19 @@ clickNextUntilDisabled() {
       this.clickNextUntilDisabled();
     }
   });
+}
+
+assert_SubMenus(submenus) {
+  this.subMenus
+    .should('have.length', submenus.length)
+    .each((element, index) => {
+      expect(element.text().trim()).to.equal(submenus[index]);
+    });
+}
+
+
+selectAssetType_Dsh(type){
+  cy.selectDrpValueByText(this.filterAssetType, type, false)
 }
 
 

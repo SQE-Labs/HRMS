@@ -1,15 +1,14 @@
 {
-    "url" : "https://topuptalent.com/",
-    "EmployeeName":"Autom Mation User",
-    "EmployeeData" :{
+    "url": "https://topuptalent.com/",
+    "EmployeeName": "Autom Mation User",
+    "EmployeeData": {
         "FirstName": "Autom",
         "LastName": "User",
         "MiddleName": "Mation",
         "EmployeeID": "CCIT/10_24/559",
         "EmailID": "autouser@caeliusconsulting.com"
-
     },
-    "EmployeePersonalData" : {
+    "EmployeePersonalData": {
         "DateOfBirth": "30-09-1993",
         "OriginalDOB": "1993-09-30",
         "AdhaarNumber": "232324324322",
@@ -33,7 +32,7 @@
         "MaritalStatus2": "Single",
         "PermanentAddress2": "#1000 CHANDIGARH (PIN 160014)"
     },
-    "EmployeeWorkData" : {
+    "EmployeeWorkData": {
         "Department": "Technical",
         "Designation": "Application Developer",
         "ReportingTo": "Anmol Juneja",
@@ -45,58 +44,85 @@
         "RecentDOJ": "2024-07-25"
     },
     "Manager": {
-    "VidyutKundu" : "Vidyut Kundu",
-    "AnmolJuneja":"Anmol Juneja"
+        "VidyutKundu": "Vidyut Kundu",
+        "AnmolJuneja": "Anmol Juneja"
     },
-
-    "AssetsNames":{
-    "Keyboard":"Keyboard"
+    "AssetsNames": {
+        "Keyboard": "Keyboard",
+        "Pendrive":"Pendrive"
     },
-    "Departments":{
-        "Genric":"GENRIC",
-        "AutomationTesting":"Automation Testing"
+    "Departments": {
+        "Genric": "GENRIC",
+        "AutomationTesting": "Automation Testing"
     },
-   "Designations":{
-    "Genric":[
-        "CEO & Chief Architect",
-        "Co Founder & COO",
-        "VP Sucess Manager & Sales",
-        "Chief People Officer",
-        "Piyush Dogra"
-      ]
-   },
-   "ExpenseManagment":{
-    "Menu":"Expense Management",
-    "SubMenus":[
-        "Reimbursement",
-        "Approve Reimbursement",
-        "Download Reimbursement",
-        "Bulk Paid"
-      ]
-   },
-   "ReimbursementTypes":{
-    "InternetClaim":"Internet Claim",
-    "TravelExpense":"Travel Expense",
-    "Miscellaneous":"Miscellaneous" 
-   },
+    "Designations": {
+        "Genric": [
+            "CEO & Chief Architect",
+            "Co Founder & COO",
+            "VP Sucess Manager & Sales",
+            "Chief People Officer",
+            "Piyush Dogra"
+        ],
+        "Options": [
+            "Select Designation",
+            "CEO & Chief Architect",
+            "Co Founder & COO",
+            "VP Sucess Manager & Sales",
+            "Chief People Officer",
+            "Piyush Dogra"
+        ]
+    },
+    "ExpenseManagment": {
+        "Menu": "Expense Management",
+        "SubMenus": [
+            "Reimbursement",
+            "Approve Reimbursement",
+            "Download Reimbursement",
+            "Bulk Paid"
+        ]
+    },
+    "ReimbursementTypes": {
+        "InternetClaim": "Internet Claim",
+        "TravelExpense": "Travel Expense",
+        "Miscellaneous": "Miscellaneous"
+    },
+    "ReimbursementDates": {
+        "InvoiceDate": "2024-11-06",
+        "FromDate": "2024-11-11",
+        "ToDate": "2024-11-13"
+    },
+    "ReimbursementAction": {
+        "Withdraw": "Withdraw"
+    },
+    "ReimbursementStatus": {
+        "PendingAdmin": "Pending-Admin",
+        "Withdraw": "Withdrawn"
+    },
+    "UnsportedFileWarningMessage": "Unsupported file type. Please upload a valid document, PDF, JPG, PNG and JPEG.",
+    "VehicalType": {
+        "TwoWheeler": "Two Wheeler",
+        "FourWheeler": "Four Wheeler"
+    },
+    "AssetManagement":{
+        "SubMenus":[
+            "Asset Dashboard",
+            "Asset Allocation",
+            "Asset De-allocation",
+            "Asset Request",
+            "Create Asset",
+            "Approve Asset Request (L1)",
+            "Approve Asset Request (L2)",
+            "Approve Asset Request (IT)",
+            "Asset Delivery (Store)",
+            "Asset RTO"
+            
+        ]
+    },
+    "AssetsOwner": {
+        "Caelius": "Caelius"
+    },
+    "AssetAssigneeCol":{
+        "Colunms":["Id","Manufacture","Asset Name","Serial Number","Owner","Action"]
 
-   "ReimbursementDates":{
-    "InvoiceDate":"2024-11-06",
-    "FromDate":"2024-11-11",
-    "ToDate":"2024-11-13" 
-   },
-   "ReimbursementAction":{
-    "Withdraw":"Withdraw"
-   },
-   "ReimbursementStatus":{
-    "PendingAdmin" : "Pending-Admin",
-    "Withdraw":"Withdrawn"
-   },
-
-    "UnsportedFileWarningMessage" : "Unsupported file type. Please upload a valid document, PDF, JPG, PNG and JPEG.",
-    "VehicalType":{
-    "TwoWheeler" : "Two Wheeler",
-    "FourWheeler":"Four Wheeler"
-   }
-  
+    }
 }
