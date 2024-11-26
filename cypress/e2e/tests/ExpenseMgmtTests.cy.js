@@ -10,13 +10,19 @@ before(function () {
   });
 })
 
+beforeEach(() => {
+
+  // login to Application
+  cy.login();
+})
+
 
 describe("Reimbursement Tests", () => {
 
   it("HRMIS_1: Verify Reimbursement Page", () => {
 
     // login to Application
-    cy.login();
+    
     sideBar.navigateTo("Expense Management", "Reimbursement");
     ReimbursementPage.assert_SubMenus(testData.ExpenseManagment.SubMenus);
 
@@ -43,7 +49,7 @@ describe("Reimbursement Tests", () => {
   it("HRMIS_2: Verify Reimbursement Request Button and Back Button", () => {
 
     // login to Application
-    cy.login();
+    
     sideBar.navigateTo("Expense Management", "Reimbursement");
 
     ReimbursementPage.clickOnReimbursemetnReq();
@@ -57,7 +63,7 @@ describe("Reimbursement Tests", () => {
 
 
   it("HRMIS_3: Verify 'Next' and 'Previous' Pagination button Reimbursement Page", () => {
-    cy.login();
+    
     sideBar.navigateTo("Expense Management", "Reimbursement");
 
     // Declare variables to store the values
@@ -103,7 +109,7 @@ describe("Reimbursement Tests", () => {
   it("HRMIS_4: Verify Reimbursement Request For Internet Claim ", () => {
 
     // login to Application
-    cy.login();
+    
     sideBar.navigateTo("Expense Management", "Reimbursement");
     ReimbursementPage.clickOnReimbursemetnReq();
 
@@ -164,7 +170,7 @@ describe("Reimbursement Tests", () => {
   it("HRMIS_5: Verify Reimbursement Request For Travel Expense ", () => {
 
     // login to Application
-    cy.login();
+    
     sideBar.navigateTo("Expense Management", "Reimbursement");
     ReimbursementPage.clickOnReimbursemetnReq();
 
@@ -247,7 +253,7 @@ describe("Reimbursement Tests", () => {
   it("HRMIS_6: Verify Reimbursement Request For Miscellaneous", () => {
 
     // login to Application
-    cy.login();
+    
     sideBar.navigateTo("Expense Management", "Reimbursement");
     ReimbursementPage.clickOnReimbursemetnReq();
 
@@ -309,7 +315,7 @@ describe("Reimbursement Tests", () => {
   it('HRMIS_7: Verify reset all fields to default values', () => {
 
     // login to Application
-    cy.login();
+    
     sideBar.navigateTo("Expense Management", "Reimbursement");
     ReimbursementPage.clickOnReimbursemetnReq();
     // Fill out the form fields
@@ -338,7 +344,7 @@ describe("Reimbursement Tests", () => {
   it("HRMIS_8: Verify Reimbursement Withdraw Button pop up", () => {
 
     // login to Application
-    cy.login();
+    
     sideBar.navigateTo("Expense Management", "Reimbursement");
     ReimbursementPage.clickNextUntilDisabled();
     ReimbursementPage.clickOnWithDrawAction();
@@ -362,7 +368,7 @@ describe("Reimbursement Tests", () => {
   it("HRMIS_9: Verify Reimbursement Withdraw, comment validation and downlode Attachment", () => {
 
     // login to Application
-    cy.login();
+    
     sideBar.navigateTo("Expense Management", "Reimbursement");
     ReimbursementPage.clickNextUntilDisabled();
     ReimbursementPage.clickOnWithDrawAction();

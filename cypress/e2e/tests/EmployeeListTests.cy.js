@@ -11,8 +11,14 @@ describe("Employee List Tests", () => {
         });
     })
 
-    it("HRMIS_1: Verify that 'Employee List' page opens up, when user clicks on 'Employee Management'.", () => {
+    beforeEach(() => {
+
+        // login to Application
         cy.login();
+    })
+
+    it("HRMIS_1: Verify that 'Employee List' page opens up, when user clicks on 'Employee Management'.", () => {
+        
         sideBar.navigateTo("Employee Management", "Employees List");
 
         // Verify that information message, when user enters invalid data in 'Search By Name' field

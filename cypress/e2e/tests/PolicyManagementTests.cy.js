@@ -5,12 +5,17 @@ import ViewPolicyMgmt from "../pages/ViewPolicyMgmt";
 import process from 'process/browser.js';
 import { generateRandomString } from '../../support/utils';
 
+beforeEach(() => {
 
+  // login to Application
+  cy.login();
+  
+})
 
 describe("Policy Management Tests", () => {
 
   it("HRMIS_1: Verify 'Modify Policies' page.", () => {
-    cy.login();
+    
 
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Policy Management", "Modify Policy");
@@ -43,7 +48,7 @@ describe("Policy Management Tests", () => {
   it("HRMIS_2: Verify 'Add Policy' Pop up.", () => {
     const randomPolicy = "Demo" + generateRandomString(5);
     const randomDescription = "Description" + generateRandomString(5);
-    cy.login();
+    
 
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Policy Management", "Modify Policy");
@@ -84,7 +89,7 @@ describe("Policy Management Tests", () => {
   it("HRMIS_3: Verify 'Update Policy' Pop up.", () => {
     const randomPolicy = "Demo" + generateRandomString(5);
     const randomDescription = "Description" + generateRandomString(5);
-    cy.login();
+    
 
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Policy Management", "Modify Policy");
@@ -137,7 +142,7 @@ describe("Policy Management Tests", () => {
 
 
   it("HRMIS_4: Verify 'Next' and 'Previous' Pagination button Modify Policy Page", () => {
-    cy.login();
+    
 
     // Navigate to Modify Policy Page
     sideBar.navigateTo("Policy Management", "Modify Policy");
@@ -181,7 +186,7 @@ describe("Policy Management Tests", () => {
   })
 
   it("HRMIS_5: Verify Asscending and Descending sorting of Policy Ids Modify Policy Page", () => {
-    cy.login();
+    
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Policy Management", "Modify Policy");
     PolicyMgmtPage.modifyPolicyLbl.should('be.visible');
@@ -212,7 +217,7 @@ describe("Policy Management Tests", () => {
 
 
   it("HRMIS_6: Verify 'view Policy' Page", () => {
-    cy.login();
+    
 
     //Navigate to View Policy Page
     sideBar.navigateTo("Policy Management", "View Policy");
@@ -242,7 +247,7 @@ describe("Policy Management Tests", () => {
 
 
   it("HRMIS_7: Verify 'Next' and 'Previous' Pagination button View Policy Page", () => {
-    cy.login();
+    
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Policy Management", "View Policy");
     PolicyMgmtPage.modifyPolicyLbl.should('be.visible');
@@ -277,7 +282,7 @@ describe("Policy Management Tests", () => {
   })
 
   it("HRMIS_8: Verify Asscending and Descending sorting of Policy Ids View Policy Page", () => {
-    cy.login();
+    
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Policy Management", "View Policy");
     PolicyMgmtPage.modifyPolicyLbl.should('be.visible');

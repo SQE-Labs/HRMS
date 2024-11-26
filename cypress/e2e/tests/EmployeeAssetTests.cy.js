@@ -7,6 +7,11 @@ before(function(){
         testData = data;
       });
 })
+beforeEach(() => {
+
+    // login to Application
+    cy.login();
+})
 
 
 describe("Employee Asset Managment Tests", () => {
@@ -14,7 +19,7 @@ describe("Employee Asset Managment Tests", () => {
     it("HRMIS_1: Verify Assets tab", () => {
 
         // login to Application
-        cy.login();
+       
         
         sideBar.navigateTo("Employee Management", "Employees List");
         EmployeelistPage.enterNameIntoSearchField(testData.EmployeeName);

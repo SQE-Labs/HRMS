@@ -10,10 +10,16 @@ import {
 } from '../../support/utils';
 import HRApprovalPage from "../pages/HRApprovalPage";
 
+
+beforeEach(() => {
+
+    // login to Application
+    cy.login();
+})
 describe("Employee Onboard Tests", () => {
 
     it("ONBRD_1: Verify that new hire is able to submit the onboarding form", () => {
-        cy.login();
+       
 
         // Invite new Employee
         sideBar.navigateTo("Employee Onboard", "Invitations");
