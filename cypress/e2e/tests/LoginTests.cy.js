@@ -4,7 +4,7 @@ import { it } from "mocha";
 describe("Login Tests",()=> {
     
     it('Login_1 : Verify that user is able to login with valid credentials', () => {
-        cy.login();
+        cy.login("superUser");
         }); 
         
     it.skip('Methods to create and retreive mails from yopmail', ()=>{

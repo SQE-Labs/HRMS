@@ -13,7 +13,7 @@ before(function(){
 beforeEach(() => {
 
     // login to Application
-    cy.login();
+    cy.login("superUser");
 })
 
 

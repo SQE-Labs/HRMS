@@ -14,7 +14,7 @@ describe("Employee List Tests", () => {
     beforeEach(() => {
 
         // login to Application
-        cy.login();
+        cy.login("superUser");
     })
 
     it("HRMIS_1: Verify that 'Employee List' page opens up, when user clicks on 'Employee Management'.", () => {

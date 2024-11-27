@@ -14,7 +14,7 @@ import HRApprovalPage from "../pages/HRApprovalPage";
 beforeEach(() => {
 
     // login to Application
-    cy.login();
+    cy.login("superUser");
 })
 describe("Employee Onboard Tests", () => {
 

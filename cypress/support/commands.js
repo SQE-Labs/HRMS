@@ -32,12 +32,15 @@ import DashboardPage from "../e2e/pages/DashboardPage.js";
 import LoginPage from "../e2e/pages/LoginPage.js"
 import 'cypress-file-upload';
 
-Cypress.Commands.add('login', (username = 'superUser') => {
+Cypress.Commands.add('login', (username) => {
     cy.fixture('users.json').then((users) => {
         const user = users[username];
         LoginPage.loginWithUI(user.email, user.password);
     })
 });
+
+
+
 
 Cypress.Commands.add('logout', () => {
     Dashboard.clickLogout();
@@ -76,7 +79,7 @@ Cypress.Commands.add('selectDrpValueByText', (locator, text, isSearchable = fals
         if (searchInputLocator) {
             // Wait and type the text in the search input field
             searchInputLocator.wait(1000).type(text);
-            const selectorNumbers = [2, 3, 4, 5, 6, 7];
+            const selectorNumbers = [2, 3, 4, 5, 6, 7,8,9];
             const selectors = selectorNumbers.map(
                 (num) => `#react-select-${num}-listbox span,#react-select-${num}-listbox, #react-select-${num}-listbox div div`
             ).join(', ');

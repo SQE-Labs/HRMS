@@ -36,11 +36,42 @@ class AssetAllocationPage extends BasePage {
 
   get serialNo2rowLbl() { return cy.get("tbody tr:nth-child(2) td:nth-child(4)") }
   get serialNo1rowLbl() { return cy.get("tbody tr:nth-child(1) td:nth-child(4)") }
-  get selectedassetRBtn() { return cy.get("input[name='selectAsset']") }
+  get selectedassetRBtn() { return cy.get("tr:nth-child(1) td input[name='selectAsset']") }
+  get lastAssignedAssetName(){return cy.get("tr:last-of-type td[data-title='Name']")}
+  get lastAssignedAssetEmp(){return cy.get("tr:last-of-type td[data-title='empName']")}
+
+  get selectEmployee_Drp() { return cy.get("#react-select-2-input") }
+  get deleteIcon(){return cy.get("tr:last-of-type td a[name='selectAsset']")}
+  get selectAssetConditionDrp(){return cy.get("#assetCondition")}
+  get repairCostTxt(){return cy.get("input[name='repairCost']")}
+  get submit2Btn(){return cy.get("div button[type='submit']")}
+
+ 
 
   //Methods
 
+  clickOnSubmit2(){
+    this.submit2Btn.click();
+    Loaders.threeDotLoading.should('not.exist');
+  }
 
+  enterRepairCost(cost){
+    this.repairCostTxt.type(cost);
+  }
+
+
+  selectAssetCondition(text){
+    cy.selectDrpValueByText(this.selectAssetConditionDrp, text, false);
+  }
+
+  clickOnDelete(){
+    this.deleteIcon.click();
+  }
+
+
+  select_Employee(text) {
+    cy.selectDrpValueByText(this.selectEmployee_Drp, text, true, this.selectEmployee_Drp);
+}
 
   assetSelectedDetails() {
     cy.get('tbody')
@@ -62,8 +93,7 @@ class AssetAllocationPage extends BasePage {
                 cy.get('td:nth-child(5)').invoke('text').then((text5) => {
                   const expectedOwner = text5.trim();
                   this.clickOnAssetAction();
-                  Loaders.threeDotLoading.should('not.exist');
-                  cy.wait(2000);
+                  
 
                   cy.xpath("//label[contains(text(),'Selected Asset')]//parent::div//textarea")
                     .should('exist') // Ensure it exists in the DOM
@@ -99,6 +129,9 @@ class AssetAllocationPage extends BasePage {
 
   clickOnAssetAction() {
     this.selectedassetRBtn.click();
+    Loaders.threeDotLoading.should('not.exist');
+    cy.wait(2000);
+    
   }
 
 

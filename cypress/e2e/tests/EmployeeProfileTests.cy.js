@@ -11,7 +11,7 @@ describe("Employee Profile Tests", () => {
     })
 
     beforeEach(function () {
-        cy.login();
+        cy.login("superUser");
     });
 
     it("HRMIS_1: Verify that the 'Employee List' page and the User Dashboard load successfully.", () => {
