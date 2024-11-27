@@ -603,6 +603,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
         AssetAllocationPage.clickOnAssetAssigne();
         AssetAllocationPage.selectAssetType("Keyboard");
         AssetAllocationPage.searchBySerialno(AssetAllocationPage.serialNo2rowLbl);
+        cy.wait(1000);
         AssetAllocationPage.asserSearchSerialNo(AssetAllocationPage.serialNo1rowLbl);
       
     })
@@ -628,6 +629,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
         AssetAllocationPage.clickOnAssetAssigne();
         AssetAllocationPage.selectAssetType("Keyboard");
         AssetAllocationPage.searchBySerialno(AssetAllocationPage.serialNo2rowLbl);
+        cy.wait(1000);
         AssetAllocationPage.assetSelectedDetails();
     })
 
@@ -652,7 +654,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
     })
 
 
-    it.only("HRMIS_21:Verify that user able to de allocate the asset | Clean up",()=>{
+    it("HRMIS_21:Verify that user able to de allocate the asset | Clean up",()=>{
         
         sideBar.navigateTo("Asset Management", "Asset De-allocation"); 
         AssetDeAllocationPage.select_Employee("DDinesh D Kumar");

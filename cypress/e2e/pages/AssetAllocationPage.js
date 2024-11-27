@@ -36,7 +36,7 @@ class AssetAllocationPage extends BasePage {
 
   get serialNo2rowLbl() { return cy.get("tbody tr:nth-child(2) td:nth-child(4)") }
   get serialNo1rowLbl() { return cy.get("tbody tr:nth-child(1) td:nth-child(4)") }
-  get selectedassetRBtn() { return cy.get("tr:nth-child(1) td input[name='selectAsset']") }
+  get selectedassetRBtn() { return cy.xpath("//input[@name='selectAsset']") }
   get lastAssignedAssetName(){return cy.get("tr:last-of-type td[data-title='Name']")}
   get lastAssignedAssetEmp(){return cy.get("tr:last-of-type td[data-title='empName']")}
 
@@ -92,6 +92,7 @@ class AssetAllocationPage extends BasePage {
 
                 cy.get('td:nth-child(5)').invoke('text').then((text5) => {
                   const expectedOwner = text5.trim();
+
                   this.clickOnAssetAction();
                   
 
@@ -146,7 +147,7 @@ class AssetAllocationPage extends BasePage {
   searchBySerialno(locatorOrString) {
 
     if (typeof locatorOrString === 'string') {
-      this.searchTxt.type(locatorOrString);
+      this.searchTxt.wait(1000).type(locatorOrString);
     }
     else {
 

@@ -10,6 +10,7 @@ module.exports = defineConfig({
   experimentalModifyObstructiveThirdPartyCode: true,
   reporter: 'cypress-mochawesome-reporter',
   e2e: {
+    specPattern: "cypress/e2e/**/*.cy.js",
     chromeWebSecurity: false,
     experimentalModifyObstructiveThirdPartyCode: true,
     experimentalSessionAndOrigin: true,

@@ -8,7 +8,7 @@ import { generateRandomString } from '../../support/utils';
 beforeEach(() => {
 
   // login to Application
-  cy.login();
+  cy.login("superUser");
   
 })
 
