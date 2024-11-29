@@ -33,7 +33,7 @@ module.exports = defineConfig({
       embeddedScreenshots: true,
       inlineAssets: true,
       videoOnFailOnly: true,
-      html: false,
+      html: true,
       json: true,
       overwrite: false
     },
