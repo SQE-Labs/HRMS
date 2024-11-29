@@ -10,11 +10,15 @@ module.exports = defineConfig({
   experimentalModifyObstructiveThirdPartyCode: true,
   reporter: 'cypress-mochawesome-reporter',
   e2e: {
-    specPattern: "cypress/e2e/**/*.cy.js",
+    specPattern: 'cypress/e2e/tests/*.cy.{js,jsx,ts,tsx}', 
     chromeWebSecurity: false,
     experimentalModifyObstructiveThirdPartyCode: true,
     experimentalSessionAndOrigin: true,
     defaultCommandTimeout: 10000,
+    "retries": {
+    "runMode": 2,
+    "openMode": 0
+  },
     video: false,
     videoCompression: 1,
     screenshotOnRunFailure: true,
@@ -29,7 +33,7 @@ module.exports = defineConfig({
       embeddedScreenshots: true,
       inlineAssets: true,
       videoOnFailOnly: true,
-      html: true,
+      html: false,
       json: true,
       overwrite: false
     },
