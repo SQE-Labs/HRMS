@@ -1,5 +1,6 @@
 import sideBar from "../components/SideBar";
-import AssetAllocationPage from "../pages/AssetAllocationPage"
+import AssetAllocationPage from "../pages/AssetAllocationPage";
+import AssetDeAllocationPage from "../pages/AssetDeAllocationPage"
 import { generateRandomString } from '../../support/utils';
 
 let testData;
@@ -13,7 +14,7 @@ before(function () {
 beforeEach(() => {
 
     // login to Application
-    cy.login();
+    cy.login("superUser");
 })
 
 
@@ -602,6 +603,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
         AssetAllocationPage.clickOnAssetAssigne();
         AssetAllocationPage.selectAssetType("Keyboard");
         AssetAllocationPage.searchBySerialno(AssetAllocationPage.serialNo2rowLbl);
+        cy.wait(1000);
         AssetAllocationPage.asserSearchSerialNo(AssetAllocationPage.serialNo1rowLbl);
       
     })
@@ -627,7 +629,42 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
         AssetAllocationPage.clickOnAssetAssigne();
         AssetAllocationPage.selectAssetType("Keyboard");
         AssetAllocationPage.searchBySerialno(AssetAllocationPage.serialNo2rowLbl);
+        cy.wait(1000);
         AssetAllocationPage.assetSelectedDetails();
+    })
+
+
+    it("HRMIS_21:Verify that user able to assign the asset to the employee 'Assign Asset' page",()=>{
+        
+        sideBar.navigateTo("Asset Management", "Asset Allocation"); 
+        AssetAllocationPage.clickOnAssetAssigne();
+        AssetAllocationPage.selectAssetType("Keyboard");
+        cy.wait(1000);
+        AssetAllocationPage.clickOnAssetAction();
+        AssetAllocationPage.selectEmployee("DDinesh D Kumar");
+        AssetAllocationPage.enterComment("Asset Allocation Request");
+        AssetAllocationPage.clickOnSubmit();
+        cy.validateSuccessMessages("Successfully assigned!");
+        AssetAllocationPage.selectItemPerPage('40');
+        AssetAllocationPage.clickNextUntilDisabled();
+        AssetAllocationPage.lastAssignedAssetName.should('have.text','Keyboard');
+        AssetAllocationPage.lastAssignedAssetEmp.should('have.text','DDinesh Kumar');
+
+    
+    })
+
+
+    it("HRMIS_21:Verify that user able to de allocate the asset | Clean up",()=>{
+        
+        sideBar.navigateTo("Asset Management", "Asset De-allocation"); 
+        AssetDeAllocationPage.select_Employee("DDinesh D Kumar");
+        AssetDeAllocationPage.clickOnDelete();
+        AssetDeAllocationPage.selectAssetCondition("Partially damaged but working");
+        AssetDeAllocationPage.enterRepairCost("500");
+        AssetDeAllocationPage.enterComment("Repair");
+        AssetDeAllocationPage.clickOnSubmit();
+        cy.validateSuccessMessages("Successfully deallocated!");
+
     })
 
 

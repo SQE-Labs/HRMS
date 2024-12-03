@@ -1,7 +1,9 @@
 import sideBar from "../components/SideBar";
 import AssetMgmtPage from "../pages/AssetMgmtPage"
 import AssetDashBoardPage from "../pages/AssetDashBoardPage"
-import { generateRandomString } from '../../support/utils';
+import AssetCreationPage from "../pages/AssetCreationPage";
+import AssetAllocationPage from "../pages/AssetAllocationPage";
+import { generateRandomString ,generateRandomNumber} from '../../support/utils';
 
 let testData;
 before(function(){
@@ -13,7 +15,7 @@ before(function(){
 beforeEach(() => {
 
     // login to Application
-    cy.login();
+    cy.login("superUser");
 })
 
 
@@ -170,6 +172,52 @@ describe("Employee Asset Managment Request Tests", () => {
         AssetDashBoardPage.selectAssetType(testData.AssetsNames.Pendrive);
         AssetDashBoardPage.clickOnExportBtn();
         cy.validateSuccessMessages("No Record Available!");
+    });
+
+
+    it("HRMIS_13: Verify User able to create a Asset on create Asset Page", () => {
+
+        // login to Application
+        const model = "Model"+generateRandomString(5); 
+        const serilaNo = "Len"+generateRandomNumber(5); 
+         
+        sideBar.navigateTo("Asset Management","Create Asset");
+        AssetCreationPage.createAssetHeader.should('be.visible').and('have.text','Create Asset');
+
+        AssetCreationPage.clickOnSubmit();
+        AssetCreationPage.assertValidation(AssetCreationPage.assetTypeDrp,"Please select an item in the list.");
+        AssetCreationPage.selectAssetType("Keyboard");
+
+        AssetCreationPage.clickOnSubmit();
+        AssetCreationPage.assertValidation(AssetCreationPage.modelTxt,"Please fill out this field.");
+        AssetCreationPage.enterModel(model);
+
+        AssetCreationPage.clickOnSubmit();
+        AssetCreationPage.assertValidation(AssetCreationPage.ownerDrp,"Please select an item in the list.");
+        AssetCreationPage.selectOwner("Caelius");
+
+        AssetCreationPage.clickOnSubmit();
+        AssetCreationPage.assertValidation(AssetCreationPage.manufactureTxt,"Please fill out this field.");
+        AssetCreationPage.enterManufacture("Lenovo");
+
+        AssetCreationPage.clickOnSubmit();
+        AssetCreationPage.assertValidation(AssetCreationPage.serialNoTxt,"Please fill out this field.");
+        AssetCreationPage.enterSerialNo(serilaNo);
+
+        AssetCreationPage.enterWarranty("2");
+        AssetCreationPage.enterPurchaseDate("2024-05-06");
+        AssetCreationPage.enterComment("Asset Created");
+
+        AssetCreationPage.clickOnSubmit();
+        cy.validateSuccessMessages("Successfully Created!");
+
+        // Assert Created Asset
+        sideBar.navigateTo("Asset Management", "Asset Allocation"); 
+        AssetAllocationPage.clickOnAssetAssigne();
+        AssetAllocationPage.selectAssetType("Keyboard");
+        AssetAllocationPage.searchBySerialno(serilaNo);
+        AssetAllocationPage.asserSearchSerialNo(AssetAllocationPage.serialNo1rowLbl);
+    
     });
 
 

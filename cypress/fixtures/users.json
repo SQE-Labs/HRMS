@@ -6,5 +6,9 @@
   "admin": {
     "email": "aaaaaaaaaaa@test.com",
     "password": "aaaaaaaa"
+  },
+  "ITUser":{
+    "email":"asset-it@caeliusconsulting.com",
+    "password":"Tes@123"
   }
 }

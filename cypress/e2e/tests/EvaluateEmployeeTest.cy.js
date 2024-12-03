@@ -8,10 +8,16 @@ before(function(){
       });
 })
 
+beforeEach(() => {
+
+  // login to Application
+  cy.login("superUser");
+})
+
 describe("Evaluate Employee Tests", () => {
 
   it("HRMIS_1: Verify 'Evaluate Employee'page.", () => {
-    cy.login();
+    
 
     //Navigate to Evaluate Employee Page
     sideBar.navigateTo("Employee Management", "Evaluate Employee");
@@ -59,7 +65,7 @@ describe("Evaluate Employee Tests", () => {
     
     EvaluateEmployeePage.deleteExistingFile('cypress/downloads/performance_evaluation.xlsx');
 
-    cy.login();
+    
 
     //Navigate to Evaluate Employee Page
     sideBar.navigateTo("Employee Management", "Evaluate Employee");

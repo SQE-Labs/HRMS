@@ -5,13 +5,16 @@ import process from 'process/browser.js';
 import { generateRandomString } from '../../support/utils';
 
 
+beforeEach(() => {
 
+  // login to Application
+  cy.login("superUser");
+  
+})
 
 describe("Role Management Tests", () => {
 
   it("HRMIS_1: Verify 'Role List' page.", () => {
-    cy.login();
-
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Role Management", "Role List");
     RoleListPage.roleListLbl.should('be.visible').and('have.text','Role List');
@@ -34,7 +37,7 @@ describe("Role Management Tests", () => {
 
 
   it("HRMIS_2: Verify 'Add Role' Pop up.", () => {
-    cy.login();
+   
 
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Role Management", "Role List");
@@ -74,7 +77,7 @@ describe("Role Management Tests", () => {
 
 
   it("HRMIS_3: Verify 'Update Role' Pop up.", () => {
-    cy.login();
+   
 
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Role Management", "Role List");
@@ -121,7 +124,7 @@ describe("Role Management Tests", () => {
 
 
   it("HRMIS_4: Verify 'Delete Role' Pop up.", () => {
-    cy.login();
+   
 
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Role Management", "Role List");

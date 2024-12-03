@@ -10,13 +10,20 @@ before(function () {
     });
 })
 
+beforeEach(() => {
+
+    // login to Application
+    cy.login("superUser");
+    
+  })
+
 
 describe("Setting Department Tests", () => {
 
     it("HRMIS_1: Verify Departments tab", () => {
 
         // login to Application
-        cy.login();
+        
 
         sideBar.navigateTo("Settings", "Departments");
         DepartmentsPage.departmentHeader.should('be.visible').and('have.text', 'Departments');
@@ -36,7 +43,7 @@ describe("Setting Department Tests", () => {
     it("HRMIS_2: Verify Add Departments ,cancle and cross icon funcionality ", () => {
 
         // login to Application
-        cy.login();
+        
 
         sideBar.navigateTo("Settings", "Departments");
         DepartmentsPage.clickOnAddDepartment();
@@ -57,7 +64,7 @@ describe("Setting Department Tests", () => {
     it("HRMIS_3: Verify validation messages on Add Department pop up", () => {
 
         // login to Application
-        cy.login();
+        
 
         sideBar.navigateTo("Settings", "Departments");
         DepartmentsPage.clickOnAddDepartment();
@@ -69,7 +76,7 @@ describe("Setting Department Tests", () => {
     it("HRMIS_4: Verify new department added on clicking submit button", () => {
 
         // login to Application
-        cy.login();
+        
         const departmentName = "Department Auto " + generateRandomString(5);
         expect(departmentName.length).to.be.at.least(21);
         sideBar.navigateTo("Settings", "Departments");
@@ -94,7 +101,7 @@ describe("Setting Department Tests", () => {
     it("HRMIS_5: Verify edit department , Cancel and cross button", () => {
 
         // login to Application
-        cy.login();
+        
         const departmentName = "Department Auto " + generateRandomString(5);
         expect(departmentName.length).to.be.at.least(21);
         sideBar.navigateTo("Settings", "Departments");
@@ -116,7 +123,7 @@ describe("Setting Department Tests", () => {
     it("HRMIS_6: Verify Update Department.", () => {
 
         // login to Application
-        cy.login();
+        
         const departmentName = "Department Updated " + generateRandomString(5);
         expect(departmentName.length).to.be.at.least(21);
         sideBar.navigateTo("Settings", "Departments");

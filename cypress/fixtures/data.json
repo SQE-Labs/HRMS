@@ -78,7 +78,8 @@
             "Reimbursement",
             "Approve Reimbursement",
             "Download Reimbursement",
-            "Bulk Paid"
+            "Bulk Paid",
+            "Reimbursement History"
         ]
     },
     "ReimbursementTypes": {
@@ -124,5 +125,23 @@
     "AssetAssigneeCol":{
         "Colunms":["Id","Manufacture","Asset Name","Serial Number","Owner","Action"]
 
+    },
+    "AttendenceManagement":{
+        "SubMenus":[
+            "Punch Details",
+            "Apply Leave",
+            "My Team Leave",
+            "Approve Leave",
+            "My Attendance",
+            "Download Attendance",
+            "Leave Credit Request",
+            "Approve Leave Credit Request",
+            "Holiday Management",
+            "Holiday List",
+            "On Leave",
+            "Apply Regularization",
+            "My Team Regularizations",
+            "Approve Regularizations"
+        ]
     }
 }

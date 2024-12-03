@@ -12,7 +12,7 @@ before(function(){
 beforeEach(() => {
 
     // login to Application
-    cy.login();
+    cy.login("superUser");
     sideBar.navigateTo("Employee Management", "Promote Employee");
     cy.wait(1000);
 

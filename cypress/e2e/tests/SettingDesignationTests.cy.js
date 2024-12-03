@@ -10,13 +10,20 @@ before(function () {
     });
 })
 
+beforeEach(() => {
+
+    // login to Application
+    cy.login("superUser");
+    
+  })
+
 
 describe("Setting Designation Tests", () => {
 
     it("HRMIS_1: Verify Designation tab", () => {
 
         // login to Application
-        cy.login();
+        
 
         sideBar.navigateTo("Settings", "Designation");
         DesignationPage.designationHeader.invoke('text').then((text) => {
@@ -30,7 +37,7 @@ describe("Setting Designation Tests", () => {
     it("HRMIS_2: Verify Add Designation button and designations appears", () => {
 
         // login to Application
-        cy.login();
+        
         sideBar.navigateTo("Settings", "Designation");
         cy.wait(1000);
         DesignationPage.select_Department(testData.Departments.Genric);
@@ -42,7 +49,7 @@ describe("Setting Designation Tests", () => {
     it("HRMIS_3: Verify Update Designation Pop up open and close", () => {
 
         // login to Application
-        cy.login();
+        
         sideBar.navigateTo("Settings", "Designation");
         cy.wait(1000);
         DesignationPage.select_Department(testData.Departments.Genric);
@@ -65,7 +72,7 @@ describe("Setting Designation Tests", () => {
     it("HRMIS_4: Verify Update designation", () => {
 
         // login to Application
-        cy.login();
+        
         const DesignationName = "Designation Updated " + generateRandomString(5);
         expect(DesignationName.length).to.be.at.least(21);
         sideBar.navigateTo("Settings", "Designation");
@@ -91,7 +98,7 @@ describe("Setting Designation Tests", () => {
     it("HRMIS_5: Clean up for Designation", () => {
 
         // login to Application
-        cy.login();
+        
         sideBar.navigateTo("Settings", "Designation");
         cy.wait(1000);
         DesignationPage.select_Department(testData.Departments.Genric);
@@ -115,7 +122,7 @@ describe("Setting Designation Tests", () => {
     it("HRMIS_6: Verify Add designation , Cancel and cross button", () => {
 
         // login to Application
-        cy.login();
+        
 
         sideBar.navigateTo("Settings", "Designation");
         cy.wait(1000);
@@ -138,7 +145,7 @@ describe("Setting Designation Tests", () => {
     it("HRMIS_7: Verify validation messages on Add Designation pop up", () => {
 
         // login to Application
-        cy.login();
+        
 
         sideBar.navigateTo("Settings", "Designation");
         cy.wait(1000);
@@ -153,7 +160,7 @@ describe("Setting Designation Tests", () => {
     it("HRMIS_8: Verify new designation added on clicking submit button", () => {
 
         // login to Application
-        cy.login();
+        
         const DesignationName = "Desination Auto " + generateRandomString(5);
         expect(DesignationName.length).to.be.at.least(21);
         sideBar.navigateTo("Settings", "Designation");
