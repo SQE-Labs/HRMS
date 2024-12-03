@@ -36,7 +36,7 @@ class AssetAllocationPage extends BasePage {
 
   get serialNo2rowLbl() { return cy.get("tbody tr:nth-child(2) td:nth-child(4)") }
   get serialNo1rowLbl() { return cy.get("tbody tr:nth-child(1) td:nth-child(4)") }
-  get selectedassetRBtn() { return cy.xpath("//input[@name='selectAsset']") }
+  get selectedassetRBtn() { return cy.xpath("(//input[@name='selectAsset'])[1]") }
   get lastAssignedAssetName(){return cy.get("tr:last-of-type td[data-title='Name']")}
   get lastAssignedAssetEmp(){return cy.get("tr:last-of-type td[data-title='empName']")}
 
@@ -191,6 +191,8 @@ class AssetAllocationPage extends BasePage {
 
   selectAssetType(type) {
     cy.selectDrpValueByText(this.selectAssetTypeDrp, type, true, this.selectAssetTypeDrp);
+    Loaders.threeDotLoading.should('not.exist');
+    Loaders.overlay.should('not.exist');
   }
 
   selectEmployee(type) {

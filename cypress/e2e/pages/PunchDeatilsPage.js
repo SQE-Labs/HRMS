@@ -11,7 +11,7 @@ get selectEmployee_Drp() { return cy.get("#react-select-2-input") }
 get calendarDate(){return cy.get("div.calendar_nav h2")}
 get backwordIcon(){return cy.get("div.calendar_nav span:nth-child(1)")}
 get forwordIcon(){return cy.get("div.calendar_nav h2 + span")};
-get dateBlock(){return cy.get("tr:nth-child(3) td:nth-child(4)")}
+get dateBlock(){return cy.xpath("(//td[not(@class='weekoff') and not(@class='') and not(@class='empty')])[1]")}
 get attendenceDetailHeader (){return cy.get("#staticBackdropLabel")}
 get crossBtn(){return cy.get("#staticBackdropLabel + button")}
 get closeBtn(){return cy.get("button.theme-button")}

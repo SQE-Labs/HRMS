@@ -245,14 +245,21 @@ describe("Attendence Management Apply Leave Tests", () => {
                 cy.log("Extracted Data:", JSON.stringify(originalData));
 
                 const sortedData = [...originalData].sort((a, b) => {
-                    // Sort uppercase strings first
-                    if (a[0] !== b[0]) {
-                      return a[0].toUpperCase() === a[0] ? -1 : 1;
+                    // Helper function to determine the priority of the first character
+                    const getPriority = (char) => {
+                        if (/[^a-zA-Z0-9]/.test(char)) return 0; // Special characters have the highest priority
+                        if (/[A-Z]/.test(char)) return 1;        // Uppercase characters have the next priority
+                        return 2;                                // Lowercase characters have the lowest priority
+                    };
+                
+                    const priorityA = getPriority(a[0]);
+                    const priorityB = getPriority(b[0]);
+                
+                    if (priorityA !== priorityB) {
+                        return priorityA - priorityB;
                     }
-                    
-                    // If both strings start with the same case, sort lexicographically
                     return a.localeCompare(b);
-                  });
+                });
                 cy.log("Sorted Data:", JSON.stringify(sortedData));
 
                 ApplyLeavePage.clickOnReasonCol();

@@ -72,7 +72,7 @@ describe("Attendence Management Punch Details Tests", () => {
     });
 
 
-    it.only("HRMIS_4: Attendence Details pop up close and open ", () => {
+    it("HRMIS_4: Attendence Details pop up close and open ", () => {
          
         sideBar.navigateTo("Attendence Management", "Punch Details");
         PunchDeatilsPage.select_Employee("DDinesh D Kumar");

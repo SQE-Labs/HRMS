@@ -31,15 +31,22 @@ class AssetDeAllocationPage extends BasePage {
 
   selectAssetCondition(text){
     cy.selectDrpValueByText(this.selectAssetConditionDrp, text, false);
+    Loaders.threeDotLoading.should('not.exist');
+    Loaders.overlay.should('not.exist');
   }
 
   clickOnDelete(){
     this.deleteIcon.click();
+    Loaders.threeDotLoading.should('not.exist');
+    Loaders.overlay.should('not.exist');
   }
 
 
   select_Employee(text) {
     cy.selectDrpValueByText(this.selectEmployee_Drp, text, true, this.selectEmployee_Drp);
+    Loaders.threeDotLoading.should('not.exist');
+    Loaders.overlay.should('not.exist');
+
 }
 
 

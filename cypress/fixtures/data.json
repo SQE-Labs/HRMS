@@ -78,7 +78,8 @@
             "Reimbursement",
             "Approve Reimbursement",
             "Download Reimbursement",
-            "Bulk Paid"
+            "Bulk Paid",
+            "Reimbursement History"
         ]
     },
     "ReimbursementTypes": {
