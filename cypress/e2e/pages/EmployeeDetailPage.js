@@ -122,12 +122,12 @@ class EmployeeDetailPage extends BasePage {
     }
 
     enterPresentAddress(presentAddress) {
-        this.presentAddress.type(presentAddress).should('have.value', presentAddress);
+        this.presentAddress.type(presentAddress,{delay:500}).should('have.value', presentAddress);
         cy.log("Entered Present Address");
     }
 
     enterPermanentAddress(permanentAddress) {
-        this.permanentAddress.type(permanentAddress).should('have.value', permanentAddress);
+        this.permanentAddress.type(permanentAddress,{delay:500}).should('have.value', permanentAddress);
         cy.log("Entered Permanent Address");
     }
 

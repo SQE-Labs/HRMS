@@ -652,7 +652,7 @@ describe("Attendence Management Apply Leave Tests", () => {
 
 
 
-    
+
     it("HRMIS_14: Verify that 'Leave Count' column gets sorted in descending order after clicking two times 'Leave Count' header with 'Sort' icon, on 'Apply Leave' page.", () => {
 
         sideBar.navigateTo("Attendence Management", "Apply Leave");
@@ -674,7 +674,7 @@ describe("Attendence Management Apply Leave Tests", () => {
 
                 const sortedData = originalData.sort((a, b) => Number(b) - Number(a));
                 cy.log("Sorted Data:", JSON.stringify(sortedData));
-                
+
 
                 ApplyLeavePage.clickOnLeaceCountCol();
                 ApplyLeavePage.clickOnLeaceCountCol();
@@ -701,7 +701,7 @@ describe("Attendence Management Apply Leave Tests", () => {
     })
 
 
-    it.only("HRMIS_15: Verify that 'Status' column gets sorted in descending order after clicking two times 'Status' header with 'Sort' icon, on 'Apply Leave' page.", () => {
+    it("HRMIS_15: Verify that 'Status' column gets sorted in descending order after clicking two times 'Status' header with 'Sort' icon, on 'Apply Leave' page.", () => {
 
         sideBar.navigateTo("Attendence Management", "Apply Leave");
         let originalData = []; // Initialize an empty array to store the text data
@@ -724,7 +724,7 @@ describe("Attendence Management Apply Leave Tests", () => {
                     b.localeCompare(a, undefined, { sensitivity: "variant" })
                 );
                 cy.log("Sorted Data:", JSON.stringify(sortedData));
-                
+
 
                 ApplyLeavePage.clickOnStatusCol();
                 ApplyLeavePage.clickOnStatusCol();
@@ -750,7 +750,65 @@ describe("Attendence Management Apply Leave Tests", () => {
             })
     })
 
+    it("Verify that 'Apply Leave' popup on 'Apply Leave' page.", () => {
+        sideBar.navigateTo("Attendence Management", "Apply Leave");
+        ApplyLeavePage.clickOnApplyLeave();
+        ApplyLeavePage.applyLeavePopUpLbl.should('be.visible').and('have.text', 'Apply Leave');
+
+        ApplyLeavePage.clickOnCancel();
+        ApplyLeavePage.applyLeavePopUpLbl.should('not.be.visible');
+
+        ApplyLeavePage.clickOnApplyLeave();
+        ApplyLeavePage.clickOnCross();
+        ApplyLeavePage.applyLeavePopUpLbl.should('not.be.visible');
+
+    })
 
 
+    it("Verify that validation message appear after click on submit button on 'Apply Leave' pop up.", () => {
+
+        const formatDate = (d) => `${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}/${d.getFullYear()}`;
+
+        const currentDate = new Date();
+        const nextDayDate = new Date(currentDate.setDate(currentDate.getDate() + 1));
+
+        cy.log("Current Date:", formatDate(new Date()));
+        cy.log("Next Day Date:", formatDate(nextDayDate));
+
+        sideBar.navigateTo("Attendence Management", "Apply Leave");
+        ApplyLeavePage.clickOnApplyLeave();
+
+        ApplyLeavePage.clickOnSubmit();
+        ApplyLeavePage.assertValidation(ApplyLeavePage.leavetypeDrp, 'Please select an item in the list.')
+
+        ApplyLeavePage.selectLeaveType("Privilege Leave");
+
+        ApplyLeavePage.clickOnSubmit();
+        ApplyLeavePage.assertValidation(ApplyLeavePage.dateRange, 'Please fill out this field.')
+        ApplyLeavePage.enterDateRange(formatDate(new Date()) + "-" +formatDate(nextDayDate));
+        ApplyLeavePage.clickOnSubmit();
+        ApplyLeavePage.assertValidation(ApplyLeavePage.resaonTxt, 'Please fill out this field.')
+
+    })
+
+
+    it("Verify that validation message appear after click on submit button when end date is blank on 'Apply Leave' pop up.", () => {
+
+        const formatDate = (d) => `${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}/${d.getFullYear()}`;
+
+        const currentDate = new Date();
+       
+        cy.log("Current Date:", formatDate(new Date()));
+        sideBar.navigateTo("Attendence Management", "Apply Leave");
+        ApplyLeavePage.clickOnApplyLeave();
+        ApplyLeavePage.selectLeaveType("Privilege Leave");
+
+        ApplyLeavePage.enterDateRange(formatDate(new Date()));
+        ApplyLeavePage.enterReason("Resaon");
+        ApplyLeavePage.clickOnSubmit();
+        ApplyLeavePage.dateValidationLbl.should('be.visible').and('have.text','End Date is required')
+    })
+
+    
 
 });
