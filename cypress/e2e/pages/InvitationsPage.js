@@ -12,12 +12,20 @@ class InvitationsPage extends BasePage {
     get chooseFile() { return cy.get('#file-input'); }
     get submitBtn() { return cy.get("div[class='justify-content-center modal-footer'] button[type='submit']"); }
     get onBoardingSuccessMsg() { return cy.get("div.Toastify__toast-body"); }
+    get crossBtn() { return cy.get("div[class='modal-dialog modal-dialog-centered modal-xl'] div[class='modal-content'] button[aria-label='Close']"); }
+
     
     // Methods
 
     clickInviteEmployeeButton() {
         this.inviteEmplooyeeBtn.click();
         cy.log("Clicked on Invite Employee Button");
+
+    }
+
+    clickCrossButton() {
+        this.crossBtn.click();
+        cy.log("Clicked on the cross pop up");
 
     }
 

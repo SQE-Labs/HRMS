@@ -16,7 +16,7 @@ describe("Employee Onboard Tests", () => {
         cy.login();
 
         // Invite new Employee
-        sideBar.navigateTo("Employee Onboard", "Invitations");
+        sideBar.navigateTo("Employee Onboard", "Onboarding Form");
         InvitationsPage.clickInviteEmployeeButton();
         const joineePersonalMail = generateRandomYopmail(10);
         InvitationsPage.enterEmailID(joineePersonalMail);
@@ -41,20 +41,23 @@ describe("Employee Onboard Tests", () => {
             DateOfBirth: '2000-09-24',
             AadharNumber: '232324324342',
             PanNumber: 'BSSSS1233D',
-            DateOfJoining: '2024-09-23',
+            DateOfJoining: '2024-12-30',
             MaritalStatus: 'Single',
             PassportNo: generateRandomString(1) + generateRandomNumber(11),
             PhoneNumber: '6448744833',
             AlternatePhone: '3673636733',
             RelationshipWithAlterNumber: 'Mother',
             AlterName: 'Mattews',
-            PresentAddress: 'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016',
-            PermanentAddress: 'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016',
+            PresentAddress: 'Akshya Nagar 1st Block 1st Cross Rammurthy nagar Bangalore560016',
+            PermanentAddress: 'Akshya Nagar 1st Block 1st Cross Rammurthy nagar Bangalore560016',
             CaeliusEmail: generateRandomCaeliusEmail(6),
-            Department: 'Marketing',
-            Designation: 'Demooo',
-            AssignManager: 'DDinesh D Kumar',
+            Department: 'Human Resource Management',
+            Designation: 'Admin Associate',
+            AssignManager: 'Vishal Thakur',
             EmployeeType: 'REGULAR',
+            LeaveManager: 'Vishal Thakur',
+            EmployeeSubType: 'Full time',
+
             messagesToValidate : [
                 'Thank you!',
                 'Your submission has been sent successfully.',
@@ -126,13 +129,13 @@ describe("Employee Onboard Tests", () => {
 
         // Navigate to Homepage > Employee Onboard > L1 Approval Action 
         HomePage.navigateToHomePage();
-
-        sideBar.navigateTo("Employee Onboard", "L1 Approval");
+        InvitationsPage.clickCrossButton();
+                sideBar.navigateTo("Employee Onboard", "IT Approval");
         
         // Viewing Newly Onboard Invitation
         L1ApprovalActionPage.selectItemsPerPage();
-        L1ApprovalActionPage.clickOnPagenationNextButton();
-        L1ApprovalActionPage.clickOnPagenationNextButton();
+        //L1ApprovalActionPage.clickOnPagenationNextButton();
+        //L1ApprovalActionPage.clickOnPagenationNextButton();
         L1ApprovalActionPage.SearchNewJoineeByName(JoineeData.Firstname);
 
         // L1ApprovalAction.validateEmailForNewJoinee();
@@ -174,11 +177,11 @@ describe("Employee Onboard Tests", () => {
         // Navigate to Homepage > HR Approval Page
         cy.wait(3000)
         HomePage.navigateToHomePage();
-        sideBar.navigateTo("Employee Onboard", "HR Approval");
+        sideBar.navigateTo("Employee Onboard", "HR Setup");
 
         // Viewing Newly Onboard Invitation to HR Approval Page
         L1ApprovalActionPage.selectItemsPerPage();
-        L1ApprovalActionPage.clickOnPagenationNextButton();
+        //L1ApprovalActionPage.clickOnPagenationNextButton();
         L1ApprovalActionPage.SearchNewJoineeByName(JoineeData.Firstname);
 
         // Verify that only single result appears
@@ -215,7 +218,10 @@ describe("Employee Onboard Tests", () => {
         HRApprovalPage.selectDepartment(JoineeData.Department);
         HRApprovalPage.selectDesignation(JoineeData.Designation);
         HRApprovalPage.selectAssignManager(JoineeData.AssignManager);
+        HRApprovalPage.selectLeaveManager(JoineeData.LeaveManager);
         HRApprovalPage.selectEmployeeType(JoineeData.EmployeeType);
+        HRApprovalPage.selectSubEmployeeType(JoineeData.EmployeeSubType);
+
         HRApprovalPage.clickApproveButton();
 
         // Validating the Thank You Success message
