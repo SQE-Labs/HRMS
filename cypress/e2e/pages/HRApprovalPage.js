@@ -6,8 +6,10 @@ class HRApprovalPage extends BasePage{
 
 //  Locators
 get caeliusEmail() { return cy.get("div[class='row mt-3'] h6[class='truncate-text']")}
-get department() { return cy.xpath("//label[@for='department']//parent::div/following-sibling::div[1]")}
+//get department() { return cy.xpath("//label[@for='department']//parent::div/following-sibling::div[1]")}
 get designation() { return cy.xpath("//label[@for='designation']//parent::div/following-sibling::div[1]")}
+get department() { return cy.get("#react-select-2-input") }
+get departmentList() { return cy.get("#react-select-2-placeholder")}
 //get assignManager() { return cy.xpath("//div[@class='dropdown-container']//div[contains(@class,'css-19bb58m')]")}
 //get leaveManager() { return cy.xpath("//div[@class='dropdown-container']//div[contains(@class,'css-19bb58m')]")}
 //get department() { return cy.xpath("(//div[@class='col-md-4']//div[contains(@class,' css-19bb58m')])[1]")}
@@ -20,9 +22,13 @@ get approveButton() { return cy.get("div[role='tabpanel'] form div button[type='
 
 
 // Methods
+// selectDepartment(departmentName) {
+//     this.department.type(departmentName).pressEnter().should('contain', departmentName);
+//     cy.log("Department is selected");
+// }
+
 selectDepartment(departmentName) {
-    this.department.type(departmentName).pressEnter().should('contain', departmentName);
-    cy.log("Department is selected");
+    cy.selectDrpValueByText(this.departmentList, departmentName, true, this.department);
 }
 
 selectDesignation(designationName) {

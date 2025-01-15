@@ -24,6 +24,7 @@ class InvitationsPage extends BasePage {
     }
 
     clickCrossButton() {
+        cy.wait(2000);
         this.crossBtn.click();
         cy.log("Clicked on the cross pop up");
 

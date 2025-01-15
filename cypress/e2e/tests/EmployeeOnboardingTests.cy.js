@@ -215,7 +215,7 @@ describe("Employee Onboard Tests", () => {
         L1ApprovalActionPage.switchToApproveTab();
 
         //HRApproval.caeliusEmail.should('have,text',JoineeData.CaeliusEmail);
-        HRApprovalPage.selectDepartment(JoineeData.Department);
+        HRApprovalPage.selectDepartment("Human Resource Management");
         HRApprovalPage.selectDesignation(JoineeData.Designation);
         HRApprovalPage.selectAssignManager(JoineeData.AssignManager);
         HRApprovalPage.selectLeaveManager(JoineeData.LeaveManager);
