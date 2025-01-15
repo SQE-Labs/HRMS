@@ -1,3 +1,147 @@
 {
-    "url" : "https://topuptalent.com/"
+    "url": "https://topuptalent.com/",
+    "EmployeeName": "Autom Mation User",
+    "EmployeeData": {
+        "FirstName": "Autom",
+        "LastName": "User",
+        "MiddleName": "Mation",
+        "EmployeeID": "CCIT/10_24/559",
+        "EmailID": "autouser@caeliusconsulting.com"
+    },
+    "EmployeePersonalData": {
+        "DateOfBirth": "30-09-1993",
+        "OriginalDOB": "1993-09-30",
+        "AdhaarNumber": "232324324322",
+        "PassportNumber": "238928392323",
+        "PanNumber": "BSSSS5123D",
+        "PresentAddress": "Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016",
+        "BloodGroup": "B+ve",
+        "Gender": "male",
+        "AlternateNumber": "4523542343",
+        "MaritalStatus": "Single",
+        "PermanentAddress": "Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016",
+        "UpdatedDateOfBirth": "2000-05-09",
+        "UpdatededDateOfBirth": "09-05-2000",
+        "AdhaarNumber2": "488123345262",
+        "PassportNumber2": "B20964573432",
+        "PanNumber2": "ABCD42215Y",
+        "PresentAddress2": "#1000 CHANDIGARH (PIN 160014)",
+        "BloodGroup2": "A+ve",
+        "Gender2": "female",
+        "AlternateNumber2": "7676767676",
+        "MaritalStatus2": "Single",
+        "PermanentAddress2": "#1000 CHANDIGARH (PIN 160014)"
+    },
+    "EmployeeWorkData": {
+        "Department": "Technical",
+        "Designation": "Application Developer",
+        "ReportingTo": "Anmol Juneja",
+        "DOJ": "30-09-2024",
+        "EmployeeStatus": "VERIFIED",
+        "EmployeeType": "Full Time",
+        "UpdateDOJ": "2024-11-30",
+        "UpdatedDOJ": "30-11-2024",
+        "RecentDOJ": "2024-07-25"
+    },
+    "Manager": {
+        "VidyutKundu": "Vidyut Kundu",
+        "AnmolJuneja": "Anmol Juneja"
+    },
+    "AssetsNames": {
+        "Keyboard": "Keyboard",
+        "Pendrive":"Pendrive"
+    },
+    "Departments": {
+        "Genric": "GENRIC",
+        "AutomationTesting": "Automation Testing"
+    },
+    "Designations": {
+        "Genric": [
+            "CEO & Chief Architect",
+            "Co Founder & COO",
+            "VP Sucess Manager & Sales",
+            "Chief People Officer",
+            "Piyush Dogra"
+        ],
+        "Options": [
+            "Select Designation",
+            "CEO & Chief Architect",
+            "Co Founder & COO",
+            "VP Sucess Manager & Sales",
+            "Chief People Officer",
+            "Piyush Dogra"
+        ]
+    },
+    "ExpenseManagment": {
+        "Menu": "Expense Management",
+        "SubMenus": [
+            "Reimbursement",
+            "Approve Reimbursement",
+            "Download Reimbursement",
+            "Bulk Paid",
+            "Reimbursement History"
+        ]
+    },
+    "ReimbursementTypes": {
+        "InternetClaim": "Internet Claim",
+        "TravelExpense": "Travel Expense",
+        "Miscellaneous": "Miscellaneous"
+    },
+    "ReimbursementDates": {
+        "InvoiceDate": "2024-11-06",
+        "FromDate": "2024-11-11",
+        "ToDate": "2024-11-13"
+    },
+    "ReimbursementAction": {
+        "Withdraw": "Withdraw"
+    },
+    "ReimbursementStatus": {
+        "PendingAdmin": "Pending-Admin",
+        "Withdraw": "Withdrawn"
+    },
+    "UnsportedFileWarningMessage": "Unsupported file type. Please upload a valid document, PDF, JPG, PNG and JPEG.",
+    "VehicalType": {
+        "TwoWheeler": "Two Wheeler",
+        "FourWheeler": "Four Wheeler"
+    },
+    "AssetManagement":{
+        "SubMenus":[
+            "Asset Dashboard",
+            "Asset Allocation",
+            "Asset De-allocation",
+            "Asset Request",
+            "Create Asset",
+            "Approve Asset Request (L1)",
+            "Approve Asset Request (L2)",
+            "Approve Asset Request (IT)",
+            "Asset Delivery (Store)",
+            "Asset RTO"
+            
+        ]
+    },
+    "AssetsOwner": {
+        "Caelius": "Caelius"
+    },
+    "AssetAssigneeCol":{
+        "Colunms":["Id","Manufacture","Asset Name","Serial Number","Owner","Action"]
+
+    },
+    "AttendenceManagement":{
+        "SubMenus":[
+            "Punch Details",
+            "Apply Leave",
+            "My Team Leave",
+            "Approve Leave",
+            "My Attendance",
+            "Download Attendance",
+            "Leave Credit Request",
+            "Approve Leave Credit Request",
+            "Holiday Management",
+            "Holiday List",
+            "On Leave",
+            "Apply Regularization",
+            "My Team Regularizations",
+            "Approve Regularizations"
+        ]
+    }
 }

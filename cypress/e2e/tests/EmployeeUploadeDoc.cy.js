@@ -1,11 +1,17 @@
 import sideBar from "../components/SideBar";
 import UploadEmpDocumentPage from "../pages/UploadEmpDocumentPage";
 
+let testData;
+before(function(){
+    cy.fixture('data').then((data) => {
+        testData = data;
+      });
+})
 
 beforeEach(() => {
 
     // login to Application
-    cy.login();
+    cy.login("superUser");
     sideBar.navigateTo("Employee Management", "Upload Document");
     cy.wait(1000);
 
@@ -16,7 +22,7 @@ describe("Employee Upload Document Tests", () => {
     it("HRMIS_1: Verify Upload document Page ", () => {
 
         UploadEmpDocumentPage.assertTextEquals(UploadEmpDocumentPage.uploadeDocHeaderLbl, 'Upload Document');
-        UploadEmpDocumentPage.selectEmployee("Auto Mation User");
+        UploadEmpDocumentPage.selectEmployee(testData.EmployeeName);
 
         const expectedCol = ['Serial No.', 'Document Name', 'Mandatory', 'Status', 'Action'];
         UploadEmpDocumentPage.assertExpectedTableLbl(UploadEmpDocumentPage.tableColHeadLbl, expectedCol);
@@ -24,9 +30,9 @@ describe("Employee Upload Document Tests", () => {
     });
 
 
-    it("HRMIS_1: Verify 'Upload Document Action'popup opens up and close when click on 'upload' icon and 'cancel' button repectively", () => {
+    it("HRMIS_2: Verify 'Upload Document Action'popup opens up and close when click on 'upload' icon and 'cancel' button repectively", () => {
 
-        UploadEmpDocumentPage.selectEmployee("Auto Mation User");
+        UploadEmpDocumentPage.selectEmployee(testData.EmployeeName);
         UploadEmpDocumentPage.clickOnUploadAct("Insurance Card");
         UploadEmpDocumentPage.uploadeActPopLbl.should('be.visible').and('have.text', 'Upload Document Action')
 
@@ -43,10 +49,10 @@ describe("Employee Upload Document Tests", () => {
     });
    
 
-    it("HRMIS_1:Verify that documents gets uploaded after clicking on 'Submit' button", () => {
+    it("HRMIS_3:Verify that documents gets uploaded after clicking on 'Submit' button", () => {
 
         UploadEmpDocumentPage.assertTextEquals(UploadEmpDocumentPage.uploadeDocHeaderLbl, 'Upload Document');
-        UploadEmpDocumentPage.selectEmployee("Auto Mation User");
+        UploadEmpDocumentPage.selectEmployee(testData.EmployeeName);
         UploadEmpDocumentPage.clickOnUploadAct("Insurance Card");
         UploadEmpDocumentPage.chooseDocument('cypress/fixtures/resources/dummy.pdf');
         UploadEmpDocumentPage.enterComments("Commented");
