@@ -1,13 +1,36 @@
 {
     "url": "https://topuptalent.com/",
-    "EmployeeName": "Autom Mation User",
+    "EmployeeName": "Autom",
     "EmployeeData": {
         "FirstName": "Autom",
         "LastName": "User",
         "MiddleName": "Mation",
-        "EmployeeID": "CCIT/10_24/559",
-        "EmailID": "autouser@caeliusconsulting.com"
+        "EmployeeID": "CCIT/12_24/651",
+        "EmailID": "shubham.mehta@caeliusconsulting.com"
     },
+
+    "EmployeeWorkInfoData": {
+        "Department": "Construcxfction",
+        "Designation": "Site Engineer - Civil",
+        "ReportingTo": "Vishal Thakur",
+        "EmployeeStatus": "VERIFIED",
+        "EmployeeType": "Fulltime"
+    },
+
+    "EmployeePersonalDetails": {
+        "DateOfBirth": "25-08-1993",
+        "AdhaarNumber": "662223509284",
+        "PassportNumber": "129882123475",
+        "PanNumber": "BAJPC4350M",
+        "PresentAddress": "TEST DATA",
+        "BloodGroup": "B+ve",
+        "Gender": "male",
+        "AlternateNumber": "9882123475",
+        "MaritalStatus": "Single",
+        "PermanentAddress": "TEST DATA",
+        "JobTitle": "Experience_1"
+    },
+
     "EmployeePersonalData": {
         "DateOfBirth": "30-09-1993",
         "OriginalDOB": "1993-09-30",

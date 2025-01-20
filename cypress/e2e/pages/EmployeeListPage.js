@@ -50,7 +50,13 @@ class EmployeeListPage extends BasePage {
     Loaders.threeDotLoading.should('not.exist');
     cy.log("Clicked on Searched User");
   }
+  
+  clickCrossButton() {
+    cy.wait(2000);
+    this.crossBtn.click();
+    cy.log("Clicked on the cross pop up");
 
+}
 
   selectDepartment(departmentName) {
     this.department.wait(2000).select(departmentName).should('contain', departmentName);

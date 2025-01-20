@@ -7,7 +7,7 @@ const specDir = 'cypress/e2e/tests';
 const specs = fs.readdirSync(specDir).filter(file => file.endsWith('.cy.js'));
 
 // Number of parallel threads
-const numThreads = 4;
+const numThreads = 3;
 const chunkSize = Math.ceil(specs.length / numThreads);
 
 // Split specs into chunks

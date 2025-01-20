@@ -40,6 +40,8 @@ get suggestedPassword() { return cy.get("div[id='tab3'] div:nth-child(3) div:nth
 get caeliusEmail() { return cy.get("input[placeholder='Enter employee email']")}
 get submitButton() { return cy.get("button[type='submit']")}
 
+get previousButton() { return cy.get("div[class='wrapper-body'] li:nth-child(1) a:nth-child(1)")}
+
 //  Methods 
     selectItemsPerPage() {
     this.itemsPerPage.wait(1000).select('40');
@@ -99,6 +101,12 @@ get submitButton() { return cy.get("button[type='submit']")}
     Loaders.threeDotLoading.should('not.exist'); 
     cy.log("Clicked on Submit Button");
     }
+
+    clickOnPreviousButton() {
+      this.previousButton.click();
+      Loaders.threeDotLoading.should('not.exist'); 
+      cy.log("Clicked on Previous Button");
+      }
     
     EmployeesTable = class{
         static get EmployeesTable(){ return cy.get("table.resume.custom")}
