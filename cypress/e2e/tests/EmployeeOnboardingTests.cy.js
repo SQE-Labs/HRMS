@@ -10,7 +10,6 @@ import {
 } from '../../support/utils';
 import HRApprovalPage from "../pages/HRApprovalPage";
 
-
 beforeEach(() => {
 
     // login to Application
@@ -20,17 +19,24 @@ describe("Employee Onboard Tests", () => {
 
     it("ONBRD_1: Verify that new hire is able to submit the onboarding form", () => {
        
-
         // Invite new Employee
-        sideBar.navigateTo("Employee Onboard", "Onboarding Form");
+        //InvitationsPage.clickCrossButton();
+        cy.get("div[class='modal-dialog modal-dialog-centered modal-xl'] div[class='modal-content'] button[aria-label='Close']").then(($button) => {
+            if ($button.is(':visible')) {
+              InvitationsPage.clickCrossButton(); // Call the method if the button is visible
+            } else {
+              cy.log('Cross button is not visible, skipping click.');
+            }
+          });
+     
+        cy.wait(2000);
+
+        sideBar.navigateTo("Employee Onboarding", "Onboarding Form");
         InvitationsPage.clickInviteEmployeeButton();
         const joineePersonalMail = generateRandomYopmail(10);
         InvitationsPage.enterEmailID(joineePersonalMail);
         InvitationsPage.enterEmployeeName("Mattews");
-
-       
         InvitationsPage.selectSamplePdf('cypress/fixtures/resources/dummy.pdf');
-
         InvitationsPage.clickSubmitButton();
 
         // Verify mail sent notification is displayed
@@ -47,7 +53,7 @@ describe("Employee Onboard Tests", () => {
             DateOfBirth: '2000-09-24',
             AadharNumber: '232324324342',
             PanNumber: 'BSSSS1233D',
-            DateOfJoining: '2024-11-23',
+            DateOfJoining: '2024-12-30',
             MaritalStatus: 'Single',
             PassportNo: generateRandomString(1) + generateRandomNumber(11),
             PhoneNumber: '6448744833',
@@ -57,11 +63,11 @@ describe("Employee Onboard Tests", () => {
             PresentAddress: 'Akshya Nagar 1st Block 1st Cross Rammurthy nagar Bangalore560016',
             PermanentAddress: 'Akshya Nagar 1st Block 1st Cross Rammurthy nagar Bangalore560016',
             CaeliusEmail: generateRandomCaeliusEmail(6),
-            Department: 'GENRIC',
-            Designation: 'Chief People Officer',
-            AssignManager: 'Manjeet Saini',
+            Department: 'Human Resource Management',
+            Designation: 'Admin Associate',
+            AssignManager: 'Vishal Thakur',
             EmployeeType: 'REGULAR',
-            LeaveManager:'Manjeet Saini',
+            LeaveManager:'Vishal Thakur',
             EmpSubType:'Intern',
             messagesToValidate : [
                 'Thank you!',
@@ -134,13 +140,13 @@ describe("Employee Onboard Tests", () => {
 
         // Navigate to Homepage > Employee Onboard > L1 Approval Action 
         HomePage.navigateToHomePage();
-        InvitationsPage.clickCrossButton();
+        // InvitationsPage.clickCrossButton();
                 sideBar.navigateTo("Employee Onboard", "IT Approval");
         
         // Viewing Newly Onboard Invitation
         L1ApprovalActionPage.selectItemsPerPage();
         // L1ApprovalActionPage.clickOnPagenationNextButton();
-        L1ApprovalActionPage.clickNextUntilDisabled();
+        //L1ApprovalActionPage.clickNextUntilDisabled();
         L1ApprovalActionPage.SearchNewJoineeByName(JoineeData.Firstname);
 
         // L1ApprovalAction.validateEmailForNewJoinee();
@@ -172,7 +178,6 @@ describe("Employee Onboard Tests", () => {
         L1ApprovalActionPage.switchToApproveTab();
         L1ApprovalActionPage.firstNameOnApproveTab.should('be.visible').and('have.text', JoineeData.Firstname);
         L1ApprovalActionPage.lastNameOnApproveTab.should('have.text', JoineeData.LastName);
-        
         L1ApprovalActionPage.enterCaeliusEmail(JoineeData.CaeliusEmail);
         L1ApprovalActionPage.clickOnSubmitButton();
 
@@ -230,8 +235,8 @@ describe("Employee Onboard Tests", () => {
         HRApprovalPage.selectAssignManager(JoineeData.AssignManager);
         HRApprovalPage.selectLeaveManager(JoineeData.LeaveManager);
         HRApprovalPage.selectEmployeeType(JoineeData.EmployeeType);
-        HRApprovalPage.selectLeaveManager(JoineeData.LeaveManager)
-        HRApprovalPage.selectEmplSubtype(JoineeData.EmpSubType)
+        HRApprovalPage.selectLeaveManager(JoineeData.LeaveManager);
+        HRApprovalPage.selectEmplSubtype(JoineeData.EmpSubType);
         HRApprovalPage.clickApproveButton();
 
         // Validating the Thank You Success message

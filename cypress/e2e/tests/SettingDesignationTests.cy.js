@@ -29,8 +29,6 @@ describe("Setting Designation Tests", () => {
         DesignationPage.designationHeader.invoke('text').then((text) => {
             expect(text.trim()).to.equal('Designation');
         });
-
-
     });
 
 
