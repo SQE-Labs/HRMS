@@ -1,13 +1,15 @@
 import BasePage from "./BasePage";
 import Loaders from "../components/Loaders";
+import 'cypress-xpath';
+
 
 class ApplyLeavePage extends BasePage {
 
 
 //Locators
-get applyLeaveHeader(){return cy.get("#showMenuBtn + h1")}
+get applyLeaveHeader(){return cy.xpath("//h1[text()='Apply Leaves']")}
 get idColSortIcon(){return cy.get("tr th:nth-child(1) img")}
-get fromColSortIcon(){return cy.get("tr th:nth-child(2) img")}
+get fromColSortIcon(){return cy.get('thead > tr > :nth-child(2)')}
 get toColSortIcon(){return cy.get("tr th:nth-child(3) img")}
 get typeColSortIcon(){return cy.get("tr th:nth-child(4) img")}
 get reasonColSortIcon(){return cy.get("tr th:nth-child(5) img")}

@@ -12,6 +12,9 @@ class InvitationsPage extends BasePage {
     get chooseFile() { return cy.get('#file-input'); }
     get submitBtn() { return cy.get("div[class='justify-content-center modal-footer'] button[type='submit']"); }
     get onBoardingSuccessMsg() { return cy.get("div.Toastify__toast-body"); }
+    get onBoardingForm(){
+        return cy.get('.show > :nth-child(1) > a');
+    }
     
     // Methods
 
@@ -55,6 +58,11 @@ class InvitationsPage extends BasePage {
     validateOnboardingEmailSentMsg(successMsg) {
         this.onBoardingSuccessMsg.should('contain.text', successMsg);
         cy.log("Onboarding mail is sent");
+    }
+    clickOnBoardingForm(){
+        this.onBoardingForm.click();
+                cy.log("Clicked on On boarding form side bar menu");
+
     }
 }
 

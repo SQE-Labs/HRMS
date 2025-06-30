@@ -1,12 +1,12 @@
 import sideBar from "../components/SideBar";
 import EvaluateEmployeePage from "../pages/EvaluateEmployeePage";
 
-let testData;
-before(function(){
-    cy.fixture('data').then((data) => {
-        testData = data;
-      });
-})
+// let testData;
+// before(function(){
+//     cy.fixture('data').then((data) => {
+//         testData = data;
+//       });
+// })
 
 beforeEach(() => {
 
