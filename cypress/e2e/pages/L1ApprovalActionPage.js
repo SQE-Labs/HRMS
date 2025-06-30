@@ -1,6 +1,7 @@
 import BasePage from "./BasePage";
 import { generateRandomYopmail } from '../../support/utils';
 import Loaders from "../components/Loaders";
+import 'cypress-xpath';
 
 class L1ApprovalActionPage extends BasePage {
 
@@ -39,10 +40,30 @@ get lastNameOnApproveTab() { return cy.get("div[class='row mt-3'] h6[class='trun
 get suggestedPassword() { return cy.get("div[id='tab3'] div:nth-child(3) div:nth-child(3) h6:nth-child(1)")}
 get caeliusEmail() { return cy.get("input[placeholder='Enter employee email']")}
 get submitButton() { return cy.get("button[type='submit']")}
+get nextButton(){
+  return cy.xpath("//a[text()='Next']")
+}
 
 //  Methods 
+ clickOnNextButton() {
+  cy.xpath("//a[text()='Next']").then($btn => {
+    const isVisible = $btn.is(':visible');
+    const isDisabled = $btn.closest('li').hasClass('disabled');
+
+    if (isVisible && !isDisabled) {
+      cy.wrap($btn).click({ force: true });
+      cy.log('✅ Clicked on Next button');
+    } else {
+      cy.log('❌ Next button is not clickable or is disabled');
+    }
+  });
+}
+
+ 
+
+
     selectItemsPerPage() {
-    this.itemsPerPage.wait(1000).select('40');
+    this.itemsPerPage.wait(2000).select('40');
     cy.log("Items Index is Changed");
     }
 
@@ -113,6 +134,7 @@ get submitButton() { return cy.get("button[type='submit']")}
         }
     
     }
+    
 
     clickNextUntilDisabled() {
         cy.get('ul.pagination li').contains('Next').should('be.visible').then(($nextButton) => {
@@ -123,7 +145,64 @@ get submitButton() { return cy.get("button[type='submit']")}
           }
         });
       }
-            
+
+      selectRecentUserByName(userName) {
+  // Type into the search field
+  cy.get('input[placeholder="Search By Name."]').clear().type(userName);
+
+  // Wait for the table/list to update (you can replace with better wait logic if needed)
+  cy.wait(4000);
+
+  // Select the first matched row that contains the user name
+  cy.get('table tbody tr')
+    .contains('td', userName)
+    .first()
+    .parent()
+    .within(() => {
+      // Assuming there's a 'View' or 'Select' button in the row
+      cy.get('button, a').contains(/view|select/i).click({ force: true });
+    });
 }
 
+searchUserWithPaginationAndReload(username) {
+  // Step 1: Set pagination to 40
+  this.itemsPerPage.wait(2000).select('40');
+  cy.log("📄 Pagination changed to 40 items");
+
+  // Step 2: If Next button is enabled, click it
+  cy.xpath("//a[text()='Next']").then($btn => {
+    const isVisible = Cypress.$($btn).is(':visible');
+    const isDisabled = Cypress.$($btn).closest('li').hasClass('disabled');
+
+    if (isVisible && !isDisabled) {
+      cy.wrap($btn).click({ force: true });
+      cy.wait(1000);
+      cy.log(' Clicked on Next button');
+    } else {
+      cy.log("ℹ Next button is not clickable or is disabled");
+    }
+
+    // Step 3: Search for the user
+    cy.get('.search > input').type('{selectall}{backspace}').type(username);
+    cy.wait(1000);
+
+    cy.get('table').then(($table) => {
+      if (!$table.text().includes(username)) {
+        cy.log('User not found, reloading page...');
+        cy.reload();
+        cy.wait(2000);
+
+        // Recursive call to repeat entire process
+        this.searchUserWithPaginationAndReload(username);
+      } else {
+        cy.log('✅ User found!');
+      }
+    });
+  });
+}
+
+
+
+
+    }
 export default new L1ApprovalActionPage();

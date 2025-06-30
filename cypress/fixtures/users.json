@@ -1,6 +1,6 @@
 { 
   "superUser": {
-    "email": "Markit@caeliusconsulting.com",
+    "email": "vishal.thakur@caeliusconsulting.com",
     "password": "Test@123"
   },
   "admin": {
@@ -10,5 +10,9 @@
   "ITUser":{
     "email":"asset-it@caeliusconsulting.com",
     "password":"Tes@123"
+  },
+  "superAdmin":{
+    "email": "vishal.thakur@caeliusconsulting.com",
+    "password":"Test@123"
   }
 }

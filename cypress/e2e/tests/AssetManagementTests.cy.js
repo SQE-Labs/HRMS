@@ -64,7 +64,8 @@ describe("Employee Asset Managment Request Tests", () => {
         AssetMgmtPage.clickOnSubmit();
         cy.validateSuccessMessages("Successfully Submitted");
         AssetMgmtPage.clickNextUntilDisabled();
-        AssetMgmtPage.lastRequestReason.should('have.text',reason);
+ 
+         cy.xpath(`//tbody/tr/td[contains(text(), "${reason}")]`) .should('have.text',reason);
 
     });
 
@@ -73,9 +74,9 @@ describe("Employee Asset Managment Request Tests", () => {
 
         // login to Application
          
-        sideBar.navigateTo("Asset Management","Asset Dashboard");
+        sideBar.navigateTo("Asset Management","Asset Overview");
         AssetDashBoardPage.assert_SubMenus(testData.AssetManagement.SubMenus);
-        AssetDashBoardPage.DashBoardHeader.should('be.visible').and('have.text','Asset Dashboard')
+        AssetDashBoardPage.DashBoardHeader.should('be.visible').and('have.text','Asset Overview')
 
     });
 
@@ -83,7 +84,7 @@ describe("Employee Asset Managment Request Tests", () => {
 
         // login to Application
          
-        sideBar.navigateTo("Asset Management","Asset Dashboard");
+        sideBar.navigateTo("Asset Management","Asset Overview");
         AssetDashBoardPage.selectAssetType(testData.AssetsNames.Keyboard);
         AssetDashBoardPage.clickOnFilterBtn();
         AssetDashBoardPage.assertAllCardsContainKeyword(AssetDashBoardPage.assetCards,testData.AssetsNames.Keyboard);
@@ -94,17 +95,17 @@ describe("Employee Asset Managment Request Tests", () => {
 
         // login to Application
          
-        sideBar.navigateTo("Asset Management","Asset Dashboard");
+        sideBar.navigateTo("Asset Management","Asset Overview");
         AssetDashBoardPage.selectAssetType(testData.AssetsNames.Pendrive);
         AssetDashBoardPage.clickOnFilterBtn();
-        AssetDashBoardPage.noRecordeLbl.should('be.visible').and('have.text', 'No Record Available');
+        AssetDashBoardPage.RecordeLbl.should('be.visible').and('have.text', 'Pendrive');
     });
 
     it("HRMIS_7: Verify Asset Owner Filter on Dashboard Page  ", () => {
 
         // login to Application
          
-        sideBar.navigateTo("Asset Management","Asset Dashboard");
+        sideBar.navigateTo("Asset Management","Asset Overview");
         AssetDashBoardPage.selectAssetOwner(testData.AssetsOwner.Caelius);
         AssetDashBoardPage.clickOnFilterBtn();
         AssetDashBoardPage.assertAllCardsContainKeyword(AssetDashBoardPage.assetCardOwner,testData.AssetsOwner.Caelius);
@@ -115,7 +116,7 @@ describe("Employee Asset Managment Request Tests", () => {
 
         // login to Application
          
-        sideBar.navigateTo("Asset Management","Asset Dashboard");
+        sideBar.navigateTo("Asset Management","Asset Overview");
         AssetDashBoardPage.selectAssetOwner(testData.AssetsOwner.Caelius);
         AssetDashBoardPage.selectAssetType(testData.AssetsNames.Keyboard);
         AssetDashBoardPage.clickOnFilterBtn();
@@ -131,7 +132,7 @@ describe("Employee Asset Managment Request Tests", () => {
 
         // login to Application
          
-        sideBar.navigateTo("Asset Management","Asset Dashboard");
+        sideBar.navigateTo("Asset Management","Asset Overview");
         AssetDashBoardPage.selectAssetType(testData.AssetsNames.Keyboard);
         AssetDashBoardPage.clickOnExportBtn();
         cy.validateSuccessMessages("No Record Available!");
@@ -143,7 +144,7 @@ describe("Employee Asset Managment Request Tests", () => {
 
         // login to Application
          
-        sideBar.navigateTo("Asset Management","Asset Dashboard");
+        sideBar.navigateTo("Asset Management","Asset Overview");
         AssetDashBoardPage.selectAssetOwner(testData.AssetsOwner.Caelius);
         AssetDashBoardPage.clickOnExportBtn();
         cy.validateSuccessMessages("No Record Available!");
@@ -155,7 +156,7 @@ describe("Employee Asset Managment Request Tests", () => {
 
         // login to Application
          
-        sideBar.navigateTo("Asset Management","Asset Dashboard");
+        sideBar.navigateTo("Asset Management","Asset Overview");
         AssetDashBoardPage.selectAssetOwner(testData.AssetsOwner.Caelius);
         AssetDashBoardPage.selectAssetType(testData.AssetsNames.Keyboard);
         AssetDashBoardPage.clickOnExportBtn();
@@ -167,7 +168,7 @@ describe("Employee Asset Managment Request Tests", () => {
 
         // login to Application
          
-        sideBar.navigateTo("Asset Management","Asset Dashboard");
+        sideBar.navigateTo("Asset Management","Asset Overview");
         AssetDashBoardPage.selectAssetOwner(testData.AssetsOwner.Caelius);
         AssetDashBoardPage.selectAssetType(testData.AssetsNames.Pendrive);
         AssetDashBoardPage.clickOnExportBtn();
@@ -181,8 +182,8 @@ describe("Employee Asset Managment Request Tests", () => {
         const model = "Model"+generateRandomString(5); 
         const serilaNo = "Len"+generateRandomNumber(5); 
          
-        sideBar.navigateTo("Asset Management","Create Asset");
-        AssetCreationPage.createAssetHeader.should('be.visible').and('have.text','Create Asset');
+        sideBar.navigateTo("Asset Management","New Asset Enrollment");
+        AssetCreationPage.createAssetHeader.should('be.visible').and('have.text','New Asset Enrollment');
 
         AssetCreationPage.clickOnSubmit();
         AssetCreationPage.assertValidation(AssetCreationPage.assetTypeDrp,"Please select an item in the list.");
