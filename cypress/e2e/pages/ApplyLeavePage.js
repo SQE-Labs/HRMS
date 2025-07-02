@@ -1,89 +1,106 @@
 import BasePage from "./BasePage";
 import Loaders from "../components/Loaders";
-import 'cypress-xpath';
-
+import "cypress-xpath";
 
 class ApplyLeavePage extends BasePage {
+  //Locators
+  get applyLeaveHeader() {
+    return cy.xpath("//h1[text()='Apply Leaves']");
+  }
+  get idColSortIcon() {
+    return cy.get("tr th:nth-child(1) img");
+  }
+  get fromColSortIcon() {
+    return cy.get("thead > tr > :nth-child(2)");
+  }
+  get toColSortIcon() {
+    return cy.get("tr th:nth-child(3) img");
+  }
+  get typeColSortIcon() {
+    return cy.get("tr th:nth-child(4) img");
+  }
+  get reasonColSortIcon() {
+    return cy.get("tr th:nth-child(5) img");
+  }
+  get leaveCountColSortIcon() {
+    return cy.get("tr th:nth-child(6) img");
+  }
+  get statusColSortIcon() {
+    return cy.get("tr th:nth-child(7) img");
+  }
+  gridDataList(col) {
+    return `tr td:nth-child(${col})`;
+  }
+  gridSingleData(col) {
+    return `tbody tr:nth-child(1) td:nth-child(${col})`;
+  }
 
+  // Method
 
-//Locators
-get applyLeaveHeader(){return cy.xpath("//h1[text()='Apply Leaves']")}
-get idColSortIcon(){return cy.get("tr th:nth-child(1) img")}
-get fromColSortIcon(){return cy.get('thead > tr > :nth-child(2)')}
-get toColSortIcon(){return cy.get("tr th:nth-child(3) img")}
-get typeColSortIcon(){return cy.get("tr th:nth-child(4) img")}
-get reasonColSortIcon(){return cy.get("tr th:nth-child(5) img")}
-get leaveCountColSortIcon(){return cy.get("tr th:nth-child(6) img")}
-get statusColSortIcon(){return cy.get("tr th:nth-child(7) img")}
-gridDataList(col) { return `tr td:nth-child(${col})` }
-gridSingleData(col) { return `tbody tr:nth-child(1) td:nth-child(${col})` }
+  clickOnIdCol() {
+    this.idColSortIcon.click();
+  }
 
-// Method
+  ClickOnfromCol() {
+    this.fromColSortIcon.click();
+  }
 
+  clickOnToCol() {
+    this.toColSortIcon.click();
+  }
 
-clickOnIdCol() {
-  this.idColSortIcon.click();
-}
+  clickOnTypeCol() {
+    this.typeColSortIcon.click();
+  }
 
-ClickOnfromCol() {
-  this.fromColSortIcon.click();
-}
+  clickOnReasonCol() {
+    this.reasonColSortIcon.click();
+  }
 
-clickOnToCol() {
-  this.toColSortIcon.click();
-}
+  clickOnLeaceCountCol() {
+    this.leaveCountColSortIcon.click();
+  }
 
-clickOnTypeCol() {
-  this.typeColSortIcon.click();
-}
+  clickOnStatusCol() {
+    this.statusColSortIcon.click();
+  }
 
-clickOnReasonCol() {
-  this.reasonColSortIcon.click();
-}
-
-clickOnLeaceCountCol() {
-  this.leaveCountColSortIcon.click();
-}
-
-clickOnStatusCol() {
-  this.statusColSortIcon.click();
-}
-
-
-clickNextUntilDisabled() {
-  cy.get('ul.pagination li').contains('Next').should('be.visible').then(($nextButton) => {
-    if (!$nextButton.parent().hasClass('disabled')) {
-      cy.wrap($nextButton).click({ force: true });
-      cy.wait(1000);
-      this.clickNextUntilDisabled();
-    }
-  });
-}
-
-
-clickNext() {
-  cy.get('ul.pagination li').contains('Next').should('be.visible').then(($nextButton) => {
-      if (!$nextButton.parent().hasClass('disabled')) {
+  clickNextUntilDisabled() {
+    cy.get("ul.pagination li")
+      .contains("Next")
+      .should("be.visible")
+      .then(($nextButton) => {
+        if (!$nextButton.parent().hasClass("disabled")) {
           cy.wrap($nextButton).click({ force: true });
           cy.wait(1000);
-      }
-  });
-}
+          this.clickNextUntilDisabled();
+        }
+      });
+  }
 
-clickPrevious() {
-  cy.get('ul.pagination li').contains('Previous').should('be.visible').then(($nextButton) => {
-      if (!$nextButton.parent().hasClass('disabled')) {
+  clickNext() {
+    cy.get("ul.pagination li")
+      .contains("Next")
+      .should("be.visible")
+      .then(($nextButton) => {
+        if (!$nextButton.parent().hasClass("disabled")) {
           cy.wrap($nextButton).click({ force: true });
           cy.wait(1000);
-      }
-  });
+        }
+      });
+  }
+
+  clickPrevious() {
+    cy.get("ul.pagination li")
+      .contains("Previous")
+      .should("be.visible")
+      .then(($nextButton) => {
+        if (!$nextButton.parent().hasClass("disabled")) {
+          cy.wrap($nextButton).click({ force: true });
+          cy.wait(1000);
+        }
+      });
+  }
 }
-
-
-
-
-}
-
-
 
 export default new ApplyLeavePage();
