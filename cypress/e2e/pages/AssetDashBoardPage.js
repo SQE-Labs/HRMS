@@ -22,10 +22,10 @@ class AssetDashBoardPage extends BasePage {
     return cy.xpath("//h5[text()='Pendrive']");
   }
   get assetCardOwner() {
-    return cy.get("h6.card-text");
+    return cy.get(" .card > .card-body > .card-title");
   }
   get filterAssetOwner() {
-    return cy.get("#filterOwner");
+    return cy.get("#filterAssetType");
   }
   get totalItemCount() {
     return cy.get("div.total");

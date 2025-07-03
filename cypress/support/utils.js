@@ -44,7 +44,9 @@ export function selectDrpValueByText(
     // If a search input locator is provided, type in the search box
     if (searchInputLocator) {
       searchInputLocator.wait(1000).type(text);
-      cy.get("#react-select-2-listbox span ,#react-select-3-listbox span")
+      cy.get(
+        "#react-select-2-listbox span ,#react-select-3-listbox span,filterAssetType"
+      )
         .contains(text)
         .click();
     }

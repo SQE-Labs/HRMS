@@ -4,7 +4,7 @@ import Loaders from "../components/Loaders";
 class AssetCreationPage extends BasePage {
   //Locators
   get createAssetHeader() {
-    return cy.get("#showMenuBtn + h1");
+    return cy.get("h1");
   }
   get submitBtn() {
     return cy.get("div.action button");
@@ -18,6 +18,11 @@ class AssetCreationPage extends BasePage {
   get ownerDrp() {
     return cy.get("#owner");
   }
+
+  get superOwner() {
+    return cy.get("#superOwner");
+  }
+
   get manufactureTxt() {
     return cy.get("input[name='manufacture']");
   }
@@ -58,6 +63,10 @@ class AssetCreationPage extends BasePage {
 
   selectOwner(text) {
     cy.selectDrpValueByText(this.ownerDrp, text, false);
+  }
+
+  selectSuperOwner(text) {
+    cy.selectDrpValueByText(this.superOwner, text, false);
   }
 
   selectAssetType(text) {
