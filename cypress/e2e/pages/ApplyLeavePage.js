@@ -14,19 +14,19 @@ class ApplyLeavePage extends BasePage {
     return cy.get("thead > tr > :nth-child(2)");
   }
   get toColSortIcon() {
-    return cy.get("tr th:nth-child(3) img");
+    return cy.get("thead > tr > :nth-child(3)");
   }
   get typeColSortIcon() {
-    return cy.get("tr th:nth-child(4) img");
+    return cy.get("thead > tr > :nth-child(4)");
   }
   get reasonColSortIcon() {
-    return cy.get("tr th:nth-child(5) img");
+    return cy.get("thead > tr > :nth-child(5)");
   }
   get leaveCountColSortIcon() {
-    return cy.get("tr th:nth-child(6) img");
+    return cy.get("thead > tr > :nth-child(6)");
   }
   get statusColSortIcon() {
-    return cy.get("tr th:nth-child(7) img");
+    return cy.get("thead > tr > :nth-child(7)");
   }
   gridDataList(col) {
     return `tr td:nth-child(${col})`;
@@ -57,7 +57,7 @@ class ApplyLeavePage extends BasePage {
     this.reasonColSortIcon.click();
   }
 
-  clickOnLeaceCountCol() {
+  clickOnLeaveCountCol() {
     this.leaveCountColSortIcon.click();
   }
 

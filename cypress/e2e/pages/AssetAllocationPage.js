@@ -41,7 +41,7 @@ class AssetAllocationPage extends BasePage {
     return `tbody tr td[data-title='${title}']`;
   }
   gridSingleData(title) {
-    return `tbody tr:nth-child(1) td[data-title='${title}']`;
+    return `tbody tr:first-of-type td[data-title='${title}']`;
   }
   get assetOwnerData() {
     return cy.get("tbody tr td:nth-child(2)");
