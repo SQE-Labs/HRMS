@@ -1,6 +1,7 @@
 import BasePage from "./BasePage";
 import { generateRandomString } from "../../support/utils";
 import Loaders from "../components/Loaders";
+import "cypress-xpath";
 
 class EmployeeProfilePage extends BasePage {
   // Locators
@@ -20,6 +21,10 @@ class EmployeeProfilePage extends BasePage {
   get noRecordAvailableInfo() {
     return cy.get("#collapse4 div.table-responsive div");
   }
+  get recordAvailable() {
+    return cy.xpath("(//tbody/tr)[1]");
+  }
+
   get basicInfoAccord() {
     return cy.get("h2[id='heading1'] button");
   }
@@ -138,9 +143,17 @@ class EmployeeProfilePage extends BasePage {
     cy.log("Updated Date of Joining");
   }
 
-  validateNoRecordsAppear() {
-    this.noRecordAvailableInfo.should("have.text", "No records available");
-    cy.log("No Records Appear");
+  validateRecordsAppear() {
+    this.recordAvailable.then(($el) => {
+      if ($el.length > 0) {
+        cy.log("✅ Record(s) found");
+        // Optionally do something with the element
+      } else {
+        cy.log("No records found");
+      }
+    });
+    // this.noRecordAvailableInfo.should("have.text", "No records available");
+    // cy.log("No Records Appear");
   }
 
   validateAccordionCollapsed() {

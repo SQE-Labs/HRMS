@@ -16,7 +16,7 @@ describe("Employee Profile Tests", () => {
 
   it("HRMIS_1: Verify that the 'Employee List' page and the User Dashboard load successfully.", () => {
     //Login and Navigate to Employees List Page
-    sideBar.navigateTo("Employee Management", "Employees List");
+    sideBar.navigateTo("Employee Management", "Employee Directory");
 
     // Verify that information message, when user enters invalid data in 'Search By Name' field
     EmployeeListPage.enterNameIntoSearchField("invalidName");
@@ -120,7 +120,7 @@ describe("Employee Profile Tests", () => {
       "equal",
       testData.EmployeePersonalData.DateOfBirth
     );
-    EmployeeProfilePage.getFieldValue("Aadhar Card Number").should(
+    EmployeeProfilePage.getFieldValue("Aadhaar Card Number").should(
       "equal",
       testData.EmployeePersonalData.AdhaarNumber
     );
@@ -194,7 +194,7 @@ describe("Employee Profile Tests", () => {
       "equal",
       testData.EmployeePersonalData.DateOfBirth
     );
-    EmployeeProfilePage.getFieldValue("Aadhar Card Number").should(
+    EmployeeProfilePage.getFieldValue("Aadhaar Card Number").should(
       "equal",
       testData.EmployeePersonalData.AdhaarNumber
     );
@@ -268,7 +268,7 @@ describe("Employee Profile Tests", () => {
       "equal",
       testData.EmployeePersonalData.UpdatededDateOfBirth
     );
-    EmployeeProfilePage.getFieldValue("Aadhar Card Number").should(
+    EmployeeProfilePage.getFieldValue("Aadhaar Card Number").should(
       "equal",
       testData.EmployeePersonalData.AdhaarNumber2
     );

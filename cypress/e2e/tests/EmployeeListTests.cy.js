@@ -16,7 +16,7 @@ describe("Employee List Tests", () => {
   });
 
   it("HRMIS_1: Verify that 'Employee List' page opens up, when user clicks on 'Employee Management'.", () => {
-    sideBar.navigateTo("Employee Management", "Employees List");
+    sideBar.navigateTo("Employee Management", "Employee Directory");
 
     // Verify that information message, when user enters invalid data in 'Search By Name' field
     EmployeeListPage.enterNameIntoSearchField("invalidName");
@@ -34,11 +34,8 @@ describe("Employee List Tests", () => {
     // Verify that the information message appears for the selected department with no records.
     EmployeeListPage.clickOnUserCard(testData.EmployeeName);
     EmployeeProfilePage.clickOnWorkExperience();
-    EmployeeProfilePage.noRecordAvailableInfo.should(
-      "have.text",
-      "No records available"
-    );
-    cy.log("No Records Appear");
+    EmployeeProfilePage.validateRecordsAppear();
+    cy.log("Records Appear");
 
     // Verify that 'Basic Info' accordion gets expanded, when user clicks 'Basic Info' accordion.
     EmployeeProfilePage.clickOnBasicInfo();

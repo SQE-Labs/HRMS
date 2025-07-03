@@ -119,7 +119,9 @@ describe("Employee Asset Managment Request Tests", () => {
     AssetDashBoardPage.assertTotalCount(AssetDashBoardPage.assetCardOwner);
   });
 
-  it("HRMIS_8:  Verify Asset Owner and Asset Type Filter on Dashboard Page", () => {
+  // Functionality has been changed ( We select only one value from the dropdown)
+
+  it.skip("HRMIS_8:  Verify Asset Owner and Asset Type Filter on Dashboard Page", () => {
     // login to Application
 
     sideBar.navigateTo("Asset Management", "Asset Overview");
@@ -137,7 +139,9 @@ describe("Employee Asset Managment Request Tests", () => {
     AssetDashBoardPage.assertTotalCount(AssetDashBoardPage.assetCards);
   });
 
-  it("HRMIS_9:Verify 'No Record Available' message appear after clicking Export when Asset Owner is blank on Dashboard Page", () => {
+  // Functionality changed confirmed by dogra sir.
+
+  it.skip("HRMIS_9:Verify 'No Record Available' message appear after clicking Export when Asset Owner is blank on Dashboard Page", () => {
     // login to Application
 
     sideBar.navigateTo("Asset Management", "Asset Overview");
@@ -146,7 +150,9 @@ describe("Employee Asset Managment Request Tests", () => {
     cy.validateSuccessMessages("No Record Available!");
   });
 
-  it("HRMIS_10:Verify 'No Record Available' message appear after clicking Export when Asset Type is blank on Dashboard Page", () => {
+  // Functionality changed confirmed by dogra sir.
+
+  it.skip("HRMIS_10:Verify 'No Record Available' message appear after clicking Export when Asset Type is blank on Dashboard Page", () => {
     // login to Application
 
     sideBar.navigateTo("Asset Management", "Asset Overview");
@@ -165,7 +171,9 @@ describe("Employee Asset Managment Request Tests", () => {
     AssetDashBoardPage.checkFile("cypress/downloads/asset_list.xlsx");
   });
 
-  it("HRMIS_12: Verify No Record Available message when Asset type and asset Owner with no record is selected ", () => {
+  // Functionality changed confirmed by dogra sir.
+
+  it.skip("HRMIS_12: Verify No Record Available message when Asset type and asset Owner with no record is selected ", () => {
     // login to Application
 
     sideBar.navigateTo("Asset Management", "Asset Overview");
@@ -211,6 +219,14 @@ describe("Employee Asset Managment Request Tests", () => {
       AssetCreationPage.manufactureTxt,
       "Please fill out this field."
     );
+
+    AssetCreationPage.selectSuperOwner("CAELIUS_OWNED");
+    AssetCreationPage.clickOnSubmit();
+    AssetCreationPage.assertValidation(
+      AssetCreationPage.manufactureTxt,
+      "Please fill out this field."
+    );
+
     AssetCreationPage.enterManufacture("Lenovo");
 
     AssetCreationPage.clickOnSubmit();

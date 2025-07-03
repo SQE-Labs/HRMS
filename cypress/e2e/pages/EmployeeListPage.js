@@ -30,7 +30,7 @@ class EmployeeListPage extends BasePage {
   }
 
   navigateToUserDashboardPage(nametxt) {
-    sideBar.navigateTo("Employee Management", "Employees List");
+    sideBar.navigateTo("Employee Management", "Employee Directory");
     this.searchByName.clear().type(nametxt).should("have.value", nametxt);
     this.user.click();
   }
