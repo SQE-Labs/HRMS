@@ -29,10 +29,11 @@ module.exports = defineConfig({
     reporterOptions: {
       reportDir: "cypress/reports",
       charts: true,
-      reportPageTitle: "HRMS Running report",
+      reportPageTitle: "HRMS Test Execution Report",
       embeddedScreenshots: true,
       inlineAssets: true,
       videoOnFailOnly: true,
+      charts: true,
       html: true,
       json: true,
       overwrite: false,

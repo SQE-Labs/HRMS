@@ -210,61 +210,50 @@ class L1ApprovalActionPage extends BasePage {
       });
   }
 
-  selectRecentUserByName(userName) {
-    // Type into the search field
-    cy.get('input[placeholder="Search By Name."]').clear().type(userName);
-
-    // Wait for the table/list to update (you can replace with better wait logic if needed)
-    cy.wait(4000);
-
-    // Select the first matched row that contains the user name
-    cy.get("table tbody tr")
-      .contains("td", userName)
-      .first()
-      .parent()
-      .within(() => {
-        // Assuming there's a 'View' or 'Select' button in the row
-        cy.get("button, a")
-          .contains(/view|select/i)
-          .click({ force: true });
-      });
-  }
-
-  searchUserWithPaginationAndReload(username) {
-    // Step 1: Set pagination to 40
-    this.itemsPerPage.wait(2000).select("40");
-    cy.log("📄 Pagination changed to 40 items");
-
-    // Step 2: If Next button is enabled, click it
-    cy.xpath("//a[text()='Next']").then(($btn) => {
-      const isVisible = Cypress.$($btn).is(":visible");
-      const isDisabled = Cypress.$($btn).closest("li").hasClass("disabled");
-
-      if (isVisible && !isDisabled) {
-        cy.wrap($btn).click({ force: true });
-        cy.wait(1000);
-        cy.log(" Clicked on Next button");
-      } else {
-        cy.log("ℹ Next button is not clickable or is disabled");
-      }
-
-      // Step 3: Search for the user
-      cy.get(".search > input").type("{selectall}{backspace}").type(username);
+  searchUserUntilFound(username) {
+    const searchOnLastPage = () => {
+      // Search on current page
+      cy.get(".search > input").clear().type(username);
       cy.wait(1000);
 
       cy.get("table").then(($table) => {
-        if (!$table.text().includes(username)) {
-          cy.log("User not found, reloading page...");
+        if ($table.text().includes(username)) {
+          cy.log("✅ User found!");
+        } else {
+          cy.log("❌ User not found, reloading and retrying...");
           cy.reload();
           cy.wait(2000);
-
-          // Recursive call to repeat entire process
-          this.searchUserWithPaginationAndReload(username);
-        } else {
-          cy.log("✅ User found!");
+          clickNextUntilDisabled(); // Restart after reload
         }
       });
-    });
+    };
+
+    const clickNextUntilDisabled = () => {
+      const clickNext = () => {
+        cy.xpath("//a[text()='Next']").then(($btn) => {
+          const isDisabled = $btn.closest("li").hasClass("disabled");
+
+          if (!isDisabled) {
+            cy.wrap($btn).click({ force: true });
+            cy.wait(1000);
+            clickNext(); // Keep clicking next until disabled
+          } else {
+            cy.log("📄 Reached last page of pagination");
+            searchOnLastPage(); // After reaching last page, search
+          }
+        });
+      };
+
+      // Set pagination first
+      cy.get("select[id='itemsPerPage']").select("40", { force: true });
+      cy.wait(1000);
+      cy.log("📄 Pagination set to 40");
+
+      clickNext(); // Begin next navigation
+    };
+
+    // 🔄 Start the entire flow
+    clickNextUntilDisabled();
   }
 }
 export default new L1ApprovalActionPage();

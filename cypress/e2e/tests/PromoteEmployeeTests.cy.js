@@ -11,7 +11,7 @@ before(function () {
 beforeEach(() => {
   // login to Application
   cy.login("superUser");
-  sideBar.navigateTo("Employee Management", "Promote Employee");
+  sideBar.navigateTo("Employee Management", "Promotion Management");
   cy.wait(1000);
 });
 
@@ -26,7 +26,7 @@ describe("Employee Managment Promote Employee Tests", () => {
     ];
     PromoteEmployeePage.assertTextEquals(
       PromoteEmployeePage.promoteEmployeeLbl,
-      "Promote Employee"
+      "Promotion Management"
     );
     cy.wait(1000);
     PromoteEmployeePage.selectEmployee(testData.EmployeeName);
@@ -70,7 +70,7 @@ describe("Employee Managment Promote Employee Tests", () => {
     );
 
     // select department
-    PromoteEmployeePage.selectDepartment("GENRIC");
+    PromoteEmployeePage.selectDepartment("Construcxfction");
 
     // when no designation is selected.
     PromoteEmployeePage.clickOnSubmitBtn();
@@ -88,7 +88,7 @@ describe("Employee Managment Promote Employee Tests", () => {
       "have.text",
       "Promote Employee"
     );
-    PromoteEmployeePage.selectDepartment("GENRIC");
+    PromoteEmployeePage.selectDepartment("Construcxfction");
     PromoteEmployeePage.assertOptionTexts(testData.Designations.Options);
   });
 });

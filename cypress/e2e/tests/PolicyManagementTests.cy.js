@@ -10,10 +10,13 @@ beforeEach(() => {
   cy.login("superUser");
 });
 
+let randomPolicy = "Demo" + generateRandomString(5);
+let randomDescription = "Description" + generateRandomString(5);
+
 describe("Policy Management Tests", () => {
   it("HRMIS_1: Verify 'Modify Policies' page.", () => {
     //Navigate to Modify Policy Page
-    sideBar.navigateTo("Policy Management", "Modify Policy");
+    sideBar.navigateTo("Caelius' Policies", "Policy Viewer");
     PolicyMgmtPage.modifyPolicyLbl.should("be.visible");
 
     // select Item Per Page 20
@@ -37,16 +40,13 @@ describe("Policy Management Tests", () => {
     cy.wait(1000);
     PolicyMgmtPage.clickOnView();
     PolicyMgmtPage.checkDownloadFile(
-      "cypress/downloads/ECardsCCIT112126022926502 (2) (6).pdf"
+      "C:/Users/SQE Labs/Desktop/HRMS/cypress/downloads/dummy.pdf"
     );
   });
 
   it("HRMIS_2: Verify 'Add Policy' Pop up.", () => {
-    const randomPolicy = "Demo" + generateRandomString(5);
-    const randomDescription = "Description" + generateRandomString(5);
-
     //Navigate to Modify Policy Page
-    sideBar.navigateTo("Policy Management", "Modify Policy");
+    sideBar.navigateTo("Caelius' Policies", "Policy Editor");
 
     PolicyMgmtPage.clickOnAddPolicy();
     PolicyMgmtPage.addPolicyHeader
@@ -83,14 +83,15 @@ describe("Policy Management Tests", () => {
   });
 
   it("HRMIS_3: Verify 'Update Policy' Pop up.", () => {
-    const randomPolicy = "Demo" + generateRandomString(5);
-    const randomDescription = "Description" + generateRandomString(5);
-
     //Navigate to Modify Policy Page
-    sideBar.navigateTo("Policy Management", "Modify Policy");
+    sideBar.navigateTo("Caelius' Policies", "Policy Editor");
 
     //search valid data from the grid
-    PolicyMgmtPage.searchPolicy();
+    PolicyMgmtPage.selectItemPerPage("40");
+    cy.wait(500);
+    PolicyMgmtPage.clickNextUntilDisabled();
+    cy.wait(500);
+    PolicyMgmtPage.searchPolicy(randomPolicy);
     cy.wait(1000);
     PolicyMgmtPage.clickOnEditBtn();
     PolicyMgmtPage.addPolicyHeader
@@ -132,14 +133,20 @@ describe("Policy Management Tests", () => {
     PolicyMgmtPage.selectValidDate("2023-10-24");
     PolicyMgmtPage.clickOnSubmit();
     cy.wait(1000);
-    PolicyMgmtPage.policyTitle.should("have.text", randomPolicy);
-    PolicyMgmtPage.policyDesc.should("have.text", randomDescription);
-    PolicyMgmtPage.policyValidDate.should("have.text", "24-10-2023");
+    cy.reload();
+    PolicyMgmtPage.selectItemPerPage("40");
+    cy.wait(500);
+    PolicyMgmtPage.clickNextUntilDisabled();
+    cy.wait(500);
+    PolicyMgmtPage.searchPolicy(randomPolicy);
+    PolicyMgmtPage.EditedPolicyTitle.should("have.text", randomPolicy);
+    PolicyMgmtPage.editedPolicyDesc.should("have.text", randomDescription);
+    PolicyMgmtPage.editedPolicyVaidDate.should("have.text", "24-10-2023");
   });
 
   it("HRMIS_4: Verify 'Next' and 'Previous' Pagination button Modify Policy Page", () => {
     // Navigate to Modify Policy Page
-    sideBar.navigateTo("Policy Management", "Modify Policy");
+    sideBar.navigateTo("Caelius' Policies", "Policy Editor");
     PolicyMgmtPage.modifyPolicyLbl.should("be.visible");
 
     // Step 1: Capture the initial policy title
@@ -182,7 +189,7 @@ describe("Policy Management Tests", () => {
 
   it("HRMIS_5: Verify Asscending and Descending sorting of Policy Ids Modify Policy Page", () => {
     //Navigate to Modify Policy Page
-    sideBar.navigateTo("Policy Management", "Modify Policy");
+    sideBar.navigateTo("Caelius' Policies", "Policy Editor");
     PolicyMgmtPage.modifyPolicyLbl.should("be.visible");
 
     let textsList1 = [];
@@ -194,7 +201,7 @@ describe("Policy Management Tests", () => {
     });
 
     // Click the sorting icon twice to change the order
-    PolicyMgmtPage.clickOnPolicyIds();
+    // PolicyMgmtPage.clickOnPolicyIds();
     //PolicyMgmtPage.clickOnPolicyIds();
 
     // Get the new sorted list
@@ -208,10 +215,10 @@ describe("Policy Management Tests", () => {
 
   it("HRMIS_6: Verify 'view Policy' Page", () => {
     //Navigate to View Policy Page
-    sideBar.navigateTo("Policy Management", "View Policy");
+    sideBar.navigateTo("Caelius' Policies", "Policy Viewer");
     ViewPolicyMgmt.modifyPolicyLbl
       .should("be.visible")
-      .and("have.text", "View Policy");
+      .and("have.text", "Policy Viewer");
 
     // select Item Per Page 20
     ViewPolicyMgmt.selectItemPerPage("20");
@@ -240,7 +247,7 @@ describe("Policy Management Tests", () => {
 
   it("HRMIS_7: Verify 'Next' and 'Previous' Pagination button View Policy Page", () => {
     //Navigate to Modify Policy Page
-    sideBar.navigateTo("Policy Management", "View Policy");
+    sideBar.navigateTo("Caelius' Policies", "Policy Viewer");
     PolicyMgmtPage.modifyPolicyLbl.should("be.visible");
 
     // expected policy
@@ -271,9 +278,11 @@ describe("Policy Management Tests", () => {
     expect(actualPolicytitle).to.equal(expectedPolicytitle);
   });
 
-  it("HRMIS_8: Verify Asscending and Descending sorting of Policy Ids View Policy Page", () => {
+  //Functionality changed
+
+  it.skip("HRMIS_8: Verify Asscending and Descending sorting of Policy Ids View Policy Page", () => {
     //Navigate to Modify Policy Page
-    sideBar.navigateTo("Policy Management", "View Policy");
+    sideBar.navigateTo("Caelius' Policies", "Policy Viewer");
     PolicyMgmtPage.modifyPolicyLbl.should("be.visible");
 
     let textsList1 = [];

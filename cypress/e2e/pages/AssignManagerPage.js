@@ -30,7 +30,7 @@ class AssignManagerPage extends BasePage {
     return cy.get("#react-select-3-input");
   }
   get assignedManagerLbl() {
-    return cy.get("table.resume tr td:nth-child(3)");
+    return cy.get("table.resume tr td:nth-child(2)");
   }
 
   //Methods

@@ -5,7 +5,7 @@ describe("Login Tests", () => {
     cy.login("superUser");
   });
 
-  it.skip("Methods to create and retreive mails from yopmail", () => {
+  it("Methods to create and retreive mails from yopmail", () => {
     cy.task("emailFetcher").then((emailId) => {
       cy.log("Email ID:", emailId);
     });

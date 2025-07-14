@@ -3,7 +3,7 @@ import BasePage from "./BasePage";
 class PolicyMgmtPage extends BasePage {
   // Locators
   get modifyPolicyLbl() {
-    return cy.get("#showMenuBtn + h1");
+    return cy.get("h1");
   }
   get addPolicyBtn() {
     return cy.get("div.actions > a.export");
@@ -36,13 +36,18 @@ class PolicyMgmtPage extends BasePage {
     return cy.get("tbody tr");
   }
   get policyTitle() {
-    return cy.get("tbody tr[kwy='0'] td:nth-child(2)");
+    // return cy.get("[data-title=title]");
+    return cy.get(':nth-child(1) > [data-title="title"]');
+  }
+
+  get EditedPolicyTitle() {
+    return cy.get('[data-title="Email"]');
   }
   get noRecordeLbl() {
     return cy.get("div.fs-4");
   }
   get viewBtn() {
-    return cy.get("tr[kwy='0'] a");
+    return cy.get("tr > :nth-child(5) > a");
   }
   get editBtn() {
     return cy.get("tbody tr:nth-child(1) button.export");
@@ -56,8 +61,14 @@ class PolicyMgmtPage extends BasePage {
   get policyDesc() {
     return cy.get("tbody tr[kwy='0'] td:nth-child(4)");
   }
+  get editedPolicyDesc() {
+    return cy.get('[data-title="description"]');
+  }
   get policyValidDate() {
     return cy.get("tbody tr[kwy='0'] td:nth-child(3)");
+  }
+  get editedPolicyVaidDate() {
+    return cy.get('[data-title="validFrom"]');
   }
   get crossBtn() {
     return cy.get("button.btn-close");
@@ -80,7 +91,9 @@ class PolicyMgmtPage extends BasePage {
   get policyIdsSortImg() {
     return cy.get("tr th:nth-child(1) img");
   }
-  // get policyTitleView() {return cy.get('tbody tr:nth-child(1) td:nth-child(2)')}
+  get policyTitleView() {
+    return cy.get("tbody tr:nth-child(1) td:nth-child(2)");
+  }
 
   // Methods
 

@@ -7,7 +7,7 @@ class ReimbursementPage extends BasePage {
     return cy.get("ul.submenu.show li");
   }
   get reimbursementHeader() {
-    return cy.get("#showMenuBtn + h1");
+    return cy.get("h1");
   }
   get reimbursementType() {
     return cy.get("tbody tr:first-of-type td[data-title='name']");

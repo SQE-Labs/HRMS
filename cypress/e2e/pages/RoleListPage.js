@@ -4,7 +4,7 @@ import BasePage from "./BasePage";
 class RoleListPage extends BasePage {
   // Locators
   get roleListLbl() {
-    return cy.get("#showMenuBtn + h1");
+    return cy.get("h1");
   }
   get itemPerPageDrp() {
     return cy.get("#itemsPerPage");

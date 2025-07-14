@@ -7,7 +7,7 @@ class AssetAllocationPage extends BasePage {
     return cy.get("ul.submenu.show li");
   }
   get assetAllocationHeader() {
-    return cy.get("#showMenuBtn + h1");
+    return cy.get("h1");
   }
   get backToAssetList() {
     return cy.get("div.total a");
