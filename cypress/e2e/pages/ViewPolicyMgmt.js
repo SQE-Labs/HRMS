@@ -3,7 +3,7 @@ import BasePage from "./BasePage";
 class ViewPolicyMgmtPage extends BasePage {
   // Locators
   get modifyPolicyLbl() {
-    return cy.get("#showMenuBtn + h1");
+    return cy.get("h1");
   }
   get addPolicyBtn() {
     return cy.get("div.actions > a.export");

@@ -200,6 +200,7 @@ describe("Employee Onboard Tests", () => {
 
     sideBar.navigateTo("Employee Onboarding", "IT Approval");
 
+    cy.reload();
     // Viewing Newly Onboard Invitation
     L1ApprovalActionPage.selectItemsPerPage();
     // L1ApprovalActionPage.clickOnPagenationNextButton();
@@ -207,9 +208,7 @@ describe("Employee Onboard Tests", () => {
     L1ApprovalActionPage.clickOnNextButton();
 
     cy.wait(4000);
-    L1ApprovalActionPage.searchUserWithPaginationAndReload(
-      JoineeData.Firstname
-    );
+    L1ApprovalActionPage.searchUserUntilFound(JoineeData.Firstname);
     // L1ApprovalActionPage.SearchNewJoineeByName(JoineeData.Firstname);
     //  L1ApprovalActionPage.selectRecentUserByName(JoineeData.Firstname);
 

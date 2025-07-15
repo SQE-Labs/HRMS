@@ -5,13 +5,13 @@ import Loaders from "../components/Loaders";
 class UploadEmpDocumentPage extends BasePage {
   // Locators
   get uploadeDocHeaderLbl() {
-    return cy.get("#showMenuBtn + h1");
+    return cy.get("h1");
   }
   get selectEmployeeDrp() {
     return cy.get("#react-select-2-input");
   }
   get tableColHeadLbl() {
-    return cy.get("table.resume tr th");
+    return cy.get("thead > tr > th");
   }
   insuranceCardActBtn(text) {
     return cy.get(
@@ -38,7 +38,8 @@ class UploadEmpDocumentPage extends BasePage {
   }
   eyeIcon(value) {
     return cy.get(
-      `tbody tr:has(td:nth-child(2):contains('${value}')) i.fa-eye`
+      // `tbody tr:has(td:nth-child(2):contains('${value}')) i.fa-eye`
+      ".modal-body > .table-responsive > .resume > tbody > tr > :nth-child(4)"
     );
   }
   eyeIconAnchor(value) {
@@ -94,6 +95,27 @@ class UploadEmpDocumentPage extends BasePage {
     cy.log("Clicked on the Insurance Upload action icon");
   }
 
+  handleInsuranceUpload(file, text) {
+    cy.contains("td", "INSURANCECARD")
+      .parent("tr")
+      .within(() => {
+        cy.get("td").then(($tds) => {
+          const approvedFound = [...$tds].some((td) =>
+            td.innerText.toLowerCase().includes("approved")
+          );
+
+          if (approvedFound) {
+            cy.log("✅ Document already approved. No upload needed.");
+          } else {
+            cy.log("⚠ Not approved. Proceeding to upload...");
+            this.clickOnUploadAct(file);
+            this.enterComments(text);
+            this.clickOnSubmitBnt();
+          }
+        });
+      });
+  }
+
   clickOnCancelBtn() {
     this.cancelBtn.wait(500).click();
     cy.log("Clicked on the Cancel Button");
@@ -120,7 +142,7 @@ class UploadEmpDocumentPage extends BasePage {
   }
 
   clickOnEyeIcon(text) {
-    this.eyeIconAnchor(text).invoke("removeAttr", "target").click();
+    this.eyeIconAnchor(text).click().invoke("removeAttr", "target");
   }
 
   assertPdf() {

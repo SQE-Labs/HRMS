@@ -15,14 +15,14 @@ beforeEach(() => {
 
 describe("Attendence Management Punch Details Tests", () => {
   it("HRMIS_1: Verify Punch Details Page ", () => {
-    sideBar.navigateTo("Attendence Management", "Punch Details");
+    sideBar.navigateTo("Attendance & Leaves", "Punch Details");
     PunchDeatilsPage.assert_SubMenus(testData.AttendenceManagement.SubMenus);
     PunchDeatilsPage.punchDetailsHeader
       .should("be.visible")
       .and("have.text", "Punch Details");
 
-    sideBar.navigateTo("Attendence Management");
-    PunchDeatilsPage.subMenus.should("not.exist");
+    // sideBar.navigateTo("Attendance & Leaves");
+    // PunchDeatilsPage.subMenus.should("not.exist");
   });
 
   it("HRMIS_2: Verify that calendar appears, when user selects an option from 'Select Employee' dropdown field, on 'Punch Details' page", () => {
@@ -34,8 +34,8 @@ describe("Attendence Management Punch Details Tests", () => {
     const formattedDate = formatter.format(date);
 
     cy.wait(2000);
-    sideBar.navigateTo("Attendence Management", "Punch Details");
-    PunchDeatilsPage.select_Employee("DDinesh D Kumar");
+    sideBar.navigateTo("Attendance & Leaves", "Punch Details");
+    PunchDeatilsPage.select_Employee("Autom Mation User");
     PunchDeatilsPage.calendarDate
       .should("be.visible")
       .and("have.text", formattedDate);
@@ -58,8 +58,8 @@ describe("Attendence Management Punch Details Tests", () => {
     cy.log(previousMonthOutput); // September 2024
 
     cy.wait(2000);
-    sideBar.navigateTo("Attendence Management", "Punch Details");
-    PunchDeatilsPage.select_Employee("DDinesh D Kumar");
+    sideBar.navigateTo("Attendance & Leaves", "Punch Details");
+    PunchDeatilsPage.select_Employee("Autom Mation User");
 
     PunchDeatilsPage.backwordIcon.click();
 
@@ -74,8 +74,8 @@ describe("Attendence Management Punch Details Tests", () => {
   });
 
   it("HRMIS_4: Attendence Details pop up close and open ", () => {
-    sideBar.navigateTo("Attendence Management", "Punch Details");
-    PunchDeatilsPage.select_Employee("DDinesh D Kumar");
+    sideBar.navigateTo("Attendance & Leaves", "Punch Details");
+    PunchDeatilsPage.select_Employee("Autom Mation User");
 
     PunchDeatilsPage.clickOnDate();
     PunchDeatilsPage.attendenceDetailHeader

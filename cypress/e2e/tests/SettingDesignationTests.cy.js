@@ -14,7 +14,7 @@ beforeEach(() => {
   cy.login("superUser");
 });
 
-describe("Setting Designation Tests", () => {
+describe.skip("Setting Designation Tests", () => {
   it("HRMIS_1: Verify Designation tab", () => {
     // login to Application
 

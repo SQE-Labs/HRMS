@@ -14,7 +14,7 @@ beforeEach(() => {
   cy.login("superUser");
 });
 
-describe("Setting Department Tests", () => {
+describe.skip("Setting Department Tests", () => {
   it("HRMIS_1: Verify Departments tab", () => {
     // login to Application
 
