@@ -93,6 +93,9 @@ class AssetAllocationPage extends BasePage {
   get selectedassetRBtn() {
     return cy.xpath("(//input[@name='selectAsset'])[1]");
   }
+  get enterAssetName() {
+    return cy.get("input");
+  }
   get lastAssignedAssetName() {
     return cy.get("tr:last-of-type td[data-title='Name']");
   }

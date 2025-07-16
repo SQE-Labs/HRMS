@@ -4,7 +4,7 @@ import Loaders from "../components/Loaders";
 class DepartmentsPage extends BasePage {
   //Locators
   get departmentHeader() {
-    return cy.get("#showMenuBtn + h1");
+    return cy.get("h1");
   }
   get departmentName() {
     return cy.get("tbody tr:first-of-type td[data-title='Name']");

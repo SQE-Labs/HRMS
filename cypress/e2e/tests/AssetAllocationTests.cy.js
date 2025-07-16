@@ -17,7 +17,7 @@ beforeEach(() => {
 
 describe("Employee Asset Managment Asset Allocation Tests", () => {
   it("HRMIS_1: Verify Asset Management Collapse and Open", () => {
-    sideBar.navigateTo("Asset Management");
+    sideBar.navigateTo("Asset Management", "Asset Allocation");
     cy.get("a[aria-expanded='true'] + ul li")
       .should("have.length", 7)
       .each(($el) => {
@@ -41,7 +41,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
   });
 
   //need to fix later on
-  it.skip("HRMIS_3: Verify Searching with Asset type ,Employee Name and serial Number on Asset Allocation subtab", () => {
+  it("HRMIS_3: Verify Searching with Asset type ,Employee Name and serial Number on Asset Allocation subtab", () => {
     sideBar.navigateTo("Asset Management", "Asset Allocation");
 
     // Searching By Asset Type
@@ -63,7 +63,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
       .and("have.text", "No Record Available.");
   });
 
-  it.skip("HRMIS_4: Verify 'Next' and 'Previous' Pagination button Asset Allocation Page", () => {
+  it("HRMIS_4: Verify 'Next' and 'Previous' Pagination button Asset Allocation Page", () => {
     // Navigate to Modify Policy Page
     sideBar.navigateTo("Asset Management", "Asset Allocation");
     AssetAllocationPage.selectItemPerPage("10");
@@ -119,9 +119,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
       .should("have.class", "disabled");
   });
 
- 
   it.skip("HRMIS_5: Verify 'Next' and 'Previous' Pagination button disable when only one page preset Asset Allocation Page", () => {
- 
     // Navigate to Modify Policy Page
     sideBar.navigateTo("Asset Management", "Asset Allocation");
     AssetAllocationPage.selectItemPerPage("40");
@@ -130,16 +128,16 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
     AssetAllocationPage.paginationBtn
       .contains("Next")
       .parent("li")
-      .should("have.class", "enabled");
+      .should("have.class", "disabled");
 
     cy.wait(500);
     AssetAllocationPage.paginationBtn
       .contains("Previous")
       .parent()
-      .should("have.class", "disabled");
+      .should("have.class", "enabled");
   });
 
-  it.skip("HRMIS_6: Verify that 'Owner' column gets sorted in asecending order after clicking 'Owner' header with 'Sort' icon, on 'Asset Allocation' page.", () => {
+  it("HRMIS_6: Verify that 'Owner' column gets sorted in asecending order after clicking 'Owner' header with 'Sort' icon, on 'Asset Allocation' page.", () => {
     sideBar.navigateTo("Asset Management", "Asset Allocation"); // Navigate to the desired page
 
     let originalData = [];
@@ -183,7 +181,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
     });
   });
 
-  it.skip("HRMIS_7: Verify that the Asset Type get sorted in ascending order after clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
+  it("HRMIS_7: Verify that the Asset Type get sorted in ascending order after clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
     sideBar.navigateTo("Asset Management", "Asset Allocation"); // Navigate to the desired page
 
     let originalData = [];
@@ -226,7 +224,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
     });
   });
 
-  it.skip("HRMIS_8: Verify that the Employee get sorted in ascending order after clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
+  it("HRMIS_8: Verify that the Employee get sorted in ascending order after clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
     sideBar.navigateTo("Asset Management", "Asset Allocation"); // Navigate to the desired page
 
     let originalData = []; // Initialize an empty array to store the text data
@@ -272,7 +270,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
       });
   });
 
-  it.skip("HRMIS_9: Verify that the serial Number get sorted in ascending order after clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
+  it("HRMIS_9: Verify that the serial Number get sorted in ascending order after clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
     sideBar.navigateTo("Asset Management", "Asset Allocation"); // Navigate to the desired page
 
     let originalData = []; // Initialize an empty array to store the text data
@@ -318,7 +316,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
       });
   });
 
-  it.skip("HRMIS_10: Verify that the serial Number get sorted in descending order after double clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
+  it("HRMIS_10: Verify that the serial Number get sorted in descending order after double clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
     sideBar.navigateTo("Asset Management", "Asset Allocation"); // Navigate to the desired page
 
     let originalData = []; // Initialize an empty array to store the text data
@@ -365,7 +363,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
       });
   });
 
-  it.skip("HRMIS_11: Verify that the employe get sorted in descending order after double clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
+  it("HRMIS_11: Verify that the employe get sorted in descending order after double clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
     sideBar.navigateTo("Asset Management", "Asset Allocation"); // Navigate to the desired page
 
     let originalData = []; // Initialize an empty array to store the text data
@@ -412,7 +410,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
       });
   });
 
-  it.skip("HRMIS_12: Verify that the Asset Type get sorted in descending order after double clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
+  it("HRMIS_12: Verify that the Asset Type get sorted in descending order after double clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
     sideBar.navigateTo("Asset Management", "Asset Allocation"); // Navigate to the desired page
 
     let originalData = []; // Initialize an empty array to store the text data
@@ -459,7 +457,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
       });
   });
 
-  it.skip("HRMIS_13: Verify that the Owner get sorted in descending order after double clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
+  it("HRMIS_13: Verify that the Owner get sorted in descending order after double clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
     sideBar.navigateTo("Asset Management", "Asset Allocation"); // Navigate to the desired page
 
     let originalData = []; // Initialize an empty array to store the text data
@@ -601,22 +599,23 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
     AssetAllocationPage.selectAssetType("Keyboard");
     cy.wait(1000);
     AssetAllocationPage.clickOnAssetAction();
-    AssetAllocationPage.selectEmployee("DDinesh D Kumar");
+    AssetAllocationPage.selectEmployee("Autom Mation User");
     AssetAllocationPage.enterComment("Asset Allocation Request");
     AssetAllocationPage.clickOnSubmit();
     cy.validateSuccessMessages("Successfully assigned!");
     AssetAllocationPage.selectItemPerPage("40");
     AssetAllocationPage.clickNextUntilDisabled();
+    AssetAllocationPage.enterAssetName(Keyboard);
     AssetAllocationPage.lastAssignedAssetName.should("have.text", "Keyboard");
     AssetAllocationPage.lastAssignedAssetEmp.should(
       "have.text",
-      "DDinesh Kumar"
+      "Autom Mation User"
     );
   });
 
   it("HRMIS_21:Verify that user able to de allocate the asset | Clean up", () => {
     sideBar.navigateTo("Asset Management", "Asset De-allocation");
-    AssetDeAllocationPage.select_Employee("DDinesh D Kumar");
+    AssetDeAllocationPage.select_Employee("Autom Mation User");
     AssetDeAllocationPage.clickOnDelete();
     AssetDeAllocationPage.selectAssetCondition("Partially damaged but working");
     AssetDeAllocationPage.enterRepairCost("500");

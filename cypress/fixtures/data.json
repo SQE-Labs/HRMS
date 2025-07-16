@@ -53,7 +53,7 @@
         "Pendrive":"Pendrive"
     },
     "Departments": {
-        "Genric": "GENRIC",
+        "Genric": "generic",
         "AutomationTesting": "Automation Testing"
     },
     "Designations": {
