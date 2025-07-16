@@ -12,7 +12,7 @@ beforeEach(() => {
   cy.login("superUser");
 });
 
-describe.only("Attendence Management Apply Leave Tests", () => {
+describe("Attendence Management Apply Leave Tests", () => {
   it("HRMIS_1: Verify Apply Leave Page @first", () => {
     sideBar.navigateTo("Attendance & Leaves", "Apply Leaves");
 

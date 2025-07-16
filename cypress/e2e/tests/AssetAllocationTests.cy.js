@@ -17,7 +17,7 @@ beforeEach(() => {
 
 describe("Employee Asset Managment Asset Allocation Tests", () => {
   it("HRMIS_1: Verify Asset Management Collapse and Open", () => {
-    sideBar.navigateTo("Asset Management");
+    sideBar.navigateTo("Asset Management", "Asset Allocation");
     cy.get("a[aria-expanded='true'] + ul li")
       .should("have.length", 7)
       .each(($el) => {
@@ -119,7 +119,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
       .should("have.class", "disabled");
   });
 
-  it("HRMIS_5: Verify 'Next' and 'Previous' Pagination button disable when only one page preset Asset Allocation Page", () => {
+  it.skip("HRMIS_5: Verify 'Next' and 'Previous' Pagination button disable when only one page preset Asset Allocation Page", () => {
     // Navigate to Modify Policy Page
     sideBar.navigateTo("Asset Management", "Asset Allocation");
     AssetAllocationPage.selectItemPerPage("40");

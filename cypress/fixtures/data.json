@@ -36,7 +36,7 @@
     "EmployeeWorkData": {
         "Department": "Technical",
         "Designation": "Sr. Solution Architect",
-        "ReportingTo": "SARA STRAUS",
+        "ReportingTo": "Vishal DDDD",
         "DOJ": "08-08-2025",
         "EmployeeStatus": "VERIFIED",
         "EmployeeType": "Fulltime",
@@ -53,7 +53,7 @@
         "Pendrive":"Pendrive"
     },
     "Departments": {
-        "Genric": "GENRIC",
+        "Genric": "generic",
         "AutomationTesting": "Automation Testing"
     },
     "Designations": {

@@ -14,11 +14,11 @@ beforeEach(() => {
   cy.login("superUser");
 });
 
-describe.skip("Setting Department Tests", () => {
+describe("Setting Department Tests", () => {
   it("HRMIS_1: Verify Departments tab", () => {
     // login to Application
 
-    sideBar.navigateTo("Settings", "Departments");
+    sideBar.navigateTo("Employee Management", "Departments");
     DepartmentsPage.departmentHeader
       .should("be.visible")
       .and("have.text", "Departments");
@@ -37,7 +37,7 @@ describe.skip("Setting Department Tests", () => {
   it("HRMIS_2: Verify Add Departments ,cancle and cross icon funcionality ", () => {
     // login to Application
 
-    sideBar.navigateTo("Settings", "Departments");
+    sideBar.navigateTo("Employee Management", "Departments");
     DepartmentsPage.clickOnAddDepartment();
     DepartmentsPage.addUpdateDepartmentHeader
       .should("be.visible")
@@ -56,7 +56,7 @@ describe.skip("Setting Department Tests", () => {
   it("HRMIS_3: Verify validation messages on Add Department pop up", () => {
     // login to Application
 
-    sideBar.navigateTo("Settings", "Departments");
+    sideBar.navigateTo("Employee Management", "Departments");
     DepartmentsPage.clickOnAddDepartment();
 
     DepartmentsPage.clickOnSubmit();
@@ -71,7 +71,7 @@ describe.skip("Setting Department Tests", () => {
 
     const departmentName = "Department Auto " + generateRandomString(5);
     expect(departmentName.length).to.be.at.least(21);
-    sideBar.navigateTo("Settings", "Departments");
+    sideBar.navigateTo("Employee Management", "Departments");
     let deptCountBefore;
     DepartmentsPage.departmentCount.invoke("text").then((text) => {
       deptCountBefore = text.trim();
@@ -92,7 +92,7 @@ describe.skip("Setting Department Tests", () => {
 
     const departmentName = "Department Auto " + generateRandomString(5);
     expect(departmentName.length).to.be.at.least(21);
-    sideBar.navigateTo("Settings", "Departments");
+    sideBar.navigateTo("Employee Management", "Departments");
     DepartmentsPage.searchDepartment("Department Auto ");
     DepartmentsPage.clickOnEditBtn();
     DepartmentsPage.departmentHeader
@@ -113,7 +113,7 @@ describe.skip("Setting Department Tests", () => {
 
     const departmentName = "Department Updated " + generateRandomString(5);
     expect(departmentName.length).to.be.at.least(21);
-    sideBar.navigateTo("Settings", "Departments");
+    sideBar.navigateTo("Employee Management", "Departments");
     DepartmentsPage.searchDepartment("Department Auto ");
     DepartmentsPage.clickOnEditBtn();
 
