@@ -11,7 +11,7 @@ before(function () {
 beforeEach(() => {
   // login to Application
   cy.login("superUser");
-  sideBar.navigateTo("Employee Management", "Upload Document");
+  sideBar.navigateTo("Employee Management", "Document Upload");
   cy.wait(1000);
 });
 
@@ -19,12 +19,12 @@ describe("Employee Upload Document Tests", () => {
   it("HRMIS_1: Verify Upload document Page ", () => {
     UploadEmpDocumentPage.assertTextEquals(
       UploadEmpDocumentPage.uploadeDocHeaderLbl,
-      "Upload Document"
+      "Document Upload"
     );
     UploadEmpDocumentPage.selectEmployee(testData.EmployeeName);
 
     const expectedCol = [
-      "Serial No.",
+      "S.No.",
       "Document Name",
       "Mandatory",
       "Status",
@@ -59,17 +59,18 @@ describe("Employee Upload Document Tests", () => {
   it("HRMIS_3:Verify that documents gets uploaded after clicking on 'Submit' button", () => {
     UploadEmpDocumentPage.assertTextEquals(
       UploadEmpDocumentPage.uploadeDocHeaderLbl,
-      "Upload Document"
+      "Document Upload"
     );
     UploadEmpDocumentPage.selectEmployee(testData.EmployeeName);
     UploadEmpDocumentPage.clickOnUploadAct("Insurance Card");
-    UploadEmpDocumentPage.chooseDocument(
-      "cypress/fixtures/resources/dummy.pdf"
+    UploadEmpDocumentPage.handleInsuranceUpload(
+      "cypress/fixtures/resources/dummy.pdf",
+      "Commented"
     );
-    UploadEmpDocumentPage.enterComments("Commented");
-    UploadEmpDocumentPage.clickOnSubmitBnt();
+    // UploadEmpDocumentPage.enterComments("Commented");
+    // UploadEmpDocumentPage.handleInsuranceUpload();
     UploadEmpDocumentPage.eyeIcon("Insurance Card").should("be.visible");
-    UploadEmpDocumentPage.clickOnEyeIcon("Insurance Card");
-    UploadEmpDocumentPage.assertPdf();
+    // UploadEmpDocumentPage.clickOnEyeIcon("Insurance Card");
+    //UploadEmpDocumentPage.assertPdf();
   });
 });

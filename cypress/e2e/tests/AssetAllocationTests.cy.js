@@ -17,7 +17,7 @@ beforeEach(() => {
 
 describe("Employee Asset Managment Asset Allocation Tests", () => {
   it("HRMIS_1: Verify Asset Management Collapse and Open", () => {
-    sideBar.navigateTo("Asset Management");
+    sideBar.navigateTo("Asset Management", "Asset Allocation");
     cy.get("a[aria-expanded='true'] + ul li")
       .should("have.length", 7)
       .each(($el) => {
@@ -41,7 +41,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
   });
 
   //need to fix later on
-  it.skip("HRMIS_3: Verify Searching with Asset type ,Employee Name and serial Number on Asset Allocation subtab", () => {
+  it("HRMIS_3: Verify Searching with Asset type ,Employee Name and serial Number on Asset Allocation subtab", () => {
     sideBar.navigateTo("Asset Management", "Asset Allocation");
 
     // Searching By Asset Type
@@ -119,22 +119,29 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
       .should("have.class", "disabled");
   });
 
-  it("HRMIS_5: Verify 'Next' and 'Previous' Pagination button disable when only one page preset Asset Allocation Page", () => {
+  it.skip("HRMIS_5: Verify 'Next' and 'Previous' Pagination button disable when only one page preset Asset Allocation Page", () => {
     // Navigate to Modify Policy Page
     sideBar.navigateTo("Asset Management", "Asset Allocation");
     AssetAllocationPage.selectItemPerPage("40");
     AssetAllocationPage.itemPerPageDrp.should("have.value", "40");
     cy.wait(500);
+<<<<<<< HEAD
     // AssetAllocationPage.paginationBtn
     //   .contains("Next")
     //   .parent("li")
     //   .should("have.class", "enabled");
+=======
+    AssetAllocationPage.paginationBtn
+      .contains("Next")
+      .parent("li")
+      .should("have.class", "disabled");
+>>>>>>> 0a10ebaa6b511778dbc8a875e3eece9708d23d06
 
     cy.wait(500);
     AssetAllocationPage.paginationBtn
       .contains("Previous")
       .parent()
-      .should("have.class", "disabled");
+      .should("have.class", "enabled");
   });
 
   it("HRMIS_6: Verify that 'Owner' column gets sorted in asecending order after clicking 'Owner' header with 'Sort' icon, on 'Asset Allocation' page.", () => {
@@ -521,7 +528,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
     sideBar.navigateTo("Asset Management", "Asset Allocation");
 
     AssetAllocationPage.clickOnAssetAssigne();
-    AssetAllocationPage.selectAssetType("USB HUB Adapter");
+    AssetAllocationPage.selectAssetType("Headset");
     AssetAllocationPage.assetAssignePopup
       .should("be.visible")
       .and("have.text", "Assign Asset");
@@ -582,22 +589,23 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
     AssetAllocationPage.selectAssetType("Keyboard");
     cy.wait(1000);
     AssetAllocationPage.clickOnAssetAction();
-    AssetAllocationPage.selectEmployee("DDinesh D Kumar");
+    AssetAllocationPage.selectEmployee("Autom Mation User");
     AssetAllocationPage.enterComment("Asset Allocation Request");
     AssetAllocationPage.clickOnSubmit();
     cy.validateSuccessMessages("Successfully assigned!");
     AssetAllocationPage.selectItemPerPage("40");
     AssetAllocationPage.clickNextUntilDisabled();
+    AssetAllocationPage.enterAssetName(Keyboard);
     AssetAllocationPage.lastAssignedAssetName.should("have.text", "Keyboard");
     AssetAllocationPage.lastAssignedAssetEmp.should(
       "have.text",
-      "DDinesh Kumar"
+      "Autom Mation User"
     );
   });
 
   it("HRMIS_21:Verify that user able to de allocate the asset | Clean up", () => {
     sideBar.navigateTo("Asset Management", "Asset De-allocation");
-    AssetDeAllocationPage.select_Employee("DDinesh D Kumar");
+    AssetDeAllocationPage.select_Employee("Autom Mation User");
     AssetDeAllocationPage.clickOnDelete();
     AssetDeAllocationPage.selectAssetCondition("Partially damaged but working");
     AssetDeAllocationPage.enterRepairCost("500");

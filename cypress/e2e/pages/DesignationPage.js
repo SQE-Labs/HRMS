@@ -4,7 +4,7 @@ import Loaders from "../components/Loaders";
 class DepartmentsPage extends BasePage {
   //Locators
   get designationHeader() {
-    return cy.get("#showMenuBtn + h1");
+    return cy.get("h1");
   }
   get selectDepartment() {
     return cy.get("div.css-19bb58m");

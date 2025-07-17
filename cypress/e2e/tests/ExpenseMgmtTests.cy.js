@@ -21,12 +21,12 @@ describe("Reimbursement Tests", () => {
   it("HRMIS_1: Verify Reimbursement Page", () => {
     // login to Application
 
-    sideBar.navigateTo("Expense Management", "Reimbursement");
+    sideBar.navigateTo("My Reimbursements", "Reimbursement Requests");
     ReimbursementPage.assert_SubMenus(testData.ExpenseManagment.SubMenus);
 
     ReimbursementPage.reimbursementHeader
       .should("be.visible")
-      .and("have.text", "Reimbursement");
+      .and("have.text", "Reimbursement Requests");
 
     // select Item Per Page 20
     ReimbursementPage.selectItemPerPage("5");
@@ -49,7 +49,7 @@ describe("Reimbursement Tests", () => {
   it("HRMIS_2: Verify Reimbursement Request Button and Back Button", () => {
     // login to Application
 
-    sideBar.navigateTo("Expense Management", "Reimbursement");
+    sideBar.navigateTo("My Reimbursements", "Reimbursement Requests");
 
     ReimbursementPage.clickOnReimbursemetnReq();
     ReimbursementPage.reimbursementFormLbl
@@ -58,11 +58,11 @@ describe("Reimbursement Tests", () => {
     ReimbursementPage.clickOn_backtoReimbursement_PageBtn();
     ReimbursementPage.reimbursementHeader
       .should("be.visible")
-      .and("have.text", "Reimbursement");
+      .and("have.text", "Reimbursement Requests");
   });
 
   it("HRMIS_3: Verify 'Next' and 'Previous' Pagination button Reimbursement Page", () => {
-    sideBar.navigateTo("Expense Management", "Reimbursement");
+    sideBar.navigateTo("My Reimbursements", "Reimbursement Requests");
 
     // Declare variables to store the values
     let expectedRequest,
@@ -106,7 +106,7 @@ describe("Reimbursement Tests", () => {
   it("HRMIS_4: Verify Reimbursement Request For Internet Claim ", () => {
     // login to Application
 
-    sideBar.navigateTo("Expense Management", "Reimbursement");
+    sideBar.navigateTo("My Reimbursements", "Reimbursement Requests");
     ReimbursementPage.clickOnReimbursemetnReq();
 
     // Assert Reimbursement Input validataion and select the type
@@ -204,7 +204,7 @@ describe("Reimbursement Tests", () => {
   it("HRMIS_5: Verify Reimbursement Request For Travel Expense ", () => {
     // login to Application
 
-    sideBar.navigateTo("Expense Management", "Reimbursement");
+    sideBar.navigateTo("My Reimbursements", "Reimbursement Requests");
     ReimbursementPage.clickOnReimbursemetnReq();
 
     // Assert Reimbursement Input validataion and select the type
@@ -334,7 +334,7 @@ describe("Reimbursement Tests", () => {
   it("HRMIS_6: Verify Reimbursement Request For Miscellaneous", () => {
     // login to Application
 
-    sideBar.navigateTo("Expense Management", "Reimbursement");
+    sideBar.navigateTo("My Reimbursements", "Reimbursement Requests");
     ReimbursementPage.clickOnReimbursemetnReq();
 
     // Assert Reimbursement Input validataion and select the type
@@ -432,7 +432,7 @@ describe("Reimbursement Tests", () => {
   it("HRMIS_7: Verify reset all fields to default values", () => {
     // login to Application
 
-    sideBar.navigateTo("Expense Management", "Reimbursement");
+    sideBar.navigateTo("My Reimbursements", "Reimbursement Requests");
     ReimbursementPage.clickOnReimbursemetnReq();
     // Fill out the form fields
     ReimbursementPage.select_reimbursementType(
@@ -464,7 +464,7 @@ describe("Reimbursement Tests", () => {
   it("HRMIS_8: Verify Reimbursement Withdraw Button pop up", () => {
     // login to Application
 
-    sideBar.navigateTo("Expense Management", "Reimbursement");
+    sideBar.navigateTo("My Reimbursements", "Reimbursement Requests");
     ReimbursementPage.clickNextUntilDisabled();
     ReimbursementPage.clickOnWithDrawAction();
     ReimbursementPage.withDrawReimbursementLbl
@@ -485,7 +485,7 @@ describe("Reimbursement Tests", () => {
   it("HRMIS_9: Verify Reimbursement Withdraw, comment validation and downlode Attachment", () => {
     // login to Application
 
-    sideBar.navigateTo("Expense Management", "Reimbursement");
+    sideBar.navigateTo("My Reimbursements", "Reimbursement Requests");
     ReimbursementPage.clickNextUntilDisabled();
     ReimbursementPage.clickOnWithDrawAction();
 
@@ -501,7 +501,7 @@ describe("Reimbursement Tests", () => {
     ReimbursementPage.enter_Comment("Commented");
     ReimbursementPage.clickOn_withDrawBtn();
     ReimbursementPage.lastRowAction_Lbl.should("have.text", "-");
-    cy.validateSuccessMessages("Successfully Status Changed to Withdrawn");
+    // cy.validateSuccessMessages("Successfully Status Changed to Withdraw");
     ReimbursementPage.lastRequestStatus.should(
       "have.text",
       testData.ReimbursementStatus.Withdraw

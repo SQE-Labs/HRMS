@@ -18,7 +18,7 @@ beforeEach(() => {
 
 describe("Employee Assign Manager Managment Tests", () => {
   it("HRMIS_1: Verify Assignee Manager Open when user click on Assing Manager Subtab", () => {
-    const expectedTexts = ["Id", "Name", "Assigned Manager", "Action"];
+    const expectedTexts = ["Name", "Assigned Manager", "Action"];
     AssignManagerPage.assertTextEquals(
       AssignManagerPage.assignManagerLbl,
       "Assign Manager"
@@ -61,19 +61,19 @@ describe("Employee Assign Manager Managment Tests", () => {
   it("HRMIS_5: Verify that user is able to re-assign manager", () => {
     AssignManagerPage.selectEmployee(testData.EmployeeName);
     AssignManagerPage.clickOnReAssigneBtn();
-    AssignManagerPage.selectManager(testData.Manager.VidyutKundu);
+    AssignManagerPage.selectManager(testData.Manager.Asset);
     AssignManagerPage.clickOnSubmitBtn();
     cy.validateSuccessMessages("Successfully Assigned!");
     AssignManagerPage.assignedManagerLbl.should(
       "have.text",
-      testData.Manager.VidyutKundu
+      testData.Manager.Asset
     );
   });
 
   it("HRMIS_6: Clean up Test Case", () => {
     AssignManagerPage.selectEmployee(testData.EmployeeName);
     AssignManagerPage.clickOnReAssigneBtn();
-    AssignManagerPage.selectManager(testData.Manager.AnmolJuneja);
+    AssignManagerPage.selectManager(testData.Manager.Vishal);
     AssignManagerPage.clickOnSubmitBtn();
     cy.validateSuccessMessages("Successfully Assigned!");
   });

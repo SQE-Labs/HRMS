@@ -23,7 +23,8 @@ describe("Employee Profile Tests", () => {
     EmployeeListPage.validateNoRecordsAppear("No Record Available");
 
     // Verify that information message, when user enters valid data in 'Search By Name' field
-    EmployeeListPage.enterNameIntoSearchField(testData.EmployeeName);
+    //EmployeeListPage.enterNameIntoSearchField(testData.EmployeeName);
+    EmployeeListPage.enterNameIntoSearchField(testData.Reimbursement);
     EmployeeListPage.getTotalEmployeescount(1);
   });
 
@@ -340,7 +341,6 @@ describe("Employee Profile Tests", () => {
     EmployeeProfilePage.clickOnPersonalDetails();
     EmployeeProfilePage.editPersonalDetailsBtn.should("not.be.visible");
   });
-
   it("HRMIS_4: Verify that the 'Work' accordion expands, and validate the update and close functionalities.", () => {
     // Verify that 'Work' accordion gets expanded, when user clicks 'Work' accordion.
     EmployeeListPage.navigateToUserDashboardPage(testData.EmployeeName);
@@ -419,7 +419,7 @@ describe("Employee Profile Tests", () => {
   });
 
   it("HRMIS_6: Verify that the 'Education' accordion expands,validate table columns", () => {
-    const expectedTexts = ["Highest Degree", "College", "From", "To"];
+    const expectedTexts = ["Degree", "College", "From", "To"];
     EmployeeListPage.navigateToUserDashboardPage(testData.EmployeeName);
     EmployeeProfilePage.clickOnEducationDetail();
     EmployeeProfilePage.assertExpectedTableLbl(

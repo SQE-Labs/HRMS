@@ -7,7 +7,7 @@ class PunchDetailsPage extends BasePage {
     return cy.get("ul.submenu.show li");
   }
   get punchDetailsHeader() {
-    return cy.get("#showMenuBtn + h1");
+    return cy.get("h1");
   }
   get selectEmployee_Drp() {
     return cy.get("#react-select-2-input");
