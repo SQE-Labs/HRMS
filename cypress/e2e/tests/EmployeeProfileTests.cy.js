@@ -18,14 +18,32 @@ describe("Employee Profile Tests", () => {
     //Login and Navigate to Employees List Page
     sideBar.navigateTo("Employee Management", "Employee Directory");
 
+    // Validate Title
+    EmployeeProfilePage.validateTitle("Employee Directory");
+
     // Verify that information message, when user enters invalid data in 'Search By Name' field
     EmployeeListPage.enterNameIntoSearchField("invalidName");
     EmployeeListPage.validateNoRecordsAppear("No Record Available");
 
+    // Verify that records get sorted as per the selection of option from the 'Select Department' dropdown field.
+    EmployeeProfilePage.selectDept(testData.Department);
+    EmployeeProfilePage.totalDeptCards();
+
+    //Verify that records get sorted as per the selection of option from the 'Status' dropdown fields
+
+    EmployeeProfilePage.selectStatusCards(testData.Status);
+    EmployeeProfilePage.totalStatusCards();
+
+    // Verify that all records get sorted as per the selection of option from the 'Select Department' & 'Status' dropdown fields.
+    EmployeeProfilePage.totalStatusCards();
+
     // Verify that information message, when user enters valid data in 'Search By Name' field
-    //EmployeeListPage.enterNameIntoSearchField(testData.EmployeeName);
     EmployeeListPage.enterNameIntoSearchField(testData.Reimbursement);
     EmployeeListPage.getTotalEmployeescount(1);
+
+    //Verify that selected employee card opens up, when user clicks on '<Employee name>' card.
+    EmployeeListPage.enterNameIntoSearchField("Autom Mation User");
+    EmployeeProfilePage.clickOnEmployeeCard();
   });
 
   it("HRMIS_2: Verify that the 'Basic Info' accordion expands, and validate the update and close functionalities.", () => {
@@ -341,6 +359,7 @@ describe("Employee Profile Tests", () => {
     EmployeeProfilePage.clickOnPersonalDetails();
     EmployeeProfilePage.editPersonalDetailsBtn.should("not.be.visible");
   });
+
   it("HRMIS_4: Verify that the 'Work' accordion expands, and validate the update and close functionalities.", () => {
     // Verify that 'Work' accordion gets expanded, when user clicks 'Work' accordion.
     EmployeeListPage.navigateToUserDashboardPage(testData.EmployeeName);
@@ -448,5 +467,19 @@ describe("Employee Profile Tests", () => {
 
     EmployeeProfilePage.clickOnEducationDetail();
     EmployeeProfilePage.workExpColLbl.should("not.be.visible");
+  });
+  it("HRMIS_8: Verify that the information message appears for employees with no dependent records, when user clicks on 'Dependents' accordion,", () => {
+    // Verify that 'Basic Info' accordion gets expanded, when user clicks 'Basic Info' accordion.
+    EmployeeListPage.navigateToUserDashboardPage("Taylor Swift");
+    EmployeeProfilePage.clickOnWorkExperience();
+    EmployeeProfilePage.validateExpSec("No records available");
+
+    //  Verify that the information message appears for employee with no educational records, when user clicks on 'Education' accordion
+    EmployeeProfilePage.clickOnEducationDetail();
+    EmployeeProfilePage.validateEducationSec("No records available");
+
+    // Verify that the information message appears for employees with no dependent records, when user clicks on 'Dependents' accordion
+    EmployeeProfilePage.clickOndependentDetail();
+    EmployeeProfilePage.validatedependentSec("No records available");
   });
 });
