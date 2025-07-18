@@ -4,7 +4,9 @@ import Loaders from "../components/Loaders";
 class AssetDeAllocationPage extends BasePage {
   //Locators
   get selectEmployee_Drp() {
-    return cy.get("#react-select-2-input");
+    return cy.xpath("//div[contains(text(),'Select employee')]", {
+      timeout: 20000,
+    });
   }
   get deleteIcon() {
     return cy.get("tr:last-of-type td a[name='selectAsset']");

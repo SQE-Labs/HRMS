@@ -65,24 +65,27 @@ Cypress.Commands.add(
   "selectDrpValueByText",
   (locator, text, isSearchable = false, searchInputLocator = "") => {
     if (isSearchable) {
-      // Click the dropdown to open
-      locator.click();
+      locator.should("be.visible").click({ force: true });
+
+      // Wait for any modal to disappear (customize the selector if needed)
+      cy.get("#staticBackdropAsset").should("not.be.visible");
+
       cy.wait(500);
+
       if (searchInputLocator) {
-        // Wait and type the text in the search input field
-        searchInputLocator.wait(1000).type(text);
-        const selectorNumbers = [2, 3, 4, 5, 6, 7, 8, 9];
+        searchInputLocator.should("be.visible").wait(1000).type(text);
+
+        const selectorNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         const selectors = selectorNumbers
           .map(
             (num) =>
               `#react-select-${num}-listbox span,#react-select-${num}-listbox, #react-select-${num}-listbox div div`
           )
           .join(", ");
-        // Click the correct option in the dropdown
-        cy.get(selectors).contains(text).click();
+
+        cy.get(selectors).contains(text).click({ force: true });
       }
     } else {
-      // Standard dropdown (non-searchable)
       locator.select(text).should("contain", text);
     }
   }

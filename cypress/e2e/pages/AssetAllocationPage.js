@@ -1,5 +1,7 @@
 import BasePage from "./BasePage";
 import Loaders from "../components/Loaders";
+import xpath from "cypress-xpath";
+import { selectDrpValueByText } from "../../support/utils";
 
 class AssetAllocationPage extends BasePage {
   //Locators
@@ -38,8 +40,13 @@ class AssetAllocationPage extends BasePage {
   }
 
   gridDataList(title) {
-    return `tbody tr td[data-title='${title}']`;
+    return cy.xpath(`//th[contains(text(),'${title}')]`).invoke("text");
   }
+
+  clickOnSort(header_title) {
+    return cy.xpath(`//th[contains(text(),'${header_title}')]`).invoke("text");
+  }
+
   gridSingleData(title) {
     return `tbody tr:first-of-type td[data-title='${title}']`;
   }
@@ -47,16 +54,16 @@ class AssetAllocationPage extends BasePage {
     return cy.get("tbody tr td:nth-child(2)");
   }
   get OwnerSortIcon() {
-    return cy.get("tr th:nth-child(2) img");
+    return cy.get("tr th:nth-child(4)");
   }
   get assetTypeSortIcon() {
-    return cy.get("tr th:nth-child(3) img");
+    return cy.get("tr th:nth-child(3)");
   }
   get employeeSortIcon() {
-    return cy.get("tr th:nth-child(4) img");
+    return cy.get("tr th:nth-child(5)");
   }
   get serialNoSortIcon() {
-    return cy.get("tr th:nth-child(5) img");
+    return cy.get("tr th:nth-child(3)");
   }
 
   get selectAssetTypeDrp() {
@@ -90,17 +97,17 @@ class AssetAllocationPage extends BasePage {
   get serialNo1rowLbl() {
     return cy.get("tbody tr:nth-child(1) td:nth-child(4)");
   }
-  get selectedassetRBtn() {
+  selectedassetRBtn() {
     return cy.xpath("(//input[@name='selectAsset'])[1]");
   }
   get enterAssetName() {
     return cy.get("input");
   }
   get lastAssignedAssetName() {
-    return cy.get("tr:last-of-type td[data-title='Name']");
+    return cy.get("tbody tr").last().find("td").eq(1);
   }
   get lastAssignedAssetEmp() {
-    return cy.get("tr:last-of-type td[data-title='empName']");
+    return cy.get("tbody tr").last().find("td").eq(4);
   }
 
   get selectEmployee_Drp() {
@@ -332,7 +339,15 @@ class AssetAllocationPage extends BasePage {
   }
 
   getColumnDataList(title) {
-    return cy.get(this.gridDataList(title)).invoke("text");
+    return cy.xpath(`//th[contains(text(),'${title}')]`).invoke("text");
+  }
+
+  getEmployeeColumnDataList() {
+    return cy.get("tbody tr td:nth-child(5)").invoke("text");
+  }
+
+  getAssetTypeColumnDataList() {
+    return cy.get("tbody tr td:nth-child(2)").invoke("text");
   }
 
   getColumnData(title) {
