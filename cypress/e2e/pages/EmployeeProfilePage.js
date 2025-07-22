@@ -223,8 +223,6 @@ class EmployeeProfilePage extends BasePage {
         cy.log("No records found");
       }
     });
-    // this.noRecordAvailableInfo.should("have.text", "No records available");
-    // cy.log("No Records Appear");
   }
 
   validateAccordionCollapsed() {

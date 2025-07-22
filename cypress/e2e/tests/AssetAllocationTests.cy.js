@@ -60,15 +60,15 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
     AssetAllocationPage.searchBy("serialNumber", "Invalid");
     AssetAllocationPage.noRecordeLbl
       .should("be.visible")
-      .and("have.text", "No Record Available.");
+      .and("have.text", "No records available");
   });
 
   it("HRMIS_4: Verify 'Next' and 'Previous' Pagination button Asset Allocation Page", () => {
     // Navigate to Modify Policy Page
     sideBar.navigateTo("Asset Management", "Asset Allocation");
-    AssetAllocationPage.selectItemPerPage("10");
-    AssetAllocationPage.itemPerPageDrp.should("have.value", "10");
-    AssetAllocationPage.gridRows.should("have.length", 10);
+    AssetAllocationPage.selectItemPerPage("40");
+    AssetAllocationPage.itemPerPageDrp.should("have.value", "40");
+    AssetAllocationPage.gridRows.should("have.length", 40);
     // Step 1: Capture the initial policy title
     let expectedAssetName, acctualAssetName1, actualAssetName, actualAssetName2;
 
@@ -119,7 +119,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
       .should("have.class", "disabled");
   });
 
-  it.skip("HRMIS_5: Verify 'Next' and 'Previous' Pagination button disable when only one page preset Asset Allocation Page", () => {
+  it("HRMIS_5: Verify 'Next' and 'Previous' Pagination button disable when only one page preset Asset Allocation Page", () => {
     // Navigate to Modify Policy Page
     sideBar.navigateTo("Asset Management", "Asset Allocation");
     AssetAllocationPage.selectItemPerPage("40");
