@@ -17,12 +17,14 @@ describe("Attendence Management Punch Details Tests", () => {
   it("HRMIS_1: Verify Punch Details Page ", () => {
     sideBar.navigateTo("Attendance & Leaves", "Punch Details");
     PunchDeatilsPage.assert_SubMenus(testData.AttendenceManagement.SubMenus);
+
+    // Verify that 'Punch Details' page opens up after clicking on 'Attendance & Leaves' > 'Punch Details' subtab from the left panel
     PunchDeatilsPage.punchDetailsHeader
       .should("be.visible")
       .and("have.text", "Punch Details");
 
-    // sideBar.navigateTo("Attendance & Leaves");
-    // PunchDeatilsPage.subMenus.should("not.exist");
+    sideBar.navigateTo("Attendance & Leaves");
+    PunchDeatilsPage.subMenus.should("not.exist");
   });
 
   it("HRMIS_2: Verify that calendar appears, when user selects an option from 'Select Employee' dropdown field, on 'Punch Details' page", () => {
@@ -39,9 +41,13 @@ describe("Attendence Management Punch Details Tests", () => {
     PunchDeatilsPage.calendarDate
       .should("be.visible")
       .and("have.text", formattedDate);
+
+    // Verify that backward icon appears enabled for a current month
     PunchDeatilsPage.backwordIcon
       .should("not.have.class", "disabled-span")
       .and("be.visible");
+
+    // Verify that forward icon appears disabled for a current month.
     PunchDeatilsPage.forwordIcon
       .should("have.class", "disabled-span")
       .and("be.visible");
@@ -88,5 +94,13 @@ describe("Attendence Management Punch Details Tests", () => {
     PunchDeatilsPage.clickOnDate();
     PunchDeatilsPage.clickOnCrossBtn();
     PunchDeatilsPage.attendenceDetailHeader.should("not.be.visible");
+  });
+  it("HRMIS_5:Verify that 'Attendance Detail' popup appears after clicking 'Week day' cell", () => {
+    sideBar.navigateTo("Attendance & Leaves", "Punch Details");
+    PunchDeatilsPage.select_Employee("Autom Mation User");
+    PunchDeatilsPage.clickOnDate();
+    PunchDeatilsPage.attendenceDetailHeader
+      .should("be.visible")
+      .and("have.text", "Attendance Detail");
   });
 });

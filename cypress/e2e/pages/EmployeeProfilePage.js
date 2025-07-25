@@ -100,17 +100,88 @@ class EmployeeProfilePage extends BasePage {
   get eduAccor() {
     return cy.get("#heading5 button");
   }
+  get dependentSection() {
+    return cy.get("#heading6 button");
+  }
+
   get workEduColLbl() {
     return cy.get("#collapse5 table.resume th");
   }
   get workDependentsColLbl() {
     return cy.get("#collapse6 table.resume th");
   }
+  get employeeDirectoryTitle() {
+    return cy.get("h1");
+  }
+  get selectDepartment() {
+    return cy.get("#department");
+  }
+
+  get deptCards() {
+    return cy.get("div[class=card]");
+  }
+
+  get selectStatusCard() {
+    return cy.get("#selectedStatus");
+  }
+
+  get employeeDetail() {
+    return cy.get(".emp-card > :nth-child(1) > .card");
+  }
+
+  get experienceSec() {
+    return cy.xpath(
+      "//button[text()='Work Experience']/../following-sibling::div//div[text()='No records available']"
+    );
+  }
+
+  get educationSec() {
+    return cy.xpath(
+      "//button[text()='Education']/../following-sibling::div//div[text()='No records available']"
+    );
+  }
+
+  get dependentSec() {
+    return cy.xpath(
+      "//button[text()='Dependents']/../following-sibling::div//div[text()='No records available']"
+    );
+  }
+
+  selectDept(type) {
+    cy.selectDrpValueByText(this.selectDepartment, type, false);
+  }
+
+  totalDeptCards() {
+    this.deptCards.should("have.length.greaterThan", 0);
+  }
+
+  totalStatusCards() {
+    this.deptCards.should("have.length.greaterThan", 0);
+  }
+
+  selectStatusCards(type) {
+    cy.selectDrpValueByText(this.selectStatusCard, type, false);
+  }
 
   // Methods
   clickOnAssetTab() {
     this.assetTab.click();
     Loaders.threeDotLoading.should("not.exist");
+  }
+
+  validateTitle(TitleName) {
+    this.employeeDirectoryTitle.should("have.text", TitleName);
+  }
+
+  validateExpSec(TitleName) {
+    this.experienceSec.should("have.text", TitleName);
+  }
+
+  validateEducationSec(TitleName) {
+    this.educationSec.should("have.text", TitleName);
+  }
+  validatedependentSec(TitleName) {
+    this.dependentSec.should("have.text", TitleName);
   }
 
   clickOnWorkExperience() {
@@ -152,8 +223,6 @@ class EmployeeProfilePage extends BasePage {
         cy.log("No records found");
       }
     });
-    // this.noRecordAvailableInfo.should("have.text", "No records available");
-    // cy.log("No Records Appear");
   }
 
   validateAccordionCollapsed() {
@@ -164,6 +233,13 @@ class EmployeeProfilePage extends BasePage {
   clickOnEditBasicInfoDetails() {
     this.editBasicInfoBtn.click();
     cy.log("Clicked on the Edit button");
+  }
+
+  clickOnEmployeeCard() {
+    this.employeeDetail.click();
+    cy.contains("Autom Mation User").should("be.visible");
+
+    cy.log("Click on User card");
   }
 
   clickOnEditWorkDetails() {
@@ -338,6 +414,11 @@ class EmployeeProfilePage extends BasePage {
   clickOnEducationDetail() {
     this.eduAccor.click();
     cy.log("Clicked on the Education Detail Option");
+  }
+
+  clickOndependentDetail() {
+    this.dependentSection.click();
+    cy.log("Clicked on the dependent Detail Option");
   }
 }
 

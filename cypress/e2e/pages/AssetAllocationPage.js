@@ -18,7 +18,7 @@ class AssetAllocationPage extends BasePage {
     return cy.get("#assign-asset h3");
   }
   get noRecordeLbl() {
-    return cy.get("div.fs-4");
+    return cy.get(".fs-4");
   }
   get assignAsset() {
     return cy.get("div.actions a.export");
@@ -36,7 +36,7 @@ class AssetAllocationPage extends BasePage {
     return cy.get("tbody tr:last-of-type td:nth-child(2)");
   }
   get paginationBtn() {
-    return cy.get("ul.pagination li.page-item");
+    return cy.xpath("//li[@class='page-item disabled']");
   }
 
   gridDataList(title) {
@@ -48,7 +48,7 @@ class AssetAllocationPage extends BasePage {
   }
 
   gridSingleData(title) {
-    return `tbody tr:first-of-type td[data-title='${title}']`;
+    return `tbody tr:first-of-type td:nth-child(2)`;
   }
   get assetOwnerData() {
     return cy.get("tbody tr td:nth-child(2)");

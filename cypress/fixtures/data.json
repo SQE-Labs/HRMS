@@ -2,6 +2,8 @@
     "url": "https://topuptalent.com/",
     "EmployeeName": "Autom Mation User",
     "Reimbursement":"Travel Expense",
+    "Department":"Technical",
+    "Status":"VERIFIED",
     "EmployeeData": {
         "FirstName": "Autom",
         "LastName": "User",

@@ -17,7 +17,7 @@ beforeEach(() => {
 });
 
 describe("Employee Assign Manager Managment Tests", () => {
-  it("HRMIS_1: Verify Assignee Manager Open when user click on Assing Manager Subtab", () => {
+  it("HRMIS_1: Verify Assigne Manager Open when user click on Assing Manager Subtab", () => {
     const expectedTexts = ["Name", "Assigned Manager", "Action"];
     AssignManagerPage.assertTextEquals(
       AssignManagerPage.assignManagerLbl,
