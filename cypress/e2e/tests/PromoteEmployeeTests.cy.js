@@ -41,6 +41,9 @@ describe("Employee Managment Promote Employee Tests", () => {
       "have.text",
       "Promote Employee"
     );
+
+    // Verify close Icon on Pop up
+
     PromoteEmployeePage.clickOnCancel();
     PromoteEmployeePage.promotePopHeaderLbl.should("not.be.visible");
 
@@ -88,6 +91,7 @@ describe("Employee Managment Promote Employee Tests", () => {
       "have.text",
       "Promote Employee"
     );
+    cy.wait(2000);
     PromoteEmployeePage.selectDepartment("Construcxfction");
     PromoteEmployeePage.assertOptionTexts(testData.Designations.Options);
   });

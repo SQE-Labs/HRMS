@@ -522,6 +522,9 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
 
     AssetAllocationPage.clickOnAssetAssigne();
     AssetAllocationPage.selectAssetType("Keyboard");
+    cy.wait(2000);
+
+    //cy.scrollTo("right");
     AssetAllocationPage.searchBySerialno(AssetAllocationPage.serialNo2rowLbl);
     cy.wait(1000);
     AssetAllocationPage.asserSearchSerialNo(

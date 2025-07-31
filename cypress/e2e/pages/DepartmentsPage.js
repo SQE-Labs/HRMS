@@ -40,6 +40,9 @@ class DepartmentsPage extends BasePage {
     return cy.get("tbody tr:last-of-type td a");
   }
 
+  get newDeptHeader() {
+    return cy.get("#staticBackdropLabel");
+  }
   // Method
 
   getValidationMessage(element) {
@@ -54,6 +57,10 @@ class DepartmentsPage extends BasePage {
 
   clickOnCancelBtn() {
     this.cancelBtn.wait(1000).click();
+  }
+
+  validateHeader() {
+    this.newDeptHeader.wait(1000).should("contain", " Department");
   }
 
   clickOnCrossIcon() {

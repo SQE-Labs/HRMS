@@ -77,6 +77,7 @@ describe("Setting Department Tests", () => {
       deptCountBefore = text.trim();
     });
     DepartmentsPage.clickOnAddDepartment();
+    DepartmentsPage.validateHeader();
     DepartmentsPage.enterDepartmentName(departmentName);
     DepartmentsPage.clickOnSubmit();
     cy.validateSuccessMessages("Department created successfully!");

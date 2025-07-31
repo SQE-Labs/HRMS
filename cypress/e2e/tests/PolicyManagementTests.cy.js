@@ -48,6 +48,7 @@ describe("Policy Management Tests", () => {
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Caelius' Policies", "Policy Editor");
 
+    PolicyMgmtPage.assertPolicyHeader();
     PolicyMgmtPage.clickOnAddPolicy();
     PolicyMgmtPage.addPolicyHeader
       .should("be.visible")

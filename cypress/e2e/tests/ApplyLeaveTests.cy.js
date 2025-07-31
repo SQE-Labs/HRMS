@@ -391,4 +391,52 @@ describe("Attendence Management Apply Leave Tests", () => {
           });
       });
   });
+  it("HRMIS_9: Verify Apply Leave and verify yes or no button on coformation message popup", () => {
+    sideBar.navigateTo("Attendance & Leaves", "Apply Leaves");
+
+    ApplyLeavePage.clickOnApplyLeaveBtn();
+    cy.wait(3000);
+
+    ApplyLeavePage.validateApplyLeaveHeader();
+    ApplyLeavePage.selectLeaveType("Privilege Leave");
+    ApplyLeavePage.assertConfMess();
+
+    ApplyLeavePage.clickOnNoBtn();
+    ApplyLeavePage.selectLeaveType("Privilege Leave");
+    ApplyLeavePage.clickOnYesBtn();
+  });
+
+  it("HRMIS_10:Verify that 'Apply Leave' popup gets closed after clicking 'Cross' icon", () => {
+    sideBar.navigateTo("Attendance & Leaves", "Apply Leaves");
+
+    ApplyLeavePage.clickOnApplyLeaveBtn();
+    ApplyLeavePage.validateApplyLeaveHeader();
+    cy.wait(3000);
+    ApplyLeavePage.clickOnCrossBtn();
+
+    ApplyLeavePage.clickOnApplyLeaveBtn();
+    cy.wait(3000);
+
+    ApplyLeavePage.clickOnCancelButton();
+  });
+
+  it("HRMIS_11:should select current date and future date (2 days ahead)", () => {
+    sideBar.navigateTo("Attendance & Leaves", "Apply Leaves");
+
+    ApplyLeavePage.clickOnApplyLeaveBtn();
+    cy.wait(3000);
+
+    ApplyLeavePage.validateApplyLeaveHeader();
+    ApplyLeavePage.selectLeaveType("Privilege Leave");
+    ApplyLeavePage.clickOnYesBtn();
+
+    ApplyLeavePage.selectcurrentandFutureDate();
+    ApplyLeavePage.enterReason("Normal Testing");
+    ApplyLeavePage.clickOnSubmitBtn();
+    ApplyLeavePage.assertLeaveSucc_Msg();
+  });
+
+  it.skip("HRMIS_12: Verify Apply Leave Page @first", () => {
+    sideBar.navigateTo("Attendance & Leaves", "Apply Leaves");
+  });
 });

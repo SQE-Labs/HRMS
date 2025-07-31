@@ -13,7 +13,7 @@ beforeEach(() => {
   // login to Application
   cy.login("superUser");
   sideBar.navigateTo("Employee Management", "Assign Manager");
-  cy.wait(1000);
+  cy.wait(3000);
 });
 
 describe("Employee Assign Manager Managment Tests", () => {
@@ -53,6 +53,7 @@ describe("Employee Assign Manager Managment Tests", () => {
   it("HRMIS_4: Verify that validation message appears, when user selects himself as manager, on 'Assign Manager' pop up.", () => {
     AssignManagerPage.selectEmployee(testData.EmployeeName);
     AssignManagerPage.clickOnReAssigneBtn();
+    cy.wait(4000);
     AssignManagerPage.selectManager(testData.EmployeeName);
     AssignManagerPage.clickOnSubmitBtn();
     cy.validateSuccessMessages("An employee cannot be their own manager");
@@ -63,6 +64,8 @@ describe("Employee Assign Manager Managment Tests", () => {
     AssignManagerPage.clickOnReAssigneBtn();
     AssignManagerPage.selectManager(testData.Manager.Asset);
     AssignManagerPage.clickOnSubmitBtn();
+    cy.wait(4000);
+
     cy.validateSuccessMessages("Successfully Assigned!");
     AssignManagerPage.assignedManagerLbl.should(
       "have.text",
@@ -73,6 +76,8 @@ describe("Employee Assign Manager Managment Tests", () => {
   it("HRMIS_6: Clean up Test Case", () => {
     AssignManagerPage.selectEmployee(testData.EmployeeName);
     AssignManagerPage.clickOnReAssigneBtn();
+    cy.wait(4000);
+
     AssignManagerPage.selectManager(testData.Manager.Vishal);
     AssignManagerPage.clickOnSubmitBtn();
     cy.validateSuccessMessages("Successfully Assigned!");

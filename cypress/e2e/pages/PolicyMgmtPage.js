@@ -94,11 +94,18 @@ class PolicyMgmtPage extends BasePage {
   get policyTitleView() {
     return cy.get("tbody tr:nth-child(1) td:nth-child(2)");
   }
+  get policyEditorHeader() {
+    return cy.get("h1");
+  }
 
   // Methods
 
   clickOnPolicyIds() {
     this.policyIdsSortImg.click();
+  }
+
+  assertPolicyHeader() {
+    this.policyEditorHeader.should("have.text", "Policy Editor");
   }
 
   selectItemPerPage(count) {

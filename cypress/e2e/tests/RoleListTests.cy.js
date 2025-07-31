@@ -31,7 +31,32 @@ describe("Role Management Tests", () => {
       .and("have.text", "No Record Available");
   });
 
-  it("HRMIS_2: Verify 'Add Role' Pop up.", () => {
+  it("HRMIS_2: Verify user is able to click on Next button.", () => {
+    //Navigate to Modify Policy Page
+    sideBar.navigateTo("Role Management", "Role List");
+
+    //search valid data from the grid
+    RoleListPage.selectItemPerPage("10");
+    cy.wait(500);
+    RoleListPage.clickNextUntilDisabled();
+    cy.wait(500);
+  });
+
+  it("HRMIS_3: Verify user is able to click on previous button.", () => {
+    //Navigate to Modify Policy Page
+    sideBar.navigateTo("Role Management", "Role List");
+
+    //search valid data from the grid
+    RoleListPage.selectItemPerPage("10");
+    cy.wait(500);
+    RoleListPage.clickNextUntilDisabled();
+    cy.wait(500);
+
+    RoleListPage.clickPreviousUntilDisabled();
+    cy.wait(500);
+  });
+
+  it("HRMIS_4: Verify 'Add Role' Pop up.", () => {
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Role Management", "Role List");
 
@@ -81,7 +106,7 @@ describe("Role Management Tests", () => {
     );
   });
 
-  it("HRMIS_3: Verify 'Update Role' Pop up.", () => {
+  it("HRMIS_5: Verify 'Update Role' Pop up.", () => {
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Role Management", "Role List");
     // select Item Per Page 20
@@ -131,7 +156,7 @@ describe("Role Management Tests", () => {
     RoleListPage.lastRoleDesc.should("have.text", roleDesc);
   });
 
-  it("HRMIS_4: Verify 'Delete Role' Pop up.", () => {
+  it("HRMIS_6: Verify 'Delete Role' Pop up.", () => {
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Role Management", "Role List");
     // select Item Per Page 20
