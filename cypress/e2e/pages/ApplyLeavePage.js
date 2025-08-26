@@ -61,17 +61,35 @@ class ApplyLeavePage extends BasePage {
     );
   }
   get reasonField() {
-    return cy.xpath("//div/textarea[@id='reasonOfLeave']");
+    return cy.get("#reasonOfLeave");
   }
-  get submitBtn() {
+  get submitButton() {
     return cy.xpath(
       "//h5[text()='Apply Leave']/../following-sibling::div/button[text()='Submit']"
     );
   }
   get succ_Msg() {
+    return cy.xpath("//div[contains(text(),'Leave Applied Successfully!')]");
+  }
+  get withdrawLink() {
+    return cy.get(":nth-child(1) > :nth-child(8) > a");
+  }
+  get withdrawHeader() {
+    return cy.xpath("//h5[text()='Withdraw Leave Request']");
+  }
+  get reasomMsg() {
+    return cy.xpath("//textarea[@name='reason']");
+  }
+  get submitBtn() {
     return cy.xpath(
-      "//div[contains(text(),'Leave Applied Successfully! Wait for Approval.')]"
+      "//h5[text()='Withdraw Leave Request']/../following-sibling::div/button[text()='Submit']"
     );
+  }
+  get validationMessage() {
+    return cy.xpath("//small[contains(text(),'Reason must')]");
+  }
+  get succ_Msg() {
+    return cy.xpath("//div[text()='Leave Withdrawn Successfully']");
   }
   gridDataList(col) {
     return `tr td:nth-child(${col})`;
@@ -199,14 +217,55 @@ class ApplyLeavePage extends BasePage {
       .not(".react-datepicker__day--outside-month")
       .click();
   }
-  enterReason(reasonEnter) {
-    this.reasonField.clear().type(reasonEnter);
+  enterReasonInApplyLeave(reasonEnter) {
+    this.reasonField.type(reasonEnter);
   }
   clickOnSubmitBtn() {
-    this.submitBtn.click();
+    this.submitButton.click();
   }
   assertLeaveSucc_Msg() {
     this.succ_Msg.should("contain.text", "Leave Applied Successfully!");
+  }
+  clickOnWithdrawLink() {
+    this.withdrawLink.click();
+  }
+  assertWithdrawHeader() {
+    this.withdrawHeader.should("have.text", "Withdraw Leave Request");
+  }
+  enterReason(ReasonMsg) {
+    this.reasomMsg.should("be.visible").type(ReasonMsg);
+  }
+  assertValidationMsg() {
+    cy.get("textarea[name='reason']").then(($el) => {
+      expect($el[0].validationMessage).to.eq("Please fill out this field.");
+    });
+  }
+  assertVal_Msg() {
+    cy.get("#leave_type_list").then(($el) => {
+      expect($el[0].validationMessage).to.eq(
+        "Please select an item in the list."
+      );
+    });
+  }
+  assertDatePicker_Msg() {
+    cy.get(".react-datepicker__input-container > .border").then(($el) => {
+      expect($el[0].validationMessage).to.eq("Please fill out this field.");
+    });
+  }
+  assertReason_Msg() {
+    cy.get("#reasonOfLeave").then(($el) => {
+      expect($el[0].validationMessage).to.eq("Please fill out this field.");
+    });
+  }
+
+  clickOnSubBtn() {
+    this.submitBtn.click();
+  }
+  assertMessage() {
+    this.validationMessage.should("contain.text", "Reason must be");
+  }
+  assertSucc_Msg() {
+    this.succ_Msg.should("contain.text", "Leave Withdrawn Successfully");
   }
 }
 

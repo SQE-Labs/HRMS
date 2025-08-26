@@ -1,6 +1,18 @@
 import sideBar from "../components/SideBar";
 import MyTeamLeavePage from "../pages/MyTeamLeavePage";
 
+let testData;
+before(function () {
+  cy.fixture("data").then((data) => {
+    testData = data;
+  });
+});
+
+beforeEach(() => {
+  // login to Application
+  cy.login("superUser");
+});
+
 describe("My Team Leave page", () => {
   it("Verify that 'Attendance & Leaves' tab expands, when user clicks on 'Attendance & Leaves'.", () => {
     cy.login("superUser");

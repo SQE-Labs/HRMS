@@ -4,6 +4,7 @@
     "Reimbursement":"Travel Expense",
     "Department":"Technical",
     "Status":"VERIFIED",
+    "Role":"IT Manager",
     "EmployeeData": {
         "FirstName": "Autom",
         "LastName": "User",
