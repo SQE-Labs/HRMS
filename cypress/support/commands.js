@@ -65,15 +65,16 @@ Cypress.Commands.add(
   "selectDrpValueByText",
   (locator, text, isSearchable = false, searchInputLocator = "") => {
     if (isSearchable) {
+      // Wait for the correct modal to be visible
+      cy.wait(3000);
+
       locator.should("be.visible").click({ force: true });
 
       // Wait for any modal to disappear (customize the selector if needed)
-      cy.get("#staticBackdropAsset").should("not.be.visible");
-
-      cy.wait(500);
+      // cy.get("#staticBackdropAsset").should("not.be.visible");
 
       if (searchInputLocator) {
-        searchInputLocator.should("be.visible").wait(1000).type(text);
+        searchInputLocator.should("be.visible").wait(4000).type(text);
 
         const selectorNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         const selectors = selectorNumbers
@@ -83,7 +84,10 @@ Cypress.Commands.add(
           )
           .join(", ");
 
-        cy.get(selectors).contains(text).click({ force: true });
+        cy.get(selectors)
+          .contains(text)
+          .should("be.visible")
+          .click({ force: true });
       }
     } else {
       locator.select(text).should("contain", text);

@@ -159,6 +159,43 @@ class RoleListPage extends BasePage {
       expect(expectedtitle).not.to.equal(expectedValue);
     });
   }
+
+  clickNext() {
+    cy.get("ul.pagination li")
+      .contains("Next")
+      .should("be.visible")
+      .then(($nextButton) => {
+        if (!$nextButton.parent().hasClass("disabled")) {
+          cy.wrap($nextButton).click({ force: true });
+          cy.wait(1000);
+        }
+      });
+  }
+
+  clickPrevious() {
+    cy.get("ul.pagination li")
+      .contains("Previous")
+      .should("be.visible")
+      .then(($nextButton) => {
+        if (!$nextButton.parent().hasClass("disabled")) {
+          cy.wrap($nextButton).click({ force: true });
+          cy.wait(1000);
+        }
+      });
+  }
+
+  clickPreviousUntilDisabled() {
+    cy.get("ul.pagination li")
+      .contains("Previous")
+      .should("be.visible")
+      .then(($nextButton) => {
+        if (!$nextButton.parent().hasClass("disabled")) {
+          cy.wrap($nextButton).click({ force: true });
+          cy.wait(1000);
+          this.clickPreviousUntilDisabled();
+        }
+      });
+  }
 }
 
 export default new RoleListPage();

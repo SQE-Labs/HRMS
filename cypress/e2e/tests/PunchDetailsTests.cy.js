@@ -95,6 +95,7 @@ describe("Attendence Management Punch Details Tests", () => {
     PunchDeatilsPage.clickOnCrossBtn();
     PunchDeatilsPage.attendenceDetailHeader.should("not.be.visible");
   });
+
   it("HRMIS_5:Verify that 'Attendance Detail' popup appears after clicking 'Week day' cell", () => {
     sideBar.navigateTo("Attendance & Leaves", "Punch Details");
     PunchDeatilsPage.select_Employee("Autom Mation User");

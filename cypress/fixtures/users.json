@@ -14,5 +14,9 @@
   "superAdmin":{
     "email": "vishal.thakur@caeliusconsulting.com",
     "password":"Test@123"
+  },
+  "LeaveManager":{
+    "email":"emp2@caeliusconsulting.com",
+    "password":"Test@123"
   }
 }

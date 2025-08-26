@@ -391,4 +391,76 @@ describe("Attendence Management Apply Leave Tests", () => {
           });
       });
   });
+  it("HRMIS_9: Verify Apply Leave and verify yes or no button on coformation message popup", () => {
+    sideBar.navigateTo("Attendance & Leaves", "Apply Leaves");
+
+    ApplyLeavePage.clickOnApplyLeaveBtn();
+    cy.wait(3000);
+
+    ApplyLeavePage.validateApplyLeaveHeader();
+    ApplyLeavePage.selectLeaveType("Privilege Leave");
+    ApplyLeavePage.assertConfMess();
+
+    ApplyLeavePage.clickOnNoBtn();
+    ApplyLeavePage.selectLeaveType("Privilege Leave");
+    ApplyLeavePage.clickOnYesBtn();
+  });
+
+  it("HRMIS_10:Verify that 'Apply Leave' popup gets closed after clicking 'Cross' icon", () => {
+    sideBar.navigateTo("Attendance & Leaves", "Apply Leaves");
+
+    ApplyLeavePage.clickOnApplyLeaveBtn();
+    ApplyLeavePage.validateApplyLeaveHeader();
+    cy.wait(3000);
+    ApplyLeavePage.clickOnCrossBtn();
+
+    ApplyLeavePage.clickOnApplyLeaveBtn();
+    cy.wait(3000);
+
+    ApplyLeavePage.clickOnCancelButton();
+  });
+
+  it("HRMIS_11:should select current date and future date (2 days ahead)", () => {
+    sideBar.navigateTo("Attendance & Leaves", "Apply Leaves");
+
+    ApplyLeavePage.clickOnApplyLeaveBtn();
+    cy.wait(3000);
+
+    ApplyLeavePage.validateApplyLeaveHeader();
+    ApplyLeavePage.clickOnSubmitBtn();
+    ApplyLeavePage.assertVal_Msg();
+    ApplyLeavePage.selectLeaveType("Privilege Leave");
+    ApplyLeavePage.clickOnYesBtn();
+    ApplyLeavePage.clickOnSubmitBtn();
+    ApplyLeavePage.assertDatePicker_Msg();
+    ApplyLeavePage.selectcurrentandFutureDate();
+    ApplyLeavePage.clickOnSubmitBtn();
+
+    ApplyLeavePage.assertReason_Msg();
+    ApplyLeavePage.enterReasonInApplyLeave("Normal Testing");
+    ApplyLeavePage.clickOnSubmitBtn();
+    //ApplyLeavePage.assertLeaveSucc_Msg();
+  });
+
+  it("HRMIS_12: Verify Apply Leave Page @first", () => {
+    sideBar.navigateTo("Attendance & Leaves", "Apply Leaves");
+    cy.wait(3000);
+    ApplyLeavePage.clickOnWithdrawLink();
+    ApplyLeavePage.assertWithdrawHeader();
+    cy.wait(2000);
+    ApplyLeavePage.clickOnSubBtn();
+    ApplyLeavePage.assertValidationMsg();
+
+    ApplyLeavePage.enterReason("Ap");
+    ApplyLeavePage.clickOnSubBtn();
+    cy.wait(2000);
+
+    ApplyLeavePage.assertMessage();
+    cy.wait(2000);
+
+    ApplyLeavePage.enterReason("Applied for leave");
+
+    ApplyLeavePage.clickOnSubBtn();
+    ApplyLeavePage.assertSucc_Msg();
+  });
 });
