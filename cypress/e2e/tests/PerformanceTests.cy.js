@@ -23,10 +23,6 @@ describe("Performance Dashboard Form Automation", () => {
     PerformancePage.selectRadioByLabel("Are you a MuleSoft Mentor?", "No");
     PerformancePage.selectRadioByLabel("Are you a MuleSoft Ambassador?", "No");
     PerformancePage.selectRadioByLabel(
-      "How many Salesforce Sessions have you presented during the last 12 months?",
-      "0"
-    );
-    PerformancePage.selectRadioByLabel(
       "Have you completed the Caelius AI Enablement Program?",
       "No"
     );
@@ -42,6 +38,10 @@ describe("Performance Dashboard Form Automation", () => {
       "Have you presented at any MuleSoft or Salesforce events other than Meetup as a speaker?",
       "N.A."
     );
+    PerformancePage.selectRadioByLabel(
+      "How many Salesforce Sessions have you presented during the last 12 months?",
+      "0"
+    );
     PerformancePage.fillTextareaByLabel(
       "How many employees have you assisted during the Review Period as a Training Buddy?",
       "N.A."
@@ -54,10 +54,7 @@ describe("Performance Dashboard Form Automation", () => {
       "How many reviews have you taken as a Reviewer?",
       "N.A."
     );
-    PerformancePage.selectRadioByLabel(
-      "No. of Projects undertaken. (last 12 months)",
-      "2"
-    );
+    PerformancePage.selectRadioByLabel("No. of Projects undertaken.", "2");
     PerformancePage.fillTextareaByLabel("Project Details", "N.A.");
     PerformancePage.fillTextareaByLabel(
       "How many code reviews have you taken in the past 12 months? Please attach the code review link.",

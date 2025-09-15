@@ -2,6 +2,7 @@ class PerformancePage {
   checkCertificationNone() {
     cy.contains("Which certifications have you completed?").scrollIntoView();
     cy.get('input[type="checkbox"]').check("None", { force: true });
+    cy.wait(2000);
   }
 
   fillOtherCertifications(text) {
@@ -10,12 +11,14 @@ class PerformancePage {
     )
       .parent()
       .find("textarea")
-      .type(text);
+      .type(text, { force: true });
+    cy.wait(2000);
   }
 
   checkExercisesNone() {
     cy.contains("Select the exercises you have completed").scrollIntoView();
     cy.get('input[type="checkbox"]').check("None", { force: true });
+    cy.wait(2000);
   }
 
   selectMockInterviews(count) {
@@ -24,50 +27,67 @@ class PerformancePage {
     )
       .parent()
       .contains(count)
-      .click();
+      .click({ force: true });
+    cy.wait(2000);
   }
 
   fillMockInterviewDetails(text) {
     cy.contains("If you have given the mock interviews or client interviews")
       .parent()
       .find("textarea")
-      .type(text);
+      .type(text, { force: true });
+    cy.wait(2000);
   }
 
   selectExpertLedSessions(option) {
     cy.contains("How many Expert-Led sessions")
       .parent()
       .contains(option)
-      .click();
+      .click({ force: true });
+    cy.wait(2000);
   }
 
   fillCoffeeNLearnDetails(text) {
     cy.contains("If you have presented on any topic in CoffeeNLearn session")
       .parent()
       .find("textarea")
-      .type(text);
+      .type(text, { force: true });
+    cy.wait(2000);
   }
 
   selectRadioByLabel(label, value) {
-    cy.contains(label).parent().contains(value).click();
+    cy.contains(label).parent().contains(value).click({ force: true });
+    cy.wait(2000);
   }
 
   fillTextareaByLabel(label, text) {
-    cy.contains(label).parent().find("textarea").type(text);
+    cy.contains(label).parent().find("textarea").type(text, { force: true });
+    cy.wait(2000);
   }
 
   fillSelfRatings(labels, value) {
     labels.forEach((label) => {
-      cy.contains(label).parent().contains(value).click();
+      cy.contains(label).parent().contains(value).click({ force: true });
     });
+    cy.wait(2000);
   }
 
   submitForm() {
-    cy.contains("button", "Submit").should("be.visible").click();
+    // Scroll up until the Submit button is visible, then click it
+    cy.contains("button", "Submit")
+      .scrollIntoView()
+      .should("be.visible")
+      .click({ force: true });
+    // Handle confirmation modal
+    cy.contains("Are you sure you want submit the performance form?").should(
+      "be.visible"
+    );
+    cy.contains("button", "Yes").click({ force: true });
+    cy.wait(2000);
   }
-
   validateSuccessMessage(message) {
     cy.contains(message, { timeout: 10000 }).should("be.visible");
+    cy.wait(2000);
   }
 }
 

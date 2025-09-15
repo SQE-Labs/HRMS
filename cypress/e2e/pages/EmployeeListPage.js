@@ -25,6 +25,7 @@ class EmployeeListPage extends BasePage {
 
   //Methods
   enterNameIntoSearchField(nametxt) {
+    cy.get(".modal-backdrop").should("not.have.class", "show");
     this.searchByName.clear().type(nametxt).should("have.value", nametxt);
     cy.log("Entered Name to Search");
   }
