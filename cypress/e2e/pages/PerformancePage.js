@@ -56,7 +56,18 @@ class PerformancePage {
   }
 
   selectRadioByLabel(label, value) {
-    cy.contains(label).parent().contains(value).click({ force: true });
+    cy.contains(label)
+      .parent()
+      .contains(value)
+      .scrollIntoView()
+      .click({ force: true });
+    cy.wait(2000);
+  }
+
+  selectRadioByid(id, value) {
+    cy.get("#" + id + ' input[type="radio"][value="' + value + '"]')
+      .scrollIntoView()
+      .check({ force: true });
     cy.wait(2000);
   }
 

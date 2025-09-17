@@ -54,7 +54,7 @@ describe("Performance Dashboard Form Automation", () => {
       "How many reviews have you taken as a Reviewer?",
       "N.A."
     );
-    PerformancePage.selectRadioByLabel("No. of Projects undertaken.", "2");
+    PerformancePage.selectRadioByid("projectsUndertaken", "2");
     PerformancePage.fillTextareaByLabel("Project Details", "N.A.");
     PerformancePage.fillTextareaByLabel(
       "How many code reviews have you taken in the past 12 months? Please attach the code review link.",
@@ -74,11 +74,12 @@ describe("Performance Dashboard Form Automation", () => {
       "N.A."
     );
 
+    PerformancePage.selectRadioByid("responsiveness", "2");
+
     PerformancePage.fillSelfRatings(
       [
         "Knowledge of Job Skills",
         "Technical Skills",
-        "Responsiveness",
         "Communication & Listening Skills",
         "Ability to Work Across Different Teams",
         "Flexibility to Work in Different Time Zones",
