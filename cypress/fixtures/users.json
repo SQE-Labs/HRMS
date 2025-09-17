@@ -1,5 +1,9 @@
 { 
   "superUser": {
+    "email": "manik.thakur@caeliusconsulting.com",
+    "password": "Test@123"
+  },
+  "superUser1": {
     "email": "vishal.thakur@caeliusconsulting.com",
     "password": "Test@123"
   },
