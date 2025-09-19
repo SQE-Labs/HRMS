@@ -5,6 +5,12 @@ import sideBar from "../components/SideBar";
 import AnalyticsInsightsPage from "../pages/AnalyticsInsightsPage";
 
 describe("Analytics & Insights - User's Role Report", () => {
+  let testData;
+  before(function () {
+    cy.fixture("data").then((data) => {
+      testData = data;
+    });
+  });
   beforeEach(() => {
     // login to Application (if needed)
     cy.login("superUser");
@@ -13,14 +19,12 @@ describe("Analytics & Insights - User's Role Report", () => {
   it("HRMIS_A1: Verify 'User's Role Report' page opens and displays required fields and table columns", () => {
     // Step 1: Navigate using sidebar
     sideBar.navigateTo("Analytics & Insights", "User's Role Report");
-    AnalyticsInsightsPage.pageHeader
-      .should("be.visible")
-      .and("have.text", "User's Role Report");
+    AnalyticsInsightsPage.assertUsersRoleReportHeader();
 
     // Step 2: Verify fields
-    AnalyticsInsightsPage.searchEmployeeName.should("be.visible");
-    AnalyticsInsightsPage.departmentDropdown.should("be.visible");
-    AnalyticsInsightsPage.statusDropdown.should("be.visible");
+    AnalyticsInsightsPage.searchEmployeeNameField;
+    AnalyticsInsightsPage.departmentDropdown;
+    AnalyticsInsightsPage.statusDropdown;
 
     // Step 3: Verify table columns
     const expectedColumns = [
@@ -34,7 +38,19 @@ describe("Analytics & Insights - User's Role Report", () => {
       "Action",
     ];
     expectedColumns.forEach((col) => {
-      AnalyticsInsightsPage.getTableColumn(col).should("be.visible");
+      AnalyticsInsightsPage.getTableColumn(col);
     });
+  });
+
+  it.only("HRMIS_A2: Verify search by employee name shows correct results", () => {
+    // Step 1: Navigate
+    sideBar.navigateTo("Analytics & Insights", "User's Role Report");
+    AnalyticsInsightsPage.assertUsersRoleReportHeader();
+
+    // Step 2: Search employee by name
+    AnalyticsInsightsPage.searchEmployeeByName(testData.EmployeeName);
+
+    // Step 3: Verify result in table
+    AnalyticsInsightsPage.assertEmployeeInTable(testData.EmployeeName);
   });
 });

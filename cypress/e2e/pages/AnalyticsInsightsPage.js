@@ -1,21 +1,24 @@
 import BasePage from "./BasePage";
+import "cypress-xpath";
 
 class AnalyticsInsightsPage extends BasePage {
   // User's Role Report page
   get usersRoleReportHeader() {
-    return cy.contains("User's Role Report");
+    return cy.contains("h1", "User's Role Report");
   }
   get searchEmployeeNameField() {
-    return cy.get('input[placeholder="Search By Employee Name"]');
+    return cy
+      .get("input[placeholder='Search By Employee Name']")
+      .should("be.visible");
   }
   get departmentDropdown() {
-    return cy.get("select").eq(0);
+    return cy.get("select").eq(0).should("be.visible");
   }
   get statusDropdown() {
-    return cy.get("select").eq(1);
+    return cy.get("select").eq(1).should("be.visible");
   }
   getTableColumn(colName) {
-    return cy.contains("th", colName);
+    return cy.get("table th").contains(colName);
   }
 
   assertUsersRoleReportHeader() {
@@ -74,6 +77,22 @@ class AnalyticsInsightsPage extends BasePage {
   }
   assertReimbursementReportHeader() {
     this.reimbursementReportHeader.should("be.visible");
+  }
+
+  // Search employee by name
+  searchEmployeeByName(name) {
+    this.searchEmployeeNameField.clear().type(name);
+    cy.wait(1000); // optional, better to wait for table response
+  }
+
+  // Get employee row by name
+  getEmployeeRowByName(name) {
+    return cy.get("table tbody tr").contains("td[data-title='empName']", name);
+  }
+
+  // Assert employee is visible in table
+  assertEmployeeInTable(name) {
+    this.getEmployeeRowByName(name).should("be.visible");
   }
 }
 
