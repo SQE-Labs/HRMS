@@ -36,7 +36,7 @@ module.exports = defineConfig({
       charts: true,
       html: true,
       json: true,
-      overwrite: false,
+      overwrite: true,
     },
     setupNodeEvents(on, config) {
       const options = {
