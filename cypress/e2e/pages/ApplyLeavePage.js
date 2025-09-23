@@ -5,10 +5,11 @@ import "cypress-xpath";
 class ApplyLeavePage extends BasePage {
   //Locators
   get applyLeaveHeader() {
-    return cy.xpath("//h1[text()='Apply Leaves']");
+    return cy.get('div>h1')
+    .should("be.visible").and("have.text", "Apply Leaves");
   }
   get idColSortIcon() {
-    return cy.get("tr th:nth-child(1) img");
+    return cy.get("tr th:nth-child(1)");
   }
   get fromColSortIcon() {
     return cy.get("thead > tr > :nth-child(2)");
@@ -72,7 +73,7 @@ class ApplyLeavePage extends BasePage {
     return cy.xpath("//div[contains(text(),'Leave Applied Successfully!')]");
   }
   get withdrawLink() {
-    return cy.get(":nth-child(1) > :nth-child(8) > a");
+    return cy.get("td > a");
   }
   get withdrawHeader() {
     return cy.xpath("//h5[text()='Withdraw Leave Request']");

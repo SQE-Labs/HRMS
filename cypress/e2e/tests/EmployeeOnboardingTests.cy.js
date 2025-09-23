@@ -27,7 +27,7 @@ describe("Employee Onboard Tests", () => {
     InvitationsPage.enterEmailID(joineePersonalMail);
     InvitationsPage.enterEmployeeName("Mattews");
 
-    InvitationsPage.selectSamplePdf("cypress/fixtures/resources/dummy.pdf");
+    InvitationsPage.selectSamplePdf("cypress/fixtures/resources/Sample testing pdf.pdf");
 
     InvitationsPage.clickSubmitButton();
 
