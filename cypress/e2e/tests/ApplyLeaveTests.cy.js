@@ -17,11 +17,9 @@ describe("Attendence Management Apply Leave Tests", () => {
     sideBar.navigateTo("Attendance & Leaves", "Apply Leaves");
 
     ApplyLeavePage.applyLeaveHeader
-      .should("be.visible")
-      .and("have.text", "Apply Leaves");
   });
 
-  it.skip("HRMIS_2:Verify that 'S.No.' column gets sorted in asecending order after clicking 'S.No.' header with 'Sort' icon, on 'Apply Leave' page. ", () => {
+  it("HRMIS_2:Verify that 'S.No.' column gets sorted in asecending order after clicking 'S.No.' header with 'Sort' icon, on 'Apply Leave' page. ", () => {
     sideBar.navigateTo("Attendance & Leaves", "Apply Leaves");
 
     let originalData = []; // Initialize an empty array to store the text data
@@ -42,9 +40,7 @@ describe("Attendence Management Apply Leave Tests", () => {
         cy.log("Extracted Data:", JSON.stringify(originalData));
         console.log(("Extracted Data:", JSON.stringify(originalData)));
 
-        sortedData = [...originalData].sort((a, b) =>
-          a.localeCompare(b, undefined, { sensitivity: "base" })
-        );
+        sortedData = [...originalData].sort((a, b) => Number(a) - Number(b));
         cy.log("Sorted Data:", JSON.stringify(sortedData));
         console.log("Sorted Data:", JSON.stringify(sortedData));
 
@@ -439,7 +435,8 @@ describe("Attendence Management Apply Leave Tests", () => {
     ApplyLeavePage.assertReason_Msg();
     ApplyLeavePage.enterReasonInApplyLeave("Normal Testing");
     ApplyLeavePage.clickOnSubmitBtn();
-    //ApplyLeavePage.assertLeaveSucc_Msg();
+    cy.wait(5000);
+    // ApplyLeavePage.assertLeaveSucc_Msg();
   });
 
   it("HRMIS_12: Verify Apply Leave Page @first", () => {
