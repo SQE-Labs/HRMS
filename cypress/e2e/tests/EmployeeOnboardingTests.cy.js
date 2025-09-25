@@ -15,10 +15,11 @@ import HRApprovalPage from "../pages/HRApprovalPage";
 
 beforeEach(() => {
   // login to Application
-  cy.login("superUser");
+  cy.login("superUser1");
 });
+
 describe("Employee Onboard Tests", () => {
-  it("ONBRD_1: Verify that new hire is able to submit the onboarding form", () => {
+  it("Verify that new hire is able to submit the onboarding form, ", () => {
     // Invite new Employee
     sideBar.navigateTo("Employee Onboarding", "Onboarding Form");
     //InvitationsPage.onBoardingForm();
@@ -65,6 +66,7 @@ describe("Employee Onboard Tests", () => {
       EmployeeType: "REGULAR",
       LeaveManager: "Vishal",
       EmpSubType: "Intern",
+      EmpFlag: "CCI_INDIA",
       messagesToValidate: [
         "Thank you!",
         "Your submission has been sent successfully.",
@@ -73,7 +75,7 @@ describe("Employee Onboard Tests", () => {
     };
 
     // Wait for mail and navigate to the url received in the mail
-    cy.wait(3000);
+  
     cy.task("getConfirmaUrl", JoineeData.JoineeEmail).then(
       (confirmationUrl) => {
         cy.visit(String(confirmationUrl), { failOnStatusCode: false });
@@ -207,7 +209,6 @@ describe("Employee Onboard Tests", () => {
     // L1ApprovalActionPage.clickNextUntilDisabled();
     L1ApprovalActionPage.clickOnNextButton();
 
-    cy.wait(4000);
     L1ApprovalActionPage.searchUserUntilFound(JoineeData.Firstname);
     // L1ApprovalActionPage.SearchNewJoineeByName(JoineeData.Firstname);
     //  L1ApprovalActionPage.selectRecentUserByName(JoineeData.Firstname);
@@ -380,6 +381,7 @@ describe("Employee Onboard Tests", () => {
     HRApprovalPage.selectEmployeeType(JoineeData.EmployeeType);
     HRApprovalPage.selectLeaveManager(JoineeData.LeaveManager);
     HRApprovalPage.selectEmplSubtype(JoineeData.EmpSubType);
+    HRApprovalPage.selectEmplFlag(JoineeData.EmpFlag);
     HRApprovalPage.clickApproveButton();
 
     // Validating the Thank You Success message
