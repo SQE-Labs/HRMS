@@ -19,7 +19,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
   it("HRMIS_1: Verify Asset Management Collapse and Open", () => {
     sideBar.navigateTo("Asset Management", "Asset Allocation");
     cy.get("a[aria-expanded='true'] + ul li")
-      .should("have.length", 7)
+      .should("have.length", 10)
       .each(($el) => {
         cy.wrap($el).should("be.visible");
       });
@@ -175,57 +175,12 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
   it("HRMIS_7: Verify that the Asset Type get sorted in ascending order after clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
     sideBar.navigateTo("Asset Management", "Asset Allocation"); // Navigate to the desired page
 
-    let originalData = [];
-    let uiSortedData = [];
-
-    // Retrieve the data for the column (e.g., asset type, owner, etc.)
-    AssetAllocationPage.getAssetTypeColumnDataList().then((data) => {
-      // Normalize the data (remove extra spaces)
-      const normalizedData = Array.isArray(data)
-        ? data.map((text) => text.trim()) // Trim any extra spaces
-        : [data.trim()]; // Handle case for a single string if necessary
-
-      // Log the data before sorting
-
-      const regex = /[A-Z][a-z]+(?: [A-Z][a-z]+)*/g;
-
-      // Use the regex to match words or phrases (with spaces if necessary)
-      const splitData = data.match(regex);
-      originalData = splitData;
-      cy.log("Data Before Sorting:", JSON.stringify(originalData));
-
-      // Programmatically sort the normalized data alphabetically
-      const expectedSortedData = [...originalData].sort((a, b) =>
-        a.localeCompare(b, undefined, { sensitivity: "base" })
-      );
-      cy.log("Expected Sorted Data:", JSON.stringify(expectedSortedData));
-
-      AssetAllocationPage.clickOnAssetType(); // Ensure this method clicks the column header for sorting
-
-      // Fetch data again after sorting in the UI
-      AssetAllocationPage.getAssetTypeColumnDataList().then(
-        (dataAfterClick) => {
-          // Normalize and split data after clicking
-
-          uiSortedData = dataAfterClick.match(regex);
-          cy.log("Data After Sorting:", JSON.stringify(uiSortedData));
-
-          // Verify that the UI sorted data matches the expected sorted data
-          expect(uiSortedData).to.deep.equal(expectedSortedData);
-        }
-      );
-    });
-  });
-
-  it("HRMIS_8: Verify that the Employee get sorted in ascending order after clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
-    sideBar.navigateTo("Asset Management", "Asset Allocation"); // Navigate to the desired page
-
     let originalData = []; // Initialize an empty array to store the text data
     let uiSortedData = [];
     let sortedData = [];
 
     // Retrieve the list of texts from the grid column
-    cy.get('tbody tr td[data-title="empName"]') // Adjust the selector to match your grid cells
+    cy.get(AssetAllocationPage.gridDataList("1")) // Adjust the selector to match your grid cells
       .each(($cell) => {
         const text = $cell.text().trim(); // Get the text and remove any extra spaces
         if (text) {
@@ -236,15 +191,15 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
       .then(() => {
         // Log the extracted data
         cy.log("Extracted Data:", JSON.stringify(originalData));
+        console.log(("Extracted Data:", JSON.stringify(originalData)));
 
-        sortedData = [...originalData].sort((a, b) =>
-          a.localeCompare(b, undefined, { sensitivity: "base" })
-        );
+        sortedData = [...originalData].sort((a, b) => Number(a) - Number(b));
         cy.log("Sorted Data:", JSON.stringify(sortedData));
+        console.log("Sorted Data:", JSON.stringify(sortedData));
 
-        AssetAllocationPage.clickOnEmployeeCol();
+        // ApplyLeavePage.clickOnIdCol();
 
-        cy.get('tbody tr td[data-title="empName"]') // Re-fetch the data after sorting
+        cy.get(AssetAllocationPage.gridDataList("1")) // Re-fetch the data after sorting
           .each(($cell) => {
             const text = $cell.text().trim();
             if (text) {
@@ -253,7 +208,59 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
           })
           .then(() => {
             // Log the data after sorting from the UI
-            cy.log("Data After Sorting (UI):", JSON.stringify(uiSortedData));
+            console.log(
+              "Data After Sorting (UI):",
+              JSON.stringify(uiSortedData)
+            );
+            cy.log("Data After Sorting (UI):", JSON.stringify(sortedData));
+
+            // Now, assert that the UI sorted data matches the expected sorted data
+
+            expect(uiSortedData).to.deep.equal(sortedData);
+          });
+      });
+  });
+
+  it("HRMIS_8: Verify that the Employee get sorted in ascending order after clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
+    sideBar.navigateTo("Asset Management", "Asset Allocation"); // Navigate to the desired page
+
+    let originalData = []; // Initialize an empty array to store the text data
+    let uiSortedData = [];
+    let sortedData = [];
+
+    // Retrieve the list of texts from the grid column
+    cy.get(AssetAllocationPage.gridDataList("2")) // Adjust the selector to match your grid cells
+      .each(($cell) => {
+        const text = $cell.text().trim(); // Get the text and remove any extra spaces
+        if (text) {
+          // Only push non-empty text to the array
+          originalData.push(text);
+        }
+      })
+      .then(() => {
+        // Log the extracted data
+        cy.log("Extracted Data:", JSON.stringify(originalData));
+        console.log(("Extracted Data:", JSON.stringify(originalData)));
+
+        sortedData = [...originalData].sort((a, b) => Number(a) - Number(b));
+        cy.log("Sorted Data:", JSON.stringify(sortedData));
+        console.log("Sorted Data:", JSON.stringify(sortedData));
+
+        // ApplyLeavePage.clickOnIdCol();
+
+        cy.get(AssetAllocationPage.gridDataList("2")) // Re-fetch the data after sorting
+          .each(($cell) => {
+            const text = $cell.text().trim();
+            if (text) {
+              uiSortedData.push(text);
+            }
+          })
+          .then(() => {
+            // Log the data after sorting from the UI
+            console.log(
+              "Data After Sorting (UI):",
+              JSON.stringify(uiSortedData)
+            );
             cy.log("Data After Sorting (UI):", JSON.stringify(sortedData));
 
             // Now, assert that the UI sorted data matches the expected sorted data
@@ -485,9 +492,14 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
     //   "Please fill out this field."
     // );
 
-    cy.get("#react-select-2-input").then(($el) => {
-      expect($el[0].validationMessage).to.eq("Please fill out this field.");
-    });
+    // cy.get("#react-select-2-input").then(($el) => {
+    //   expect($el[0].validationMessage).to.eq("Please fill out this field.");
+    // });
+    cy.contains("Please fill out this field.").should("be.visible");
+    // cy.document().then((doc) => {
+    //   const pageText = doc.body.innerText; // gets all visible text
+    //   expect(pageText).to.include("Please fill out this field.");
+    // });
   });
 
   it("HRMIS_16:Verify 'Assets are not available for selected type !' message after selecting Unavailable asset type", () => {

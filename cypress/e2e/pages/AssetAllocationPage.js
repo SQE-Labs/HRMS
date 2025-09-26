@@ -39,8 +39,8 @@ class AssetAllocationPage extends BasePage {
     return cy.xpath("//li[@class='page-item disabled']");
   }
 
-  gridDataList(title) {
-    return cy.xpath(`//th[contains(text(),'${title}')]`).invoke("text");
+  gridDataList(col) {
+    return `tr td:nth-child(${col})`;
   }
 
   clickOnSort(header_title) {

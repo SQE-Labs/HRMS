@@ -5,8 +5,10 @@ import "cypress-xpath";
 class ApplyLeavePage extends BasePage {
   //Locators
   get applyLeaveHeader() {
-    return cy.get('div>h1')
-    .should("be.visible").and("have.text", "Apply Leaves");
+    return cy
+      .get("div>h1")
+      .should("be.visible")
+      .and("have.text", "Apply Leaves");
   }
   get idColSortIcon() {
     return cy.get("tr th:nth-child(1)");
