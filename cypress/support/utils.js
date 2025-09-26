@@ -51,12 +51,16 @@ export function selectDrpValueByText(
         .click();
     }
 
-    // else {
-    //     // Use OR condition in selector to handle multiple input field types
-    //     cy.get('.select2-search__field, .bootstrap-search-input').type(text).type('{enter}');
-    // }
   } else {
     // Standard dropdown (non-searchable)
     locator.select(text).should("contain", text);
   }
 }
+
+export function sortNumbersAsc(arr) {
+  return [...arr].sort((a, b) => Number(a) - Number(b));
+}
+
+export function sortDatesAsc(arr) {
+    return [...arr].sort((a, b) => new Date(a) - new Date(b));
+  }

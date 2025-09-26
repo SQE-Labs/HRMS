@@ -71,8 +71,8 @@ class ApplyLeavePage extends BasePage {
       "//h5[text()='Apply Leave']/../following-sibling::div/button[text()='Submit']"
     );
   }
-  get succ_Msg() {
-    return cy.xpath("//div[contains(text(),'Leave Applied Successfully!')]");
+  get succ_Msg1() {
+    return cy.xpath("//div[contains(text(),'Leave Applied Successfully! Wait for Approval.')]");
   }
   get withdrawLink() {
     return cy.get("td > a");
@@ -100,6 +100,7 @@ class ApplyLeavePage extends BasePage {
   gridSingleData(col) {
     return `tbody tr:nth-child(1) td:nth-child(${col})`;
   }
+  
 
   // Method
 
@@ -227,7 +228,7 @@ class ApplyLeavePage extends BasePage {
     this.submitButton.click();
   }
   assertLeaveSucc_Msg() {
-    this.succ_Msg.should("contain.text", "Leave Applied Successfully!");
+    this.succ_Msg1.should("contain.text", "Leave Applied Successfully!");
   }
   clickOnWithdrawLink() {
     this.withdrawLink.click();

@@ -47,6 +47,9 @@ class HRApprovalPage extends BasePage {
   get employeSubtype() {
     return cy.get("#react-select-7-input");
   }
+  get employeFlag(){
+    return cy.get("#react-select-8-input");
+  }
 
   // Methods
   selectDepartment(departmentName) {
@@ -113,6 +116,16 @@ class HRApprovalPage extends BasePage {
     );
     //this.employeeType.wait(1000).type(employeeType).pressEnter();
     cy.log("Employee Subtype is selected");
+  }
+
+  selectEmplFlag(flag){
+    cy.selectDrpValueByText(
+      this.employeFlag,
+      flag,
+      true,
+      this.employeFlag
+    );
+    cy.log("Employee Flag is selected");
   }
 
   clickApproveButton() {

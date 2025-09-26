@@ -23,7 +23,9 @@
     "cypress-xpath": "^2.0.1",
     "easy-yopmail": "5.1.0",
     "https-browserify": "^1.0.0",
-    "mochawesome-merge": "^4.3.0",
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^4.4.1",
+    "mochawesome-report-generator": "^6.3.0",
     "process": "^0.11.10",
     "querystring-es3": "^0.2.1",
     "stream-browserify": "^3.0.0",
@@ -35,8 +37,6 @@
   "dependencies": {
     "assert": "^2.1.0",
     "browserify-fs": "^1.0.0",
-    "mocha": "^8.2.1",
-    "mochawesome": "^6.2.1",
-    "mochawesome-report-generator": "^5.2.0"
+    "mocha": "^8.2.1"
   }
 }
