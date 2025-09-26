@@ -1,5 +1,6 @@
 import sideBar from "../components/SideBar";
 import ApplyLeavePage from "../pages/ApplyLeavePage";
+import { sortNumbersAsc, sortDatesAsc } from "../../support/utils";
 
 let testData;
 before(function () {
@@ -13,7 +14,7 @@ beforeEach(() => {
 });
 
 describe("Attendence Management Apply Leave Tests", () => {
-  it("HRMIS_1: Verify Apply Leave Page @first", () => {
+  it("A&L_2: Verify Apply Leave Page @first", () => {
     sideBar.navigateTo("Attendance & Leaves", "Apply Leaves");
 
     ApplyLeavePage.applyLeaveHeader
@@ -41,7 +42,7 @@ describe("Attendence Management Apply Leave Tests", () => {
         console.log(("Extracted Data:", JSON.stringify(originalData)));
 
         // Convert in Ascending order
-        sortedData = ApplyLeavePage.sortNumbersAsc(originalData);
+        sortedData = sortNumbersAsc(originalData);
 
         cy.log("Sorted Data:", JSON.stringify(sortedData));
         console.log("Sorted Data:", JSON.stringify(sortedData));
@@ -137,7 +138,7 @@ describe("Attendence Management Apply Leave Tests", () => {
         cy.log("Original From Column Data:", JSON.stringify(originalData));
 
         // Step 2: Convert to Date objects and sort in ascending order
-        sortedData = ApplyLeavePage.sortDatesAsc(originalData);
+        sortedData = sortDatesAsc(originalData);
 
         cy.log("Expected Sorted Dates:", JSON.stringify(sortedData));
 

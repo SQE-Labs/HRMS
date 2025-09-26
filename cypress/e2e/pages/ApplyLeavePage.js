@@ -103,13 +103,6 @@ class ApplyLeavePage extends BasePage {
   
 
   // Method
-  sortNumbersAsc(arr){
-  return [...arr].sort((a, b) => Number(a) - Number(b));
-  }
-
-  sortDatesAsc(arr) {
-    return [...arr].sort((a, b) => new Date(a) - new Date(b));
-  }
 
   clickOnIdCol() {
     this.idColSortIcon.click();

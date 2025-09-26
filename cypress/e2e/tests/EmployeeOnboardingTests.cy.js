@@ -19,26 +19,11 @@ beforeEach(() => {
 });
 
 describe("Employee Onboard Tests", () => {
-  it("Verify that new hire is able to submit the onboarding form, ", () => {
-    // Invite new Employee
-    sideBar.navigateTo("Employee Onboarding", "Onboarding Form");
-    //InvitationsPage.onBoardingForm();
-    InvitationsPage.clickInviteEmployeeButton();
-    const joineePersonalMail = generateRandomYopmail(10);
-    InvitationsPage.enterEmailID(joineePersonalMail);
-    InvitationsPage.enterEmployeeName("Mattews");
 
-    InvitationsPage.selectSamplePdf("cypress/fixtures/resources/Sample testing pdf.pdf");
+const joineePersonalMail = generateRandomYopmail(10);
 
-    InvitationsPage.clickSubmitButton();
-
-    // Verify mail sent notification is displayed
-    InvitationsPage.validateOnboardingEmailSentMsg(
-      "Onboarding welcome mail sent"
-    );
-
-    // New Employee Details test Data
-    const JoineeData = {
+//New employee details
+  const JoineeData = {
       JoineeEmail: joineePersonalMail,
       Firstname: "Auto " + generateRandomString(7),
       MiddleName: generateRandomString(4),
@@ -74,8 +59,27 @@ describe("Employee Onboard Tests", () => {
       ],
     };
 
+  it("Verify that new hire is able to submit the onboarding form, ", () => {
+    // Invite new Employee
+    sideBar.navigateTo("Employee Onboarding", "Onboarding Form");
+    //InvitationsPage.onBoardingForm();
+    InvitationsPage.clickInviteEmployeeButton();
+    // const joineePersonalMail = generateRandomYopmail(10);
+    InvitationsPage.enterEmailID(joineePersonalMail);
+    InvitationsPage.enterEmployeeName("Mattews");
+
+    InvitationsPage.selectSamplePdf("cypress/fixtures/resources/Sample testing pdf.pdf");
+
+    InvitationsPage.clickSubmitButton();
+
+    // Verify mail sent notification is displayed
+    InvitationsPage.validateOnboardingEmailSentMsg(
+      "Onboarding welcome mail sent"
+    );
+
+
     // Wait for mail and navigate to the url received in the mail
-  
+    cy.wait(3000);
     cy.task("getConfirmaUrl", JoineeData.JoineeEmail).then(
       (confirmationUrl) => {
         cy.visit(String(confirmationUrl), { failOnStatusCode: false });
@@ -85,7 +89,6 @@ describe("Employee Onboard Tests", () => {
     // Provide joinee's valid email to continue
     verifyPersonalEmailPopup.enterPersonalEmailID(JoineeData.JoineeEmail);
 
-    // cy.pause();
     verifyPersonalEmailPopup.clickSubmitButton();
 
     // Providing Personal Details
@@ -196,7 +199,9 @@ describe("Employee Onboard Tests", () => {
 
     // Validating the Thank You Success message
     cy.validateSuccessMessages(JoineeData.messagesToValidate);
+    });
 
+    it("Verify that IT ApprovalActionPage is working, ", () => {
     // Navigate to Homepage > Employee Onboard > L1 Approval Action
     HomePage.navigateToHomePage();
 
@@ -369,7 +374,7 @@ describe("Employee Onboard Tests", () => {
       "have.value",
       JoineeData.PermanentAddress
     );
-
+  
     // Validating and Providing Approve Details
     L1ApprovalActionPage.switchToApproveTab();
 
@@ -388,3 +393,5 @@ describe("Employee Onboard Tests", () => {
     cy.validateSuccessMessages("Employee's HRMIS account created ");
   });
 });
+
+
