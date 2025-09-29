@@ -71,53 +71,6 @@ describe("Attendence Management Apply Leave Tests", () => {
       });
   });
 
-  // it("HRMIS_3:Verify that 'From' column gets sorted in asecending order after clicking 'From' header with 'Sort' icon, on 'Apply Leave' page. ", () => {
-  //     sideBar.navigateTo("Attendance & Leaves", "Apply Leaves");
-
-  //     let originalData = []; // Initialize an empty array to store the text data
-  //     let uiSortedData = [];
-  //     let sortedData = [];
-
-  //     // Retrieve the list of texts from the grid column
-  //     cy.get(ApplyLeavePage.gridDataList("2"))  // Adjust the selector to match your grid cells
-  //         .each(($cell) => {
-  //             const text = $cell.text().trim(); // Get the text and remove any extra spaces
-  //             if (text) { // Only push non-empty text to the array
-  //                 originalData.push(text);
-  //             }
-  //         })
-  //         .then(() => {
-  //             // Log the extracted data
-  //             cy.log("Extracted Data:", JSON.stringify(originalData));
-
-  //             sortedData = [...originalData].sort((a, b) =>
-  //                 a.localeCompare(b, undefined, { sensitivity: "base" })
-  //             );
-  //             cy.log("Sorted Data:", JSON.stringify(sortedData));
-
-  //             ApplyLeavePage.ClickOnfromCol();
-
-  //             cy.get(ApplyLeavePage.gridDataList("2")) // Re-fetch the data after sorting
-  //                 .each(($cell) => {
-  //                     const text = $cell.text().trim();
-  //                     if (text) {
-  //                         uiSortedData.push(text);
-  //                     }
-  //                 })
-  //                 .then(() => {
-  //                     // Log the data after sorting from the UI
-  //                     cy.log("Data After Sorting (UI):", JSON.stringify(uiSortedData));
-  //                     cy.log("Data After Sorting (UI):", JSON.stringify(sortedData));
-
-  //                     // Now, assert that the UI sorted data matches the expected sorted data
-
-  //                     expect(uiSortedData).to.deep.equal(sortedData);
-
-  //                 });
-
-  //         })
-
-  // });
 
   it("HRMIS_3: Verify that 'From' column gets sorted in ascending order after clicking 'From' header with 'Sort' icon, on 'Apply Leave' page.", () => {
     sideBar.navigateTo("Attendance & Leaves", "Apply Leaves");

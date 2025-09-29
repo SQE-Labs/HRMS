@@ -53,7 +53,8 @@
     },
     "AssetsNames": {
         "Keyboard": "Keyboard",
-        "Pendrive":"Pendrive"
+        "Pendrive":"Pendrive",
+        "WiredMouse":"Wired Mouse"
     },
     "Departments": {
         "Genric": "generic",
