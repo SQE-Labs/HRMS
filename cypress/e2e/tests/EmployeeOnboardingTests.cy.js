@@ -15,29 +15,15 @@ import HRApprovalPage from "../pages/HRApprovalPage";
 
 beforeEach(() => {
   // login to Application
-  cy.login("superUser");
+  cy.login("superUser1");
 });
+
 describe("Employee Onboard Tests", () => {
-  it("ONBRD_1: Verify that new hire is able to submit the onboarding form", () => {
-    // Invite new Employee
-    sideBar.navigateTo("Employee Onboarding", "Onboarding Form");
-    //InvitationsPage.onBoardingForm();
-    InvitationsPage.clickInviteEmployeeButton();
-    const joineePersonalMail = generateRandomYopmail(10);
-    InvitationsPage.enterEmailID(joineePersonalMail);
-    InvitationsPage.enterEmployeeName("Mattews");
 
-    InvitationsPage.selectSamplePdf("cypress/fixtures/resources/Sample testing pdf.pdf");
+const joineePersonalMail = generateRandomYopmail(10);
 
-    InvitationsPage.clickSubmitButton();
-
-    // Verify mail sent notification is displayed
-    InvitationsPage.validateOnboardingEmailSentMsg(
-      "Onboarding welcome mail sent"
-    );
-
-    // New Employee Details test Data
-    const JoineeData = {
+//New employee details
+  const JoineeData = {
       JoineeEmail: joineePersonalMail,
       Firstname: "Auto " + generateRandomString(7),
       MiddleName: generateRandomString(4),
@@ -65,12 +51,32 @@ describe("Employee Onboard Tests", () => {
       EmployeeType: "REGULAR",
       LeaveManager: "Vishal",
       EmpSubType: "Intern",
+      EmpFlag: "CCI_INDIA",
       messagesToValidate: [
         "Thank you!",
         "Your submission has been sent successfully.",
         "HR will get back to you shortly.",
       ],
     };
+
+  it("Verify that new hire is able to submit the onboarding form, ONBRD_1, emp_dtl_1 ", () => {
+    // Invite new Employee
+    sideBar.navigateTo("Employee Onboarding", "Onboarding Form");
+    //InvitationsPage.onBoardingForm();
+    InvitationsPage.clickInviteEmployeeButton();
+    // const joineePersonalMail = generateRandomYopmail(10);
+    InvitationsPage.enterEmailID(joineePersonalMail);
+    InvitationsPage.enterEmployeeName("Mattews");
+
+    InvitationsPage.selectSamplePdf("cypress/fixtures/resources/Sample testing pdf.pdf");
+
+    InvitationsPage.clickSubmitButton();
+
+    // Verify mail sent notification is displayed
+    InvitationsPage.validateOnboardingEmailSentMsg(
+      "Onboarding welcome mail sent"
+    );
+
 
     // Wait for mail and navigate to the url received in the mail
     cy.wait(3000);
@@ -83,7 +89,6 @@ describe("Employee Onboard Tests", () => {
     // Provide joinee's valid email to continue
     verifyPersonalEmailPopup.enterPersonalEmailID(JoineeData.JoineeEmail);
 
-    // cy.pause();
     verifyPersonalEmailPopup.clickSubmitButton();
 
     // Providing Personal Details
@@ -194,7 +199,9 @@ describe("Employee Onboard Tests", () => {
 
     // Validating the Thank You Success message
     cy.validateSuccessMessages(JoineeData.messagesToValidate);
+    });
 
+    it("Verify that IT ApprovalActionPage is working, IT_approve1, HR_setup1, HR_setup2, HR_setup3, HR_setup4 ", () => {
     // Navigate to Homepage > Employee Onboard > L1 Approval Action
     HomePage.navigateToHomePage();
 
@@ -207,7 +214,6 @@ describe("Employee Onboard Tests", () => {
     // L1ApprovalActionPage.clickNextUntilDisabled();
     L1ApprovalActionPage.clickOnNextButton();
 
-    cy.wait(4000);
     L1ApprovalActionPage.searchUserUntilFound(JoineeData.Firstname);
     // L1ApprovalActionPage.SearchNewJoineeByName(JoineeData.Firstname);
     //  L1ApprovalActionPage.selectRecentUserByName(JoineeData.Firstname);
@@ -368,7 +374,7 @@ describe("Employee Onboard Tests", () => {
       "have.value",
       JoineeData.PermanentAddress
     );
-
+  
     // Validating and Providing Approve Details
     L1ApprovalActionPage.switchToApproveTab();
 
@@ -380,9 +386,12 @@ describe("Employee Onboard Tests", () => {
     HRApprovalPage.selectEmployeeType(JoineeData.EmployeeType);
     HRApprovalPage.selectLeaveManager(JoineeData.LeaveManager);
     HRApprovalPage.selectEmplSubtype(JoineeData.EmpSubType);
+    HRApprovalPage.selectEmplFlag(JoineeData.EmpFlag);
     HRApprovalPage.clickApproveButton();
 
     // Validating the Thank You Success message
     cy.validateSuccessMessages("Employee's HRMIS account created ");
   });
 });
+
+

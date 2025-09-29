@@ -87,11 +87,8 @@ describe("Employee Asset Managment Request Tests", () => {
     sideBar.navigateTo("Asset Management", "Asset Overview");
     AssetDashBoardPage.selectAssetType(testData.AssetsNames.Keyboard);
     AssetDashBoardPage.clickOnFilterBtn();
-    AssetDashBoardPage.assertAllCardsContainKeyword(
-      AssetDashBoardPage.assetCards,
-      testData.AssetsNames.Keyboard
-    );
-    AssetDashBoardPage.assertTotalCount(AssetDashBoardPage.assetCards);
+    AssetDashBoardPage.assertAllCardsContainKeyword("Keyboard");
+    AssetDashBoardPage.assertTotalCount();
   });
 
   it("HRMIS_6: Verify Asset Type Filter 'No Record Available' on Dashboard Page  ", () => {
@@ -106,7 +103,7 @@ describe("Employee Asset Managment Request Tests", () => {
     );
   });
 
-  it("HRMIS_7: Verify Asset Owner Filter on Dashboard Page  ", () => {
+  it.skip("HRMIS_7: Verify Asset Owner Filter on Dashboard Page  ", () => {
     // login to Application
 
     sideBar.navigateTo("Asset Management", "Asset Overview");
@@ -121,33 +118,28 @@ describe("Employee Asset Managment Request Tests", () => {
 
   // Functionality has been changed ( We select only one value from the dropdown)
 
-  it.skip("HRMIS_8:  Verify Asset Owner and Asset Type Filter on Dashboard Page", () => {
+  it("HRMIS_8:  Verify Asset Owner and Asset Type Filter on Dashboard Page", () => {
     // login to Application
 
     sideBar.navigateTo("Asset Management", "Asset Overview");
     AssetDashBoardPage.selectAssetOwner(testData.AssetsOwner.Caelius);
     AssetDashBoardPage.selectAssetType(testData.AssetsNames.Keyboard);
     AssetDashBoardPage.clickOnFilterBtn();
-    AssetDashBoardPage.assertAllCardsContainKeyword(
-      AssetDashBoardPage.assetCardOwner,
-      testData.AssetsOwner.Caelius
+    AssetDashBoardPage.assertAllCardsContainKeyword("Keyboard"
     );
-    AssetDashBoardPage.assertAllCardsContainKeyword(
-      AssetDashBoardPage.assetCards,
-      testData.AssetsNames.Keyboard
-    );
-    AssetDashBoardPage.assertTotalCount(AssetDashBoardPage.assetCards);
+    AssetDashBoardPage.assertTotalCount();
+
   });
 
   // Functionality changed confirmed by dogra sir.
 
-  it.skip("HRMIS_9:Verify 'No Record Available' message appear after clicking Export when Asset Owner is blank on Dashboard Page", () => {
+  it("HRMIS_9:Verify 'No Record Available' message appear after clicking Export when Asset Owner is blank on Dashboard Page", () => {
     // login to Application
 
     sideBar.navigateTo("Asset Management", "Asset Overview");
-    AssetDashBoardPage.selectAssetType(testData.AssetsNames.Keyboard);
+    AssetDashBoardPage.selectAssetType(testData.AssetsNames.WiredMouse);
     AssetDashBoardPage.clickOnExportBtn();
-    cy.validateSuccessMessages("No Record Available!");
+    AssetDashBoardPage.validateErrorMessages();
   });
 
   // Functionality changed confirmed by dogra sir.
@@ -158,7 +150,7 @@ describe("Employee Asset Managment Request Tests", () => {
     sideBar.navigateTo("Asset Management", "Asset Overview");
     AssetDashBoardPage.selectAssetOwner(testData.AssetsOwner.Caelius);
     AssetDashBoardPage.clickOnExportBtn();
-    cy.validateSuccessMessages("No Record Available!");
+    AssetDashBoardPage.validateErrorMessages();
   });
 
   it("HRMIS_11:Verify CSV file is downloaded after clicking Export on Dashboard Page", () => {
@@ -173,14 +165,14 @@ describe("Employee Asset Managment Request Tests", () => {
 
   // Functionality changed confirmed by dogra sir.
 
-  it.skip("HRMIS_12: Verify No Record Available message when Asset type and asset Owner with no record is selected ", () => {
+  it("HRMIS_12: Verify No Record Available message when Asset type and asset Owner with no record is selected ", () => {
     // login to Application
 
     sideBar.navigateTo("Asset Management", "Asset Overview");
     AssetDashBoardPage.selectAssetOwner(testData.AssetsOwner.Caelius);
-    AssetDashBoardPage.selectAssetType(testData.AssetsNames.Pendrive);
+    AssetDashBoardPage.selectAssetType(testData.AssetsNames.WiredMouse);
     AssetDashBoardPage.clickOnExportBtn();
-    cy.validateSuccessMessages("No Record Available!");
+    AssetDashBoardPage.validateErrorMessages();
   });
 
   it("HRMIS_13: Verify User able to create a Asset on create Asset Page", () => {

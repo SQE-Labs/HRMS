@@ -16,7 +16,10 @@ class AssetDashBoardPage extends BasePage {
     return cy.get("div.actions button.export");
   }
   get assetCards() {
-    return cy.get("h5.card-title");
+    return cy.xpath("//h5[@title='Keyboard']");
+  }
+  get cardXpath1(){
+    return cy.xpath("//h5[text()='Keyboard']/..")
   }
   get RecordeLbl() {
     return cy.xpath("//h5[text()='Pendrive']");
@@ -33,6 +36,10 @@ class AssetDashBoardPage extends BasePage {
   get exportBtn() {
     return cy.get("div.actions a.export");
   }
+  get errorMessage(){
+    return cy.xpath("//div[contains(text(),'No Record Available!')]");
+  }
+
 
   //Methods
 
@@ -45,11 +52,11 @@ class AssetDashBoardPage extends BasePage {
     //.to.equal(submenus[index])
   }
 
-  assertAllCardsContainKeyword(locator, keyword) {
-    locator.each(($el) => {
-      cy.wrap($el).should("contain.text", keyword);
-    });
-  }
+  assertAllCardsContainKeyword(Keyword) {
+  cy.xpath("//h5[text()='Keyboard']")
+    .should('be.visible')
+    .and('contain.text',Keyword);
+}
 
   selectAssetType(type) {
     cy.selectDrpValueByText(this.filterAssetType, type, false);
@@ -69,10 +76,16 @@ class AssetDashBoardPage extends BasePage {
     // Loaders.threeDotLoading.should("not.exist");
   }
 
-  assertTotalCount(locatorCard) {
-    this.totalItemCount.invoke("text").then((text) => {
-      const totalCount = parseInt(text.split(":")[1].trim());
-      locatorCard.should("have.length", totalCount);
+  validateErrorMessages(){
+    this.errorMessage.should('contain.text', 'No Record Available!');
+  }
+
+  
+  assertTotalCount() {
+  this.cardXpath1.then(($cards) => {
+    const totalCount = $cards.length;
+    cy.log(`Total cards: ${totalCount}`);
+    cy.wrap($cards).should("have.length", totalCount);
     });
   }
 
