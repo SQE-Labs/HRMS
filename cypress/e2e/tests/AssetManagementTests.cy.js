@@ -103,22 +103,7 @@ describe("Employee Asset Managment Request Tests", () => {
     );
   });
 
-  it.skip("HRMIS_7: Verify Asset Owner Filter on Dashboard Page  ", () => {
-    // login to Application
-
-    sideBar.navigateTo("Asset Management", "Asset Overview");
-    AssetDashBoardPage.selectAssetOwner(testData.AssetsOwner.Caelius);
-    AssetDashBoardPage.clickOnFilterBtn();
-    AssetDashBoardPage.assertAllCardsContainKeyword(
-      AssetDashBoardPage.assetCardOwner,
-      testData.AssetsOwner.Caelius
-    );
-    AssetDashBoardPage.assertTotalCount(AssetDashBoardPage.assetCardOwner);
-  });
-
-  // Functionality has been changed ( We select only one value from the dropdown)
-
-  it("HRMIS_8:  Verify Asset Owner and Asset Type Filter on Dashboard Page", () => {
+  it("HRMIS_7:  Verify Asset Owner and Asset Type Filter on Dashboard Page", () => {
     // login to Application
 
     sideBar.navigateTo("Asset Management", "Asset Overview");
@@ -133,7 +118,7 @@ describe("Employee Asset Managment Request Tests", () => {
 
   // Functionality changed confirmed by dogra sir.
 
-  it("HRMIS_9:Verify 'No Record Available' message appear after clicking Export when Asset Owner is blank on Dashboard Page", () => {
+  it("HRMIS_8:Verify 'No Record Available' message appear after clicking Export when Asset Owner is blank on Dashboard Page", () => {
     // login to Application
 
     sideBar.navigateTo("Asset Management", "Asset Overview");
@@ -142,18 +127,9 @@ describe("Employee Asset Managment Request Tests", () => {
     AssetDashBoardPage.validateErrorMessages();
   });
 
-  // Functionality changed confirmed by dogra sir.
+  // Functionality changed confirmed by dogra sir
 
-  it.skip("HRMIS_10:Verify 'No Record Available' message appear after clicking Export when Asset Type is blank on Dashboard Page", () => {
-    // login to Application
-
-    sideBar.navigateTo("Asset Management", "Asset Overview");
-    AssetDashBoardPage.selectAssetOwner(testData.AssetsOwner.Caelius);
-    AssetDashBoardPage.clickOnExportBtn();
-    AssetDashBoardPage.validateErrorMessages();
-  });
-
-  it("HRMIS_11:Verify CSV file is downloaded after clicking Export on Dashboard Page", () => {
+  it("HRMIS_9:Verify CSV file is downloaded after clicking Export on Dashboard Page", () => {
     // login to Application
 
     sideBar.navigateTo("Asset Management", "Asset Overview");
@@ -165,7 +141,7 @@ describe("Employee Asset Managment Request Tests", () => {
 
   // Functionality changed confirmed by dogra sir.
 
-  it("HRMIS_12: Verify No Record Available message when Asset type and asset Owner with no record is selected ", () => {
+  it("HRMIS_10: Verify No Record Available message when Asset type and asset Owner with no record is selected ", () => {
     // login to Application
 
     sideBar.navigateTo("Asset Management", "Asset Overview");
@@ -175,7 +151,7 @@ describe("Employee Asset Managment Request Tests", () => {
     AssetDashBoardPage.validateErrorMessages();
   });
 
-  it("HRMIS_13: Verify User able to create a Asset on create Asset Page", () => {
+  it("HRMIS_11: Verify User able to create a Asset on create Asset Page", () => {
     // login to Application
     const model = "Model" + generateRandomString(5);
     const serilaNo = "Len" + generateRandomNumber(5);

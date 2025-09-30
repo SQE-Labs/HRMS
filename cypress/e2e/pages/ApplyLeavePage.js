@@ -71,7 +71,7 @@ class ApplyLeavePage extends BasePage {
       "//h5[text()='Apply Leave']/../following-sibling::div/button[text()='Submit']"
     );
   }
-  get succ_Msg1() {
+  get succ_Msg() {
     return cy.xpath("//div[contains(text(),'Leave Applied Successfully! Wait for Approval.')]");
   }
   get withdrawLink() {
@@ -91,7 +91,7 @@ class ApplyLeavePage extends BasePage {
   get validationMessage() {
     return cy.xpath("//small[contains(text(),'Reason must')]");
   }
-  get succ_Msg() {
+  get error_Msg() {
     return cy.xpath("//div[text()='Leave Withdrawn Successfully']");
   }
   gridDataList(col) {
@@ -227,8 +227,8 @@ class ApplyLeavePage extends BasePage {
   clickOnSubmitBtn() {
     this.submitButton.click();
   }
-  assertLeaveSucc_Msg() {
-    this.succ_Msg1.should("contain.text", "Leave Applied Successfully!");
+  assertSucc_Msg() {
+    this.succ_Msg.should("contain.text", "Leave Applied Successfully!");
   }
   clickOnWithdrawLink() {
     this.withdrawLink.click();
@@ -268,8 +268,8 @@ class ApplyLeavePage extends BasePage {
   assertMessage() {
     this.validationMessage.should("contain.text", "Reason must be");
   }
-  assertSucc_Msg() {
-    this.succ_Msg.should("contain.text", "Leave Withdrawn Successfully");
+  assertError_Msg() {
+    this.error_Msg.should("contain.text", "Leave Withdrawn Successfully");
   }
 }
 
