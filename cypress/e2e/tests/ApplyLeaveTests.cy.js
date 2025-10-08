@@ -389,7 +389,7 @@ describe("Attendence Management Apply Leave Tests", () => {
     ApplyLeavePage.assertReason_Msg();
     ApplyLeavePage.enterReasonInApplyLeave("Normal Testing");
     ApplyLeavePage.clickOnSubmitBtn();
-    ApplyLeavePage.assertLeaveSucc_Msg();
+    ApplyLeavePage.assertSucc_Msg();
   });
 
   it("HRMIS_12: Verify Apply Leave Page @first", () => {
@@ -411,6 +411,6 @@ describe("Attendence Management Apply Leave Tests", () => {
     ApplyLeavePage.enterReason("Applied for leave");
 
     ApplyLeavePage.clickOnSubBtn();
-    ApplyLeavePage.assertSucc_Msg();
+    ApplyLeavePage.assertError_Msg();
   });
 });

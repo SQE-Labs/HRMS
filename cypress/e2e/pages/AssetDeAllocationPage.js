@@ -4,9 +4,7 @@ import Loaders from "../components/Loaders";
 class AssetDeAllocationPage extends BasePage {
   //Locators
   get selectEmployee_Drp() {
-    return cy.xpath("//div[contains(text(),'Select employee')]", {
-      timeout: 20000,
-    });
+    return cy.get("#react-select-2-input");
   }
   get deleteIcon() {
     return cy.get("tr:last-of-type td a[name='selectAsset']");
@@ -32,6 +30,7 @@ class AssetDeAllocationPage extends BasePage {
   }
 
   enterRepairCost(cost) {
+    cy.wait(2000)
     this.repairCostTxt.type(cost);
   }
 
@@ -51,10 +50,10 @@ class AssetDeAllocationPage extends BasePage {
     Loaders.overlay.should("not.exist");
   }
 
-  select_Employee(text) {
+  select_Employee(type) {
     cy.selectDrpValueByText(
       this.selectEmployee_Drp,
-      text,
+      type,
       true,
       this.selectEmployee_Drp
     );
