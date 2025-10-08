@@ -35,9 +35,16 @@ class AssetAllocationPage extends BasePage {
   get lastAssetName() {
     return cy.get("tbody tr:last-of-type td:nth-child(2)");
   }
-  get paginationBtn() {
+  get paginationPrevBtn() {
     return cy.xpath("//li[@class='page-item disabled']");
   }
+  get paginationNextBtn() {
+    return cy.xpath("//a[text()='Next']");
+  }
+  get paginationBtn() {
+  return cy.get('.pagination'); // adjust selector as per your HTML
+}
+
 
   gridDataList(col) {
     return `tr td:nth-child(${col})`;
@@ -426,14 +433,14 @@ class AssetAllocationPage extends BasePage {
   }
 
   getValidationMessage(element) {
-    return element.invoke("prop", "validationMessage");
-  }
+  return element.invoke('prop', 'validationMessage');
+}
 
-  assertValidation(element, expectedMessage) {
-    this.getValidationMessage(element).then((message) => {
-      expect(message).to.equal(expectedMessage);
-    });
-  }
+assertValidation(element, expectedMessage) {
+  this.getValidationMessage(element).should('eq', expectedMessage);
+}
+
+
 }
 
 export default new AssetAllocationPage();
