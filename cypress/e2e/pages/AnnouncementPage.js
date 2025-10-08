@@ -22,13 +22,32 @@ class AnnouncementPage {
     cy.get("select").first().select(type);
   }
   enterTitle(title) {
-    cy.get('input[placeholder="Enter title"]').type(title);
+    cy.get('input[placeholder="Enter title"]')
+      .clear({ force: true })
+      .type(title, { force: true });
   }
-  enterStartDateTime(dateTime) {
-    cy.get('input[placeholder="YYYY-MM-DDTHH:mm:ss"]').eq(0).type(dateTime);
+  enterStartDateTime() {
+    // open date picker
+    cy.get('input[placeholder="YYYY-MM-DDTHH:mm:ss"]').eq(0).click();
+
+    // select date (1st October 2025)
+    cy.xpath("//div[text()='7']").click();
+
+    // select time (10:00 AM)
+    cy.xpath("//li[text()='10:00 AM']").click();
   }
-  enterEndDateTime(dateTime) {
-    cy.get('input[placeholder="YYYY-MM-DDTHH:mm:ss"]').eq(1).type(dateTime);
+  enterEndDateTime() {
+    // open date picker
+    cy.get('input[placeholder="YYYY-MM-DDTHH:mm:ss"]').eq(1).click();
+
+    // select date (1st October 2025)
+    cy.xpath("//div[text()='7']").click();
+
+    // select time (10:00 AM)
+    cy.xpath("//li[text()='10:00 AM']").click();
+  }
+  clickOutside() {
+    cy.get(".col-md-2").first().click(); // Click outside to close datetime picker
   }
   enterPresentedBy(name) {
     cy.get('input[placeholder="Enter presenter name"]').type(name);
@@ -40,10 +59,13 @@ class AnnouncementPage {
     cy.get('input[placeholder="Enter mode"]').type(mode);
   }
   uploadFile(filePath) {
-    cy.get('input[type="file"]').attachFile(filePath);
+    cy.get('input[type="file"]').selectFile(filePath);
   }
   enterDescription(desc) {
     cy.get('textarea[placeholder="Enter description"]').type(desc);
+  }
+  validateAnnouncementInList(title) {
+    cy.xpath(`//td[@data-title='title' and text()='${title}']`).should("exist");
   }
 }
 

@@ -17,7 +17,7 @@ describe("Attendence Management Apply Leave Tests", () => {
   it("A&L_2: Verify Apply Leave Page @first", () => {
     sideBar.navigateTo("Attendance & Leaves", "Apply Leaves");
 
-    ApplyLeavePage.applyLeaveHeader
+    ApplyLeavePage.applyLeaveHeader;
   });
 
   it("HRMIS_2:Verify that 'S.No.' column gets sorted in asecending order after clicking 'S.No.' header with 'Sort' icon, on 'Apply Leave' page. ", () => {
