@@ -50,6 +50,9 @@ class HRApprovalPage extends BasePage {
   get employeFlag(){
     return cy.get("#react-select-8-input");
   }
+  get employeIsTech(){
+    return cy.get("#react-select-9-input");
+  }
 
   // Methods
   selectDepartment(departmentName) {
@@ -124,6 +127,16 @@ class HRApprovalPage extends BasePage {
       flag,
       true,
       this.employeFlag
+    );
+    cy.log("Employee Flag is selected");
+  }
+
+  selectIsTech(flag){
+    cy.selectDrpValueByText(
+      this.employeIsTech,
+      flag,
+      true,
+      this.employeIsTech
     );
     cy.log("Employee Flag is selected");
   }

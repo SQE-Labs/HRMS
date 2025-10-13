@@ -1,7 +1,7 @@
 import sideBar from "../components/SideBar";
 import AssetAllocationPage from "../pages/AssetAllocationPage";
 import AssetDeAllocationPage from "../pages/AssetDeAllocationPage";
-import { generateRandomString } from "../../support/utils";
+import { generateRandomString, sortNumbersAsc, sortNumbersDesc, sortAlphaDesc } from "../../support/utils";
 import "cypress-xpath";
 let testData;
 before(function () {
@@ -270,117 +270,85 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
       });
   });
 
-  it("HRMIS_9: Verify that the 'Serial Number' column gets sorted in ascending order after clicking the 'Sort' icon on the 'Asset Allocation' page.", () => {
+  it("HRMIS_9:  Verify that the 'Serial Number' column gets sorted in ascending order after clicking the 'Sort' icon on the 'Asset Allocation' page.", () => {
   sideBar.navigateTo("Asset Management", "Asset Allocation");
 
-  let originalData = [];
-  let sortedData = [];
+  // Click the sort icon
+  AssetAllocationPage.clickOnSort("Serial Number");
 
-  cy.get(AssetAllocationPage.gridDataList("Serial Number")).then(($cells) => {
-    originalData = [...$cells]
-      .map((cell) => cell.innerText.trim())
-      .filter(Boolean);
-
-    // Expected sorted data
-    sortedData = [...originalData].sort((a, b) =>
-      a.localeCompare(b, undefined, { sensitivity: "base" })
-    );
-
-    // Click sort icon
-    AssetAllocationPage.clickOnSort("Serial Number");
-  });
-
-  // Wait for sort to reflect in UI and then compare
-  cy.wait(1000);
-  cy.get(AssetAllocationPage.gridDataList("Serial Number")).then(($cellsAfterSort) => {
-    const uiSortedData = [...$cellsAfterSort]
-      .map((cell) => cell.innerText.trim())
-      .filter(Boolean);
-
-    cy.log("Expected Sorted Data:", JSON.stringify(sortedData));
-    cy.log("UI Data After Sort:", JSON.stringify(uiSortedData));
-
-    expect(uiSortedData).to.deep.equal(sortedData);
-  });
+  // Retry until UI reflects sorted order
+  cy.get(AssetAllocationPage.gridDataList(3))
+    .then(($cells) => [...$cells].map((c) => Number(c.innerText.trim())))
+    .should((numbers) => {
+      const expected = sortNumbersAsc(numbers);
+      expect(numbers).to.deep.equal(expected);
+    });
 });
 
 
-  it("HRMIS_10: Verify that the serial Number get sorted in descending order after double clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
-    sideBar.navigateTo("Asset Management", "Asset Allocation");
+  it("HRMIS_10: Verify that the 'Serial Number' column gets sorted in descending order after double clicking the column header with 'Sort' icon on the 'Asset Allocation' page.", () => {
+  sideBar.navigateTo("Asset Management", "Asset Allocation");
 
-    let originalData = [];
-    let sortedData = [];
-    let uiSortedData = [];
+  // 1️⃣ Get original data first
+  cy.get(AssetAllocationPage.gridDataList(3))
+    .then(($cells) => {
+      const originalNumbers = [...$cells]
+        .map((c) => Number(c.innerText.trim()))
+        .filter((n) => !isNaN(n));
 
-    cy.get(AssetAllocationPage.gridDataList("Serial Number"))
-      .then(($cells) => {
-        originalData = Cypress.$($cells)
+      const expectedDesc = sortNumbersDesc(originalNumbers);
+
+      // 2️⃣ Click sort icon twice for descending
+      AssetAllocationPage.clickOnSort("Serial Number");
+      AssetAllocationPage.clickOnSort("Serial Number");
+
+      // 3️⃣ Retry reading UI until it matches expected
+      cy.get(AssetAllocationPage.gridDataList(3))
+        .then(($cellsAfterSort) => {
+          const uiNumbers = [...$cellsAfterSort]
+            .map((c) => Number(c.innerText.trim()))
+            .filter((n) => !isNaN(n));
+
+          cy.log("Expected Descending Data:", JSON.stringify(expectedDesc));
+          cy.log("UI Data After Sort:", JSON.stringify(uiNumbers));
+
+          expect(uiNumbers).to.deep.equal(expectedDesc);
+        });
+    });
+});
+
+  it("HRMIS_11: Verify that Employee gets sorted descending alphabetically after double-click", () => {
+  sideBar.navigateTo("Asset Management", "Asset Allocation");
+
+ cy.get(AssetAllocationPage.gridDataList(5))
+  .filter(':visible')
+  .then(($cells) => {
+    const originalNames = $cells
+      .toArray()
+      .map((cell) => cell.innerText?.replace(/\s+/g, ' ').trim())
+      .filter(Boolean);
+
+    const expectedDesc = sortAlphaDesc(originalNames);
+
+    // Click sort icon twice
+    AssetAllocationPage.clickOnSort("Employee Name");
+    AssetAllocationPage.clickOnSort("Employee Name");
+
+    cy.get(AssetAllocationPage.gridDataList(5))
+      .filter(':visible')
+      .then(($cellsAfterSort) => {
+        const uiNames = $cellsAfterSort
           .toArray()
-          .map((cell) => cell.innerText?.replace(/\s+/g, " ").trim())
+          .map((cell) => cell.innerText?.replace(/\s+/g, ' ').trim())
           .filter(Boolean);
 
-        sortedData = [...originalData].sort((a, b) =>
-          a.toLowerCase().localeCompare(b.toLowerCase())
-        );
+        cy.log("Expected Descending Data:", JSON.stringify(expectedDesc));
+        cy.log("UI Data After Sort:", JSON.stringify(uiNames));
 
-        AssetAllocationPage.clickOnSort("Serial Number");
-        cy.wait(500);
-      })
-      .then(() => {
-        cy.get(AssetAllocationPage.gridDataList("Serial Number")).then(
-          ($cellsAfterSort) => {
-            uiSortedData = Cypress.$($cellsAfterSort)
-              .toArray()
-              .map((cell) => cell.innerText?.replace(/\s+/g, " ").trim())
-              .filter(Boolean);
-
-            cy.log("Expected Sorted Data:", JSON.stringify(sortedData));
-            cy.log("UI Data After Sort:", JSON.stringify(uiSortedData));
-
-            expect(uiSortedData).to.deep.equal(sortedData);
-          }
-        );
+        expect(uiNames).to.deep.equal(expectedDesc);
       });
   });
-
-  it("HRMIS_11: Verify that the employe get sorted in descending order after double clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
-    sideBar.navigateTo("Asset Management", "Asset Allocation");
-
-    let originalData = [];
-    let sortedData = [];
-    let uiSortedData = [];
-
-    cy.get(AssetAllocationPage.gridDataList("Employee Name"))
-      .then(($cells) => {
-        originalData = Cypress.$($cells)
-          .toArray()
-          .map((cell) => cell.innerText?.replace(/\s+/g, " ").trim())
-          .filter(Boolean);
-
-        sortedData = [...originalData].sort((a, b) =>
-          a.toLowerCase().localeCompare(b.toLowerCase())
-        );
-
-        AssetAllocationPage.clickOnSort("Employee Name");
-        AssetAllocationPage.clickOnSort("Employee Name");
-        cy.wait(500);
-      })
-      .then(() => {
-        cy.get(AssetAllocationPage.gridDataList("Employee Name")).then(
-          ($cellsAfterSort) => {
-            uiSortedData = Cypress.$($cellsAfterSort)
-              .toArray()
-              .map((cell) => cell.innerText?.replace(/\s+/g, " ").trim())
-              .filter(Boolean);
-
-            cy.log("Expected Sorted Data:", JSON.stringify(sortedData));
-            cy.log("UI Data After Sort:", JSON.stringify(uiSortedData));
-
-            expect(uiSortedData).to.deep.equal(sortedData);
-          }
-        );
-      });
-  });
+});
 
   it("HRMIS_12: Verify that the Asset Type get sorted in descending order after double clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
     sideBar.navigateTo("Asset Management", "Asset Allocation");
@@ -428,7 +396,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
     let sortedData = [];
     let uiSortedData = [];
 
-    cy.get(AssetAllocationPage.gridDataList("Owner"))
+    cy.get(AssetAllocationPage.gridDataList(4))
       .then(($cells) => {
         originalData = Cypress.$($cells)
           .toArray()
@@ -444,7 +412,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
         cy.wait(500);
       })
       .then(() => {
-        cy.get(AssetAllocationPage.gridDataList("Owner")).then(
+        cy.get(AssetAllocationPage.gridDataList(4)).then(
           ($cellsAfterSort) => {
             uiSortedData = Cypress.$($cellsAfterSort)
               .toArray()
@@ -479,26 +447,12 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
     AssetAllocationPage.assetMgmtForm.should("not.exist");
   });
 
-  it("HRMIS_15:Verify Asset Assign Asset Management Page validations", () => {
+  it.only("HRMIS_15:Verify Asset Assign Asset Management Page validations", () => {
     sideBar.navigateTo("Asset Management", "Asset Allocation");
 
     AssetAllocationPage.clickOnAssetAssigne();
     AssetAllocationPage.clickOnSubmit();
-    cy.get('#react-select-2-input').then(($el) => {
-    AssetAllocationPage.assertValidation(cy.wrap($el), 'Please fill out this field.');
-    });
-      // cy.get('#react-select-2-input').then(($input) => {
-      // expect($input[0].validationMessage).to.eq('Please fill out this field.');
-      // })
-
-    // cy.get("#react-select-2-input").then(($el) => {
-    //   expect($el[0].validationMessage).to.eq("Please fill out this field.");
-    // });
-    // .contains("Please fill out this field.").should("be.visible");
-    // cy.document().then((doc) => {
-    //   const pageText = doc.body.innerText; // gets all visible text
-    //   expect(pageText).to.include("Please fill out this field.");
-    // });
+    AssetAllocationPage.validateAssetTypeField();
   });
 
   it("HRMIS_16:Verify 'Assign Asset' pop-up opens after clicking on available asset", () => {

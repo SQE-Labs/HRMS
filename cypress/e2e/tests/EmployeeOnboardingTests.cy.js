@@ -52,6 +52,7 @@ const joineePersonalMail = generateRandomYopmail(10);
       LeaveManager: "Vishal",
       EmpSubType: "Intern",
       EmpFlag: "CCI_INDIA",
+      EmpIsTech: "Yes",
       messagesToValidate: [
         "Thank you!",
         "Your submission has been sent successfully.",
@@ -387,6 +388,7 @@ const joineePersonalMail = generateRandomYopmail(10);
     HRApprovalPage.selectLeaveManager(JoineeData.LeaveManager);
     HRApprovalPage.selectEmplSubtype(JoineeData.EmpSubType);
     HRApprovalPage.selectEmplFlag(JoineeData.EmpFlag);
+    HRApprovalPage.selectIsTech(JoineeData.EmpIsTech);
     HRApprovalPage.clickApproveButton();
 
     // Validating the Thank You Success message

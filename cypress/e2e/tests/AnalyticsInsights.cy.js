@@ -42,7 +42,7 @@ describe("Analytics & Insights - User's Role Report", () => {
     });
   });
 
-  it.only("HRMIS_A2: Verify search by employee name shows correct results", () => {
+  it("HRMIS_A2: Verify search by employee name shows correct results", () => {
     // Step 1: Navigate
     sideBar.navigateTo("Analytics & Insights", "User's Role Report");
     AnalyticsInsightsPage.assertUsersRoleReportHeader();
