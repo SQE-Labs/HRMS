@@ -168,6 +168,13 @@ class ApplyLeavePage extends BasePage {
         }
       });
   }
+  getPrivilegeLeaveCount() {
+  return cy.xpath("(//span[contains(text(),'Privilege Leave')])[2]").then(($el) => {
+    const leaveCount = parseInt($el.text().trim());
+    cy.log('Privilege Leave count is:', leaveCount);
+    return leaveCount;
+  });
+}
   clickOnApplyLeaveBtn() {
     this.applyLeaveBtn.click();
   }

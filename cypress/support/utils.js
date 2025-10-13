@@ -63,4 +63,16 @@ export function sortNumbersAsc(arr) {
 
 export function sortDatesAsc(arr) {
     return [...arr].sort((a, b) => new Date(a) - new Date(b));
-  }
+}
+
+export function sortNumbersDesc(arr) {
+  return [...arr].sort((a, b) => Number(b) - Number(a));
+}
+
+export function sortAlphaAsc(arr) {
+  return [...arr].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+}
+
+export function sortAlphaDesc(arr) {
+  return [...arr].sort((a, b) => b.toLowerCase().localeCompare(a.toLowerCase()));
+}

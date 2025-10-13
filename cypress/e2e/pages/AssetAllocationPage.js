@@ -57,6 +57,13 @@ class AssetAllocationPage extends BasePage {
   gridSingleData(title) {
     return `tbody tr:first-of-type td:nth-child(2)`;
   }
+
+  // assertValidationMsg() {
+  //   cy.get("textarea[name='reason']").then(($el) => {
+  //     expect($el[0].validationMessage).to.eq("Please fill out this field.");
+  //   });
+  // }
+
   get assetOwnerData() {
     return cy.get("tbody tr td:nth-child(2)");
   }
@@ -151,6 +158,17 @@ class AssetAllocationPage extends BasePage {
   clickOnDelete() {
     this.deleteIcon.click();
   }
+  assetTypeField() {
+  return cy.get('#react-select-2-input');
+  }
+  
+  validateAssetTypeField() {
+  this.assetTypeField().then(($el) => {
+    const tooltipMessage = $el[0].validationMessage;
+    cy.log('Validation message:', tooltipMessage);
+    expect(tooltipMessage).to.eq('Please fill out this field.');
+  });
+}
 
   select_Employee(text) {
     cy.selectDrpValueByText(
@@ -431,15 +449,6 @@ class AssetAllocationPage extends BasePage {
         }
       });
   }
-
-  getValidationMessage(element) {
-  return element.invoke('prop', 'validationMessage');
-}
-
-assertValidation(element, expectedMessage) {
-  this.getValidationMessage(element).should('eq', expectedMessage);
-}
-
 
 }
 

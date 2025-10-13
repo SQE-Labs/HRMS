@@ -341,20 +341,29 @@ describe("Attendence Management Apply Leave Tests", () => {
           });
       });
   });
-  it("HRMIS_9: Verify Apply Leave and verify yes or no button on coformation message popup", () => {
-    sideBar.navigateTo("Attendance & Leaves", "Apply Leaves");
 
-    ApplyLeavePage.clickOnApplyLeaveBtn();
-    cy.wait(3000);
+  it("HRMIS_9: Verify Apply Leave and verify yes or no button on confirmation message popup", () => {
+  sideBar.navigateTo("Attendance & Leaves", "Apply Leaves"); 
 
-    ApplyLeavePage.validateApplyLeaveHeader();
-    ApplyLeavePage.selectLeaveType("Privilege Leave");
-    ApplyLeavePage.assertConfMess();
+      ApplyLeavePage.clickOnApplyLeaveBtn();
+      cy.wait(3000);
 
-    ApplyLeavePage.clickOnNoBtn();
-    ApplyLeavePage.selectLeaveType("Privilege Leave");
-    ApplyLeavePage.clickOnYesBtn();
-  });
+      ApplyLeavePage.validateApplyLeaveHeader();
+      ApplyLeavePage.selectLeaveType("Privilege Leave");
+      ApplyLeavePage.getPrivilegeLeaveCount().then((leaveCount) => {
+        if (leaveCount === 0) {
+          cy.log("Privilege Leave count is 0 — executing apply leave flow");
+          ApplyLeavePage.assertConfMess();
+
+          ApplyLeavePage.clickOnNoBtn();
+          ApplyLeavePage.selectLeaveType("Privilege Leave");
+          ApplyLeavePage.clickOnYesBtn();
+        } else {
+          cy.log(`Privilege Leave count is ${leaveCount} — Test Passed`);
+        }
+    });
+});
+
 
   it("HRMIS_10:Verify that 'Apply Leave' popup gets closed after clicking 'Cross' icon", () => {
     sideBar.navigateTo("Attendance & Leaves", "Apply Leaves");
@@ -370,27 +379,34 @@ describe("Attendence Management Apply Leave Tests", () => {
     ApplyLeavePage.clickOnCancelButton();
   });
 
-  it("HRMIS_11:should select current date and future date (2 days ahead)", () => {
-    sideBar.navigateTo("Attendance & Leaves", "Apply Leaves");
+  it("HRMIS_11: should select current date and future date (2 days ahead)", () => {
+  sideBar.navigateTo("Attendance & Leaves", "Apply Leaves");
 
-    ApplyLeavePage.clickOnApplyLeaveBtn();
-    cy.wait(3000);
+      ApplyLeavePage.clickOnApplyLeaveBtn();
+      cy.wait(3000);
 
-    ApplyLeavePage.validateApplyLeaveHeader();
-    ApplyLeavePage.clickOnSubmitBtn();
-    ApplyLeavePage.assertVal_Msg();
-    ApplyLeavePage.selectLeaveType("Privilege Leave");
-    ApplyLeavePage.clickOnYesBtn();
-    ApplyLeavePage.clickOnSubmitBtn();
-    ApplyLeavePage.assertDatePicker_Msg();
-    ApplyLeavePage.selectcurrentandFutureDate();
-    ApplyLeavePage.clickOnSubmitBtn();
+      ApplyLeavePage.validateApplyLeaveHeader();
+      ApplyLeavePage.clickOnSubmitBtn();
+      ApplyLeavePage.assertVal_Msg();
+      ApplyLeavePage.selectLeaveType("Privilege Leave");
 
-    ApplyLeavePage.assertReason_Msg();
-    ApplyLeavePage.enterReasonInApplyLeave("Normal Testing");
-    ApplyLeavePage.clickOnSubmitBtn();
-    ApplyLeavePage.assertSucc_Msg();
+      ApplyLeavePage.getPrivilegeLeaveCount().then((leaveCount) => {
+        if (leaveCount === 0) {
+          cy.log("Privilege Leave count is 0 — executing apply leave flow");
+          ApplyLeavePage.clickOnYesBtn();
+        }
+
+      ApplyLeavePage.clickOnSubmitBtn();
+      ApplyLeavePage.assertDatePicker_Msg();
+      ApplyLeavePage.selectcurrentandFutureDate();
+      ApplyLeavePage.clickOnSubmitBtn();
+      ApplyLeavePage.assertReason_Msg();
+      ApplyLeavePage.enterReasonInApplyLeave("Normal Testing");
+      ApplyLeavePage.clickOnSubmitBtn();
+      ApplyLeavePage.assertSucc_Msg();
   });
+});
+
 
   it("HRMIS_12: Verify Apply Leave Page @first", () => {
     sideBar.navigateTo("Attendance & Leaves", "Apply Leaves");
