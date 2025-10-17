@@ -26,7 +26,7 @@ describe("Announcement Management - Create Announcement", () => {
     AnnouncementPage.enterPresentedBy("Test Presenter");
     AnnouncementPage.enterVenue("Test Venue");
     AnnouncementPage.enterMode("Online");
-    AnnouncementPage.uploadFile("cypress/fixtures/resources/sample.pdf");
+    AnnouncementPage.uploadFile("resources/Sample.html");
     AnnouncementPage.enterDescription("This is a test announcement.");
     AnnouncementPage.submitBtn.click();
 

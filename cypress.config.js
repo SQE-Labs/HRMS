@@ -4,6 +4,7 @@ const webpackPreprocessor = require("@cypress/webpack-preprocessor");
 const webpack = require("webpack");
 const path = require("path");
 const fs = require("fs");
+const os = require("os");
 
 module.exports = defineConfig({
   chromeWebSecurity: false,
@@ -20,12 +21,10 @@ module.exports = defineConfig({
       openMode: 0,
     },
     video: false,
-    videoCompression: 1,
     screenshotOnRunFailure: true,
     watchForFileChanges: false,
     viewportWidth: 1920,
     viewportHeight: 1080,
-    reporter: "cypress-mochawesome-reporter",
     reporterOptions: {
       reportDir: "cypress/reports",
       charts: true,
@@ -33,25 +32,26 @@ module.exports = defineConfig({
       embeddedScreenshots: true,
       inlineAssets: true,
       videoOnFailOnly: true,
-      charts: true,
       html: true,
       json: true,
       overwrite: true,
     },
+
     setupNodeEvents(on, config) {
       const options = {
         webpackOptions: {
           resolve: {
             fallback: {
+              os: require.resolve("os-browserify/browser"), // ✅ Fix for "os" module not found
               stream: require.resolve("stream-browserify"),
               querystring: require.resolve("querystring-es3"),
               fs: require.resolve("browserify-fs"),
               zlib: require.resolve("browserify-zlib"),
               assert: require.resolve("assert/"),
-              https: false,
-              path: false,
+              path: require.resolve("path-browserify"),
               buffer: require.resolve("buffer/"),
               process: require.resolve("process/browser.js"),
+              https: false,
             },
           },
           plugins: [
@@ -65,8 +65,6 @@ module.exports = defineConfig({
 
       on("file:preprocessor", webpackPreprocessor(options));
 
-      //used for backend interation, not able to access DOM
-      //commands are used for ui interaction
       on("task", {
         emailFetcher() {
           return easyYopmail.getNewEmailId();
@@ -79,13 +77,15 @@ module.exports = defineConfig({
         },
         deleteFile(filePath) {
           const fullPath = path.resolve(__dirname, filePath);
-
           if (fs.existsSync(fullPath)) {
             fs.unlinkSync(fullPath);
             return { success: true };
           }
-
           return { success: false, message: "File not found" };
+        },
+        
+        getDownloadFolder() {
+          return path.join(os.homedir(), "Downloads");
         },
       });
 

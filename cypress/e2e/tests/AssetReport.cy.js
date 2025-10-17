@@ -1,6 +1,3 @@
-// cypress/e2e/tests/AssetReport.cy.js
-// Test: Verify Asset Report download after selecting Asset Type and Owner
-
 import sideBar from "../components/SideBar";
 import AnalyticsInsightsPage from "../pages/AnalyticsInsightsPage";
 
@@ -19,13 +16,12 @@ describe("Analytics & Insights - Asset Report", () => {
     AnalyticsInsightsPage.selectOwner("SQE Labs");
 
     // Step 3: Click Download button
-    AnalyticsInsightsPage.clickDownload();
+    AnalyticsInsightsPage.clickDownloadButton();
 
-    // Step 4: Assert file download (example: check downloads folder for file)
-    // You may need to customize the filename and assertion based on your app
-    const downloadsFolder = "cypress/downloads";
-    cy.readFile(`${downloadsFolder}/Asset_Report.xlsx`, {
-      timeout: 10000,
-    }).should("exist");
+    // Step 4: Get system Downloads path dynamically via task
+    cy.task("getDownloadFolder").then((downloadsFolder) => {
+      const filePath = `${downloadsFolder}/asset_list.xlsx`;
+      cy.readFile(filePath, { timeout: 40000 }).should("exist");
+    });
   });
 });

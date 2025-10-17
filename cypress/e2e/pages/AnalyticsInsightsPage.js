@@ -48,7 +48,7 @@ class AnalyticsInsightsPage extends BasePage {
     return cy.get("select").eq(1);
   }
   get downloadButton() {
-    return cy.contains("button", "Download");
+    return cy.xpath("//button[contains(text(),'Download')]");
   }
   selectAssetType(type) {
     this.assetTypeDropdown.select(type);

@@ -447,7 +447,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
     AssetAllocationPage.assetMgmtForm.should("not.exist");
   });
 
-  it.only("HRMIS_15:Verify Asset Assign Asset Management Page validations", () => {
+  it("HRMIS_15:Verify Asset Assign Asset Management Page validations", () => {
     sideBar.navigateTo("Asset Management", "Asset Allocation");
 
     AssetAllocationPage.clickOnAssetAssigne();
