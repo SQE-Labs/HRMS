@@ -26,6 +26,8 @@
     "mochawesome": "^7.1.4",
     "mochawesome-merge": "^4.4.1",
     "mochawesome-report-generator": "^6.3.0",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1",
     "process": "^0.11.10",
     "querystring-es3": "^0.2.1",
     "stream-browserify": "^3.0.0",

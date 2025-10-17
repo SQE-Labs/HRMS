@@ -163,12 +163,10 @@ class AssetAllocationPage extends BasePage {
   }
   
   validateAssetTypeField() {
-  this.assetTypeField().then(($el) => {
-    const tooltipMessage = $el[0].validationMessage;
-    cy.log('Validation message:', tooltipMessage);
-    expect(tooltipMessage).to.eq('Please fill out this field.');
-  });
-}
+    cy.get("#react-select-2-input").then(($el) => {
+      expect($el[0].validationMessage).to.eq("Please fill out this field.");
+    });
+  }
 
   select_Employee(text) {
     cy.selectDrpValueByText(
