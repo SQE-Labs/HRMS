@@ -24,12 +24,12 @@ describe("Employee Assign Manager Managment Tests", () => {
       "Assign Manager"
     );
     cy.wait(1000);
-    AssignManagerPage.selectEmployee("Autom Mation Ffff");
+    AssignManagerPage.selectEmployee(testData.EmployeeName);
     AssignManagerPage.assertExpectedTableLbl(expectedTexts);
   });
 
   it("HRMIS_2: Verify Assign Manager Pop up opens up when user click on Re-Assigne button", () => {
-    AssignManagerPage.selectEmployee("Autom Mation Ffff");
+    AssignManagerPage.selectEmployee(testData.EmployeeName);
     AssignManagerPage.clickOnReAssigneBtn();
     AssignManagerPage.assigneeMangerPopupLbl.should(
       "have.text",
@@ -40,7 +40,7 @@ describe("Employee Assign Manager Managment Tests", () => {
   });
 
   it("HRMIS_3: Verify Assign Manager Pop up closed when user click on Close button", () => {
-    AssignManagerPage.selectEmployee("Autom Mation Ffff");
+    AssignManagerPage.selectEmployee(testData.EmployeeName);
     AssignManagerPage.clickOnReAssigneBtn();
     AssignManagerPage.assigneeMangerPopupLbl.should(
       "have.text",
@@ -51,16 +51,16 @@ describe("Employee Assign Manager Managment Tests", () => {
   });
 
   it("HRMIS_4: Verify that validation message appears, when user selects himself as manager, on 'Assign Manager' pop up.", () => {
-    AssignManagerPage.selectEmployee("Autom Mation Ffff");
+    AssignManagerPage.selectEmployee(testData.EmployeeName);
     AssignManagerPage.clickOnReAssigneBtn();
     cy.wait(4000);
-    AssignManagerPage.selectManager("Autom Mation Ffff");
+    AssignManagerPage.selectManager(testData.EmployeeName);
     AssignManagerPage.clickOnSubmitBtn();
     cy.validateSuccessMessages("An employee cannot be their own manager");
   });
 
   it("HRMIS_5: Verify that user is able to re-assign manager", () => {
-    AssignManagerPage.selectEmployee("Autom Mation Ffff");
+    AssignManagerPage.selectEmployee(testData.EmployeeName);
     AssignManagerPage.clickOnReAssigneBtn();
     AssignManagerPage.selectManager(testData.Manager.Asset);
     AssignManagerPage.clickOnSubmitBtn();
@@ -74,7 +74,7 @@ describe("Employee Assign Manager Managment Tests", () => {
   });
 
   it("HRMIS_6: Clean up Test Case", () => {
-    AssignManagerPage.selectEmployee("Autom Mation Ffff");
+    AssignManagerPage.selectEmployee(testData.EmployeeName);
     AssignManagerPage.clickOnReAssigneBtn();
     cy.wait(4000);
 
