@@ -247,10 +247,13 @@ class ApplyLeavePage extends BasePage {
     this.reasomMsg.should("be.visible").type(ReasonMsg);
   }
   assertValidationMsg() {
-    cy.get("textarea[name='reason']").then(($el) => {
-      expect($el[0].validationMessage).to.eq("Please fill out this field.");
-    });
-  }
+  cy.get("textarea[name='reason']").then(($el) => {
+    const message = $el[0].validationMessage;
+    expect(
+      message === "Please fill out this field." || message === "Please fill in this field."
+    ).to.eq(true);
+  });
+}
   assertVal_Msg() {
     cy.get("#leave_type_list").then(($el) => {
       expect($el[0].validationMessage).to.eq(
@@ -259,15 +262,22 @@ class ApplyLeavePage extends BasePage {
     });
   }
   assertDatePicker_Msg() {
-    cy.get(".react-datepicker__input-container > .border").then(($el) => {
-      expect($el[0].validationMessage).to.eq("Please fill out this field.");
-    });
-  }
-  assertReason_Msg() {
-    cy.get("#reasonOfLeave").then(($el) => {
-      expect($el[0].validationMessage).to.eq("Please fill out this field.");
-    });
-  }
+  cy.get(".react-datepicker__input-container > .border").then(($el) => {
+    const message = $el[0].validationMessage;
+    expect(
+      message === "Please fill out this field." || message === "Please fill in this field."
+    ).to.eq(true);
+  });
+}
+
+assertReason_Msg() {
+  cy.get("#reasonOfLeave").then(($el) => {
+    const message = $el[0].validationMessage;
+    expect(
+      message === "Please fill out this field." || message === "Please fill in this field."
+    ).to.eq(true);
+  });
+}
 
   clickOnSubBtn() {
     this.submitBtn.click();

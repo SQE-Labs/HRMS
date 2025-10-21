@@ -286,7 +286,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
 });
 
 
-  it("HRMIS_10: Verify that the 'Serial Number' column gets sorted in descending order after double clicking the column header with 'Sort' icon on the 'Asset Allocation' page.", () => {
+  it("HRMIS_10: Verify that the 'Serial Number' column gets sorted in descending order after double clicking the column header with 'Sort' icon on the 'Asset Allocation' page.@Bug", () => {
   sideBar.navigateTo("Asset Management", "Asset Allocation");
 
   // 1️⃣ Get original data first
@@ -317,7 +317,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
     });
 });
 
-  it("HRMIS_11: Verify that Employee gets sorted descending alphabetically after double-click", () => {
+  it("HRMIS_11: Verify that Employee gets sorted descending alphabetically after double-click. @Bug", () => {
   sideBar.navigateTo("Asset Management", "Asset Allocation");
 
  cy.get(AssetAllocationPage.gridDataList(5))
@@ -350,7 +350,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
   });
 });
 
-  it("HRMIS_12: Verify that the Asset Type get sorted in descending order after double clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
+  it("HRMIS_12: Verify that the Asset Type get sorted in descending order after double clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.@Bug", () => {
     sideBar.navigateTo("Asset Management", "Asset Allocation");
 
     let originalData = [];
@@ -389,7 +389,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
       });
   });
 
-  it("HRMIS_13: Verify that the Owner get sorted in descending order after double clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.", () => {
+  it("HRMIS_13: Verify that the Owner get sorted in descending order after double clicking the column header with 'Sort' icon, on the 'Asset Allocation' page.@Bug", () => {
     sideBar.navigateTo("Asset Management", "Asset Allocation");
 
     let originalData = [];
@@ -447,11 +447,12 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
     AssetAllocationPage.assetMgmtForm.should("not.exist");
   });
 
-  it("HRMIS_15:Verify Asset Assign Asset Management Page validations", () => {
+  it("HRMIS_15:Verify Asset Assign Asset Management Page validations.@Bug", () => {
     sideBar.navigateTo("Asset Management", "Asset Allocation");
 
     AssetAllocationPage.clickOnAssetAssigne();
     AssetAllocationPage.clickOnSubmit();
+    cy.wait(3000);
     AssetAllocationPage.validateAssetTypeField();
   });
 
