@@ -13,6 +13,6 @@ describe("Analytics & Insights - Attendance Report", () => {
     // Step 1: Navigate using sidebar
     sideBar.navigateTo("Analytics & Insights", "Attendance Report");
     // Step 2: Assert page header
-    cy.contains("Download Attendance").should("be.visible");
+    cy.xpath("//h1[text()='Download Attendance']").should("be.visible");
   });
 });
