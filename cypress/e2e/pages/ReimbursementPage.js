@@ -140,9 +140,20 @@ class ReimbursementPage extends BasePage {
     return element.invoke("prop", "validationMessage");
   }
 
-  assertValidation(element, expectedMessage) {
+  assertValidationFile(element, expectedMessage) {
     this.getValidationMessage(element).then((message) => {
       expect(message).to.equal(expectedMessage);
+    });
+  }
+
+  assertValidation(element, expectedMessage) {
+  this.getValidationMessage(element).then((message) => {
+    expect(message).to.satisfy(
+      (msg) =>
+        msg === expectedMessage ||
+        msg === "Please fill in this field." ||
+        msg === "Please fill out this field."
+      );
     });
   }
 

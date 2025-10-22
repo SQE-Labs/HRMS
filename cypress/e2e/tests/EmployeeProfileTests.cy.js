@@ -42,7 +42,7 @@ describe("Employee Profile Tests", () => {
     EmployeeListPage.getTotalEmployeescount(1);
 
     //Verify that selected employee card opens up, when user clicks on '<Employee name>' card.
-    EmployeeListPage.enterNameIntoSearchField("Autom Mation User");
+    EmployeeListPage.enterNameIntoSearchField(testData.EmployeeName);
     EmployeeProfilePage.clickOnEmployeeCard();
   });
 

@@ -162,35 +162,35 @@ describe("Employee Asset Managment Request Tests", () => {
       .and("have.text", "New Asset Enrollment");
 
     AssetCreationPage.clickOnSubmit();
-    AssetCreationPage.assertValidation(
+    AssetCreationPage.assertValidationItem(
       AssetCreationPage.assetTypeDrp,
       "Please select an item in the list."
     );
     AssetCreationPage.selectAssetType("Keyboard");
 
     AssetCreationPage.clickOnSubmit();
-    AssetCreationPage.assertValidation(
+    AssetCreationPage.assertValidationField(
       AssetCreationPage.modelTxt,
       "Please fill out this field."
     );
     AssetCreationPage.enterModel(model);
 
     AssetCreationPage.clickOnSubmit();
-    AssetCreationPage.assertValidation(
+    AssetCreationPage.assertValidationItem(
       AssetCreationPage.ownerDrp,
       "Please select an item in the list."
     );
     AssetCreationPage.selectOwner("Caelius");
 
     AssetCreationPage.clickOnSubmit();
-    AssetCreationPage.assertValidation(
+    AssetCreationPage.assertValidationField(
       AssetCreationPage.manufactureTxt,
       "Please fill out this field."
     );
 
     AssetCreationPage.selectSuperOwner("CAELIUS_OWNED");
     AssetCreationPage.clickOnSubmit();
-    AssetCreationPage.assertValidation(
+    AssetCreationPage.assertValidationField(
       AssetCreationPage.manufactureTxt,
       "Please fill out this field."
     );
@@ -198,7 +198,7 @@ describe("Employee Asset Managment Request Tests", () => {
     AssetCreationPage.enterManufacture("Lenovo");
 
     AssetCreationPage.clickOnSubmit();
-    AssetCreationPage.assertValidation(
+    AssetCreationPage.assertValidationField(
       AssetCreationPage.serialNoTxt,
       "Please fill out this field."
     );

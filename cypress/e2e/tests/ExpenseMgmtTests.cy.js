@@ -156,7 +156,7 @@ describe("Reimbursement Tests", () => {
 
     // uploade validation and chosse the document
     ReimbursementPage.clickOnSubmit();
-    ReimbursementPage.assertValidation(
+    ReimbursementPage.assertValidationFile(
       ReimbursementPage.chooseFile,
       "Please select a file."
     );
@@ -209,7 +209,7 @@ describe("Reimbursement Tests", () => {
 
     // Assert Reimbursement Input validataion and select the type
     ReimbursementPage.clickOnSubmit();
-    ReimbursementPage.assertValidation(
+    ReimbursementPage.assertValidationFile(
       ReimbursementPage.reimbursementType_Drp,
       "Please select an item in the list."
     );
@@ -254,7 +254,7 @@ describe("Reimbursement Tests", () => {
 
     // uploade validation and chosse the document
     ReimbursementPage.clickOnSubmit();
-    ReimbursementPage.assertValidation(
+    ReimbursementPage.assertValidationFile(
       ReimbursementPage.chooseFile,
       "Please select a file."
     );
@@ -282,7 +282,7 @@ describe("Reimbursement Tests", () => {
 
     // Assert Vehical Type validataion and select the type
     ReimbursementPage.clickOnSubmit();
-    ReimbursementPage.assertValidation(
+    ReimbursementPage.assertValidationFile(
       ReimbursementPage.vehicalTypeDrp,
       "Please select an item in the list."
     );
@@ -339,7 +339,7 @@ describe("Reimbursement Tests", () => {
 
     // Assert Reimbursement Input validataion and select the type
     ReimbursementPage.clickOnSubmit();
-    ReimbursementPage.assertValidation(
+    ReimbursementPage.assertValidationFile(
       ReimbursementPage.reimbursementType_Drp,
       "Please select an item in the list."
     );
@@ -384,7 +384,7 @@ describe("Reimbursement Tests", () => {
 
     // uploade validation and chosse the document
     ReimbursementPage.clickOnSubmit();
-    ReimbursementPage.assertValidation(
+    ReimbursementPage.assertValidationFile(
       ReimbursementPage.chooseFile,
       "Please select a file."
     );

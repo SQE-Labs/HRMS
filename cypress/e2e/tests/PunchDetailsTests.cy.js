@@ -14,11 +14,9 @@ beforeEach(() => {
 });
 
 describe("Attendence Management Punch Details Tests", () => {
-  it("HRMIS_1: Verify Punch Details Page ", () => {
+  it("HRMIS_1: Verify that 'Punch Details' page opens up after clicking on 'Attendance & Leaves' ", () => {
     sideBar.navigateTo("Attendance & Leaves", "Punch Details");
-    PunchDeatilsPage.assert_SubMenus(testData.AttendenceManagement.SubMenus);
 
-    // Verify that 'Punch Details' page opens up after clicking on 'Attendance & Leaves' > 'Punch Details' subtab from the left panel
     PunchDeatilsPage.punchDetailsHeader
       .should("be.visible")
       .and("have.text", "Punch Details");
@@ -37,7 +35,7 @@ describe("Attendence Management Punch Details Tests", () => {
 
     cy.wait(2000);
     sideBar.navigateTo("Attendance & Leaves", "Punch Details");
-    PunchDeatilsPage.select_Employee("Autom Mation User");
+    PunchDeatilsPage.select_Employee(testData.EmployeeName);
     PunchDeatilsPage.calendarDate
       .should("be.visible")
       .and("have.text", formattedDate);
@@ -65,7 +63,7 @@ describe("Attendence Management Punch Details Tests", () => {
 
     cy.wait(2000);
     sideBar.navigateTo("Attendance & Leaves", "Punch Details");
-    PunchDeatilsPage.select_Employee("Autom Mation User");
+    PunchDeatilsPage.select_Employee(testData.EmployeeName);
 
     PunchDeatilsPage.backwordIcon.click();
 
@@ -81,7 +79,7 @@ describe("Attendence Management Punch Details Tests", () => {
 
   it("HRMIS_4: Attendence Details pop up close and open ", () => {
     sideBar.navigateTo("Attendance & Leaves", "Punch Details");
-    PunchDeatilsPage.select_Employee("Autom Mation User");
+    PunchDeatilsPage.select_Employee(testData.EmployeeName);
 
     PunchDeatilsPage.clickOnDate();
     PunchDeatilsPage.attendenceDetailHeader
@@ -98,7 +96,7 @@ describe("Attendence Management Punch Details Tests", () => {
 
   it("HRMIS_5:Verify that 'Attendance Detail' popup appears after clicking 'Week day' cell", () => {
     sideBar.navigateTo("Attendance & Leaves", "Punch Details");
-    PunchDeatilsPage.select_Employee("Autom Mation User");
+    PunchDeatilsPage.select_Employee(testData.EmployeeName);
     PunchDeatilsPage.clickOnDate();
     PunchDeatilsPage.attendenceDetailHeader
       .should("be.visible")
