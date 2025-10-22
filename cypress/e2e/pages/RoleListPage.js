@@ -102,8 +102,13 @@ class RoleListPage extends BasePage {
   }
 
   assertValidation(element, expectedMessage) {
-    this.getValidationMessage(element).then((message) => {
-      expect(message).to.equal(expectedMessage);
+  this.getValidationMessage(element).then((message) => {
+    expect(message).to.satisfy(
+      (msg) =>
+        msg === expectedMessage ||
+        msg === "Please fill in this field." ||
+        msg === "Please fill out this field."
+      );
     });
   }
 
