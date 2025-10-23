@@ -13,6 +13,6 @@ describe("Analytics & Insights - Reimbursement Report", () => {
     // Step 1: Navigate using sidebar
     sideBar.navigateTo("Analytics & Insights", "Reimbursement Report");
     // Step 2: Assert page header
-    cy.contains("Download Reimbursement").should("be.visible");
+    cy.xpath("//h3[contains(text(), 'Download Reimbursement')]").should("be.visible");
   });
 });
