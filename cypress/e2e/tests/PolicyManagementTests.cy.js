@@ -54,22 +54,22 @@ describe("Policy Management Tests", () => {
       .should("be.visible")
       .and("have.text", "Add Policy");
     PolicyMgmtPage.clickOnSubmit();
-    PolicyMgmtPage.assertTitleValidation("Please fill out this field.");
+    PolicyMgmtPage.assertTitleValidation('input[name="policyTitle"]', "Please fill out this field.");
     PolicyMgmtPage.enterPolicytitle(randomPolicy);
 
     PolicyMgmtPage.clickOnSubmit();
-    PolicyMgmtPage.assertDocumentValidation("Please select a file.");
+    PolicyMgmtPage.assertDocumentValidation('input[name="policyDocument"]', "Please select a file.");
     PolicyMgmtPage.uploadePolicyFile(
       "cypress/fixtures/resources/ECardsCCIT112126022926502 (2) (6).pdf"
     );
 
     PolicyMgmtPage.clickOnSubmit();
-    PolicyMgmtPage.assertValidDateValidation("Please fill out this field.");
+    PolicyMgmtPage.assertValidDateValidation('input[name="policyValidFrom"]', " Please fill out this field.");
     PolicyMgmtPage.selectValidDate("2023-10-24");
 
     PolicyMgmtPage.clickOnSubmit();
     cy.wait(1000);
-    PolicyMgmtPage.assertPolicyDescValidation("Please fill out this field.");
+    PolicyMgmtPage.assertPolicyDescValidation('textarea[name="description"]',"Please fill out this field.");
     PolicyMgmtPage.enterDescription(randomDescription);
     PolicyMgmtPage.clickOnSubmit();
     cy.wait(1000);
@@ -110,19 +110,19 @@ describe("Policy Management Tests", () => {
     PolicyMgmtPage.clickOnEditBtn();
     PolicyMgmtPage.policyTitleTxt.clear();
     PolicyMgmtPage.clickOnSubmit();
-    PolicyMgmtPage.assertTitleValidation("Please fill out this field.");
+    PolicyMgmtPage.assertTitleValidation('input[name="policyTitle"]', " Please fill out this field.");
     PolicyMgmtPage.enterPolicytitle(randomPolicy);
 
     // Description
     PolicyMgmtPage.policyDescTxt.clear();
     PolicyMgmtPage.clickOnSubmit();
-    PolicyMgmtPage.assertPolicyDescValidation("Please fill out this field.");
+    PolicyMgmtPage.assertPolicyDescValidation('textarea[name="description"]', " Please fill out this field.");
     PolicyMgmtPage.enterDescription(randomDescription);
 
     // Document
     PolicyMgmtPage.delete_Policy();
     PolicyMgmtPage.clickOnSubmit();
-    PolicyMgmtPage.assertDocumentValidation("Please select a file.");
+    PolicyMgmtPage.assertDocumentValidation('input[name="policyDocument"]', "Please select a file.");
     PolicyMgmtPage.uploadePolicyFile(
       "cypress/fixtures/resources/ECardsCCIT112126022926502 (2) (6).pdf"
     );
@@ -130,7 +130,7 @@ describe("Policy Management Tests", () => {
     // Valid date
     PolicyMgmtPage.dateField.clear();
     PolicyMgmtPage.clickOnSubmit();
-    PolicyMgmtPage.assertValidDateValidation("Please fill out this field.");
+    PolicyMgmtPage.assertValidDateValidation('input[name="policyValidFrom"]', "Please fill out this field.");
     PolicyMgmtPage.selectValidDate("2023-10-24");
     PolicyMgmtPage.clickOnSubmit();
     cy.wait(1000);
