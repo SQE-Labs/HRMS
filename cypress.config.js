@@ -33,7 +33,7 @@ module.exports = defineConfig({
       inlineAssets: true,
       videoOnFailOnly: true,
       html: true,
-      json: true,
+      json: false,
       overwrite: true,
     },
 
