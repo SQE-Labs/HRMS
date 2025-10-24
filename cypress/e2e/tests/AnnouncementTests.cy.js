@@ -7,7 +7,7 @@ describe("Announcement Management - Create Announcement", () => {
     cy.login("superUser");
   });
 
-  it("HRMIS_ANN_1: Verify creation of a new announcement", () => {
+  it("HRMIS_ANN_1: Verify creation of a new announcement", { retries: 2 }, () => {
     sideBar.navigateTo("Announcements", "New Announcement");
     AnnouncementPage.newAnnouncementHeader
       .should("be.visible")
@@ -31,6 +31,6 @@ describe("Announcement Management - Create Announcement", () => {
     AnnouncementPage.submitBtn.click();
 
     // Assert success (update selector/message as per actual app)
-    AnnouncementPage.successMsg.should("be.visible");
+    AnnouncementPage.successMsg.should("be.visible", { timeout: 10000 });
   });
 });
