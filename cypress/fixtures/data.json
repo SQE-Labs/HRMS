@@ -7,7 +7,7 @@
     "Role":"IT Manager",
     "EmployeeData": {
         "FirstName": "Autom",
-        "LastName": "User",
+        "LastName": "Ffff",
         "MiddleName": "Mation",
         "EmployeeID": "CCIT/10_23/347",
         "EmailID": "preeti.c@caeliusconsulting.com"
@@ -39,7 +39,7 @@
     "EmployeeWorkData": {
         "Department": "Technical",
         "Designation": "Sr. Solution Architect",
-        "ReportingTo": "Vishal DDDD",
+        "ReportingTo": "Vishal thakur",
         "DOJ": "08-08-2025",
         "EmployeeStatus": "VERIFIED",
         "EmployeeType": "Fulltime",

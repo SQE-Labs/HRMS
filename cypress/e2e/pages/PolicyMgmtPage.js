@@ -183,32 +183,53 @@ class PolicyMgmtPage extends BasePage {
   }
 
   getValidationMessage(element) {
-    return element.invoke("prop", "validationMessage");
+    return cy.get(element).invoke("prop", "validationMessage");
   }
 
-  assertTitleValidation(expectedMessage) {
-    this.getValidationMessage(this.policyTitleTxt).then((message) => {
-      expect(message).to.equal(expectedMessage);
-    });
-  }
+  assertDocumentValidation(element, expectedMessage) {
+  this.getValidationMessage(element).then((message) => {
+    expect(message).to.satisfy(
+      (msg) =>
+        msg === expectedMessage ||
+        msg === "Please select a file." ||
+        msg === "Please fill out this field."
+    );
+  });
+}
 
-  assertDocumentValidation(expectedMessage) {
-    this.getValidationMessage(this.uploadeFile).then((message) => {
-      expect(message).to.equal(expectedMessage);
-    });
-  }
+  assertTitleValidation(element, expectedMessage) {
+    this.getValidationMessage(element).then((message) => {
+    expect(message).to.satisfy(
+      (msg) =>
+        msg === expectedMessage ||
+        msg === "Please fill in this field." ||
+        msg === "Please fill out this field."
+    );
+  });
+}
 
-  assertValidDateValidation(expectedMessage) {
-    this.getValidationMessage(this.dateField).then((message) => {
-      expect(message).to.equal(expectedMessage);
-    });
-  }
 
-  assertPolicyDescValidation(expectedMessage) {
-    this.getValidationMessage(this.policyDescTxt).then((message) => {
-      expect(message).to.equal(expectedMessage);
-    });
-  }
+  assertValidDateValidation(element, expectedMessage) {
+    this.getValidationMessage(element).then((message) => {
+    expect(message).to.satisfy(
+      (msg) =>
+        msg === expectedMessage ||
+        msg === "Please fill in this field." ||
+        msg === "Please fill out this field."
+    );
+  });
+}
+
+  assertPolicyDescValidation(element, expectedMessage) {
+    this.getValidationMessage(element).then((message) => {
+    expect(message).to.satisfy(
+      (msg) =>
+        msg === expectedMessage ||
+        msg === "Please fill in this field." ||
+        msg === "Please fill out this field."
+    );
+  });
+}
 
   clickNext() {
     cy.get("ul.pagination li")

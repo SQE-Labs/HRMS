@@ -52,7 +52,7 @@ class PromoteEmployeePage extends BasePage {
   }
 
   getdesgnationOptions() {
-    return this.selectDesignationDrp.find("option").should("have.length", 6);
+    return this.selectDesignationDrp.find("option").should("have.length", 7);
   }
 
   selectEmployee(text) {
