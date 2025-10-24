@@ -235,12 +235,11 @@ class EmployeeProfilePage extends BasePage {
     cy.log("Clicked on the Edit button");
   }
 
-  clickOnEmployeeCard() {
-    this.employeeDetail.click();
-    cy.contains("Autom Mation User").should("be.visible");
-
-    cy.log("Click on User card");
-  }
+  clickOnEmployeeCard(employeeName) {
+  this.employeeDetail.click();
+  cy.contains(employeeName).should("be.visible");
+  cy.log("Click on User card");
+}
 
   clickOnEditWorkDetails() {
     this.editWorkInfoBtn.click();

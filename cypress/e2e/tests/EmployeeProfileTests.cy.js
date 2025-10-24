@@ -43,7 +43,7 @@ describe("Employee Profile Tests", () => {
 
     //Verify that selected employee card opens up, when user clicks on '<Employee name>' card.
     EmployeeListPage.enterNameIntoSearchField(testData.EmployeeName);
-    EmployeeProfilePage.clickOnEmployeeCard();
+    EmployeeProfilePage.clickOnEmployeeCard(testData.EmployeeName);
   });
 
   it("HRMIS_2: Verify that the 'Basic Info' accordion expands, and validate the update and close functionalities.", () => {

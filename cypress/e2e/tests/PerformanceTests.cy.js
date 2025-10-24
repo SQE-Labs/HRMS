@@ -7,7 +7,7 @@ describe("Performance Dashboard Form Automation", () => {
     sideBar.navigateTo("Performance");
   });
 
-  it("should fill out and submit the performance form successfully", () => {
+  it("should fill out and submit the performance form successfully @Bug", () => {
     PerformancePage.checkCertificationNone();
     PerformancePage.fillOtherCertifications("N.A.");
     PerformancePage.checkExercisesNone();
