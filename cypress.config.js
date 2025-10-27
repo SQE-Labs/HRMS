@@ -9,16 +9,16 @@ const os = require("os");
 module.exports = defineConfig({
   chromeWebSecurity: false,
   experimentalModifyObstructiveThirdPartyCode: true,
-  reporter: "cypress-mochawesome-reporter",
   e2e: {
+    reporter: "cypress-mochawesome-reporter",
     specPattern: "cypress/e2e/tests/*.cy.{js,jsx,ts,tsx}",
     chromeWebSecurity: false,
     experimentalModifyObstructiveThirdPartyCode: true,
     experimentalSessionAndOrigin: true,
     defaultCommandTimeout: 10000,
     retries: {
-      runMode: 0,
-      openMode: 0,
+      runMode: 2,
+      openMode: 1,
     },
     video: false,
     screenshotOnRunFailure: true,
@@ -26,14 +26,15 @@ module.exports = defineConfig({
     viewportWidth: 1920,
     viewportHeight: 1080,
     reporterOptions: {
-      reportDir: "cypress/reports",
+      reportDir: "cypress/reports/.jsons",
+      output: 'cypress/reports/results.json',
       charts: true,
       reportPageTitle: "HRMS Test Execution Report",
       embeddedScreenshots: true,
       inlineAssets: true,
       videoOnFailOnly: true,
       html: true,
-      json: false,
+      json: true,
       overwrite: true,
     },
 
@@ -94,3 +95,60 @@ module.exports = defineConfig({
     },
   },
 });
+
+
+
+
+
+// const { defineConfig } = require("cypress");
+// const fs = require("fs");
+// const path = require("path");
+
+// module.exports = defineConfig({
+//   e2e: {
+//     setupNodeEvents(on, config) {
+//       const mochawesome = require("mochawesome-report-generator");
+//       const marge = require("mochawesome-merge");
+
+//       // Generate mochawesome JSON + HTML reports after run
+//       on("after:run", async () => {
+//         const reportDir = "cypress/reports";
+//         const jsonDir = path.join(reportDir, "jsons");
+//         const htmlDir = path.join(reportDir, "html");
+
+//         // Ensure directories exist
+//         if (!fs.existsSync(reportDir)) fs.mkdirSync(reportDir);
+//         if (!fs.existsSync(jsonDir)) fs.mkdirSync(jsonDir);
+//         if (!fs.existsSync(htmlDir)) fs.mkdirSync(htmlDir);
+
+//         const jsonReport = await marge({
+//           files: [path.join(jsonDir, "*.json")],
+//         });
+
+//         await mochawesome.create(jsonReport, {
+//           reportDir: htmlDir,
+//           reportFilename: "index",
+//         });
+//       });
+
+//       return config;
+//     },
+
+//     // Base configuration
+//     specPattern: "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}",
+//     chromeWebSecurity: false,
+//     video: false,
+//     screenshotOnRunFailure: true,
+//     reporter: "mochawesome",
+//     reporterOptions: {
+//       reportDir: "cypress/reports/jsons",
+//       overwrite: false,
+//       html: true,
+//       json: true,
+//       charts: true,
+//       embeddedScreenshots: true,
+//       inlineAssets: true,
+//       reportTitle: "Cypress Test Execution Report",
+//     },
+//   },
+// });
