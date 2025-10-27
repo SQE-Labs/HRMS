@@ -18,7 +18,7 @@ module.exports = defineConfig({
     defaultCommandTimeout: 10000,
     retries: {
       runMode: 2,
-      openMode: 1,
+      openMode: 0,
     },
     video: false,
     screenshotOnRunFailure: true,

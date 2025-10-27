@@ -7,7 +7,7 @@ describe("Announcement Management - Create Announcement", () => {
     cy.login("superUser");
   });
 
-  it("HRMIS_ANN_1: Verify creation of a new announcement", { retries: 2 }, () => {
+  it("HRMIS_ANN_1: Verify creation of a new announcement", () => {
     sideBar.navigateTo("Announcements", "New Announcement");
     AnnouncementPage.newAnnouncementHeader
       .should("be.visible")

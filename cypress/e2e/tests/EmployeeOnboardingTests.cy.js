@@ -60,7 +60,7 @@ const joineePersonalMail = generateRandomYopmail(10);
       ],
     };
 
-  it("Verify that new hire is able to submit the onboarding form, ONBRD_1, emp_dtl_1 ", { retries: 2 }, () => {
+  it("Verify that new hire is able to submit the onboarding form, ONBRD_1, emp_dtl_1 ", () => {
     // Invite new Employee
     sideBar.navigateTo("Employee Onboarding", "Onboarding Form");
     //InvitationsPage.onBoardingForm();
@@ -202,7 +202,7 @@ const joineePersonalMail = generateRandomYopmail(10);
     cy.validateSuccessMessages(JoineeData.messagesToValidate);
     });
 
-    it("Verify that IT ApprovalActionPage is working, IT_approve1, HR_setup1, HR_setup2, HR_setup3, HR_setup4 ", { retries: 2 },() => {
+    it("Verify that IT ApprovalActionPage is working, IT_approve1, HR_setup1, HR_setup2, HR_setup3, HR_setup4 ",() => {
     // Navigate to Homepage > Employee Onboard > L1 Approval Action
     HomePage.navigateToHomePage();
 
