@@ -43,7 +43,7 @@ describe("My Team Leave page", () => {
     MyTeamLeavePage.clickOnViewLink();
     MyTeamLeavePage.applyLeaveHeader();
     MyTeamLeavePage.clickOnSubmitButton();
-    MyTeamLeavePage.assertVal_MsgItem();
+    MyTeamLeavePage.assertVal_MsgItem("Please select an item in the list.");
     MyTeamLeavePage.selectAction("Approve");
     MyTeamLeavePage.clickOnSubmitButton();
     MyTeamLeavePage.assertValidationMsgField(); 

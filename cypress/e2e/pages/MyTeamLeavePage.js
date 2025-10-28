@@ -88,11 +88,11 @@ class MyTeamLeavePage extends BasePage {
     ).to.eq(true);
   });
 }
-
-  assertVal_MsgItem() {
+//"Please select an item in the list."
+  assertVal_MsgItem(message) {
     cy.get("#leaveAction").then(($el) => {
       expect($el[0].validationMessage).to.eq(
-        "Please select an item in the list."
+        message
       );
     });
   }
