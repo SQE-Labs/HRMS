@@ -107,9 +107,22 @@ class ViewPolicyMgmtPage extends BasePage {
     this.viewBtn.click();
   }
 
-  checkDownloadFile(path) {
-    cy.readFile(path).should("exist");
-  }
+  checkDownloadFile() {
+  cy.get("iframe")
+    .should("be.visible")
+    .then(($iframe) => {
+      const src = $iframe.attr("src");
+      expect(src).to.contain("blob");
+      cy.log("✅ PDF blob loaded successfully in iframe");
+    });
+
+  cy.get("iframe")
+    .its("0.contentDocument")
+    .should("exist")
+    .and("have.property", "contentType", "application/pdf");
+
+  cy.log("✅ PDF is rendered properly inside iframe");
+}
 
   clickOnEditBtn() {
     this.editBtn.click();

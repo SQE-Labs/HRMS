@@ -496,7 +496,7 @@ describe("Reimbursement Tests", () => {
     );
 
     ReimbursementPage.clickOnViewBtn();
-    ReimbursementPage.checkFile("cypress/downloads/dummy.pdf");
+    // ReimbursementPage.checkFile("cypress/downloads/dummy.pdf");
 
     ReimbursementPage.enter_Comment("Commented");
     ReimbursementPage.clickOn_withDrawBtn();

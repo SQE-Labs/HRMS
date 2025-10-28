@@ -39,9 +39,7 @@ describe("Policy Management Tests", () => {
     PolicyMgmtPage.searchPolicy();
     cy.wait(1000);
     PolicyMgmtPage.clickOnView();
-    PolicyMgmtPage.checkDownloadFile(
-      "C:/Users/SQE Labs/Desktop/HRMS/cypress/downloads/dummy.pdf"
-    );
+    PolicyMgmtPage.checkDownloadFile();
   });
 
   it("HRMIS_2: Verify 'Add Policy' Pop up.", () => {
@@ -241,9 +239,7 @@ describe("Policy Management Tests", () => {
     ViewPolicyMgmt.searchPolicy();
     cy.wait(1000);
     ViewPolicyMgmt.clickOnView();
-    ViewPolicyMgmt.checkDownloadFile(
-      "cypress/downloads/ECardsCCIT112126022926502 (2) (6).pdf"
-    );
+    ViewPolicyMgmt.checkDownloadFile();
   });
 
   it("HRMIS_7: Verify 'Next' and 'Previous' Pagination button View Policy Page", () => {

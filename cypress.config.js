@@ -84,17 +84,39 @@ module.exports = defineConfig({
           }
           return { success: false, message: "File not found" };
         },
-        
+
         getDownloadFolder() {
           return path.join(os.homedir(), "Downloads");
+        },
+
+        isFileExist(filePath) {
+          return fs.existsSync(filePath);
+        },
+        readFileSize(filePath) {
+          const stats = fs.statSync(filePath);
+          return stats.size;
+        },
+        createFolderIfNotExist(dirPath) {
+          if (!fs.existsSync(dirPath)) {
+            fs.mkdirSync(dirPath, { recursive: true });
+          }
+          return null;
+        },
+        saveFile({ filePath, data }) {
+          fs.writeFileSync(filePath, data, "binary");
+          return null;
         },
       });
 
       require("cypress-mochawesome-reporter/plugin")(on);
       return config;
     },
+
+    // ✅ Added: Explicit downloads folder
+    downloadsFolder: "cypress/downloads",
   },
 });
+
 
 
 
