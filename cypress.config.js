@@ -34,9 +34,9 @@ module.exports = defineConfig({
       inlineAssets: true,
       videoOnFailOnly: true,
       charts: true,
-      html: true,
+      html: false,
       json: true,
-      overwrite: true,
+      overwrite: false,
     },
     setupNodeEvents(on, config) {
       const options = {
