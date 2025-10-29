@@ -15,7 +15,7 @@ beforeEach(() => {
 });
 
 describe("Leave Update Tests", () => {
-  it("'Leave Update' page should open up @Functionality change", () => {
+  it.skip("'Leave Update' page should open up @Discontinued", () => {
     sideBar.navigateTo("Attendance & Leaves", "Leave Update");
     LeaveUpdate.assertHeader();
     LeaveUpdate.selectEmployee("Vishal DDDD");
