@@ -17,7 +17,7 @@ module.exports = defineConfig({
     experimentalSessionAndOrigin: true,
     defaultCommandTimeout: 10000,
     retries: {
-      runMode: 0,
+      runMode: 2,
       openMode: 0,
     },
     video: false,

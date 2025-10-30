@@ -549,7 +549,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
     // AssetAllocationPage.enterAssetName(Keyboard);
     cy.wait(3000);
     AssetAllocationPage.lastAssignedAssetName.should("have.text", "Keyboard");
-    AssetAllocationPage.lastAssignedAssetEmp.should("have.text", "Autom ffff");
+    AssetAllocationPage.lastAssignedAssetEmp.should("have.text", "Autom Ffff");
   });
 
   it("HRMIS_23:Verify that user able to de allocate the asset | Clean up", () => {

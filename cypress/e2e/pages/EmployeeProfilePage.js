@@ -192,12 +192,24 @@ class EmployeeProfilePage extends BasePage {
   clickOnPersonalDetails() {
     this.personalDetailsAccord.click();
     cy.log("Clicked on the Work Experience Option");
+
+    this.basicInfoAccord.should("have.attr", "aria-expanded", "true");
+    cy.get("#collapse1").should("have.class", "show");
   }
 
   clickOnBasicInfo() {
-    this.basicInfoAccord.wait(500).click();
-    cy.log("Clicked on the Basic Info Option");
-  }
+  this.basicInfoAccord.wait(500).click();
+  cy.log("Clicked on the Basic Info Option");
+
+  // Wait until the up arrow becomes visible (indicating expanded section)
+  this.basicInfoAccord.should("have.attr", "aria-expanded", "true");
+  cy.get("#collapse1").should("have.class", "show");
+}
+
+clickOnBasicInfoCollapsed() {
+  this.basicInfoAccord.wait(500).click();
+  cy.log("Clicked on the Basic Info Option");
+}
 
   clickOnWork() {
     this.workAccord.click();
@@ -357,34 +369,49 @@ class EmployeeProfilePage extends BasePage {
   }
 
   getFieldValue(label) {
-    return cy
-      .get(".row")
-      .find(`p:contains(${label})`)
-      .then(($element) => {
-        // Get the parent container of the label
-        const parent = $element.parent();
+  return cy.get("#collapse1 .accordion-body .row").then(($rows) => {
+    let value = null;
 
-        // Find the index of the label in the parent container
-        const index = parent
-          .find("p")
-          .toArray()
-          .findIndex((p) => Cypress.$(p).text().includes(label));
-
-        // Return the value from the next row based on the calculated index
-        return cy
-          .get(".row")
-          .find(`p:contains(${label})`)
-          .parent()
-          .parent()
-          .next()
-          .find("p")
-          .eq(index)
-          .invoke("text")
-          .then((text) => {
-            return text.replace(/\u00A0/g, " ").trim(); // Replace &nbsp; with space and trim
-          });
+    // Loop through all rows
+    Cypress.$($rows).each((_, row) => {
+      const $cols = Cypress.$(row).find(".col-md-3");
+      $cols.each((index, col) => {
+        if (Cypress.$(col).text().trim() === label) {
+          value = Cypress.$($cols[index + 1]).text().trim();
+          return false; // stop loop
+        }
       });
-  }
+      if (value) return false;
+    });
+
+    // Ensure value found and return via Cypress chain
+    expect(value, `Value for ${label}`).to.not.be.null;
+    return cy.wrap(value);
+  });
+}
+
+
+getPersonalFieldValue(label) {
+  return cy
+    .xpath("//div[contains(@class,'accordion-body')]//div[contains(@class,'row')]", { timeout: 15000 })
+    .then(($row) => {
+      const $labels = Cypress.$($row).find(".col-md-3").eq(0).find("p");
+      const $values = Cypress.$($row).find(".col-md-3").eq(1).find("p");
+
+      let value = null;
+
+      $labels.each((index, el) => {
+        const labelText = Cypress.$(el).text().trim().toLowerCase();
+        if (labelText === label.trim().toLowerCase()) {
+          value = $values.eq(index).text().trim();
+          return false; // stop loop
+        }
+      });
+
+      expect(value, `Value for ${label}`).to.not.be.null;
+      return cy.wrap(value);
+    });
+}
 
   updateGender(value) {
     this.genderRadioBtn(value).click();
