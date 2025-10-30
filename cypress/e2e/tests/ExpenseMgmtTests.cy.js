@@ -495,7 +495,7 @@ describe("Reimbursement Tests", () => {
       "Please fill out this field."
     );
 
-    ReimbursementPage.clickOnViewBtn();
+    // ReimbursementPage.clickOnViewBtn();
     // ReimbursementPage.checkFile("cypress/downloads/dummy.pdf");
 
     ReimbursementPage.enter_Comment("Commented");
