@@ -214,7 +214,7 @@ class L1ApprovalActionPage extends BasePage {
     const searchOnLastPage = () => {
       // Search on current page
       cy.get(".search > input").clear().type(username);
-      cy.wait(1000);
+      cy.wait(3000);
 
       cy.get("table").then(($table) => {
         if ($table.text().includes(username)) {

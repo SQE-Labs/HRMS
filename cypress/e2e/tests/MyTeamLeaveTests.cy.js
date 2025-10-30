@@ -10,7 +10,7 @@ before(function () {
 
 beforeEach(() => {
   // login to Application
-  cy.login("superUser");
+  cy.login("superUser1");
 });
 
 describe("My Team Leave page", () => {
@@ -43,10 +43,11 @@ describe("My Team Leave page", () => {
     MyTeamLeavePage.clickOnViewLink();
     MyTeamLeavePage.applyLeaveHeader();
     MyTeamLeavePage.clickOnSubmitButton();
-    // cy.get(".tooltip-class").should(
-    //   "contain.text",
-    //   "Please select an item in the list."
-    // );
+    MyTeamLeavePage.assertVal_MsgItem("Please select an item in the list.");
+    MyTeamLeavePage.selectAction("Approve");
+    MyTeamLeavePage.clickOnSubmitButton();
+    MyTeamLeavePage.assertValidationMsgField(); 
+    
   });
   it("Verify that 'Leave Approval' pop up opens up, after clicking on 'View' link", () => {
     // MyTeamLeavePage.clickOnCrossIcon();

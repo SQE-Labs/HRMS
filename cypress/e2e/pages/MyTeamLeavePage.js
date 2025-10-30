@@ -15,7 +15,7 @@ class MyTeamLeavePage extends BasePage {
     return cy.xpath("//button[text()='Export']");
   }
   get viewLink() {
-    return cy.xpath("//a[text()='View']");
+    return cy.xpath("//a[text()='View']").first();
   }
   get crossIcon() {
     return cy.xpath(
@@ -80,6 +80,23 @@ class MyTeamLeavePage extends BasePage {
   enterReasonText(reasontext) {
     this.reasonTxtBox.type(reasontext);
   }
+  assertValidationMsgField() {
+  cy.get("textarea[class='border']").then(($el) => {
+    const message = $el[0].validationMessage;
+    expect(
+      message === "Please fill out this field." || message === "Please fill in this field."
+    ).to.eq(true);
+  });
+}
+//"Please select an item in the list."
+  assertVal_MsgItem(message) {
+    cy.get("#leaveAction").then(($el) => {
+      expect($el[0].validationMessage).to.eq(
+        message
+      );
+    });
+  }
+
   successMessage() {
     this.succ_Msg.should("have.text", "Successfully Updated");
   }

@@ -49,6 +49,12 @@ class EmployeeProfilePage extends BasePage {
   get workAccord() {
     return cy.get("h2[id='heading2'] button");
   }
+  get workAccordionBody() {
+    return cy.xpath("//div[@id='collapse2']//div[@class='accordion-body']");
+  }
+  get personalAccordionBody() {
+    return cy.xpath("//div[@aria-labelledby='heading3']//div[contains(@class,'accordion-body')]");
+  }
   get editWorkInfoBtn() {
     return cy.get("#collapse2 a i");
   }
@@ -188,16 +194,19 @@ class EmployeeProfilePage extends BasePage {
     this.workExperienceAccord.wait(500).click();
     cy.log("Clicked on the Work Experience Option");
   }
-
-  clickOnPersonalDetails() {
-    this.personalDetailsAccord.click();
-    cy.log("Clicked on the Work Experience Option");
-  }
-
   clickOnBasicInfo() {
-    this.basicInfoAccord.wait(500).click();
-    cy.log("Clicked on the Basic Info Option");
-  }
+  this.basicInfoAccord.wait(500).click();
+  cy.log("Clicked on the Basic Info Option");
+
+  // Wait until the up arrow becomes visible (indicating expanded section)
+  this.basicInfoAccord.should("have.attr", "aria-expanded", "true");
+  cy.get("#collapse1").should("have.class", "show");
+}
+
+clickOnBasicInfoCollapsed() {
+  this.basicInfoAccord.wait(500).click();
+  cy.log("Clicked on the Basic Info Option");
+}
 
   clickOnWork() {
     this.workAccord.click();
@@ -205,8 +214,7 @@ class EmployeeProfilePage extends BasePage {
   }
 
   clickOnPersonalDetails() {
-    this.personalDetailsAccord.click();
-    cy.log("Clicked on the Personal Details Option");
+    this.personalDetailsAccord.click({ force: true });
   }
 
   updateDOJ(doj) {
@@ -357,33 +365,55 @@ class EmployeeProfilePage extends BasePage {
   }
 
   getFieldValue(label) {
-    return cy
-      .get(".row")
-      .find(`p:contains(${label})`)
-      .then(($element) => {
-        // Get the parent container of the label
-        const parent = $element.parent();
+  return cy.get("#collapse1 .accordion-body .row").then(($rows) => {
+    let value = null;
 
-        // Find the index of the label in the parent container
-        const index = parent
-          .find("p")
-          .toArray()
-          .findIndex((p) => Cypress.$(p).text().includes(label));
-
-        // Return the value from the next row based on the calculated index
-        return cy
-          .get(".row")
-          .find(`p:contains(${label})`)
-          .parent()
-          .parent()
-          .next()
-          .find("p")
-          .eq(index)
-          .invoke("text")
-          .then((text) => {
-            return text.replace(/\u00A0/g, " ").trim(); // Replace &nbsp; with space and trim
-          });
+    // Loop through all rows
+    Cypress.$($rows).each((_, row) => {
+      const $cols = Cypress.$(row).find(".col-md-3");
+      $cols.each((index, col) => {
+        if (Cypress.$(col).text().trim() === label) {
+          value = Cypress.$($cols[index + 1]).text().trim();
+          return false; // stop loop
+        }
       });
+      if (value) return false;
+    });
+
+    // Ensure value found and return via Cypress chain
+    expect(value, `Value for ${label}`).to.not.be.null;
+    return cy.wrap(value);
+  });
+}
+
+
+  getPersonalFieldValue(fieldName) {
+    return cy.xpath(
+      `//div[@id='collapse2']//div[contains(@class,'accordion-body')]//*[contains(text(),'${fieldName}')]/following-sibling::*`
+    );
+  }
+
+  validateWorkSectionDetails() {
+    this.workAccordionBody.should("be.visible");
+    this.workAccordionBody.should("include.text", "Technical");
+    this.workAccordionBody.should("include.text", "Sr. Solution Architect");
+    this.workAccordionBody.should("include.text", "Vishal thakur");
+    this.workAccordionBody.should("include.text", "08-08-2025");
+    this.workAccordionBody.should("include.text", "VERIFIED");
+    this.workAccordionBody.should("include.text", "Fulltime");
+  }
+
+  validatePersonalDetailsSection() {
+    this.personalAccordionBody.should("be.visible");
+    this.personalAccordionBody.should("include.text", "30-09-1993");
+    this.personalAccordionBody.should("include.text", "232324324322");
+    this.personalAccordionBody.should("include.text", "238928392323");
+    this.personalAccordionBody.should("include.text", "BSSSS5123D");
+    this.personalAccordionBody.should("include.text", "Akshya Nagar 1st Block 1st Cross Rammurthy nagar Bangalore560016");
+    this.personalAccordionBody.should("include.text", "B+ve");
+    this.personalAccordionBody.should("include.text", "male");
+    this.personalAccordionBody.should("include.text", "Single");
+    this.personalAccordionBody.should("include.text", "4523542343");
   }
 
   updateGender(value) {

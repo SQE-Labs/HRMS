@@ -39,9 +39,7 @@ describe("Policy Management Tests", () => {
     PolicyMgmtPage.searchPolicy();
     cy.wait(1000);
     PolicyMgmtPage.clickOnView();
-    PolicyMgmtPage.checkDownloadFile(
-      "C:/Users/SQE Labs/Desktop/HRMS/cypress/downloads/dummy.pdf"
-    );
+    PolicyMgmtPage.checkDownloadFile();
   });
 
   it("HRMIS_2: Verify 'Add Policy' Pop up.", () => {
@@ -241,9 +239,7 @@ describe("Policy Management Tests", () => {
     ViewPolicyMgmt.searchPolicy();
     cy.wait(1000);
     ViewPolicyMgmt.clickOnView();
-    ViewPolicyMgmt.checkDownloadFile(
-      "cypress/downloads/ECardsCCIT112126022926502 (2) (6).pdf"
-    );
+    ViewPolicyMgmt.checkDownloadFile();
   });
 
   it("HRMIS_7: Verify 'Next' and 'Previous' Pagination button View Policy Page", () => {
@@ -277,33 +273,5 @@ describe("Policy Management Tests", () => {
 
     expect(actualPolicytitle1).to.equal(actualPolicytitle2);
     expect(actualPolicytitle).to.equal(expectedPolicytitle);
-  });
-
-  //Functionality changed
-
-  it.skip("HRMIS_8: Verify Asscending and Descending sorting of Policy Ids View Policy Page", () => {
-    //Navigate to Modify Policy Page
-    sideBar.navigateTo("Caelius' Policies", "Policy Viewer");
-    PolicyMgmtPage.modifyPolicyLbl.should("be.visible");
-
-    let textsList1 = [];
-    let textsList2 = [];
-
-    cy.getColumnTexts("tbody tr td:nth-child(1)").then((texts) => {
-      textsList1 = [...texts].sort().reverse();
-      cy.log("textsList1 (descending):", textsList1);
-    });
-
-    // Click the sorting icon twice to change the order
-    PolicyMgmtPage.clickOnPolicyIds();
-    //PolicyMgmtPage.clickOnPolicyIds();
-
-    // Get the new sorted list
-    cy.getColumnTexts("tbody tr td:nth-child(1)").then((texts) => {
-      textsList2 = [...texts];
-      cy.log("textsList2 (after clicks):", textsList2);
-      const sortedTextsList2 = [...textsList2].sort().reverse();
-      expect(sortedTextsList2).to.deep.equal(textsList1);
-    });
   });
 });

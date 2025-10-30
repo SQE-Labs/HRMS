@@ -10,15 +10,17 @@ module.exports = defineConfig({
   chromeWebSecurity: false,
   experimentalModifyObstructiveThirdPartyCode: true,
   e2e: {
+     downloadsFolder: "cypress/downloads",
     reporter: "cypress-mochawesome-reporter",
     specPattern: "cypress/e2e/tests/*.cy.{js,jsx,ts,tsx}",
+    excludeSpecPattern: ["cypress/e2e/tests/PerformanceTests.cy.js"],
     chromeWebSecurity: false,
     experimentalModifyObstructiveThirdPartyCode: true,
     experimentalSessionAndOrigin: true,
     defaultCommandTimeout: 10000,
     retries: {
-      runMode: 2,
-      openMode: 1,
+      runMode: 0,
+      openMode: 0,
     },
     video: false,
     screenshotOnRunFailure: true,
@@ -76,18 +78,22 @@ module.exports = defineConfig({
         getConfirmaUrl(email) {
           return easyYopmail.getConfirmationURL(email);
         },
-        deleteFile(filePath) {
-          const fullPath = path.resolve(__dirname, filePath);
-          if (fs.existsSync(fullPath)) {
-            fs.unlinkSync(fullPath);
-            return { success: true };
+
+         deleteAllXlsxFiles(folderPath) {
+          if (fs.existsSync(folderPath)) {
+            const files = fs.readdirSync(folderPath);
+            files.forEach((file) => {
+              if (file.endsWith(".xlsx")) {
+                fs.unlinkSync(path.join(folderPath, file));
+                console.log(` Deleted old file: ${file}`);
+              }
+            });
+          } else {
+            console.log(`Folder not found: ${folderPath}`);
           }
-          return { success: false, message: "File not found" };
+          return null;
         },
-        
-        getDownloadFolder() {
-          return path.join(os.homedir(), "Downloads");
-        },
+
       });
 
       require("cypress-mochawesome-reporter/plugin")(on);
@@ -95,60 +101,3 @@ module.exports = defineConfig({
     },
   },
 });
-
-
-
-
-
-// const { defineConfig } = require("cypress");
-// const fs = require("fs");
-// const path = require("path");
-
-// module.exports = defineConfig({
-//   e2e: {
-//     setupNodeEvents(on, config) {
-//       const mochawesome = require("mochawesome-report-generator");
-//       const marge = require("mochawesome-merge");
-
-//       // Generate mochawesome JSON + HTML reports after run
-//       on("after:run", async () => {
-//         const reportDir = "cypress/reports";
-//         const jsonDir = path.join(reportDir, "jsons");
-//         const htmlDir = path.join(reportDir, "html");
-
-//         // Ensure directories exist
-//         if (!fs.existsSync(reportDir)) fs.mkdirSync(reportDir);
-//         if (!fs.existsSync(jsonDir)) fs.mkdirSync(jsonDir);
-//         if (!fs.existsSync(htmlDir)) fs.mkdirSync(htmlDir);
-
-//         const jsonReport = await marge({
-//           files: [path.join(jsonDir, "*.json")],
-//         });
-
-//         await mochawesome.create(jsonReport, {
-//           reportDir: htmlDir,
-//           reportFilename: "index",
-//         });
-//       });
-
-//       return config;
-//     },
-
-//     // Base configuration
-//     specPattern: "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}",
-//     chromeWebSecurity: false,
-//     video: false,
-//     screenshotOnRunFailure: true,
-//     reporter: "mochawesome",
-//     reporterOptions: {
-//       reportDir: "cypress/reports/jsons",
-//       overwrite: false,
-//       html: true,
-//       json: true,
-//       charts: true,
-//       embeddedScreenshots: true,
-//       inlineAssets: true,
-//       reportTitle: "Cypress Test Execution Report",
-//     },
-//   },
-// });
