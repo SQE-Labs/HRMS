@@ -1,5 +1,7 @@
 import sideBar from "../components/SideBar";
 import AnalyticsInsightsPage from "../pages/AnalyticsInsightsPage";
+const fs = require("fs");
+const path = require("path");
 
 describe("Analytics & Insights - Asset Report", () => {
   beforeEach(() => {
@@ -7,6 +9,7 @@ describe("Analytics & Insights - Asset Report", () => {
   });
 
   it("HRMIS_AR1: Verify Asset Report download after selecting Asset Type and Owner", () => {
+    const downloadsFolder = "cypress/downloads";
     // Step 1: Navigate using sidebar
     sideBar.navigateTo("Analytics & Insights", "Asset Report");
     AnalyticsInsightsPage.assetReportHeader.should("be.visible");
@@ -16,12 +19,9 @@ describe("Analytics & Insights - Asset Report", () => {
     AnalyticsInsightsPage.selectOwner("SQE Labs");
 
     // Step 3: Click Download button
+    cy.task("deleteAllXlsxFiles", downloadsFolder);
     AnalyticsInsightsPage.clickDownloadButton();
-
-    // Step 4: Get system Downloads path dynamically via task
-    cy.task("getDownloadFolder").then((downloadsFolder) => {
-      const filePath = `${downloadsFolder}/asset_list.xlsx`;
-      cy.readFile(filePath, { timeout: 40000 }).should("exist");
-    });
+    cy.wait(3000);
+    cy.readFile(`${downloadsFolder}/asset_list.xlsx`, { timeout: 20000 }).should("exist");
   });
 });

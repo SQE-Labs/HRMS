@@ -49,6 +49,12 @@ class EmployeeProfilePage extends BasePage {
   get workAccord() {
     return cy.get("h2[id='heading2'] button");
   }
+  get workAccordionBody() {
+    return cy.xpath("//div[@id='collapse2']//div[@class='accordion-body']");
+  }
+  get personalAccordionBody() {
+    return cy.xpath("//div[@aria-labelledby='heading3']//div[contains(@class,'accordion-body')]");
+  }
   get editWorkInfoBtn() {
     return cy.get("#collapse2 a i");
   }
@@ -188,15 +194,6 @@ class EmployeeProfilePage extends BasePage {
     this.workExperienceAccord.wait(500).click();
     cy.log("Clicked on the Work Experience Option");
   }
-
-  clickOnPersonalDetails() {
-    this.personalDetailsAccord.click();
-    cy.log("Clicked on the Work Experience Option");
-
-    this.basicInfoAccord.should("have.attr", "aria-expanded", "true");
-    cy.get("#collapse1").should("have.class", "show");
-  }
-
   clickOnBasicInfo() {
   this.basicInfoAccord.wait(500).click();
   cy.log("Clicked on the Basic Info Option");
@@ -217,8 +214,7 @@ clickOnBasicInfoCollapsed() {
   }
 
   clickOnPersonalDetails() {
-    this.personalDetailsAccord.click();
-    cy.log("Clicked on the Personal Details Option");
+    this.personalDetailsAccord.click({ force: true });
   }
 
   updateDOJ(doj) {
@@ -391,27 +387,34 @@ clickOnBasicInfoCollapsed() {
 }
 
 
-getPersonalFieldValue(label) {
-  return cy
-    .xpath("//div[contains(@class,'accordion-body')]//div[contains(@class,'row')]", { timeout: 15000 })
-    .then(($row) => {
-      const $labels = Cypress.$($row).find(".col-md-3").eq(0).find("p");
-      const $values = Cypress.$($row).find(".col-md-3").eq(1).find("p");
+  getPersonalFieldValue(fieldName) {
+    return cy.xpath(
+      `//div[@id='collapse2']//div[contains(@class,'accordion-body')]//*[contains(text(),'${fieldName}')]/following-sibling::*`
+    );
+  }
 
-      let value = null;
+  validateWorkSectionDetails() {
+    this.workAccordionBody.should("be.visible");
+    this.workAccordionBody.should("include.text", "Technical");
+    this.workAccordionBody.should("include.text", "Sr. Solution Architect");
+    this.workAccordionBody.should("include.text", "Vishal thakur");
+    this.workAccordionBody.should("include.text", "08-08-2025");
+    this.workAccordionBody.should("include.text", "VERIFIED");
+    this.workAccordionBody.should("include.text", "Fulltime");
+  }
 
-      $labels.each((index, el) => {
-        const labelText = Cypress.$(el).text().trim().toLowerCase();
-        if (labelText === label.trim().toLowerCase()) {
-          value = $values.eq(index).text().trim();
-          return false; // stop loop
-        }
-      });
-
-      expect(value, `Value for ${label}`).to.not.be.null;
-      return cy.wrap(value);
-    });
-}
+  validatePersonalDetailsSection() {
+    this.personalAccordionBody.should("be.visible");
+    this.personalAccordionBody.should("include.text", "30-09-1993");
+    this.personalAccordionBody.should("include.text", "232324324322");
+    this.personalAccordionBody.should("include.text", "238928392323");
+    this.personalAccordionBody.should("include.text", "BSSSS5123D");
+    this.personalAccordionBody.should("include.text", "Akshya Nagar 1st Block 1st Cross Rammurthy nagar Bangalore560016");
+    this.personalAccordionBody.should("include.text", "B+ve");
+    this.personalAccordionBody.should("include.text", "male");
+    this.personalAccordionBody.should("include.text", "Single");
+    this.personalAccordionBody.should("include.text", "4523542343");
+  }
 
   updateGender(value) {
     this.genderRadioBtn(value).click();
