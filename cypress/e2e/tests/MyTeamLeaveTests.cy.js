@@ -23,7 +23,7 @@ describe("My Team Leave page", () => {
 
   //Export button is not working.
 
-  it.only("Verify that excel file gets downloaded, after clicking on 'Export' button, @Bug", () => {
+  it("Verify that excel file gets downloaded, after clicking on 'Export' button, @Bug", () => {
     // MyTeamLeavePage.clickOnCrossIcon();
 
     sideBar.navigateTo("Attendance & Leaves", "My Team Leave");
