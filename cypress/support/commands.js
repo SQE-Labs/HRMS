@@ -101,17 +101,3 @@ Cypress.Commands.add("getColumnTexts", (selector) => {
     return Cypress._.map($cells, "textContent").map((text) => text.trim());
   });
 });
-
-Cypress.Commands.add("hasRecords", () => {
-  return cy.get("body").then(($body) => {
-    const noRecordFound = $body.text().includes("No Record Available");
-
-    if (noRecordFound) {
-      cy.log("No Record Available — skipping test flow.");
-      return false;
-    } else {
-      cy.log("Records found — continuing test flow.");
-      return true;
-    }
-  });
-});
