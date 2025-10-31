@@ -96,6 +96,10 @@ class MyTeamLeavePage extends BasePage {
       );
     });
   }
+  
+  hasRecords() {
+  return cy.hasRecords();
+}
 
   successMessage() {
     this.succ_Msg.should("have.text", "Successfully Updated");
