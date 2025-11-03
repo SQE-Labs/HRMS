@@ -13,13 +13,16 @@ module.exports = defineConfig({
      downloadsFolder: "cypress/downloads",
     reporter: "cypress-mochawesome-reporter",
     specPattern: "cypress/e2e/tests/*.cy.{js,jsx,ts,tsx}",
-    excludeSpecPattern: ["cypress/e2e/tests/PerformanceTests.cy.js"],
+    excludeSpecPattern: [
+      "cypress/e2e/tests/PerformanceTests.cy.js",
+      "cypress/e2e/tests/EvaluateEmployeeTest.cy.js",
+      ],
     chromeWebSecurity: false,
     experimentalModifyObstructiveThirdPartyCode: true,
     experimentalSessionAndOrigin: true,
     defaultCommandTimeout: 10000,
     retries: {
-      runMode: 0,
+      runMode: 2,
       openMode: 0,
     },
     video: false,

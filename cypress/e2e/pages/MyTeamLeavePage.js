@@ -96,7 +96,6 @@ class MyTeamLeavePage extends BasePage {
       );
     });
   }
-
   successMessage() {
     this.succ_Msg.should("have.text", "Successfully Updated");
   }
