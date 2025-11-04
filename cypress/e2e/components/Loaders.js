@@ -10,6 +10,10 @@ class Loaders extends BasePage {
   get overlay() {
     return cy.get(".overlay");
   }
+
+  get spinnerLoading() {
+    return cy.get("svg[data-testid='tail-spin-svg']");
+  }
 }
 
 export default new Loaders();
