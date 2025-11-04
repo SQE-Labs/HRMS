@@ -45,7 +45,8 @@
         "EmployeeType": "Fulltime",
         "UpdateDOJ": "2025-09-08",
         "UpdatedDOJ": "08-09-2025",
-        "RecentDOJ": "2025-08-08"
+        "RecentDOJ": "2025-08-08",
+        "EmployeeFlag": "CCI_INDIA"
     },
     "Manager": {
         "Asset": "Asset IT",
@@ -133,6 +134,8 @@
 
     },
     "AttendenceManagement":{
+        "Month": "October",
+        "Year": "2025",
         "SubMenus":[
              "Apply Leaves",
              "Leave Update",
