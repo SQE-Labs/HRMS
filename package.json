@@ -7,10 +7,17 @@
     "cypress:run:chrome:headed": "cypress run --browser chrome --headed",
     "test": "npm run cypress:run:chrome",
     "test:headed": "npm run cypress:run:chrome:headed",
-    "parallel": "cypress-parallel -s cypress/e2e/tests/**/*.cy.js -t 4"
+    "parallel": "cypress-parallel -s cypress/e2e/tests/**/*.cy.js -t 4",
+    "allure:generate": "allure generate allure-results --clean -o allure-report",
+    "allure:open": "allure open allure-report",
+    "test:allure": "npx cypress run --env allure=true",
+    "allure:report": "allure generate \"allure-results\" --clean -o \"allure-report\" && allure open \"allure-report\""
+
   },
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^6.0.2",
+    "@shelex/cypress-allure-plugin": "^2.41.2",
+    "allure-commandline": "^2.34.1",
     "browserify-zlib": "^0.2.0",
     "buffer": "^6.0.3",
     "chai": "^5.1.2",
