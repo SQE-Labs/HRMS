@@ -6,3 +6,5 @@ reports/
 .idea/
 downloads/
 cypress.config.js/
+allure-report/
+allure-results/

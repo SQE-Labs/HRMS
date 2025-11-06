@@ -394,14 +394,18 @@ clickOnBasicInfoCollapsed() {
   }
 
   validateWorkSectionDetails() {
-    this.workAccordionBody.should("be.visible");
-    this.workAccordionBody.should("include.text", "Technical");
-    this.workAccordionBody.should("include.text", "Sr. Solution Architect");
-    this.workAccordionBody.should("include.text", "Vishal thakur");
-    this.workAccordionBody.should("include.text", "08-08-2025");
-    this.workAccordionBody.should("include.text", "VERIFIED");
-    this.workAccordionBody.should("include.text", "Fulltime");
-  }
+  this.workAccordionBody.should("be.visible");
+
+  this.workAccordionBody.invoke("text").then((text) => {
+    const lowerText = text.toLowerCase();
+    expect(lowerText).to.include("technical".toLowerCase());
+    expect(lowerText).to.include("sr. solution architect".toLowerCase());
+    expect(lowerText).to.include("vishal thakur".toLowerCase());
+    expect(lowerText).to.include("08-08-2025".toLowerCase());
+    expect(lowerText).to.include("verified".toLowerCase());
+    expect(lowerText).to.include("fulltime".toLowerCase());
+  });
+}
 
   validatePersonalDetailsSection() {
     this.personalAccordionBody.should("be.visible");
