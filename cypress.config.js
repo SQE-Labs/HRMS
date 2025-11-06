@@ -126,13 +126,14 @@ module.exports = defineConfig({
     downloadsFolder: "cypress/downloads",
     // specPattern: "cypress/e2e/tests/*.cy.{js,jsx,ts,tsx}",
     excludeSpecPattern: [
-      "cypress/e2e/tests/PerformanceTests.cy.js",
+      // "cypress/e2e/tests/PerformanceTests.cy.js",
       "cypress/e2e/tests/EvaluateEmployeeTest.cy.js",
     ],
     specPattern:[
       "cypress/e2e/tests/AnalyticsInsights.cy.js",
-      "cypress/e2e/tests/DownloadAttendance.cy.js",
-      "cypress/e2e/tests/LoginTests.cy.js"
+      // "cypress/e2e/tests/DownloadAttendance.cy.js",
+      "cypress/e2e/tests/LoginTests.cy.js",
+      "cypress/e2e/tests/PerformanceTests.cy.js"
     ],
     defaultCommandTimeout: 10000,
     retries: { runMode: 2, openMode: 0 },
