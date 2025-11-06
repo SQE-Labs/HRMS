@@ -129,6 +129,11 @@ module.exports = defineConfig({
       "cypress/e2e/tests/PerformanceTests.cy.js",
       "cypress/e2e/tests/EvaluateEmployeeTest.cy.js",
     ],
+    includeSpecPattern:[
+      "cypress/e2e/tests/AnalyticsInsights.cy.js",
+      "cypress/e2e/tests/DownloadAttendance.cy.js",
+      "cypress/e2e/tests/LoginTests.cy.js"
+    ],
     defaultCommandTimeout: 10000,
     retries: { runMode: 2, openMode: 0 },
     video: false,
