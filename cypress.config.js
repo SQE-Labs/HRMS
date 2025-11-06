@@ -124,12 +124,12 @@ module.exports = defineConfig({
 
   e2e: {
     downloadsFolder: "cypress/downloads",
-    specPattern: "cypress/e2e/tests/*.cy.{js,jsx,ts,tsx}",
+    // specPattern: "cypress/e2e/tests/*.cy.{js,jsx,ts,tsx}",
     excludeSpecPattern: [
       "cypress/e2e/tests/PerformanceTests.cy.js",
       "cypress/e2e/tests/EvaluateEmployeeTest.cy.js",
     ],
-    includeSpecPattern:[
+    specPattern:[
       "cypress/e2e/tests/AnalyticsInsights.cy.js",
       "cypress/e2e/tests/DownloadAttendance.cy.js",
       "cypress/e2e/tests/LoginTests.cy.js"
