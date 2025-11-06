@@ -118,6 +118,9 @@ const fs = require("fs");
 module.exports = defineConfig({
   chromeWebSecurity: false,
   experimentalModifyObstructiveThirdPartyCode: true,
+  env: {
+    allure: true,
+  },
 
   e2e: {
     downloadsFolder: "cypress/downloads",
@@ -162,6 +165,7 @@ module.exports = defineConfig({
           ],
         },
       };
+      
 
       on("file:preprocessor", webpackPreprocessor(options));
 
