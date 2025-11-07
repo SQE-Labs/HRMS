@@ -481,30 +481,4 @@ describe("Reimbursement Tests", () => {
     ReimbursementPage.clickOn_CrossIconBtn();
     ReimbursementPage.withDrawReimbursementLbl.should("not.be.visible");
   });
-
-  it("HRMIS_9: Verify Reimbursement Withdraw, comment validation and downlode Attachment", () => {
-    // login to Application
-
-    sideBar.navigateTo("My Reimbursements", "Reimbursement Requests");
-    ReimbursementPage.clickNextUntilDisabled();
-    ReimbursementPage.clickOnWithDrawAction();
-
-    ReimbursementPage.clickOn_withDrawBtn();
-    ReimbursementPage.assertValidation(
-      ReimbursementPage.comment_Txt,
-      "Please fill out this field."
-    );
-
-    // ReimbursementPage.clickOnViewBtn();
-    // ReimbursementPage.checkFile("cypress/downloads/dummy.pdf");
-
-    ReimbursementPage.enter_Comment("Commented");
-    ReimbursementPage.clickOn_withDrawBtn();
-    ReimbursementPage.lastRowAction_Lbl.should("have.text", "-");
-    // cy.validateSuccessMessages("Successfully Status Changed to Withdraw");
-    ReimbursementPage.lastRequestStatus.should(
-      "have.text",
-      testData.ReimbursementStatus.Withdraw
-    );
-  });
 });

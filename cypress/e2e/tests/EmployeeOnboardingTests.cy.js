@@ -392,7 +392,7 @@ const joineePersonalMail = generateRandomYopmail(10);
     HRApprovalPage.clickApproveButton();
 
     // Validating the Thank You Success message
-    cy.validateSuccessMessages("Employee's HRMIS account created ");
+    cy.validateSuccessMessages("Employee's HRMIS account created");
   });
 });
 
