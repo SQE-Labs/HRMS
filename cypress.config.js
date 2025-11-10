@@ -15,13 +15,7 @@ module.exports = defineConfig({
 
   e2e: {
     downloadsFolder: "cypress/downloads",
-    // specPattern: "cypress/e2e/tests/*.cy.{js,jsx,ts,tsx}",
-    specPattern:[
-      "cypress/e2e/tests/AnalyticsInsights.cy.js",
-      // "cypress/e2e/tests/DownloadAttendance.cy.js",
-      "cypress/e2e/tests/LoginTests.cy.js",
-      // "cypress/e2e/tests/PerformanceTests.cy.js"
-    ],
+    specPattern: "cypress/e2e/tests/*.cy.{js,jsx,ts,tsx}",
     excludeSpecPattern: [
       "cypress/e2e/tests/PerformanceTests.cy.js",
       "cypress/e2e/tests/EvaluateEmployeeTest.cy.js",
@@ -34,19 +28,38 @@ module.exports = defineConfig({
     viewportWidth: 1920,
     viewportHeight: 1080,
 
+    reporter: "mochawesome",
+reporterOptions: {
+  reportDir: "cypress/reports",
+  overwrite: false,
+  html: false,   // disable per-test HTML files
+  json: true,    // generate JSONs for merging
+  charts: true,
+  embeddedScreenshots: true,
+  inlineAssets: true,
+  reportPageTitle: "HRMS Test Execution Report",
+},
+
     setupNodeEvents(on, config) {
       // 🧹 Clean old Allure results before run
-     const resultsDir = path.join(__dirname, "allure-results");
-     const reportDir = path.join(__dirname, "allure-report");
+      const resultsDir = path.join(__dirname, "allure-results");
+      const allureReportDir = path.join(__dirname, "allure-report");
 
       if (fs.existsSync(resultsDir)) {
         fs.rmSync(resultsDir, { recursive: true, force: true });
         console.log("Old Allure results deleted successfully!");
       }
 
-      if (fs.existsSync(reportDir)) {
-        fs.rmSync(reportDir, { recursive: true, force: true });
+      if (fs.existsSync(allureReportDir)) {
+        fs.rmSync(allureReportDir, { recursive: true, force: true });
         console.log("Old Allure reports deleted successfully!");
+      }
+
+      // 🧹 Clean old default Cypress (mochawesome) reports before run
+      const cypressReportDir = path.join(__dirname, "cypress/reports");
+      if (fs.existsSync(cypressReportDir)) {
+        fs.rmSync(cypressReportDir, { recursive: true, force: true });
+        console.log("Old Cypress HTML reports deleted successfully!");
       }
 
       // Enable Allure plugin

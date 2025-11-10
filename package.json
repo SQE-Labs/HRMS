@@ -11,8 +11,9 @@
     "allure:generate": "allure generate allure-results --clean -o allure-report",
     "allure:open": "allure open allure-report",
     "test:allure": "npx cypress run --env allure=true",
-    "allure:report": "allure generate \"allure-results\" --clean -o \"allure-report\" && allure open \"allure-report\""
-
+    "allure:report": "allure generate \"allure-results\" --clean -o \"allure-report\" && allure open \"allure-report\"",
+    "merge:report": "npx mochawesome-merge cypress/reports/*.json -o cypress/reports/merged.json && npx marge cypress/reports/merged.json --reportDir cypress/reports --inline --reportFilename mochawesome.html --reportTitle 'HRMS Test Execution Report'",
+    "cy:run": "cypress run"
   },
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^6.0.2",
@@ -32,7 +33,7 @@
     "https-browserify": "^1.0.0",
     "mochawesome": "^7.1.4",
     "mochawesome-merge": "^4.4.1",
-    "mochawesome-report-generator": "^6.3.0",
+    "mochawesome-report-generator": "^6.3.2",
     "os-browserify": "^0.3.0",
     "path-browserify": "^1.0.1",
     "process": "^0.11.10",
