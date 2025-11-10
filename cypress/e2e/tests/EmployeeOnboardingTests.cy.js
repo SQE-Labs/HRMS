@@ -48,7 +48,7 @@ const joineePersonalMail = generateRandomYopmail(10);
       Department: "Technical",
       Designation: "Solution Consultant",
       AssignManager: "Vishal",
-      EmployeeType: "REGULAR",
+      EmployeeType: "Regular",
       LeaveManager: "Vishal",
       EmpSubType: "Intern",
       EmpFlag: "CCI_INDIA",
