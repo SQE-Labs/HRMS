@@ -49,7 +49,7 @@ describe("My Team Leave page", () => {
     MyTeamLeavePage.assertValidationMsgField(); 
     
   });
-  it("Verify that 'Leave Approval' pop up opens up, after clicking on 'View' link", () => {
+  it("Verify that 'Leave Approval' pop up opens up, after clicking on 'View' link and flow works properly", () => {
     // MyTeamLeavePage.clickOnCrossIcon();
 
     sideBar.navigateTo("Attendance & Leaves", "My Team Leave");

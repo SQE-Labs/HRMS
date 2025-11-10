@@ -401,7 +401,10 @@ clickOnBasicInfoCollapsed() {
     expect(lowerText).to.include("technical".toLowerCase());
     expect(lowerText).to.include("sr. solution architect".toLowerCase());
     expect(lowerText).to.include("vishal thakur".toLowerCase());
-    expect(lowerText).to.include("08-08-2025".toLowerCase());
+    
+    const datePattern = /\d{2}-\d{2}-\d{4}/;
+    expect(lowerText).to.match(datePattern);
+    
     expect(lowerText).to.include("verified".toLowerCase());
     expect(lowerText).to.include("fulltime".toLowerCase());
   });

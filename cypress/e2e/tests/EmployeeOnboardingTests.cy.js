@@ -48,7 +48,7 @@ const joineePersonalMail = generateRandomYopmail(10);
       Department: "Technical",
       Designation: "Solution Consultant",
       AssignManager: "Vishal",
-      EmployeeType: "REGULAR",
+      EmployeeType: "Regular",
       LeaveManager: "Vishal",
       EmpSubType: "Intern",
       EmpFlag: "CCI_INDIA",
@@ -392,7 +392,7 @@ const joineePersonalMail = generateRandomYopmail(10);
     HRApprovalPage.clickApproveButton();
 
     // Validating the Thank You Success message
-    cy.validateSuccessMessages("Employee's HRMIS account created ");
+    cy.validateSuccessMessages("Employee's HRMIS account created");
   });
 });
 
