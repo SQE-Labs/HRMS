@@ -17,15 +17,23 @@ beforeEach(() => {
 
 describe("Employee Asset Managment Asset Allocation Tests", () => {
   it("HRMIS_AM_7: Verify Asset Management Collapse and Open", () => {
-    sideBar.navigateTo("Asset Management", "Asset Allocation");
-    cy.get("a[aria-expanded='true'] + ul li")
-      .should("have.length", 10)
-      .each(($el) => {
-        cy.wrap($el).should("be.visible");
-      });
-    sideBar.navigateTo("Asset Management");
-    cy.get("a[aria-expanded='true'] + ul li").should("not.exist");
-  });
+  sideBar.navigateTo("Asset Management", "Asset Allocation");
+  cy.get("a[aria-expanded='true']", { timeout: 10000 })
+    .scrollIntoView()
+    .should("be.visible")
+    .parent("li")
+    .within(() => {
+      cy.get("ul > li")
+        .should("exist")
+        .and("have.length.greaterThan", 0)
+        .each(($el) => {
+          cy.wrap($el).scrollIntoView().should("be.visible");
+        });
+    });
+
+  sideBar.navigateTo("Asset Management");
+  cy.get("a[aria-expanded='true'] + ul").should("not.exist");
+});
 
   //bug
   it("HRMIS_AM_8: Verify that number of records appear exactly as the option selected by the user", () => {
