@@ -14,7 +14,7 @@ describe("Employee Profile Tests", () => {
     cy.login("superUser");
   });
 
-  it("HRMIS_1: Verify that the 'Employee List' page and the User Dashboard load successfully.", () => {
+  it("HRMIS_EM_1, HRMIS_EM_2: Verify that the 'Employee List' page and the User Dashboard load successfully.", () => {
     //Login and Navigate to Employees List Page
     sideBar.navigateTo("Employee Management", "Employee Directory");
 
@@ -46,7 +46,7 @@ describe("Employee Profile Tests", () => {
     EmployeeProfilePage.clickOnEmployeeCard(testData.EmployeeName);
   });
 
-  it("HRMIS_2: Verify that the 'Basic Info' accordion expands, and validate the update and close functionalities.", () => {
+  it("HRMIS_EM_8: Verify that the 'Basic Info' accordion expands, and validate the update and close functionalities.", () => {
     // Verify that 'Basic Info' accordion gets expanded, when user clicks 'Basic Info' accordion.
     EmployeeListPage.navigateToUserDashboardPage(testData.EmployeeName);
     EmployeeProfilePage.clickOnBasicInfo();
@@ -131,7 +131,7 @@ describe("Employee Profile Tests", () => {
     EmployeeProfilePage.validateAccordionCollapsed();
   });
 
-  it("HRMIS_3: Verify that the 'Personal Details' accordion expands and displays correct details.", () => {
+  it("HRMIS_EM_15: Verify that the 'Personal Details' accordion expands and displays correct details.", () => {
   // Navigate to profile and expand Personal Details section
   EmployeeListPage.navigateToUserDashboardPage(testData.EmployeeName);
   EmployeeProfilePage.clickOnPersonalDetails();
@@ -141,7 +141,7 @@ describe("Employee Profile Tests", () => {
 });
 
 
-  it("HRMIS_4: Verify that the 'Work' accordion expands and displays correct details.", () => {
+  it("HRMIS_EM_11: Verify that the 'Work' accordion expands and displays correct details.", () => {
   // Navigate to employee profile and expand Work section
   EmployeeListPage.navigateToUserDashboardPage(testData.EmployeeName);
   EmployeeProfilePage.clickOnWork();
@@ -152,7 +152,7 @@ describe("Employee Profile Tests", () => {
 
 
 
-  it("HRMIS_5: Verify that the 'Work Experience' accordion expands,validate table columns", () => {
+  it("HRMIS_EM_18: Verify that the 'Work Experience' accordion expands,validate table columns", () => {
     const expectedTexts = [
       "Job Title",
       "Previous Company",
@@ -171,7 +171,7 @@ describe("Employee Profile Tests", () => {
     EmployeeProfilePage.workExpColLbl.should("not.be.visible");
   });
 
-  it("HRMIS_6: Verify that the 'Education' accordion expands,validate table columns", () => {
+  it("HRMIS_EM_20: Verify that the 'Education' accordion expands,validate table columns", () => {
     const expectedTexts = ["Degree", "College", "From", "To"];
     EmployeeListPage.navigateToUserDashboardPage(testData.EmployeeName);
     EmployeeProfilePage.clickOnEducationDetail();
@@ -184,7 +184,7 @@ describe("Employee Profile Tests", () => {
     EmployeeProfilePage.workExpColLbl.should("not.be.visible");
   });
 
-  it("HRMIS_7: Verify that the 'Dependents' accordion expands,validate table columns", () => {
+  it("HRMIS_EM_22: Verify that the 'Dependents' accordion expands,validate table columns", () => {
     const expectedTexts = [
       "Name",
       "Gender",

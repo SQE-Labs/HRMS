@@ -21,7 +21,7 @@ beforeEach(() => {
 });
 
 describe("Employee Asset Managment Request Tests", () => {
-  it("HRMIS_1: Verify Asset Request Tab", () => {
+  it("HRMIS_AM_25: Verify Asset Request Tab", () => {
     // login to Application
 
     sideBar.navigateTo("Asset Management", "Asset Request");
@@ -40,7 +40,7 @@ describe("Employee Asset Managment Request Tests", () => {
       .and("have.text", "Asset Request");
   });
 
-  it("HRMIS_2: Verify Reset Asset Request Details", () => {
+  it("HRMIS_AM_33: Verify Reset Asset Request Details", () => {
     // login to Application
 
     sideBar.navigateTo("Asset Management", "Asset Request");
@@ -52,7 +52,7 @@ describe("Employee Asset Managment Request Tests", () => {
     AssetMgmtPage.selectAssetType.should("contain", "Select an asset type");
   });
 
-  it("HRMIS_3: Verify Submit Asset Request ", () => {
+  it("HRMIS_AM_34: Verify Submit Asset Request ", () => {
     // login to Application
 
     const reason = "Reason For Request " + generateRandomString(5);
@@ -70,7 +70,7 @@ describe("Employee Asset Managment Request Tests", () => {
     );
   });
 
-  it("HRMIS_4: Verify Asset Management Subtabs and Asset Dashboard Page  ", () => {
+  it("HRMIS_AM_2: Verify Asset Management Subtabs and Asset Dashboard Page  ", () => {
     // login to Application
 
     sideBar.navigateTo("Asset Management", "Asset Overview");
@@ -81,7 +81,7 @@ describe("Employee Asset Managment Request Tests", () => {
     );
   });
 
-  it("HRMIS_5: Verify Asset Type Filter on Dashboard Page  ", () => {
+  it("HRMIS_AM_3: Verify Asset Type Filter on Dashboard Page  ", () => {
     // login to Application
 
     sideBar.navigateTo("Asset Management", "Asset Overview");
@@ -103,7 +103,7 @@ describe("Employee Asset Managment Request Tests", () => {
     );
   });
 
-  it("HRMIS_7:  Verify Asset Owner and Asset Type Filter on Dashboard Page", () => {
+  it("HRMIS_AM_4:  Verify Asset Owner and Asset Type Filter on Dashboard Page", () => {
     // login to Application
 
     sideBar.navigateTo("Asset Management", "Asset Overview");
@@ -129,7 +129,7 @@ describe("Employee Asset Managment Request Tests", () => {
 
   // Functionality changed confirmed by dogra sir
 
-  it("HRMIS_9:Verify CSV file is downloaded after clicking Export on Dashboard Page", () => {
+  it("HRMIS_AM_6:Verify CSV file is downloaded after clicking Export on Dashboard Page", () => {
     // login to Application
 
     sideBar.navigateTo("Asset Management", "Asset Overview");
@@ -151,7 +151,7 @@ describe("Employee Asset Managment Request Tests", () => {
     AssetDashBoardPage.validateErrorMessages();
   });
 
-  it("HRMIS_11: Verify User able to create a Asset on create Asset Page", () => {
+  it("HRMIS_AM_48, HRMIS_AM_56: Verify User able to create a Asset on create Asset Page", () => {
     // login to Application
     const model = "Model" + generateRandomString(5);
     const serilaNo = "Len" + generateRandomNumber(5);

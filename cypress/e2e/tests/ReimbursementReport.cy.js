@@ -9,7 +9,7 @@ describe("Analytics & Insights - Reimbursement Report", () => {
     cy.login("superUser");
   });
 
-  it("HRMIS_RR1: Verify navigation to 'Download Reimbursement' page", () => {
+  it("HRMIS_AI_14: Verify navigation to 'Download Reimbursement' page", () => {
     // Step 1: Navigate using sidebar
     sideBar.navigateTo("Analytics & Insights", "Reimbursement Report");
     // Step 2: Assert page header

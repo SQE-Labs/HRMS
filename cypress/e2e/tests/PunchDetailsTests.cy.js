@@ -14,7 +14,7 @@ beforeEach(() => {
 });
 
 describe("Attendence Management Punch Details Tests", () => {
-  it("HRMIS_1: Verify that 'Punch Details' page opens up after clicking on 'Attendance & Leaves' ", () => {
+  it("HRMIS_A&L_44: Verify that 'Punch Details' page opens up after clicking on 'Attendance & Leaves' ", () => {
     sideBar.navigateTo("Attendance & Leaves", "Punch Details");
 
     PunchDeatilsPage.punchDetailsHeader

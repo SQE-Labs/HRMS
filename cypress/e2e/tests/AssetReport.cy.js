@@ -8,7 +8,7 @@ describe("Analytics & Insights - Asset Report", () => {
     cy.login("superUser");
   });
 
-  it("HRMIS_AR1: Verify Asset Report download after selecting Asset Type and Owner", () => {
+  it("HRMIS_AI_12: Verify Asset Report download after selecting Asset Type and Owner", () => {
     const downloadsFolder = "cypress/downloads";
     // Step 1: Navigate using sidebar
     sideBar.navigateTo("Analytics & Insights", "Asset Report");

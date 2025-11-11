@@ -7,7 +7,7 @@ beforeEach(() => {
 
 describe("Attendance Management - Approve Document", () => {
 
-    it("HRMIS_AD1: Verify the navigation of Approve Document page", () => {
+    it("HRMIS_EM_63: Verify the navigation of Approve Document page", () => {
 
         sideBar.navigateTo("Attendance & Leaves", "Approve Document");
         ApproveDocumentPage.approveDocumentHeader.should("be.visible").and("have.text", "Approve Document");

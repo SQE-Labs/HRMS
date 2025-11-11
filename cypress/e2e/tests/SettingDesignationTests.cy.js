@@ -15,7 +15,7 @@ beforeEach(() => {
 });
 
 describe("Setting Designation Tests", () => {
-  it("HRMIS_1: Verify Designation tab", () => {
+  it("HRMIS_EM_86: Verify Designation tab", () => {
     // login to Application
 
     sideBar.navigateTo("Employee Management", "Designations");
@@ -24,7 +24,7 @@ describe("Setting Designation Tests", () => {
     });
   });
 
-  it("HRMIS_2: Verify Add Designation button and designations appears", () => {
+  it("HRMIS_EM_87: Verify Add Designation button and designations appears", () => {
     // login to Application
 
     sideBar.navigateTo("Employee Management", "Designations");
@@ -36,7 +36,7 @@ describe("Setting Designation Tests", () => {
     // DesignationPage.assertDesignations(testData.Designations.Genric);
   });
 
-  it("HRMIS_3: Verify Update Designation Pop up open and close", () => {
+  it("HRMIS_EM_88, HRMIS_EM_89: Verify Update Designation Pop up open and close", () => {
     // login to Application
 
     sideBar.navigateTo("Employee Management", "Designations");
@@ -58,7 +58,7 @@ describe("Setting Designation Tests", () => {
     DesignationPage.addUpdateDesignationHeader.should("not.be.visible");
   });
 
-  it("HRMIS_4: Verify Update designation", () => {
+  it("HRMIS_EM_92: Verify Update designation", () => {
     // login to Application
 
     const DesignationName = "Designation Updated " + generateRandomString(5);
@@ -106,7 +106,7 @@ describe("Setting Designation Tests", () => {
     // DesignationPage.lastDesignationName.should("have.text", lastItem);
   });
 
-  it("HRMIS_6: Verify Add designation , Cancel and cross button", () => {
+  it("HRMIS_EM_93, HRMIS_EM_94: Verify Add designation , Cancel and cross button", () => {
     // login to Application
 
     sideBar.navigateTo("Employee Management", "Designations");
@@ -145,7 +145,7 @@ describe("Setting Designation Tests", () => {
     );
   });
 
-  it("HRMIS_8: Verify new designation added on clicking submit button", () => {
+  it("HRMIS_EM_97: Verify new designation added on clicking submit button", () => {
     // login to Application
 
     const DesignationName = "Desination Auto " + generateRandomString(5);

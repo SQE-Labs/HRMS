@@ -15,12 +15,12 @@ beforeEach(() => {
 });
 
 describe("Role Menu Assignment", () => {
-  it("HRMS_1 : Verify that 'Role management' tab expands, when user clicks on 'Role Management' accordion from left panel.", () => {
+  it("HRMIS_RM_24: Verify that 'Role management' tab expands, when user clicks on 'Role Management' accordion from left panel.", () => {
     sideBar.navigateTo("Role Management", "Menu Assignment");
     RoleMenuAssignMent.roleAssignmentHeader("Menu Assignment");
   });
 
-  it("HRMS_2 : Verify that user is able to select any option from 'Select Employee' dropdown field", () => {
+  it("HRMIS_RM_26: Verify that user is able to select any option from 'Select Employee' dropdown field", () => {
     cy.wait(2000);
     sideBar.navigateTo("Role Management", "Menu Assignment");
 
@@ -36,7 +36,7 @@ describe("Role Menu Assignment", () => {
     RoleMenuAssignMent.checkBoxAssert();
   });
 
-  it("HRMS_3 : Verify that user is able to select any option from 'Select Employee' dropdown field", () => {
+  it("HRMIS_RM_27: Verify that user is able to check/uncheck the menu option checkboxes", () => {
     cy.wait(2000);
     sideBar.navigateTo("Role Management", "Menu Assignment");
 

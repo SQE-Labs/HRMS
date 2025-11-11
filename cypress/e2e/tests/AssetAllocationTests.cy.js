@@ -16,7 +16,7 @@ beforeEach(() => {
 });
 
 describe("Employee Asset Managment Asset Allocation Tests", () => {
-  it("HRMIS_1: Verify Asset Management Collapse and Open", () => {
+  it("HRMIS_AM_7: Verify Asset Management Collapse and Open", () => {
     sideBar.navigateTo("Asset Management", "Asset Allocation");
     cy.get("a[aria-expanded='true'] + ul li")
       .should("have.length", 10)
@@ -28,7 +28,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
   });
 
   //bug
-  it("HRMIS_2: Verify Asset Allocation Page open after clicking on Asset Allocation subtab", () => {
+  it("HRMIS_AM_8: Verify that number of records appear exactly as the option selected by the user", () => {
     sideBar.navigateTo("Asset Management", "Asset Allocation");
     AssetAllocationPage.assetAllocationHeader
       .should("be.visible")
@@ -41,7 +41,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
   });
 
   //need to fix later on
-  it("HRMIS_3: Verify Searching with Asset type ,Employee Name and serial Number on Asset Allocation subtab", () => {
+  it("HRMIS_AM_8: Verify Searching with Asset type ,Employee Name and serial Number on Asset Allocation subtab", () => {
     sideBar.navigateTo("Asset Management", "Asset Allocation");
 
     // Searching By Asset Type
@@ -63,7 +63,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
       .and("have.text", "No records available");
   });
 
-  it("HRMIS_4: Verify 'Next' and 'Previous' Pagination button Asset Allocation Page", () => {
+  it("HRMIS_AM_9, HRMIS_AM_10: Verify 'Next' and 'Previous' Pagination button Asset Allocation Page", () => {
 
     sideBar.navigateTo("Asset Management", "Asset Allocation");
     AssetAllocationPage.selectItemPerPage("40");
@@ -428,7 +428,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
       });
   });
 
-  it("HRMIS_14:Verify Asset Assign Asset Management Page", () => {
+  it("HRMIS_AM_11:Verify Asset Assign Asset Management Page", () => {
     sideBar.navigateTo("Asset Management", "Asset Allocation");
 
     AssetAllocationPage.clickOnAssetAssigne();
@@ -456,7 +456,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
     AssetAllocationPage.validateAssetTypeField();
   });
 
-  it("HRMIS_16:Verify 'Assign Asset' pop-up opens after clicking on available asset", () => {
+  it("HRMIS_AM_13:Verify 'Assign Asset' pop-up opens after clicking on available asset", () => {
     sideBar.navigateTo("Asset Management", "Asset Allocation");
 
     AssetAllocationPage.clickOnAssetAssigne();
@@ -527,7 +527,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
     // AssetAllocationPage.assetSelectedDetails();
   });
 
-  it("HRMIS_22:Verify that user able to assign the asset to the employee 'Assign Asset' page", () => {
+  it("HRMIS_AM_14, HRMIS_AM_16:Verify that user able to assign the asset to the employee 'Assign Asset' page", () => {
     sideBar.navigateTo("Asset Management", "Asset Allocation");
     AssetAllocationPage.clickOnAssetAssigne();
     AssetAllocationPage.selectAssetType("Keyboard");
@@ -552,7 +552,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
     AssetAllocationPage.lastAssignedAssetEmp.should("have.text", "Autom Ffff");
   });
 
-  it("HRMIS_23:Verify that user able to de allocate the asset | Clean up", () => {
+  it("HRMIS_AM_17, HRMIS_AM_18, HRMIS_AM_19, HRMIS_AM_23:Verify that user able to de allocate the asset | Clean up", () => {
     sideBar.navigateTo("Asset Management", "Asset De-allocation");
     // cy.wait(30000)
     AssetDeAllocationPage.select_Employee("Autom Mation Ffff")

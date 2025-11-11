@@ -14,7 +14,7 @@ beforeEach(() => {
 });
 
 describe("My Team Leave page", () => {
-  it("Verify that 'Attendance & Leaves' tab expands, when user clicks on 'Attendance & Leaves'.", () => {
+  it("HRMIS_A&L_22: Verify that 'Attendance & Leaves' tab expands, when user clicks on 'Attendance & Leaves'.", () => {
     sideBar.navigateTo("Attendance & Leaves", "My Team Leave");
     MyTeamLeavePage.headerTxt();
     //MyTeamLeavePage.clickStatusDropdown();
@@ -23,20 +23,20 @@ describe("My Team Leave page", () => {
 
   //Export button is not working.
 
-  it("Verify that excel file gets downloaded, after clicking on 'Export' button, @Bug", () => {
+  it("HRMIS_A&L_25: Verify that excel file gets downloaded, after clicking on 'Export' button, @Bug", () => {
     // MyTeamLeavePage.clickOnCrossIcon();
 
     sideBar.navigateTo("Attendance & Leaves", "My Team Leave");
     MyTeamLeavePage.clickOnExportBtn();
   });
 
-  it("Verify that 'Leave Approval' pop up opens up, after clicking on 'View' link", () => {
+  it("HRMIS_A&L_26: Verify that 'Leave Approval' pop up opens up, after clicking on 'View' link", () => {
     // MyTeamLeavePage.clickOnCrossIcon();
 
     sideBar.navigateTo("Attendance & Leaves", "My Team Leave");
     MyTeamLeavePage.clickOnViewLink();
   });
-  it("Verify that validation message appears, after clicking on 'Submit' button when user leaves all the fields blank", () => {
+  it("HRMIS_A&L_30: Verify that validation message appears, after clicking on 'Submit' button when user leaves all the fields blank", () => {
     // MyTeamLeavePage.clickOnCrossIcon();
 
     sideBar.navigateTo("Attendance & Leaves", "My Team Leave");
@@ -49,7 +49,7 @@ describe("My Team Leave page", () => {
     MyTeamLeavePage.assertValidationMsgField(); 
     
   });
-  it("Verify that 'Leave Approval' pop up opens up, after clicking on 'View' link and flow works properly", () => {
+  it("HRMIS_A&L_23: Verify that 'Leave Approval' pop up opens up, after clicking on 'View' link and flow works properly", () => {
     // MyTeamLeavePage.clickOnCrossIcon();
 
     sideBar.navigateTo("Attendance & Leaves", "My Team Leave");

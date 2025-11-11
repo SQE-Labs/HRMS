@@ -14,7 +14,7 @@ let randomPolicy = "Demo" + generateRandomString(5);
 let randomDescription = "Description" + generateRandomString(5);
 
 describe("Policy Management Tests", () => {
-  it("HRMIS_1: Verify 'Modify Policies' page.", () => {
+  it("HRMIS_CP_29: Verify 'Modify Policies' page.", () => {
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Caelius' Policies", "Policy Viewer");
     PolicyMgmtPage.modifyPolicyLbl.should("be.visible");
@@ -42,7 +42,7 @@ describe("Policy Management Tests", () => {
     PolicyMgmtPage.checkDownloadFile();
   });
 
-  it("HRMIS_2: Verify 'Add Policy' Pop up.", () => {
+  it("HRMIS_CP_20: Verify 'Add Policy' Pop up.", () => {
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Caelius' Policies", "Policy Editor");
 
@@ -81,7 +81,7 @@ describe("Policy Management Tests", () => {
     PolicyMgmtPage.lastValidDate.should("have.text", "24-10-2023");
   });
 
-  it("HRMIS_3: Verify 'Update Policy' Pop up.", () => {
+  it("HRMIS_CP_12: Verify 'Update Policy' Pop up.", () => {
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Caelius' Policies", "Policy Editor");
 
@@ -186,7 +186,7 @@ describe("Policy Management Tests", () => {
       });
   });
 
-  it("HRMIS_5: Verify Asscending and Descending sorting of Policy Ids Modify Policy Page", () => {
+  it("HRMIS_CP_28: Verify Asscending and Descending sorting of Policy Ids Modify Policy Page", () => {
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Caelius' Policies", "Policy Editor");
     PolicyMgmtPage.modifyPolicyLbl.should("be.visible");
@@ -242,7 +242,7 @@ describe("Policy Management Tests", () => {
     ViewPolicyMgmt.checkDownloadFile();
   });
 
-  it("HRMIS_7: Verify 'Next' and 'Previous' Pagination button View Policy Page", () => {
+  it("HRMIS_CP_31: Verify 'Next' and 'Previous' Pagination button View Policy Page", () => {
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Caelius' Policies", "Policy Viewer");
     PolicyMgmtPage.modifyPolicyLbl.should("be.visible");

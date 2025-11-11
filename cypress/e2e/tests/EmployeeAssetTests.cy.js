@@ -13,7 +13,7 @@ beforeEach(() => {
 });
 
 describe("Employee Asset Managment Tests", () => {
-  it("HRMIS_1: Verify Assets tab", () => {
+  it("HRMIS_EM_24: Verify Assets tab", () => {
     // login to Application
 
     sideBar.navigateTo("Employee Management", "Employee Directory");
