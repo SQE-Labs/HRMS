@@ -17,7 +17,7 @@ beforeEach(() => {
 });
 
 describe("Employee Assign Manager Managment Tests", () => {
-  it("HRMIS_1: Verify Assigne Manager Open when user click on Assing Manager Subtab", () => {
+  it("HRMIS_EM_28: Verify Assigne Manager Open when user click on Assing Manager Subtab", () => {
     const expectedTexts = ["Name", "Assigned Manager", "Action"];
     AssignManagerPage.assertTextEquals(
       AssignManagerPage.assignManagerLbl,
@@ -28,7 +28,7 @@ describe("Employee Assign Manager Managment Tests", () => {
     AssignManagerPage.assertExpectedTableLbl(expectedTexts);
   });
 
-  it("HRMIS_2: Verify Assign Manager Pop up opens up when user click on Re-Assigne button", () => {
+  it("HRMIS_EM_30: Verify Assign Manager Pop up opens up when user click on Re-Assigne button", () => {
     AssignManagerPage.selectEmployee(testData.EmployeeName);
     AssignManagerPage.clickOnReAssigneBtn();
     AssignManagerPage.assigneeMangerPopupLbl.should(
@@ -39,7 +39,7 @@ describe("Employee Assign Manager Managment Tests", () => {
     cy.validateSuccessMessages("Successfully Assigned!");
   });
 
-  it("HRMIS_3: Verify Assign Manager Pop up closed when user click on Close button", () => {
+  it("HRMIS_EM_33: Verify Assign Manager Pop up closed when user click on Close button", () => {
     AssignManagerPage.selectEmployee(testData.EmployeeName);
     AssignManagerPage.clickOnReAssigneBtn();
     AssignManagerPage.assigneeMangerPopupLbl.should(
@@ -59,7 +59,7 @@ describe("Employee Assign Manager Managment Tests", () => {
     cy.validateSuccessMessages("An employee cannot be their own manager");
   });
 
-  it("HRMIS_5: Verify that user is able to re-assign manager", () => {
+  it("HRMIS_EM_34: Verify that user is able to re-assign manager", () => {
     AssignManagerPage.selectEmployee(testData.EmployeeName);
     AssignManagerPage.clickOnReAssigneBtn();
     AssignManagerPage.selectManager(testData.Manager.Asset);

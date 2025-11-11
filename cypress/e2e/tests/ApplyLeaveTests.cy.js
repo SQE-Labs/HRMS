@@ -14,7 +14,7 @@ beforeEach(() => {
 });
 
 describe("Attendence Management Apply Leave Tests", () => {
-  it("A&L_2: Verify Apply Leave Page @first", () => {
+  it("HRMIS_A&L_2: Verify Apply Leave Page @first", () => {
     sideBar.navigateTo("Attendance & Leaves", "Apply Leaves");
 
     ApplyLeavePage.applyLeaveHeader
@@ -342,7 +342,7 @@ describe("Attendence Management Apply Leave Tests", () => {
       });
   });
 
-  it("HRMIS_9: Verify Apply Leave and verify yes or no button on confirmation message popup", () => {
+  it("HRMIS_A&L_3: Verify Apply Leave and verify yes or no button on confirmation message popup", () => {
   sideBar.navigateTo("Attendance & Leaves", "Apply Leaves"); 
 
       ApplyLeavePage.clickOnApplyLeaveBtn();
@@ -379,7 +379,7 @@ describe("Attendence Management Apply Leave Tests", () => {
     ApplyLeavePage.clickOnCancelButton();
   });
 
-  it("HRMIS_11: should select current date and future date (2 days ahead)", () => {
+  it("HRMIS_A&L_11: should select current date and future date (2 days ahead)", () => {
   sideBar.navigateTo("Attendance & Leaves", "Apply Leaves");
 
       ApplyLeavePage.clickOnApplyLeaveBtn();
@@ -408,7 +408,7 @@ describe("Attendence Management Apply Leave Tests", () => {
 });
 
 
-  it("HRMIS_12: Verify Apply Leave Page @first", () => {
+  it("HRMIS_A&L_21: Verify Apply Leave Page and application withdraws", () => {
     sideBar.navigateTo("Attendance & Leaves", "Apply Leaves");
     cy.wait(3000);
     ApplyLeavePage.clickOnWithdrawLink();

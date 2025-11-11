@@ -16,7 +16,7 @@ beforeEach(() => {
 });
 
 describe("Employee Managment Promote Employee Tests", () => {
-  it("HRMIS_1: Verify Promote Open when user click on Promote Employee Subtab under Employee Managment", () => {
+  it("HRMIS_EM_45: Verify Promote Open when user click on Promote Employee Subtab under Employee Managment", () => {
     const expectedTexts = [
       "Employee Id",
       "Name",
@@ -33,7 +33,7 @@ describe("Employee Managment Promote Employee Tests", () => {
     PromoteEmployeePage.assertExpectedTableLbl(expectedTexts);
   });
 
-  it("HRMIS_2: Verify Promot pop up open and close when user click on Promot and Cancel button", () => {
+  it("HRMIS_EM_47: Verify Promot pop up open and close when user click on Promot and Cancel button", () => {
     cy.wait(1000);
     PromoteEmployeePage.selectEmployee(testData.EmployeeName);
     PromoteEmployeePage.clickOnPromote();
@@ -53,7 +53,7 @@ describe("Employee Managment Promote Employee Tests", () => {
     PromoteEmployeePage.promotePopHeaderLbl.should("not.be.visible");
   });
 
-  it("HRMIS_3: Verify Validation message appears after clicking on submit button when no department or designation is selected", () => {
+  it("HRMIS_EM_50: Verify Validation message appears after clicking on submit button when no department or designation is selected", () => {
     cy.wait(1000);
     PromoteEmployeePage.selectEmployee(testData.EmployeeName);
     PromoteEmployeePage.clickOnPromote();
@@ -83,7 +83,7 @@ describe("Employee Managment Promote Employee Tests", () => {
     );
   });
 
-  it("HRMIS_4: Verify options list of Desgination associated to Department", () => {
+  it("HRMIS_EM_46: Verify options list of Desgination associated to Department", () => {
     cy.wait(1000);
     PromoteEmployeePage.selectEmployee(testData.EmployeeName);
     PromoteEmployeePage.clickOnPromote();

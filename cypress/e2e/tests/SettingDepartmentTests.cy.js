@@ -15,7 +15,7 @@ beforeEach(() => {
 });
 
 describe("Setting Department Tests", () => {
-  it("HRMIS_1: Verify Departments tab", () => {
+  it("HRMIS_EM_73, HRMIS_EM_74: Verify Departments tab", () => {
     // login to Application
 
     sideBar.navigateTo("Employee Management", "Departments");
@@ -34,7 +34,7 @@ describe("Setting Department Tests", () => {
       .and("have.text", "No Record Available");
   });
 
-  it("HRMIS_2: Verify Add Departments ,cancle and cross icon funcionality ", () => {
+  it("HRMIS_EM_81, HRMIS_EM_82: Verify Add Departments ,cancle and cross icon funcionality ", () => {
     // login to Application
 
     sideBar.navigateTo("Employee Management", "Departments");
@@ -66,7 +66,7 @@ describe("Setting Department Tests", () => {
     );
   });
 
-  it("HRMIS_4: Verify new department added on clicking submit button", () => {
+  it("HRMIS_EM_85: Verify new department added on clicking submit button", () => {
     // login to Application
 
     const departmentName = "Department Auto " + generateRandomString(5);
@@ -88,7 +88,7 @@ describe("Setting Department Tests", () => {
     });
   });
 
-  it("HRMIS_5: Verify edit department , Cancel and cross button", () => {
+  it("HRMIS_EM_76, HRMIS_EM_77: Verify edit department , Cancel and cross button", () => {
     // login to Application
 
     const departmentName = "Department Auto " + generateRandomString(5);
@@ -109,7 +109,7 @@ describe("Setting Department Tests", () => {
     DepartmentsPage.addUpdateDepartmentHeader.should("not.be.visible");
   });
 
-  it("HRMIS_6: Verify Update Department.", () => {
+  it("HRMIS_EM_80: Verify Update Department.", () => {
     // login to Application
 
     const departmentName = "Department Updated " + generateRandomString(5);

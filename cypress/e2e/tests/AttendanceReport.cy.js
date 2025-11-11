@@ -9,7 +9,7 @@ describe("Analytics & Insights - Attendance Report", () => {
     cy.login("superUser");
   });
 
-  it("HRMIS_AT1: Verify navigation to 'Download Attendance' page", () => {
+  it("HRMIS_AI_13: Verify navigation to 'Download Attendance' page", () => {
     // Step 1: Navigate using sidebar
     sideBar.navigateTo("Analytics & Insights", "Attendance Report");
     // Step 2: Assert page header

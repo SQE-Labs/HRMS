@@ -1,7 +1,7 @@
 import { it } from "mocha";
 
 describe("Login Tests", () => {
-  it("Login_1 : Verify that user is able to login with valid credentials", () => {
+  it("HRMIS_LI_1 : Verify that user is able to login with valid credentials", () => {
     cy.login("superUser");
   });
 

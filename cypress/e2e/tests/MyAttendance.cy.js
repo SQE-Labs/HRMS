@@ -15,7 +15,7 @@ beforeEach(() => {
 });
 
 describe("My Attendance", () => {
-  it("HRMIS_1: Navigating to Attendance & Leaves Page", () => {
+  it("HRMIS_A&L_59: Navigating to Attendance & Leaves Page", () => {
     sideBar.navigateTo("Attendance & Leaves", "My Attendance");
     MyAttendance.myAttendanceHeaderTxt();
   });

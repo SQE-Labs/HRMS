@@ -16,7 +16,7 @@ beforeEach(() => {
 });
 
 describe("Employee Upload Document Tests", () => {
-  it("HRMIS_1: Verify Upload document Page ", () => {
+  it("HRMIS_EM_52, HRMIS_EM_53: Verify Upload document Page ", () => {
     UploadEmpDocumentPage.assertTextEquals(
       //Verify that user gets directed to 'Document Upload' page, after clicking on 'Document Upload
       UploadEmpDocumentPage.uploadeDocHeaderLbl,
@@ -39,7 +39,7 @@ describe("Employee Upload Document Tests", () => {
     );
   });
 
-  it("HRMIS_2: Verify 'Upload Document Action'popup opens up and close when click on 'upload' icon and 'cancel' button repectively", () => {
+  it("HRMIS_EM_54, HRMIS_EM_55: Verify 'Upload Document Action'popup opens up and close when click on 'upload' icon and 'cancel' button repectively", () => {
     UploadEmpDocumentPage.selectEmployee(testData.EmployeeName);
     UploadEmpDocumentPage.clickOnUploadAct("Insurance Card");
     UploadEmpDocumentPage.uploadeActPopLbl
@@ -62,7 +62,7 @@ describe("Employee Upload Document Tests", () => {
     UploadEmpDocumentPage.uploadeActPopLbl.should("not.be.visible");
   });
 
-  it("HRMIS_3:Verify that documents gets uploaded after clicking on 'Submit' button", () => {
+  it("HRMIS_EM_58: Verify that documents gets uploaded after clicking on 'Submit' button", () => {
     UploadEmpDocumentPage.assertTextEquals(
       UploadEmpDocumentPage.uploadeDocHeaderLbl,
       "Document Upload"

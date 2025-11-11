@@ -17,7 +17,7 @@ beforeEach(() => {
 
 describe("Attendance Management - Download Attendance", () => {
  
-  it("HRMIS_DA1: Verify the reset button is working after setting the data", () => {
+  it("HRMIS_A&L_54: Verify the reset button is working after setting the data", () => {
     //HRMIS_DA1: Verify navigation to 'Download Attendance' page
     sideBar.navigateTo("Attendance & Leaves", "Download Attendance");
     DownloadAttendancePage.downloadAttendanceHeader
@@ -39,7 +39,7 @@ describe("Attendance Management - Download Attendance", () => {
     DownloadAttendancePage.empFlag.should("have.value", "ALL");
   });
 
-  it("HRMIS_DA2: Verify the download button is working after setting the data", () => {
+  it("HRMIS_A&L_58: Verify the download button is working after setting the data", () => {
     const downloadsFolder = "cypress/downloads";
 
     const monthFromData = testData.AttendenceManagement.Month;

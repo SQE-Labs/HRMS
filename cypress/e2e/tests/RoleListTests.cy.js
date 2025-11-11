@@ -10,7 +10,7 @@ beforeEach(() => {
 });
 
 describe("Role Management Tests", () => {
-  it("HRMIS_1: Verify 'Role List' page.", () => {
+  it("HRMIS_RM_1: Verify 'Role List' page.", () => {
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Role Management", "Role List");
     RoleListPage.roleListLbl.should("be.visible").and("have.text", "Role List");
@@ -31,7 +31,7 @@ describe("Role Management Tests", () => {
       .and("have.text", "No Record Available");
   });
 
-  it("HRMIS_2: Verify user is able to click on Next button.", () => {
+  it("HRMIS_RM_4: Verify user is able to click on Next button.", () => {
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Role Management", "Role List");
 
@@ -42,7 +42,7 @@ describe("Role Management Tests", () => {
     cy.wait(500);
   });
 
-  it("HRMIS_3: Verify user is able to click on previous button.", () => {
+  it("HRMIS_RM_5: Verify user is able to click on previous button.", () => {
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Role Management", "Role List");
 
@@ -56,7 +56,7 @@ describe("Role Management Tests", () => {
     cy.wait(500);
   });
 
-  it("HRMIS_4: Verify 'Add Role' Pop up.", () => {
+  it("HRMIS_RM_17: Verify 'Add Role' Pop up.", () => {
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Role Management", "Role List");
 
@@ -106,7 +106,7 @@ describe("Role Management Tests", () => {
     );
   });
 
-  it("HRMIS_5: Verify 'Update Role' Pop up.", () => {
+  it("HRMIS_RM_8: Verify 'Update Role' Pop up.", () => {
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Role Management", "Role List");
     // select Item Per Page 20
@@ -156,7 +156,7 @@ describe("Role Management Tests", () => {
     RoleListPage.lastRoleDesc.should("have.text", roleDesc);
   });
 
-  it("HRMIS_6: Verify 'Delete Role' Pop up.", () => {
+  it("HRMIS_RM_14: Verify 'Delete Role' Pop up.", () => {
     //Navigate to Modify Policy Page
     sideBar.navigateTo("Role Management", "Role List");
     // select Item Per Page 20

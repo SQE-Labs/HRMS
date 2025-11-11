@@ -16,7 +16,7 @@ describe("Analytics & Insights - User's Role Report", () => {
     cy.login("superUser");
   });
 
-  it("HRMIS_A1: Verify 'User's Role Report' page opens and displays required fields and table columns", () => {
+  it("HRMIS_AI_2: Verify 'User's Role Report' page opens and displays required fields and table columns", () => {
     // Step 1: Navigate using sidebar
     sideBar.navigateTo("Analytics & Insights", "User's Role Report");
     AnalyticsInsightsPage.assertUsersRoleReportHeader();
@@ -42,7 +42,7 @@ describe("Analytics & Insights - User's Role Report", () => {
     });
   });
 
-  it("HRMIS_A2: Verify search by employee name shows correct results", () => {
+  it("HRMIS_AI_4: Verify search by employee name shows correct results", () => {
     // Step 1: Navigate
     sideBar.navigateTo("Analytics & Insights", "User's Role Report");
     AnalyticsInsightsPage.assertUsersRoleReportHeader();
