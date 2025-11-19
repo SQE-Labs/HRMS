@@ -20,9 +20,9 @@ class ApproveDocumentPage extends BasePage{
     get commnetTxtArea() {
         return cy.get("textarea[name='comment']");
     }
-    get selectEmployeeDoc(){
-      return cy.xpath("//div[text()='All Employees']");
-    }
+    get selectEmployeeInput() {
+  return cy.get('#react-select-4-input');
+}
     get actionbutton(){
         return cy.xpath("//button[@class='btn btn-secondary' and text()='Action']");
     }
@@ -79,14 +79,13 @@ clickOnUploadAct(text) {
     this.submitBtn.click();
   }
 
-  selectEmployeeDocument(text){
-    cy.selectDrpValueByText(
-      this.selectEmployeeDoc,
-      text,
-      true,
-      this.selectEmployeeDoc
-    );
-  }
+  selectEmployeeDocument(text) {
+  this.selectEmployeeInput
+    .click({ force: true })
+    .type(text, { force: true })
+    .type('{enter}', { force: true });
+}
+
   
   clickOnActBtn(){
     this.actionbutton.click();

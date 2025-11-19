@@ -24,10 +24,10 @@ describe("Employee Asset Managment Request Tests", () => {
   it("HRMIS_AM_25: Verify Asset Request Tab", () => {
     // login to Application
 
-    sideBar.navigateTo("Asset Management", "Asset Request");
+    sideBar.navigateTo("Asset Management", "Approve Asset Request (L1)");
     AssetMgmtPage.assetReqHeader
       .should("be.visible")
-      .and("have.text", "Asset Request");
+      .and("have.text", "Approve Asset Request (L1)");
     AssetMgmtPage.assetReqBtn.should("be.visible");
     AssetMgmtPage.clickOnAssetReq();
     AssetMgmtPage.assetReqLbl

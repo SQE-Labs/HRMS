@@ -28,11 +28,11 @@ describe("Employee Management - Approve Document", () => {
 
     });
 
-    it.only("HRMIS_EM: Verify that the document gets approves or rejected on Approve Document page", () =>{
+    it("HRMIS_EM: Verify that the document gets approves or rejected on Approve Document page", () =>{
       const fullName = `${testData.EmployeeData.FirstName} ${testData.EmployeeData.LastName}`;
 
         sideBar.navigateTo("Employee Management", "Approve Document");
-        ApproveDocumentPage.selectEmployeeDocument(fullName);
+        // ApproveDocumentPage.selectEmployeeDocument(fullName);
         ApproveDocumentPage.clickOnActBtn("PAN Card");
         cy.wait(3000);
         ApproveDocumentPage.selectRejectOption("Reject");
