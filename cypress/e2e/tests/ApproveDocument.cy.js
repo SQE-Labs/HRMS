@@ -17,32 +17,29 @@ describe("Employee Management - Approve Document", () => {
     it("HRMIS_EM_63: Verify the document is uploaded on Approve Document page", () => {
 
         sideBar.navigateTo("Employee Management", "Document Upload");
-        ApproveDocumentPage.selectEmployee(testData.EmployeeName);
+        ApproveDocumentPage.selectEmployee(testData.EmployeeData.AprroveName);
         ApproveDocumentPage.clickOnUploadAct("PAN Card");
         ApproveDocumentPage.selectSamplePdf("cypress/fixtures/resources/Sample testing pdf.pdf");
+        ApproveDocumentPage.clickOnSubmitBnt();
+        ApproveDocumentPage.assertValMsg_Comment();
         ApproveDocumentPage.enterComments();
         ApproveDocumentPage.clickOnSubmitBnt();
-
-        sideBar.navigateTo("Employee Management", "Approve Document");
-        ApproveDocumentPage.approveDocumentHeader.should("be.visible").and("have.text", "Approve Document");
+        ApproveDocumentPage.assertSuccMsg_Upload();
 
     });
 
     it("HRMIS_EM: Verify that the document gets approves or rejected on Approve Document page", () =>{
-      const fullName = `${testData.EmployeeData.FirstName} ${testData.EmployeeData.LastName}`;
 
         sideBar.navigateTo("Employee Management", "Approve Document");
-        // ApproveDocumentPage.selectEmployeeDocument(fullName);
+        ApproveDocumentPage.selectEmployeeDocument(testData.EmployeeData.AprroveName);
         ApproveDocumentPage.clickOnActBtn("PAN Card");
-        cy.wait(3000);
-        ApproveDocumentPage.selectRejectOption("Reject");
-        cy.wait(3000);
-        ApproveDocumentPage.enterRejectComments();
-        cy.wait(3000);
         ApproveDocumentPage.clickOnSubmitBtn();
-        cy.wait(3000);
-
-
-
+        ApproveDocumentPage.assertValMsg_Field();
+        ApproveDocumentPage.selectRejectOption("Reject");
+        ApproveDocumentPage.clickOnSubmitBtn();
+        ApproveDocumentPage.assertValMsg_Reason();
+        ApproveDocumentPage.enterRejectComments();
+        ApproveDocumentPage.clickOnSubmitBtn();
+        ApproveDocumentPage.assertSuccMsg_Approve();
     });
 });
