@@ -77,8 +77,12 @@ clickOnUploadAct(text) {
     this.chooseFile.selectFile(filePath);
     cy.log("PDF file is Selected");
   }
-  enterComments(){
-    this.commnetTxtArea.click().type("Commented");
+  enterComments(text) {
+    this.commnetTxtArea
+        .should('be.visible')
+        .click()
+        .clear()
+        .type(text);
   }
 
   clickOnSubmitBnt() {
@@ -105,14 +109,14 @@ clickOnUploadAct(text) {
   clickOnSubmitBtn(){
     this.submitRejectBtn.click();
   }
-  assertValMsg_Field() {
+  assertValMsg_Item() {
     cy.get("#documentAction").then(($el) => {
       expect($el[0].validationMessage).to.eq(
         "Please select an item in the list."
       );
     });
   }
-  assertValMsg_Reason(){
+  assertValMsg_Field(){
     cy.get("textarea[class='border']").then(($el) => {
     const message = $el[0].validationMessage;
     expect(

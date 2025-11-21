@@ -22,7 +22,7 @@ describe("Employee Management - Approve Document", () => {
         ApproveDocumentPage.selectSamplePdf("cypress/fixtures/resources/Sample testing pdf.pdf");
         ApproveDocumentPage.clickOnSubmitBnt();
         ApproveDocumentPage.assertValMsg_Comment();
-        ApproveDocumentPage.enterComments();
+        ApproveDocumentPage.enterComments("Commented");
         ApproveDocumentPage.clickOnSubmitBnt();
         ApproveDocumentPage.assertSuccMsg_Upload();
 
@@ -31,13 +31,14 @@ describe("Employee Management - Approve Document", () => {
     it("HRMIS_EM: Verify that the document gets approves or rejected on Approve Document page", () =>{
 
         sideBar.navigateTo("Employee Management", "Approve Document");
+        ApproveDocumentPage.approveDocumentHeader.should('be.visible').and('have.text', 'Approve Document');
         ApproveDocumentPage.selectEmployeeDocument(testData.EmployeeData.AprroveName);
         ApproveDocumentPage.clickOnActBtn("PAN Card");
         ApproveDocumentPage.clickOnSubmitBtn();
-        ApproveDocumentPage.assertValMsg_Field();
+        ApproveDocumentPage.assertValMsg_Item();
         ApproveDocumentPage.selectRejectOption("Reject");
         ApproveDocumentPage.clickOnSubmitBtn();
-        ApproveDocumentPage.assertValMsg_Reason();
+        ApproveDocumentPage.assertValMsg_Field();
         ApproveDocumentPage.enterRejectComments();
         ApproveDocumentPage.clickOnSubmitBtn();
         ApproveDocumentPage.assertSuccMsg_Approve();

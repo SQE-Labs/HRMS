@@ -53,6 +53,16 @@
         "Asset": "Asset IT",
         "Vishal": "Vishal"
     },
+    "ProjectTeamFlow":{
+        "ProjectName": "Cypress Automation",
+        "SubMenus":[
+            "Project List",
+            "Project Report",
+            "My Projects",
+            "Shadow Resources",
+            "CSAT Rating"
+        ]
+    },
     "AssetsNames": {
         "Keyboard": "Keyboard",
         "Pendrive":"Pendrive",

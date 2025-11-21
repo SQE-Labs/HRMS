@@ -35,7 +35,7 @@ describe("Employee Asset Managment Request Tests", () => {
     AssetMgmtPage.assetReqHeader.should("be.visible").and("contain.text", "IT Resource Requests");
   });
 
-  it.only("HRMIS_AM_33: Verify Reset Asset Request Details", () => {
+  it("HRMIS_AM_33: Verify Reset Asset Request Details", () => {
     // login to Application
 
     sideBar.navigateTo("Asset Management", "IT Resource Requests");
