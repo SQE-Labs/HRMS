@@ -21,8 +21,22 @@ describe("Project Team Flow - Project List", () => {
         ProjectListPage.createProjectBtn();
         ProjectListPage.createProjectHeader.scrollIntoView().should('be.visible').and('contain.text', 'Create Project');
         ProjectListPage.clickSubmitBtn();
-        ProjectListPage.assertValMsg_Field();
+        ProjectListPage.assertValMsg_PN();
         ProjectListPage.projectName(testData.ProjectTeamFlow.ProjectName);
+        ProjectListPage.clickSubmitBtn();
+        ProjectListPage.assertValMsg_PT();
+        ProjectListPage.projectType(testData.ProjectTeamFlow.ProjectType);
+        ProjectListPage.clickSubmitBtn();
+        ProjectListPage.assertValMsg_DL();
+        ProjectListPage.deliveryLead(testData.ProjectTeamFlow.DeliveryLead);
+        ProjectListPage.clickSubmitBtn();
+        ProjectListPage.assertValMsg_PM();
+        ProjectListPage.projectManager(testData.ProjectTeamFlow.ProjectManager);
+        ProjectListPage.clickSubmitBtn();
+        ProjectListPage.assertValMsg_PS();
+        ProjectListPage.principalSponsor(testData.ProjectTeamFlow.PrincipalSponsor);
+        ProjectListPage.leadBusinessAnalyst(testData.ProjectTeamFlow.LeadBusinessAnalyst)
+
     });
 
 });

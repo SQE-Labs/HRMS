@@ -55,6 +55,11 @@
     },
     "ProjectTeamFlow":{
         "ProjectName": "Cypress Automation",
+        "ProjectType": "Hyper Automation",
+        "DeliveryLead": "Cypress Test Team",
+        "ProjectManager": "Jaisika Dhiman",
+        "PrincipalSponsor": "Simran Kaur",
+        "LeadBusinessAnalyst": "Elon Mask",
         "SubMenus":[
             "Project List",
             "Project Report",
