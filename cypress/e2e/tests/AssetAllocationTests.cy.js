@@ -561,7 +561,7 @@ describe("Employee Asset Managment Asset Allocation Tests", () => {
   });
 
   it("HRMIS_AM_17, HRMIS_AM_18, HRMIS_AM_19, HRMIS_AM_23:Verify that user able to de allocate the asset | Clean up", () => {
-    sideBar.navigateTo("Asset Management", "Asset De-allocation");
+    sideBar.navigateTo("Asset Management", "IT Resource Return & Revocation");
     // cy.wait(30000)
     AssetDeAllocationPage.select_Employee("Autom Mation Ffff")
     AssetDeAllocationPage.clickOnDelete();

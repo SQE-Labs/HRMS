@@ -9,6 +9,7 @@
         "FirstName": "Autom",
         "LastName": "Ffff",
         "MiddleName": "Mation",
+        "AprroveName": "Cypress Test Team",
         "EmployeeID": "CCIT/10_23/347",
         "EmailID": "preeti.c@caeliusconsulting.com"
     },
@@ -51,6 +52,16 @@
     "Manager": {
         "Asset": "Asset IT",
         "Vishal": "Vishal"
+    },
+    "ProjectTeamFlow":{
+        "ProjectName": "Cypress Automation",
+        "SubMenus":[
+            "Project List",
+            "Project Report",
+            "My Projects",
+            "Shadow Resources",
+            "CSAT Rating"
+        ]
     },
     "AssetsNames": {
         "Keyboard": "Keyboard",
@@ -116,7 +127,7 @@
         "SubMenus":[
             "Asset Dashboard",
             "Asset Allocation",
-            "Asset De-allocation",
+            "IT Resource Return & Revocation",
             "Asset Request",
             "Create Asset",
             "Approve Asset Request (L1)",

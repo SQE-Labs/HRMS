@@ -11,10 +11,10 @@ class AssetMgmtPage extends BasePage {
     return cy.get("div.actions  a.export");
   }
   get assetReqLbl() {
-    return cy.get("h3.heading");
+    return cy.get("h1.h1");
   }
   get backReqListBtn() {
-    return cy.get("#showMenuBtn ~ div  a.brand-color");
+    return cy.get("button.back-button");
   }
   get selectAssetType() {
     return cy.get("#asset_list");
@@ -56,8 +56,10 @@ class AssetMgmtPage extends BasePage {
   }
 
   selectAsset_Type(assetType) {
-    cy.selectDrpValueByText(this.selectAssetType, assetType, false);
-  }
+  this.selectAssetType
+    .should('be.visible')
+    .select(assetType);
+}
   enterResonText() {
     lastRequestReason.last();
   }

@@ -23,30 +23,25 @@ beforeEach(() => {
 describe("Employee Asset Managment Request Tests", () => {
   it("HRMIS_AM_25: Verify Asset Request Tab", () => {
     // login to Application
-
-    sideBar.navigateTo("Asset Management", "Asset Request");
-    AssetMgmtPage.assetReqHeader
-      .should("be.visible")
-      .and("have.text", "Asset Request");
+    sideBar.navigateTo("Asset Management", "IT Resource Requests");
+    AssetMgmtPage.assetReqHeader.should("be.visible").and("contain.text", "IT Resource Requests");
     AssetMgmtPage.assetReqBtn.should("be.visible");
     AssetMgmtPage.clickOnAssetReq();
     AssetMgmtPage.assetReqLbl
       .should("be.visible")
-      .and("have.text", "Asset Request");
+      .and("contain.text", "Asset Request");
     AssetMgmtPage.clickOnBackAssetReqList();
     AssetMgmtPage.assetReqLbl.should("not.exist");
-    AssetMgmtPage.assetReqHeader
-      .should("be.visible")
-      .and("have.text", "Asset Request");
+    AssetMgmtPage.assetReqHeader.should("be.visible").and("contain.text", "IT Resource Requests");
   });
 
   it("HRMIS_AM_33: Verify Reset Asset Request Details", () => {
     // login to Application
 
-    sideBar.navigateTo("Asset Management", "Asset Request");
+    sideBar.navigateTo("Asset Management", "IT Resource Requests");
     AssetMgmtPage.clickOnAssetReq();
-    AssetMgmtPage.selectAsset_Type("Keyboard");
-    AssetMgmtPage.enterReqReason("ReasonRequest");
+    AssetMgmtPage.selectAsset_Type(testData.AssetsNames.Keyboard);
+    AssetMgmtPage.enterReqReason("Reason Request");
     AssetMgmtPage.clickOnResetBtn();
     AssetMgmtPage.requestReason.should("have.text", "");
     AssetMgmtPage.selectAssetType.should("contain", "Select an asset type");
@@ -56,7 +51,7 @@ describe("Employee Asset Managment Request Tests", () => {
     // login to Application
 
     const reason = "Reason For Request " + generateRandomString(5);
-    sideBar.navigateTo("Asset Management", "Asset Request");
+    sideBar.navigateTo("Asset Management", "IT Resource Requests");
     AssetMgmtPage.clickOnAssetReq();
     AssetMgmtPage.selectAsset_Type(testData.AssetsNames.Keyboard);
     AssetMgmtPage.enterReqReason(reason);
