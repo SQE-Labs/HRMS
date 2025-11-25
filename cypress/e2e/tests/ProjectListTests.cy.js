@@ -35,8 +35,14 @@ describe("Project Team Flow - Project List", () => {
         ProjectListPage.clickSubmitBtn();
         ProjectListPage.assertValMsg_PS();
         ProjectListPage.principalSponsor(testData.ProjectTeamFlow.PrincipalSponsor);
-        ProjectListPage.leadBusinessAnalyst(testData.ProjectTeamFlow.LeadBusinessAnalyst)
-
+        ProjectListPage.leadBusinessAnalyst(testData.ProjectTeamFlow.LeadBusinessAnalyst);
+        ProjectListPage.enterStartDate();
+        ProjectListPage.enterEndDate();
+        ProjectListPage.clickSubmitBtn();
+        ProjectListPage.assertValMsg_PD();
+        ProjectListPage.projectDescription("Commented");
+        ProjectListPage.clickSubmitBtn();
+        ProjectListPage.successMsg.should('be.visible').and('contain.text', 'Project created successfully.');
     });
 
 });

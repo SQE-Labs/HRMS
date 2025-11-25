@@ -17,7 +17,7 @@ describe("Employee Management - Approve Document", () => {
     it("HRMIS_EM_63: Verify the document is uploaded on Approve Document page", () => {
 
         sideBar.navigateTo("Employee Management", "Document Upload");
-        ApproveDocumentPage.selectEmployee(testData.EmployeeData.AprroveName);
+        ApproveDocumentPage.selectEmployee(testData.EmployeeData.DocUploadName);
         ApproveDocumentPage.clickOnUploadAct("PAN Card");
         ApproveDocumentPage.selectSamplePdf("cypress/fixtures/resources/Sample testing pdf.pdf");
         ApproveDocumentPage.clickOnSubmitBnt();

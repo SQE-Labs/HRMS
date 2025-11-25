@@ -33,8 +33,14 @@ class ProjectListPage extends BasePage{
     get leadBA(){
         return cy.get("#react-select-6-input");
     }
+    get pdescription(){
+      return cy.xpath("//textarea[@name='commercialSummary']");
+    }
     get submitBtn(){
         return cy.xpath("//button[@type='submit']");
+    }
+    get successMsg(){
+        return cy.xpath("//div[contains(text(),'Project created successfully.')]");
     }
 
 
@@ -88,6 +94,12 @@ class ProjectListPage extends BasePage{
             this.leadBA
         )
     }
+    projectDescription(text){
+        this.pdescription
+            .should('be.visible')
+            .clear()
+            .type(text);
+    }
     assertValMsg_PN(){
     cy.xpath("//input[@name='projectName']").then(($el) => {
     const message = $el[0].validationMessage;
@@ -128,9 +140,60 @@ class ProjectListPage extends BasePage{
     ).to.eq(true);
     });
   }
+  assertValMsg_PD(){
+    cy.xpath("//textarea[@name='commercialSummary']").then(($el) => {
+    const message = $el[0].validationMessage;
+    expect(
+      message === "Please fill out this field." || message === "Please fill in this field."
+    ).to.eq(true);
+    });
+  }
   clickSubmitBtn(){
     this.submitBtn.click();
   }
+  enterStartDate() {
+  const now = new Date();
+  const day = now.getDate();
+
+  // open datepicker
+  cy.xpath('(//input[@placeholder="mm/dd/yyyy"])[1]')
+    .click({ force: true });
+
+  // click today's day
+  cy.contains('.react-datepicker__day', new RegExp(`^${day}$`))
+    .click({ force: true });
+}
+
+enterEndDate() {
+  const now = new Date();
+
+  // Add 6 days
+  const endDate = new Date(now);
+  endDate.setDate(endDate.getDate() + 6);
+
+  // Extract day, month, year
+  const day = endDate.getDate();
+  const month = endDate.toLocaleString("en-US", { month: "long" });
+  const year = endDate.getFullYear();
+
+  const endDateInput = '(//input[@placeholder="mm/dd/yyyy"])[2]';
+
+  // Open datepicker for end date
+  cy.xpath(endDateInput).scrollIntoView().click({ force: true });
+
+  // Ensure correct month & year is visible
+  cy.get('.react-datepicker__current-month').then(($m) => {
+    if (!$m.text().includes(month) || !$m.text().includes(year)) {
+      cy.get('.react-datepicker__navigation--next')
+        .click({ force: true });
+    }
+  });
+
+  // Select the correct day
+  cy.contains('.react-datepicker__day', new RegExp(`^${day}$`))
+    .click({ force: true });
+}
+
 }
 
 export default new ProjectListPage();
