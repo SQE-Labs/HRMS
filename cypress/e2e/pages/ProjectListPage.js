@@ -42,6 +42,9 @@ class ProjectListPage extends BasePage{
     get successMsg(){
         return cy.xpath("//div[contains(text(),'Project created successfully.')]");
     }
+    get searchByName(){
+      return cy.xpath("//input[@name='search']");
+    }
 
 
     //Methods
@@ -100,6 +103,26 @@ class ProjectListPage extends BasePage{
             .clear()
             .type(text);
     }
+    
+    searchByProjectName(text) {
+      this.searchByName
+      .should('exist')
+      .should('be.visible')
+      .clear()
+      .type(text, { force: true });
+
+    // optional small wait for API search debounce
+    cy.wait(500);
+  }
+
+  verifyProjectCard(projectName, status = 'Active') {
+      cy.contains('button.accordion-button.collapsed', projectName)
+        .should('be.visible')
+        .within(() => {
+          cy.contains(projectName).should('be.visible');
+          cy.contains(status).should('be.visible');
+    });
+  }
     assertValMsg_PN(){
     cy.xpath("//input[@name='projectName']").then(($el) => {
     const message = $el[0].validationMessage;
