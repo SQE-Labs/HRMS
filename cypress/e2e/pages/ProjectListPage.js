@@ -42,9 +42,19 @@ class ProjectListPage extends BasePage{
     get successMsg(){
         return cy.xpath("//div[contains(text(),'Project created successfully.')]");
     }
+    get assertSuccessMsg_Update(){
+      return cy.xpath("//div[contains(text(),'Project updated successfully.')]");
+    }
     get searchByName(){
       return cy.xpath("//input[@name='search']");
     }
+    get editBtn(){
+      return cy.xpath("//i[@class='fa fa-edit']");
+    }
+    get updateBtn(){
+      return cy.xpath("//button[text()='Update']");
+    }
+
 
 
     //Methods
@@ -97,6 +107,14 @@ class ProjectListPage extends BasePage{
             this.leadBA
         )
     }
+    editProjectType(text) {
+      cy.selectDrpValueByText(
+        this.pjType,
+        text,
+        true,
+        this.pjType
+      )
+    }
     projectDescription(text){
         this.pdescription
             .should('be.visible')
@@ -110,9 +128,6 @@ class ProjectListPage extends BasePage{
       .should('be.visible')
       .clear()
       .type(text, { force: true });
-
-    // optional small wait for API search debounce
-    cy.wait(500);
   }
 
   verifyProjectCard(projectName, status = 'Active') {
@@ -122,6 +137,31 @@ class ProjectListPage extends BasePage{
           cy.contains(projectName).should('be.visible');
           cy.contains(status).should('be.visible');
     });
+  }
+  toggleProjectAccordion(projectName) {
+      cy.contains('button.accordion-button', projectName)
+        .should('be.visible')
+        .click({ force: true });
+  }
+  verifyProjectDetailsInAccordion(testData) {
+
+    cy.get('.project-details')
+      .should('be.visible');
+
+    const body = cy.get('.project-details');
+
+    body.should("include.text", testData.ProjectType);
+    body.should("include.text", testData.DeliveryLead);
+    body.should("include.text", testData.ProjectManager);
+    body.should("include.text", testData.PrincipalSponsor);
+    body.should("include.text", testData.LeadBusinessAnalyst);
+
+}
+  clickOnEditProjectBtn(){
+    this.editBtn.click();
+  }
+  clickOnUpdateBtn(){
+    this.updateBtn.click();
   }
     assertValMsg_PN(){
     cy.xpath("//input[@name='projectName']").then(($el) => {

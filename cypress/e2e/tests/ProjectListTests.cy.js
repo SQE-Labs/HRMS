@@ -63,10 +63,23 @@ describe("Project Team Flow - Project List", () => {
       .and('contain.text', 'Project created successfully.');
   });
 
-  it("Verify project appears in list", () => {
+  it("HRMIS_PTF_3: Verify that relevent results appears, when user enters valid data in 'Search by Project Name' search bar, on 'Project List' page.", () => {
     sideBar.navigateTo("Project TeamFlow", "Project List");
     ProjectListPage.searchByProjectName(randomProjectName);
     ProjectListPage.verifyProjectCard(randomProjectName);
   });
 
+  it("HRMIS_PTF_4: Verify that user is able to expand and collapse any project accordion, on 'Project List' page. ", () => {
+    sideBar.navigateTo("Project TeamFlow", "Project List");
+    ProjectListPage.searchByProjectName(randomProjectName);
+    ProjectListPage.toggleProjectAccordion(randomProjectName);
+    ProjectListPage.verifyProjectDetailsInAccordion(testData.ProjectTeamFlow);
+    ProjectListPage.clickOnEditProjectBtn();
+    ProjectListPage.editProjectType(testData.ProjectTeamFlow.EditProjectType);
+    ProjectListPage.clickOnUpdateBtn();
+    ProjectListPage.assertSuccessMsg_Update
+        .should('be.visible')
+        .and('contain.text', 'Project updated successfully.');
+    
+  });
 });
