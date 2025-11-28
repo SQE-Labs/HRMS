@@ -44,7 +44,7 @@ describe("Employee Asset Managment Request Tests", () => {
     AssetMgmtPage.enterReqReason("Reason Request");
     AssetMgmtPage.clickOnResetBtn();
     AssetMgmtPage.requestReason.should("have.text", "");
-    AssetMgmtPage.selectAssetType.should("contain", "Select an asset type");
+    AssetMgmtPage.assetField.should("contain", "Select Asset Type");
   });
 
   it("HRMIS_AM_34: Verify Submit Asset Request ", () => {

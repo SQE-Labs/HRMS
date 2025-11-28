@@ -9,7 +9,8 @@
         "FirstName": "Autom",
         "LastName": "Ffff",
         "MiddleName": "Mation",
-        "AprroveName": "Cypress Test Team",
+        "DocUploadName": "Cypress Test Team",
+        "AprroveName": "Cypress Team",
         "EmployeeID": "CCIT/10_23/347",
         "EmailID": "preeti.c@caeliusconsulting.com"
     },
@@ -54,7 +55,13 @@
         "Vishal": "Vishal"
     },
     "ProjectTeamFlow":{
-        "ProjectName": "Cypress Automation",
+        "ProjectType": "Hyper Automation",
+        "DeliveryLead": "Cypress Test Team",
+        "ProjectManager": "Jaisika Dhiman",
+        "PrincipalSponsor": "Simran Kaur",
+        "LeadBusinessAnalyst": "Elon Mask",
+        "EditProjectType": "MuleSoft Integration",
+        "EditDeliveryLead": "Manik Tester",
         "SubMenus":[
             "Project List",
             "Project Report",

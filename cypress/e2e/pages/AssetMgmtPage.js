@@ -1,6 +1,7 @@
 import BasePage from "./BasePage";
 import Loaders from "../components/Loaders";
 import "cypress-xpath";
+import { selectDrpValueByText } from "../../support/utils";
 
 class AssetMgmtPage extends BasePage {
   //Locators
@@ -17,7 +18,10 @@ class AssetMgmtPage extends BasePage {
     return cy.get("button.back-button");
   }
   get selectAssetType() {
-    return cy.get("#asset_list");
+    return cy.get("#react-select-2-input");
+  }
+  get assetField() {
+    return cy.xpath("//div[contains(text(),'Select Asset Type')]");
   }
   get requestReason() {
     return cy.get("textarea[name='reason']");
@@ -28,13 +32,9 @@ class AssetMgmtPage extends BasePage {
   get submitBtn() {
     return cy.get("div.action button.theme-button");
   }
-  //get lastRequestReason(){return cy.xpath(`//tbody/tr/td[contains(text(), "${reason}")]`);}
   get searchField() {
     return cy.get("input");
   }
-  //div.wrapper-body > div.table-responsive tr:last-of-type td[data-title='reason']
-  //td[contains(text(),'Reason For Request auiwh')]
-  ////tbody/tr/td[contains(text(),"${reason}")]
   get subMenus() {
     return cy.get("ul.submenu.show li");
   }
@@ -55,10 +55,13 @@ class AssetMgmtPage extends BasePage {
     Loaders.threeDotLoading.should("not.exist");
   }
 
-  selectAsset_Type(assetType) {
-  this.selectAssetType
-    .should('be.visible')
-    .select(assetType);
+  selectAsset_Type(text) {
+   cy.selectDrpValueByText(
+      this.selectAssetType,
+      text,
+      true,
+      this.selectAssetType
+    )
 }
   enterResonText() {
     lastRequestReason.last();

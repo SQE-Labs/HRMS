@@ -1,5 +1,6 @@
 import BasePage from "./BasePage";
 import "cypress-xpath";
+import { selectDrpValueByText } from "../../support/utils";
 // import Loaders from "../components/Loaders";
 
 class ApproveDocumentPage extends BasePage{
@@ -90,9 +91,12 @@ clickOnUploadAct(text) {
   }
 
   selectEmployeeDocument(text) {
-  this.selectEmployeeInput
-    .click({ force: true })
-    .type(text, { force: true })
+    cy.selectDrpValueByText(
+    this.selectEmployeeInput,
+      text,
+      true,
+      this.selectEmployeeInput
+    )
 }
 
   
