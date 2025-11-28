@@ -54,7 +54,21 @@ class ProjectListPage extends BasePage{
     get updateBtn(){
       return cy.xpath("//button[text()='Update']");
     }
-
+    get notifyBtn(){
+      return cy.xpath("//button[text()='Push Notification']");
+    }
+    get reasonNotification(){
+      return cy.get("#react-select-2-input");
+    }
+    get sendBtn(){
+      return cy.xpath("//button[text()='Send']");
+    }
+    get yesBtn(){
+      return cy.xpath("//button[contains(@class,'btn theme-button') and text()='Yes']");
+    }
+    get assertSuccessMsg_Notification(){
+      return cy.xpath("//div[contains(text(),'Mail sent successfully.')]");
+    }
 
 
     //Methods
@@ -115,6 +129,22 @@ class ProjectListPage extends BasePage{
         this.pjType
       )
     }
+    editDeliveryLead(text) {
+      cy.selectDrpValueByText(
+        this.dLead,
+        text,
+        true,
+        this.dLead
+      )
+    }
+    reasonForNotification(text){
+      cy.selectDrpValueByText(
+        this.reasonNotification,
+        text,
+        true,
+        this.reasonNotification
+      )
+    }
     projectDescription(text){
         this.pdescription
             .should('be.visible')
@@ -162,6 +192,19 @@ class ProjectListPage extends BasePage{
   }
   clickOnUpdateBtn(){
     this.updateBtn.click();
+  }
+  clickOnNotifyTeamBtn(){
+    this.notifyBtn.click();
+  }
+  confirmSendBtn(){
+    this.sendBtn.click();
+  }
+  confirmPopupMsg() {
+    cy.contains("Are you sure you want to send this notification?")
+      .should("be.visible");
+  }
+  clickOnYesBtn(){
+    this.yesBtn.click();
   }
     assertValMsg_PN(){
     cy.xpath("//input[@name='projectName']").then(($el) => {

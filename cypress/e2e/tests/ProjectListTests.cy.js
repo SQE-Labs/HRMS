@@ -16,7 +16,9 @@ beforeEach(() => {
 describe("Project Team Flow - Project List", () => {
   const randomProjectName = "Project_" + generateRandomString(6);  
 
-  it("HRMIS_PTF_1, HRMIS_PTF_2: Verify create project", () => {
+  //All below tests are dependent on each other and should be executed in the given order
+
+  it("HRMIS_PTF_1, HRMIS_PTF_2, HRMIS_PTF_9, HRMIS_PTF_11: Verify that user gets directed to 'Create Project' page, after clicking on 'Create Project' button, on 'Project List' page.", () => {
     sideBar.navigateTo("Project TeamFlow", "Project List");
 
     ProjectListPage.projectListHeader.should('be.visible').and('have.text', 'Project List');
@@ -69,17 +71,31 @@ describe("Project Team Flow - Project List", () => {
     ProjectListPage.verifyProjectCard(randomProjectName);
   });
 
-  it("HRMIS_PTF_4: Verify that user is able to expand and collapse any project accordion, on 'Project List' page. ", () => {
+  it("HRMIS_PTF_4: Verify that user is able to edit and update project details, on 'Project List' page. ", () => {
     sideBar.navigateTo("Project TeamFlow", "Project List");
     ProjectListPage.searchByProjectName(randomProjectName);
     ProjectListPage.toggleProjectAccordion(randomProjectName);
     ProjectListPage.verifyProjectDetailsInAccordion(testData.ProjectTeamFlow);
     ProjectListPage.clickOnEditProjectBtn();
     ProjectListPage.editProjectType(testData.ProjectTeamFlow.EditProjectType);
+    ProjectListPage.editDeliveryLead(testData.ProjectTeamFlow.EditDeliveryLead);
     ProjectListPage.clickOnUpdateBtn();
     ProjectListPage.assertSuccessMsg_Update
         .should('be.visible')
         .and('contain.text', 'Project updated successfully.');
-    
   });
-});
+
+  it("HRMIS_PTF_5, HRMIS_PTF_6: Verify that user is able to send notification to the team members, after clicking 'Yes' button, on confirmation message of 'Project list' page." , () => {
+    sideBar.navigateTo("Project TeamFlow", "Project List");
+    ProjectListPage.searchByProjectName(randomProjectName);
+    ProjectListPage.toggleProjectAccordion(randomProjectName);
+    ProjectListPage.clickOnNotifyTeamBtn();
+    ProjectListPage.reasonForNotification("Project Completed");
+    ProjectListPage.confirmSendBtn();
+    ProjectListPage.confirmPopupMsg();
+    ProjectListPage.clickOnYesBtn();
+    ProjectListPage.assertSuccessMsg_Notification
+        .should('be.visible')
+        .and('contain.text', 'Mail sent successfully.');
+  });
+})
