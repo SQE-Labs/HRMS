@@ -85,6 +85,21 @@ describe("Project Team Flow - Project List", () => {
         .and('contain.text', 'Project updated successfully.');
   });
 
+  it("HRMIS_PTF_7, HRMIS_PTF_8: Verify that 'Add New Member' pop up opens up after clicking on 'Add Member' button, under project accordion on 'Project List' page.", () => {
+    sideBar.navigateTo("Project TeamFlow", "Project List");
+    ProjectListPage.searchByProjectName(randomProjectName);
+    ProjectListPage.toggleProjectAccordion(randomProjectName);
+    ProjectListPage.clickOnAddMembersBtn();
+    ProjectListPage.newMemberPopupHeader();
+    ProjectListPage.addEmployeeName(testData.EmployeeName);
+    ProjectListPage.addDesignation(testData.ProjectTeamFlow.Designation);
+    ProjectListPage.enterStartDate();
+    ProjectListPage.clickOnAddMemberBtn();
+    ProjectListPage.assertSuccessMsg_AddMember
+        .should('be.visible')
+        .and('contain.text', 'Member assigned successfully.');
+  });
+
   it("HRMIS_PTF_5, HRMIS_PTF_6: Verify that user is able to send notification to the team members, after clicking 'Yes' button, on confirmation message of 'Project list' page." , () => {
     sideBar.navigateTo("Project TeamFlow", "Project List");
     ProjectListPage.searchByProjectName(randomProjectName);
