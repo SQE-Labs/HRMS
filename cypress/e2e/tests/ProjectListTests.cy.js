@@ -85,6 +85,21 @@ describe("Project Team Flow - Project List", () => {
         .and('contain.text', 'Project updated successfully.');
   });
 
+  it("HRMIS_PTF_7, HRMIS_PTF_8: Verify that 'Add New Member' pop up opens up after clicking on 'Add Member' button, under project accordion on 'Project List' page.", () => {
+    sideBar.navigateTo("Project TeamFlow", "Project List");
+    ProjectListPage.searchByProjectName(randomProjectName);
+    ProjectListPage.toggleProjectAccordion(randomProjectName);
+    ProjectListPage.clickOnAddMembersBtn();
+    ProjectListPage.newMemberPopupHeader();
+    ProjectListPage.addEmployeeName(testData.ProjectTeamFlow.AddEmployeeName);
+    ProjectListPage.addDesignation(testData.ProjectTeamFlow.Designation);
+    ProjectListPage.enterStartDate();
+    ProjectListPage.clickOnAddMemberBtn();
+    ProjectListPage.assertSuccessMsg_AddMember
+        .should('be.visible')
+        .and('contain.text', 'Member assigned successfully.');
+  });
+
   it("HRMIS_PTF_5, HRMIS_PTF_6: Verify that user is able to send notification to the team members, after clicking 'Yes' button, on confirmation message of 'Project list' page." , () => {
     sideBar.navigateTo("Project TeamFlow", "Project List");
     ProjectListPage.searchByProjectName(randomProjectName);
@@ -97,5 +112,15 @@ describe("Project Team Flow - Project List", () => {
     ProjectListPage.assertSuccessMsg_Notification
         .should('be.visible')
         .and('contain.text', 'Mail sent successfully.');
+  });
+
+  it("HRMIS_PTF_16, HRMIS_PTF_17: Verify that user gets directed to 'My Projects' page, after clicking on 'My Projects' subtab on 'Project TeamFlow' section.", () => {
+    sideBar.navigateTo("Project TeamFlow", "My Projects");
+    ProjectListPage.myProjectsHeader.should('be.visible').and('have.text', 'My Projects');
+
+    // Verify that relevent results appears, when user enters valid data in 'Search by Project Name' search bar, on 'My Projects' page.
+    ProjectListPage.searchByProjectName(randomProjectName);
+    ProjectListPage.toggleProjectAccordion(randomProjectName);
+    ProjectListPage.verifyProjectDetails(testData.ProjectTeamFlow);
   });
 })

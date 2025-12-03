@@ -69,6 +69,24 @@ class ProjectListPage extends BasePage{
     get assertSuccessMsg_Notification(){
       return cy.xpath("//div[contains(text(),'Mail sent successfully.')]");
     }
+    get addMembersBtn(){
+      return cy.xpath("//button[text()='Add Member']");
+    }
+    get employeeName(){
+      return cy.get("#react-select-2-input");
+    }
+    get designation(){
+      return cy.get("#react-select-3-input");
+    }
+    get addMemberBtn(){
+      return cy.xpath("//button[@type='submit']");
+    }
+    get assertSuccessMsg_AddMember(){
+      return cy.xpath("//div[contains(text(),'Member assigned successfully.')]");
+    }
+    get myProjectsHeader(){
+      return cy.xpath("//h1[text()='My Projects']");
+    }
 
 
     //Methods
@@ -145,6 +163,22 @@ class ProjectListPage extends BasePage{
         this.reasonNotification
       )
     }
+    addEmployeeName(text){
+      cy.selectDrpValueByText(
+        this.employeeName,
+        text,
+        true,
+        this.employeeName
+      )
+    }
+    addDesignation(text){
+      cy.selectDrpValueByText(
+        this.designation,
+        text,
+        true,
+        this.designation
+      )
+    }
     projectDescription(text){
         this.pdescription
             .should('be.visible')
@@ -186,7 +220,20 @@ class ProjectListPage extends BasePage{
     body.should("include.text", testData.PrincipalSponsor);
     body.should("include.text", testData.LeadBusinessAnalyst);
 
-}
+  }
+  verifyProjectDetails(testData) {
+
+    cy.get('.project-details')
+      .should('be.visible');
+
+    const body = cy.get('.project-details');
+
+    body.should("include.text", testData.EditProjectType);
+    body.should("include.text", testData.EditDeliveryLead);
+    body.should("include.text", testData.ProjectManager);
+    body.should("include.text", testData.PrincipalSponsor);
+    body.should("include.text", testData.LeadBusinessAnalyst);
+  }
   clickOnEditProjectBtn(){
     this.editBtn.click();
   }
@@ -196,11 +243,21 @@ class ProjectListPage extends BasePage{
   clickOnNotifyTeamBtn(){
     this.notifyBtn.click();
   }
+  clickOnAddMembersBtn(){
+    this.addMembersBtn.click();
+  }
+  clickOnAddMemberBtn(){
+    this.addMemberBtn.click();
+  } 
   confirmSendBtn(){
     this.sendBtn.click();
   }
   confirmPopupMsg() {
     cy.contains("Are you sure you want to send this notification?")
+      .should("be.visible");
+  }
+  newMemberPopupHeader(){
+    cy.contains("h5", "Add New Member")
       .should("be.visible");
   }
   clickOnYesBtn(){
@@ -254,6 +311,18 @@ class ProjectListPage extends BasePage{
     ).to.eq(true);
     });
   }
+  assertValMsg_EN() {
+  cy.contains("button", "Yes"); // submit form
+    
+  cy.contains(".error-message", "Select Employee")
+    .should("be.visible");
+}
+  assertValMsg_DES() {
+  cy.contains("button", "Yes").click(); 
+    
+  cy.contains(".error-message", "Select Designation")
+    .should("be.visible");
+}
   clickSubmitBtn(){
     this.submitBtn.click();
   }
