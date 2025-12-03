@@ -84,6 +84,9 @@ class ProjectListPage extends BasePage{
     get assertSuccessMsg_AddMember(){
       return cy.xpath("//div[contains(text(),'Member assigned successfully.')]");
     }
+    get myProjectsHeader(){
+      return cy.xpath("//h1[text()='My Projects']");
+    }
 
 
     //Methods
@@ -217,7 +220,20 @@ class ProjectListPage extends BasePage{
     body.should("include.text", testData.PrincipalSponsor);
     body.should("include.text", testData.LeadBusinessAnalyst);
 
-}
+  }
+  verifyProjectDetails(testData) {
+
+    cy.get('.project-details')
+      .should('be.visible');
+
+    const body = cy.get('.project-details');
+
+    body.should("include.text", testData.EditProjectType);
+    body.should("include.text", testData.EditDeliveryLead);
+    body.should("include.text", testData.ProjectManager);
+    body.should("include.text", testData.PrincipalSponsor);
+    body.should("include.text", testData.LeadBusinessAnalyst);
+  }
   clickOnEditProjectBtn(){
     this.editBtn.click();
   }

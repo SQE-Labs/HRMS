@@ -91,7 +91,7 @@ describe("Project Team Flow - Project List", () => {
     ProjectListPage.toggleProjectAccordion(randomProjectName);
     ProjectListPage.clickOnAddMembersBtn();
     ProjectListPage.newMemberPopupHeader();
-    ProjectListPage.addEmployeeName(testData.EmployeeName);
+    ProjectListPage.addEmployeeName(testData.ProjectTeamFlow.AddEmployeeName);
     ProjectListPage.addDesignation(testData.ProjectTeamFlow.Designation);
     ProjectListPage.enterStartDate();
     ProjectListPage.clickOnAddMemberBtn();
@@ -112,5 +112,15 @@ describe("Project Team Flow - Project List", () => {
     ProjectListPage.assertSuccessMsg_Notification
         .should('be.visible')
         .and('contain.text', 'Mail sent successfully.');
+  });
+
+  it("HRMIS_PTF_16, HRMIS_PTF_17: Verify that user gets directed to 'My Projects' page, after clicking on 'My Projects' subtab on 'Project TeamFlow' section.", () => {
+    sideBar.navigateTo("Project TeamFlow", "My Projects");
+    ProjectListPage.myProjectsHeader.should('be.visible').and('have.text', 'My Projects');
+
+    // Verify that relevent results appears, when user enters valid data in 'Search by Project Name' search bar, on 'My Projects' page.
+    ProjectListPage.searchByProjectName(randomProjectName);
+    ProjectListPage.toggleProjectAccordion(randomProjectName);
+    ProjectListPage.verifyProjectDetails(testData.ProjectTeamFlow);
   });
 })
