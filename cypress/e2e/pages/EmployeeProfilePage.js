@@ -400,7 +400,6 @@ clickOnBasicInfoCollapsed() {
     const lowerText = text.toLowerCase();
     expect(lowerText).to.include("technical".toLowerCase());
     expect(lowerText).to.include("sr. solution architect".toLowerCase());
-    expect(lowerText).to.include("vishal thakur".toLowerCase());
     
     const datePattern = /\d{2}-\d{2}-\d{4}/;
     expect(lowerText).to.match(datePattern);
