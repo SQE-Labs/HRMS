@@ -84,6 +84,9 @@ class ProjectListPage extends BasePage{
     get assertSuccessMsg_AddMember(){
       return cy.xpath("//div[contains(text(),'Member assigned successfully.')]");
     }
+    get assertValMsg_ShadowMember(){
+      return cy.xpath("//div[contains(text(),'Employee is already assigned as a Shadow Employee in this project.')]");
+    }
     get myProjectsHeader(){
       return cy.xpath("//h1[text()='My Projects']");
     }
