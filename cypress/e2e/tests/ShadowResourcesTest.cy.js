@@ -18,7 +18,7 @@ describe("Project Team Flow - Project List", () => {
 
   //All below tests are dependent on each other and should be executed in the given order
 
-  it("Create Project in Project List module", () => {
+  it("Verify that project is created when user enters valid data on 'Project List' page.", () => {
     sideBar.navigateTo("Project TeamFlow", "Project List");
 
     ProjectListPage.projectListHeader.should('be.visible').and('have.text', 'Project List');
@@ -41,7 +41,7 @@ describe("Project Team Flow - Project List", () => {
       .should('be.visible')
       .and('contain.text', 'Project created successfully.');
   });
-  it("Add member in Project List create project", () => {
+  it("Verify that 'Add New Member' pop up opens up after clicking on 'Add Member' button", () => {
       sideBar.navigateTo("Project TeamFlow", "Project List");
       ProjectListPage.searchByProjectName(randomProjectName);
       ProjectListPage.toggleProjectAccordion(randomProjectName);
@@ -55,7 +55,7 @@ describe("Project Team Flow - Project List", () => {
           .should('be.visible')
           .and('contain.text', 'Member assigned successfully.');
     });
-    it("Shadow resources project search and validation", () => {
+    it("HRMIS_PTF_20: Verify that user gets directed to 'Shadow Resources' page, after clicking on 'Shadow Resources' subtab on 'Project TeamFlow' section.", () => {
         sideBar.navigateTo("Project TeamFlow", "Shadow Resources");
         ShadowResourcesPage.searchByProjectName(randomProjectName);
         ShadowResourcesPage.toggleProjectAccordion(randomProjectName);
@@ -71,14 +71,14 @@ describe("Project Team Flow - Project List", () => {
             .and('contain.text', 'Shadow member created successfully.');
     });
 
-    it("HRMIS_PTF_3: Verify that relevent results appears, when user enters valid data in 'Search by Project Name' search bar.", () => {
+    it("HRMIS_PTF_21: Verify that relevent results appears, when user enters valid data in 'Search by Project Name' search bar, on 'Shadow Resources' page.", () => {
         sideBar.navigateTo("Project TeamFlow", "Shadow Resources");
         ShadowResourcesPage.searchByProjectName(randomProjectName);
         ShadowResourcesPage.toggleProjectAccordion(randomProjectName);
         ShadowResourcesPage.verifyShadowMembers(testData.ProjectTeamFlow);
     });
 
-    it("Validate the shadow member cannot be added in add member list in Project List module", ()=> {
+    it("HRMIS_PTFS_: Verify that the shadow member cannot be added in add member list in Project List module", ()=> {
         sideBar.navigateTo("Project TeamFlow", "Project List");
         ProjectListPage.searchByProjectName(randomProjectName);
         ProjectListPage.toggleProjectAccordion(randomProjectName);
