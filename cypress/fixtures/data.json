@@ -57,7 +57,7 @@
     "ProjectTeamFlow":{
         "ProjectType": "Hyper Automation",
         "DeliveryLead": "Cypress Test Team",
-        "ProjectManager": "Tester",
+        "ProjectManager": "Test",
         "PrincipalSponsor": "Simran Kaur",
         "LeadBusinessAnalyst": "Elon Mask",
         "EditProjectType": "MuleSoft Integration",
