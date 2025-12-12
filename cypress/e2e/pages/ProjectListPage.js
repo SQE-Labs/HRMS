@@ -75,9 +75,6 @@ class ProjectListPage extends BasePage{
     get addMemberBtn(){
       return cy.xpath("//button[@type='submit']");
     }
-    get assertValMsg_ShadowMember(){
-      return cy.xpath("//div[contains(text(),'Employee is already assigned as a Shadow Employee in this project.')]");
-    }
     get myProjectsHeader(){
       return cy.xpath("//h1[text()='My Projects']");
     }
