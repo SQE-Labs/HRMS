@@ -23,8 +23,8 @@ class ShadowResourcesPage extends BasePage{
     get resDesignation(){
         return cy.get("#react-select-4-input");
     }
-    get assertSuccessMsg_AddShadowMember(){
-        return cy.xpath("//div[contains(text(),'Shadow member created successfully.')]");
+    get getToastMsg(){
+        return cy.get(".Toastify__toast-body :nth-child(2)");
     }
 
 

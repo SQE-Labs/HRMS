@@ -37,7 +37,7 @@ describe("Project Team Flow - Project List", () => {
     ProjectListPage.projectDescription("Commented");
     ProjectListPage.clickSubmitBtn();
 
-    ProjectListPage.successMsg
+    ProjectListPage.getToastMsg
       .should('be.visible')
       .and('contain.text', 'Project created successfully.');
   });
@@ -51,7 +51,7 @@ describe("Project Team Flow - Project List", () => {
       ProjectListPage.addDesignation(testData.ProjectTeamFlow.Designation);
       ProjectListPage.enterStartDate();
       ProjectListPage.clickOnAddMemberBtn();
-      ProjectListPage.assertSuccessMsg_AddMember
+      ProjectListPage.getToastMsg
           .should('be.visible')
           .and('contain.text', 'Member assigned successfully.');
     });
@@ -66,7 +66,7 @@ describe("Project Team Flow - Project List", () => {
         ShadowResourcesPage.shadowResourceDesignation(testData.ProjectTeamFlow.Designation);
         ShadowResourcesPage.joiningDate();
         ShadowResourcesPage.clickOnAddMemberBtn();
-        ShadowResourcesPage.assertSuccessMsg_AddShadowMember
+        ShadowResourcesPage.getToastMsg
             .should('be.visible')
             .and('contain.text', 'Shadow member created successfully.');
     });
@@ -88,7 +88,7 @@ describe("Project Team Flow - Project List", () => {
         ProjectListPage.addDesignation(testData.ProjectTeamFlow.Designation);
         ProjectListPage.enterStartDate();
         ProjectListPage.clickOnAddMemberBtn();
-        ProjectListPage.assertValMsg_ShadowMember
+        ProjectListPage.getToastMsg
             .should('be.visible')
             .and('contain.text', 'Employee is already assigned as a Shadow Employee in this project.');
     });
