@@ -60,7 +60,7 @@ describe("Project Team Flow - Project List", () => {
     ProjectListPage.projectDescription("Commented");
     ProjectListPage.clickSubmitBtn();
 
-    ProjectListPage.successMsg
+    ProjectListPage.getToastMsg
       .should('be.visible')
       .and('contain.text', 'Project created successfully.');
   });
@@ -80,7 +80,7 @@ describe("Project Team Flow - Project List", () => {
     ProjectListPage.editProjectType(testData.ProjectTeamFlow.EditProjectType);
     ProjectListPage.editDeliveryLead(testData.ProjectTeamFlow.EditDeliveryLead);
     ProjectListPage.clickOnUpdateBtn();
-    ProjectListPage.assertSuccessMsg_Update
+    ProjectListPage.getToastMsg
         .should('be.visible')
         .and('contain.text', 'Project updated successfully.');
   });
@@ -95,7 +95,7 @@ describe("Project Team Flow - Project List", () => {
     ProjectListPage.addDesignation(testData.ProjectTeamFlow.Designation);
     ProjectListPage.enterStartDate();
     ProjectListPage.clickOnAddMemberBtn();
-    ProjectListPage.assertSuccessMsg_AddMember
+    ProjectListPage.getToastMsg
         .should('be.visible')
         .and('contain.text', 'Member assigned successfully.');
   });
@@ -109,7 +109,7 @@ describe("Project Team Flow - Project List", () => {
     ProjectListPage.confirmSendBtn();
     ProjectListPage.confirmPopupMsg();
     ProjectListPage.clickOnYesBtn();
-    ProjectListPage.assertSuccessMsg_Notification
+    ProjectListPage.getToastMsg
         .should('be.visible')
         .and('contain.text', 'Mail sent successfully.');
   });

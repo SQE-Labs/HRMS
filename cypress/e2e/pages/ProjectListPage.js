@@ -39,11 +39,8 @@ class ProjectListPage extends BasePage{
     get submitBtn(){
         return cy.xpath("//button[@type='submit']");
     }
-    get successMsg(){
-        return cy.xpath("//div[contains(text(),'Project created successfully.')]");
-    }
-    get assertSuccessMsg_Update(){
-      return cy.xpath("//div[contains(text(),'Project updated successfully.')]");
+    get getToastMsg(){
+        return cy.get(".Toastify__toast-body :nth-child(2)");
     }
     get searchByName(){
       return cy.xpath("//input[@name='search']");
@@ -66,9 +63,6 @@ class ProjectListPage extends BasePage{
     get yesBtn(){
       return cy.xpath("//button[contains(@class,'btn theme-button') and text()='Yes']");
     }
-    get assertSuccessMsg_Notification(){
-      return cy.xpath("//div[contains(text(),'Mail sent successfully.')]");
-    }
     get addMembersBtn(){
       return cy.xpath("//button[text()='Add Member']");
     }
@@ -80,9 +74,6 @@ class ProjectListPage extends BasePage{
     }
     get addMemberBtn(){
       return cy.xpath("//button[@type='submit']");
-    }
-    get assertSuccessMsg_AddMember(){
-      return cy.xpath("//div[contains(text(),'Member assigned successfully.')]");
     }
     get myProjectsHeader(){
       return cy.xpath("//h1[text()='My Projects']");
