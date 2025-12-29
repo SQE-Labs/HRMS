@@ -22,7 +22,7 @@
     "browserify-zlib": "^0.2.0",
     "buffer": "^6.0.3",
     "chai": "^5.1.2",
-    "cypress": "^15.6.0",
+    "cypress": "^15.8.1",
     "cypress-file-upload": "^5.0.8",
     "cypress-mochawesome-reporter": "3.8.2",
     "cypress-multi-reporters": "^1.6.4",
