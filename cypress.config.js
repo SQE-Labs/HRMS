@@ -7,19 +7,21 @@ const path = require("path");
 const fs = require("fs");
 
 module.exports = defineConfig({
-  chromeWebSecurity: false,
-  experimentalModifyObstructiveThirdPartyCode: true,
   env: {
     allure: true,
   },
 
   e2e: {
+    chromeWebSecurity: false,
+    experimentalModifyObstructiveThirdPartyCode: true,
+
     downloadsFolder: "cypress/downloads",
     specPattern: "cypress/e2e/tests/*.cy.{js,jsx,ts,tsx}",
     excludeSpecPattern: [
       "cypress/e2e/tests/PerformanceTests.cy.js",
       "cypress/e2e/tests/EvaluateEmployeeTest.cy.js",
     ],
+
     defaultCommandTimeout: 10000,
     retries: { runMode: 2, openMode: 0 },
     video: false,
@@ -29,40 +31,26 @@ module.exports = defineConfig({
     viewportHeight: 1080,
 
     reporter: "mochawesome",
-reporterOptions: {
-  reportDir: "cypress/reports",
-  overwrite: false,
-  html: false,   // disable per-test HTML files
-  json: true,    // generate JSONs for merging
-  charts: true,
-  embeddedScreenshots: true,
-  inlineAssets: true,
-  reportPageTitle: "HRMS Test Execution Report",
-},
+    reporterOptions: {
+      reportDir: "cypress/reports",
+      overwrite: false,
+      html: false,
+      json: true,
+      charts: true,
+      embeddedScreenshots: true,
+      inlineAssets: true,
+      reportPageTitle: "HRMS Test Execution Report",
+    },
 
     setupNodeEvents(on, config) {
-      // 🧹 Clean old Allure results before run
       const resultsDir = path.join(__dirname, "allure-results");
       const allureReportDir = path.join(__dirname, "allure-report");
-
-      if (fs.existsSync(resultsDir)) {
-        fs.rmSync(resultsDir, { recursive: true, force: true });
-        console.log("Old Allure results deleted successfully!");
-      }
-
-      if (fs.existsSync(allureReportDir)) {
-        fs.rmSync(allureReportDir, { recursive: true, force: true });
-        console.log("Old Allure reports deleted successfully!");
-      }
-
-      // 🧹 Clean old default Cypress (mochawesome) reports before run
       const cypressReportDir = path.join(__dirname, "cypress/reports");
-      if (fs.existsSync(cypressReportDir)) {
-        fs.rmSync(cypressReportDir, { recursive: true, force: true });
-        console.log("Old Cypress HTML reports deleted successfully!");
-      }
 
-      // Enable Allure plugin
+      if (fs.existsSync(resultsDir)) fs.rmSync(resultsDir, { recursive: true, force: true });
+      if (fs.existsSync(allureReportDir)) fs.rmSync(allureReportDir, { recursive: true, force: true });
+      if (fs.existsSync(cypressReportDir)) fs.rmSync(cypressReportDir, { recursive: true, force: true });
+
       allureWriter(on, config);
 
       const options = {
@@ -93,26 +81,14 @@ reporterOptions: {
       on("file:preprocessor", webpackPreprocessor(options));
 
       on("task", {
-        emailFetcher() {
-          return easyYopmail.getNewEmailId();
-        },
-        contentGetter(someEmail) {
-          return easyYopmail.getLatestEmail(someEmail);
-        },
-        getConfirmaUrl(email) {
-          return easyYopmail.getConfirmationURL(email);
-        },
+        emailFetcher: () => easyYopmail.getNewEmailId(),
+        contentGetter: (email) => easyYopmail.getLatestEmail(email),
+        getConfirmaUrl: (email) => easyYopmail.getConfirmationURL(email),
         deleteAllXlsxFiles(folderPath) {
           if (fs.existsSync(folderPath)) {
-            const files = fs.readdirSync(folderPath);
-            files.forEach((file) => {
-              if (file.endsWith(".xlsx")) {
-                fs.unlinkSync(path.join(folderPath, file));
-                console.log(`Deleted old file: ${file}`);
-              }
-            });
-          } else {
-            console.log(`Folder not found: ${folderPath}`);
+            fs.readdirSync(folderPath)
+              .filter(f => f.endsWith(".xlsx"))
+              .forEach(f => fs.unlinkSync(path.join(folderPath, f)));
           }
           return null;
         },
