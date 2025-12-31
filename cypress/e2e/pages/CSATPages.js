@@ -25,6 +25,12 @@ class CSATPages extends BasePage {
       .parents("div")
       .find("input");
   }
+  get managefilterBy() {
+    return cy.get("#react-select-2-input");
+  }
+  get manageselectEmployee() {
+    return cy.get("#react-select-3-input");
+  }
   get filterBy() {
     return cy.get("#react-select-4-input");
   }
@@ -37,15 +43,25 @@ class CSATPages extends BasePage {
   get ratingInput() {
     return cy.get('input[placeholder="Enter CSAT Rating"]');
   }
+  get updatedRatingInput() {
+    return cy.get('input[class="border"]');
+  }
   get ratingBtn() {
     return cy.xpath("//button[text()='Add Rating']");
   }
-  get getToastMsg(){
-        return cy.get(".Toastify__toast-body :nth-child(2)");
-    }
+  get getToastMsg() {
+    return cy.get(".Toastify__toast-body :nth-child(2)");
+  }
   get getAddCSATHeader() {
     return cy.xpath("//h5[text()='Add CSAT Rating']");
   }
+  get editBtn() {
+    return cy.get('a[class="fw-bolder"]');
+  }
+  get updateBtn() {
+    return cy.get('a[class="fw-bolder me-3"]');
+  }
+
   getSelectOptionDropdown() {
     return cy.contains("Select Option")
       .parents("div")
@@ -69,6 +85,13 @@ class CSATPages extends BasePage {
   clickOnAddRatingButton() {
     this.ratingBtn.click();
   }
+  clickOnEditButton() {
+    // cy.get('body').click(0, 0); // click outside to close overlay
+    this.editBtn.click({ force: true });
+  }
+  clickOnUpdateRatingButton() {
+    this.updateBtn.click({ force: true });
+  }
 
   selectFilterBy(value) {
     this.getFilterByDropdown()
@@ -77,7 +100,7 @@ class CSATPages extends BasePage {
 
     cy.contains(".react-select__option", value).click();
   }
-  FilterBy(text) {
+  addFilterBy(text) {
     cy.selectDrpValueByText(
       this.filterBy,
       text,
@@ -91,7 +114,7 @@ class CSATPages extends BasePage {
       .clear()
       .type(rating);
   }
-  SelectEmployeeBy(text) {
+  addSelectEmployeeBy(text) {
     cy.selectDrpValueByText(
       this.selectEmployee,
       text,
@@ -99,7 +122,28 @@ class CSATPages extends BasePage {
       this.selectEmployee
     );
   }
-
+  manageFilterBy(text) {
+    cy.selectDrpValueByText(
+      this.managefilterBy,
+      text,
+      true,
+      this.managefilterBy
+    );
+  }
+  manageSelectEmployeeBy(text) {
+    cy.selectDrpValueByText(
+      this.manageselectEmployee,
+      text,
+      true,
+      this.manageselectEmployee
+    );
+  }
+  enterUpdateRating(rating) {
+    this.updatedRatingInput
+      .should('be.visible')
+      .clear()
+      .type(rating);
+  }
 
   selectAnyEmployeeFromSelectOption() {
     this.getSelectOptionDropdown()

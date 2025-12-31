@@ -41,7 +41,7 @@ describe("Project TeamFlow - CSAT Rating", () => {
       .and('contain.text', 'Project created successfully.');
   });
 
-  it("HRMIS_PTF_25 - Verify Add CSAT Ratings navigation and UI", () => {
+  it("Verify Add CSAT Ratings navigation and UI", () => {
     sideBar.navigateTo("Project TeamFlow", "CSAT Rating");
 
     // Verify CSAT page header
@@ -65,7 +65,7 @@ describe("Project TeamFlow - CSAT Rating", () => {
   });
 
 
-  it.only("HRMIS_PTF_26 - Verify project accordions appear when filtered by Employee Name", () => {
+  it("Verify project accordions appear when filtered by Employee Name", () => {
     sideBar.navigateTo("Project TeamFlow", "CSAT Rating");
 
     // Click Add CSAT Ratings tab
@@ -78,8 +78,8 @@ describe("Project TeamFlow - CSAT Rating", () => {
     CSATPages.getSelectOptionDropdown()
       .should("be.visible");
 
-    CSATPages.FilterBy("Project Name");
-    CSATPages.SelectEmployeeBy("Project_qchomr");
+    CSATPages.addFilterBy("Project Name");
+    CSATPages.addSelectEmployeeBy(randomProjectName);
 
     CSATPages.checkList();
     CSATPages.clickOnNextButton();
@@ -90,9 +90,24 @@ describe("Project TeamFlow - CSAT Rating", () => {
       .should('be.visible')
       .and('contain.text', 'CSAT created successfully.');
   });
-  
+
   it("Manage CSAT Ratings - Verify that relevent results appears, when user enters valid data in 'Search by Employee Name' search bar, on 'Manage CSAT Ratings' page.", () => {
     sideBar.navigateTo("Project TeamFlow", "CSAT Rating");
-    
+
+    // Verify dropdowns
+    CSATPages.getFilterByDropdown()
+      .should("be.visible");
+
+    CSATPages.getSelectOptionDropdown()
+      .should("be.visible");
+
+    CSATPages.manageFilterBy("Project Name");
+    CSATPages.manageSelectEmployeeBy(randomProjectName);
+    CSATPages.clickOnEditButton();
+    CSATPages.enterUpdateRating("4");
+    CSATPages.clickOnUpdateRatingButton();
+    CSATPages.getToastMsg
+      .should('be.visible')
+      .and('contain.text', 'CSAT updated successfully.');
   });
 });
