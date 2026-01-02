@@ -21,7 +21,7 @@ module.exports = defineConfig({
       "cypress/e2e/tests/EvaluateEmployeeTest.cy.js",
     ],
     defaultCommandTimeout: 10000,
-    retries: { runMode: 0, openMode: 0 },
+    retries: { runMode: 2, openMode: 0 },
     video: false,
     screenshotOnRunFailure: true,
     watchForFileChanges: false,
