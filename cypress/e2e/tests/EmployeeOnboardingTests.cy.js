@@ -33,7 +33,7 @@ const joineePersonalMail = generateRandomYopmail(10);
       DateOfBirth: "2000-09-24",
       AadharNumber: "232324324342",
       PanNumber: "BSSSS1233D",
-      DateOfJoining: "2025-11-23",
+      DateOfJoining: "2026-10-02",
       MaritalStatus: "Single",
       PassportNo: generateRandomString(1) + generateRandomNumber(11),
       PhoneNumber: "6448744833",
